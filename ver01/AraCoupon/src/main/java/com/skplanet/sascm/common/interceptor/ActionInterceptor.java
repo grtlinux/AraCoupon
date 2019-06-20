@@ -95,6 +95,12 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			} else if (url.indexOf("/Kang/") > -1) {
 				return true;
+			} else if (url.indexOf("/ctr/") > -1) {
+				return true;
+			} else if (url.indexOf("/str/") > -1) {
+				return true;
+			} else if (url.indexOf("/usr/") > -1) {
+				return true;
 			} else {
 				throw new ModelAndViewDefiningException(new ModelAndView("redirect:/login.do?url="+url));
 			}
