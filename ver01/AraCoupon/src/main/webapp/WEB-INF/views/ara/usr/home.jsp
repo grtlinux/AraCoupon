@@ -30,23 +30,24 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="usr/login.do">ACSS</a>
+				<a class="navbar-brand" href="usr/home.do">ACSS</a>
 			</div>
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
-					<li><a href="/sample05/">내 정보</a></li>
-					<!-- li><a href="#">쿠폰</a></li -->
+					<li><a href="usr/info.do">내 정보</a></li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/sample05/lecture?lectureName=HTML5"><span class="glyphicon glyphicon-list-all"></span>&nbsp;수령</a></li>
-							<li><a href="/sample05/lecture?lectureName=CSS3"><span class="glyphicon glyphicon-list-all"></span>&nbsp;목록</a></li>
+							<li><a href="usr/coupon/take.do"><span class="glyphicon glyphicon-list-all"></span>&nbsp;수령</a></li>
+							<li><a href="usr/coupon/list.do"><span class="glyphicon glyphicon-list-all"></span>&nbsp;목록</a></li>
 							<li class="divider"></li>
-							<li><a href="/sample05/lecture?lectureName=JQuery"><span class="glyphicon glyphicon-list-all"></span>&nbsp;기록</a></li>
+							<li><a href="usr/coupon/record.do"><span class="glyphicon glyphicon-list-all"></span>&nbsp;기록</a></li>
 						</ul>
 					</li>
+					<!--
 					<li><a href="/sample05/">통계</a></li>
+					-->
 				</ul>
 				
 				<!-- login menu -->
@@ -54,9 +55,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/sample05/loginForm"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="/sample05/registerForm"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="javascript:alert('Log out');"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+							<li><a href="usr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="usr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="usr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -148,6 +149,7 @@
 						<h4 class="media-heading"><a href="javascript:fn_console('Android 언어 기초 프로그래밍 강좌');">Android 언어 기초 프로그래밍 강좌</a>&nbsp;<span class="badge">New</span></h4>
 						언어 강의는 기초 프로그래밍 강의ㅣㅂ니다. ㅓ음 프로그램을 접하는 입뭄자가 듣기에 적합한 강의입니다.
 						강의로는 무료이며 언어 기초 프로그래밍 강좌는 총 20간으로 구성됩니다.
+						The time on the server is ${serverTime}.
 					</div>
 				</div>
 			</div>
