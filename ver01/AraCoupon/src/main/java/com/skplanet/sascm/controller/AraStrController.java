@@ -54,6 +54,60 @@ public class AraStrController {
 		return PATH + "/index";
 	}
 
+	@RequestMapping(value = "/coupon/create.do", method = RequestMethod.GET)
+	public String create(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+		if (Flag.flag) {
+			log.debug("strid: " + request.getParameter("strid"));
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", request.getParameter("strid"));
+			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
+			log.debug("map: " + map);
+			model.addAttribute("info", map);
+		}
+
+		return PATH + "/coupon/create";
+	}
+
+	@RequestMapping(value = "/coupon/approvalReq.do", method = RequestMethod.GET)
+	public String approvalReq(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+		if (Flag.flag) {
+			log.debug("strid: " + request.getParameter("strid"));
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", request.getParameter("strid"));
+			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
+			log.debug("map: " + map);
+			model.addAttribute("info", map);
+		}
+
+		return PATH + "/coupon/approvalReq";
+	}
+
+	@RequestMapping(value = "/coupon/approvalRes.do", method = RequestMethod.GET)
+	public String approvalRes(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+		if (Flag.flag) {
+			log.debug("strid: " + request.getParameter("strid"));
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", request.getParameter("strid"));
+			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
+			log.debug("map: " + map);
+			model.addAttribute("info", map);
+		}
+
+		return PATH + "/coupon/approvalRes";
+	}
+
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

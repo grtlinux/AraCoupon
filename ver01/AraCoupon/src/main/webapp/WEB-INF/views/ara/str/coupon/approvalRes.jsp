@@ -79,16 +79,42 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- container for jumbotron -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- container for table -->
 	<div class="container">
-		<!-- jumbotron -->
-		<div class="jumbotron text-center">
-			<h1>아라쿠폰서비스시스템(ACSS)을 소개합니다.</h1>
-			<p>아라쿠폰서비스시스템은 여러분이 쿠폰서비스를 이용하여 많은 부가가치를 창출하기를 바라는 마음으로 ...</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="javascript:fn_console('아라쿠폰서비스시스템 가기');">아라쿠폰서비스시스템 가기</a></p>
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>승인목록</h3>
+				<div class="panel panel-primary">
+					<table id="codeTable" class="table">
+						<thead>
+							<tr>
+								<td>코드대분류</td>
+								<td>코드대분류명</td>
+								<td>코드소분류</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>코드대분류</td>
+								<td>코드대분류명</td>
+								<td>코드소분류</td>
+							</tr>
+							<tr>
+								<td>코드대분류</td>
+								<td>코드대분류명</td>
+								<td>코드소분류</td>
+							</tr>
+							<tr>
+								<td>코드대분류</td>
+								<td>코드대분류명</td>
+								<td>코드소분류</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
-	<!-- gap -->
-	<div style="height:70px;"></div>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -214,15 +240,5 @@
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 	});
-	function fn_console(msg) {
-		if (true) console.log(">>>>> " + msg);
-	}
-	function isEmpty(value) {
-		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
-			return true;
-		} else {
-			return false;
-		}
-	}
 </script>
 </html>

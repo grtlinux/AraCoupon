@@ -79,16 +79,64 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- container for jumbotron -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- container for panel -->
 	<div class="container">
-		<!-- jumbotron -->
-		<div class="jumbotron text-center">
-			<h1>아라쿠폰서비스시스템(ACSS)을 소개합니다.</h1>
-			<p>아라쿠폰서비스시스템은 여러분이 쿠폰서비스를 이용하여 많은 부가가치를 창출하기를 바라는 마음으로 ...</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="javascript:fn_console('아라쿠폰서비스시스템 가기');">아라쿠폰서비스시스템 가기</a></p>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;쿠폰을 만든다.</h3>
+					</div>
+					<div class="panel-body">
+						<div class="media">
+							<div class="media-left">
+								<a href="#"><img class="media-object" src="/AraCoupon/bootstrap3/images/PNG.jpg" style="width:80px;"></a>
+							</div>
+							<div class="media-body">
+								<div class="panel panel-primary">
+									<table id="codeTable" class="table">
+										<tbody>
+											<tr>
+												<td style="width:20%;">코드대분류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>코드대분류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>코드대분류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>코드대분류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>코드대분류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>코드대분류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>코드대분류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<blockquote>&nbsp;&nbsp;Do And Forget!!</blockquote>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<!-- gap -->
-	<div style="height:70px;"></div>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->

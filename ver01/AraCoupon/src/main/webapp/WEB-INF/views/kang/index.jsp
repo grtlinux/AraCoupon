@@ -207,6 +207,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
+				<p>테이블</p>
 				<div class="panel panel-primary">
 					<table id="codeTable" class="table">
 						<thead>
