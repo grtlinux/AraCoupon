@@ -21,12 +21,15 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import com.skplanet.sascm.object.CampaignListBO;
 import com.skplanet.sascm.service.KangService;
+import com.skplanet.sascm.util.Common;
 
 @Controller
 @RequestMapping(value = "/Kang")
 public class KangController {
 
 	private final Log log = LogFactory.getLog(getClass());
+
+	private static final String PATH = "ara/usr";
 
 	@Resource(name = "kangService")
 	private KangService kangService;
@@ -41,9 +44,54 @@ public class KangController {
 
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		String msg = this.kangService.getMessage(map);
+		model.addAttribute("serverTime", "Hello 강석!!!" + msg);
+		
 		return "kang/index";
 	}
 
+	@RequestMapping(value = "/getIndex.do", method = RequestMethod.POST)
+	public void getIndex(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		Map<String,Object> mapRet = new HashMap<>();
+
+		if (true) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("serverType", request.getParameter("serverType"));
+			map.put("key01", Common.nvl(request.getParameter("key01"), "VAL01"));
+			map.put("key02", Common.nvl(request.getParameter("key02"), "VAL02"));
+			
+			//paramter
+			log.info("=============================================");
+			log.info("serverType    : " + request.getParameter("serverType"));
+			log.info("key01         : " + request.getParameter("key01"));
+			log.info("key02         : " + request.getParameter("key02"));
+			log.info("=============================================");
+			
+			mapRet.put("serverType", request.getParameter("serverType"));
+			mapRet.put("key01", Common.nvl(request.getParameter("key01"), "VAL01"));
+			mapRet.put("key02", Common.nvl(request.getParameter("key02"), "VAL02"));
+			mapRet.put("map", map);
+		}
+		
+		if (true) {
+			Map<String, Object> param = new HashMap<>();
+			param.put("comm_code_id", "");
+			param.put("arrKey", new String[] {"C001","C002","PN","PT","OC"});
+
+			List<Map<String, Object>> list = this.kangService.selectCommCodeListOnMap(param);
+			mapRet.put("list", list);
+		}
+
+		
+		log.info("=============================================");
+		log.info("mapRet           : " + mapRet);
+		log.info("=============================================");
+		
+		jsonView.render(mapRet, request, response);
+	}
+	
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
@@ -106,5 +154,54 @@ public class KangController {
 
 		model.addAttribute("serverTime", "Hello 강석!!!" + msg);
 		return "kang/kang";
+	}
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) throws Exception {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		String msg = this.kangService.getMessage(map);
+
+		model.addAttribute("serverTime", "Hello 강석!!!" + msg);
+		return PATH + "/home";
+	}
+
+	@RequestMapping(value = "/info.do", method = RequestMethod.GET)
+	public String info(Locale locale, Model model) throws Exception {
+		return PATH + "/info";
+	}
+
+	@RequestMapping(value = "/coupon/take.do", method = RequestMethod.GET)
+	public String couponTake(Locale locale, Model model) throws Exception {
+		return PATH + "/coupon/take";
+	}
+
+	@RequestMapping(value = "/coupon/list.do", method = RequestMethod.GET)
+	public String couponList(Locale locale, Model model) throws Exception {
+		return PATH + "/coupon/list";
+	}
+
+	@RequestMapping(value = "/login/login.do", method = RequestMethod.GET)
+	public String loginLogin(Locale locale, Model model) throws Exception {
+		return PATH + "/login/login";
+	}
+
+	@RequestMapping(value = "/login/logout.do", method = RequestMethod.GET)
+	public String loginLogout(Locale locale, Model model) throws Exception {
+		return PATH + "/login/logout";
+	}
+
+	@RequestMapping(value = "/login/register.do", method = RequestMethod.GET)
+	public String loginRegister(Locale locale, Model model) throws Exception {
+		return PATH + "/login/register";
 	}
 }

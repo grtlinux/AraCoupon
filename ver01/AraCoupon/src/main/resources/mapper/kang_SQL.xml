@@ -16,20 +16,22 @@
 
 	<!-- select CommCodeList on Map -->
 	<select id="Kang.selectCommCodeListOnMap" parameterType="Map" resultType="Map">
-		SELECT
+		SELECT  /* Kang.selectCommCodeListOnMap */
 			B.COMM_CODE_ID
 			, B.COMM_CODE_NAME
-			, B.CODE_DESC
+			, B.MST_CODE_DESC
 			, C.CODE_ID
 			, C.CODE_NAME
-			, NVL(C.CODE_DESC, '-')  SUB_CODE_DESC
+			, NVL(C.CODE_DESC, ' ')  AS DTL_CODE_DESC
+			--, C.CODE_DESC           AS DTL_CODE_DESC
 			, C.USE_YN
 		FROM
 			(
 				SELECT
 					A.COMM_CODE_ID
 					, A.COMM_CODE_NAME
-					, NVL(A.CODE_DESC, '-')   CODE_DESC
+					--, NVL(A.CODE_DESC, '-')  AS MST_CODE_DESC
+					, A.CODE_DESC            AS MST_CODE_DESC
 					, A.USE_YN
 				FROM
 					HR.CM_CODE_MST  A
