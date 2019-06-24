@@ -230,6 +230,10 @@
 						</tbody>
 					</table>
 				</div>
+				<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
+					<button type="button" class="btn btn-danger btn-sm" onclick="fn_save();"><i class="fa fa-floppy-o" aria-hidden="true"></i> 저장</button>
+					<button type="button" class="btn btn-success btn-sm" onclick="fn_close();"><i class="fa fa-times" aria-hidden="true"></i> 닫기</button>
+				</div>
 			</div>
 		</div>
 	</div>

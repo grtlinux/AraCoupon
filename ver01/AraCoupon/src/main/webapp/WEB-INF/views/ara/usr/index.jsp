@@ -37,19 +37,17 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="usr/home.do">ACSS</a>
+				<a class="navbar-brand" href="/AraCoupon/usr/index.do?usrid=${info.USR_ID}">ACSS</a>
 			</div>
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modal0" data-toggle="modal" href="#">내 정보</a></li>
+					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="usr/coupon/take.do"><span class="glyphicon glyphicon-list-all"></span>&nbsp;수령</a></li>
-							<li><a href="usr/coupon/list.do"><span class="glyphicon glyphicon-list-all"></span>&nbsp;목록</a></li>
-							<li class="divider"></li>
-							<li><a href="usr/coupon/record.do"><span class="glyphicon glyphicon-list-all"></span>&nbsp;기록</a></li>
+							<li><a href="/AraCoupon/usr/coupon/takeCoupon.do?usrid=${info.USR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰수집</a></li>
+							<li><a href="/AraCoupon/usr/coupon/listCoupon.do?usrid=${info.USR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰목록(사용)</a></li>
 						</ul>
 					</li>
 					<!--
@@ -62,9 +60,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="usr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="usr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="usr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+							<li><a href="/AraCoupon/usr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="/AraCoupon/usr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="/AraCoupon/usr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -73,7 +71,6 @@
 	</nav>
 	<!-- gap -->
 	<div style="height:70px;"></div>
-
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -214,5 +211,15 @@
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 	});
+	function fn_console(msg) {
+		if (true) console.log(">>>>> " + msg);
+	}
+	function isEmpty(value) {
+		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+			return true;
+		} else {
+			return false;
+		}
+	}
 </script>
 </html>

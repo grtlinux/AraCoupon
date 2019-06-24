@@ -9,4 +9,7 @@ public interface AraCtrDAO {
 	public Map<String,Object> selectCenterInfo(Map<String, Object> param) throws SQLException;
 	public List<Map<String,Object>> selectApprovalReq(Map<String, Object> param) throws SQLException;
 	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws SQLException;
+	public Map<String,Object> selectCampaignInfo(Map<String, Object> param) throws SQLException;
+	public int insertCouponSheet(Map<String, Object> param) throws SQLException;
+	public List<Map<String,Object>> listCalculateList(Map<String, Object> param) throws SQLException;
 }

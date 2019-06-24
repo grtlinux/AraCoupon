@@ -1,5 +1,6 @@
 package com.skplanet.sascm.serviceimpl;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,5 +30,20 @@ public class AraCtrServiceImpl implements AraCtrService {
 	@Override
 	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws Exception {
 		return this.araCtrDAO.selectApprovalRes(param);
+	}
+
+	@Override
+	public Map<String, Object> selectCampaignInfo(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.selectCampaignInfo(param);
+	}
+
+	@Override
+	public int insertCouponSheet(Map<String, Object> param) throws SQLException {
+		return this.araCtrDAO.insertCouponSheet(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> listCalculateList(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.listCalculateList(param);
 	}
 }

@@ -21,4 +21,63 @@
 			AND A.USR_ID = #{usrid}
 	</select>
 
+
+	<!-- 제공 받은 쿠폰 목록 -->
+	<select id="takeCouponList" parameterType="Map" resultType="Map">
+		SELECT  /* AraUsr.takeCouponList */
+			A.STR_ID        AS STR_ID
+			, A.CAMP_ID     AS CAMP_ID
+			, A.USR_ID      AS USR_ID
+			, A.USD_STR_ID  AS USD_STR_ID
+			, A.CPN_TYP     AS CPN_TYP
+			, A1.DTL_NM     AS CPN_TYP_NM
+			, A1.DTL_DESC   AS CPN_TYP_DESC
+			, A.CPN_PHS     AS CPN_PHS
+			, A2.DTL_NM     AS CPN_PHS_NM
+			, A2.DTL_DESC   AS CPN_PHS_DESC
+			, A.CPN_NO      AS CPN_NO
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.USR_ID = #{usrid}
+			AND A.CPN_PHS = '2'
+			AND A.USD_STR_ID = -1
+		ORDER BY
+			A.CPN_NO ASC
+	</select>
+
+
+	<!-- 제공 받은 쿠폰 목록 -->
+	<select id="listCouponList" parameterType="Map" resultType="Map">
+		SELECT  /* AraUsr.listCouponList */
+			A.STR_ID        AS STR_ID
+			, A.CAMP_ID     AS CAMP_ID
+			, A.USR_ID      AS USR_ID
+			, A.USD_STR_ID  AS USD_STR_ID
+			, A.CPN_TYP     AS CPN_TYP
+			, A1.DTL_NM     AS CPN_TYP_NM
+			, A1.DTL_DESC   AS CPN_TYP_DESC
+			, A.CPN_PHS     AS CPN_PHS
+			, A2.DTL_NM     AS CPN_PHS_NM
+			, A2.DTL_DESC   AS CPN_PHS_DESC
+			, A.CPN_NO      AS CPN_NO
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.USR_ID = #{usrid}
+			AND A.CPN_PHS = '3'
+		ORDER BY
+			A.CPN_NO ASC
+	</select>
+
+
+
+
+
+
+
 </mapper>

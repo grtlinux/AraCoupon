@@ -52,6 +52,25 @@
 							<li><a href="/AraCoupon/str/coupon/approvalRes.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;승인목록</a></li>
 						</ul>
 					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰제공<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/AraCoupon/str/provide/giveCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
+							<li><a href="/AraCoupon/str/provide/listCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰결제<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/AraCoupon/str/payment/listPayment.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/AraCoupon/str/calculate/listCalculate.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+						</ul>
+					</li>
 					<!--
 					<li><a href="/sample05/">통계</a></li>
 					-->

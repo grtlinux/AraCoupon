@@ -27,4 +27,24 @@ public class AraStrDAOImpl extends AbstractDAO implements AraStrDAO {
 	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws SQLException {
 		return (List<Map<String, Object>>) selectList("AraStr.selectApprovalRes", param);
 	}
+
+	@Override
+	public List<Map<String, Object>> giveCouponList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraStr.giveCouponList", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> listCouponList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraStr.listCouponList", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> listPaymentList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraStr.listPaymentList", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> listCalculateList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraStr.listCalculateList", param);
+	}
 }

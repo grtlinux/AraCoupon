@@ -10,7 +10,7 @@
 	<base href="http://172.30.1.20:8080/AraCoupon/" target="_self">
 	<base href="http://192.168.1.117:8080/AraCoupon/" target="_self">
 	-->
-	<title>거래처 - ${info.STR_NM}</title>
+	<title>고객 - ${info.USR_NM}</title>
 </head>
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -37,38 +37,17 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/AraCoupon/str/index.do?strid=${info.STR_ID}">ACSS</a>
+				<a class="navbar-brand" href="/AraCoupon/usr/index.do?usrid=${info.USR_ID}">ACSS</a>
 			</div>
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
 					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/coupon/create.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;생성</a></li>
-							<li class="divider"></li>
-							<li><a href="/AraCoupon/str/coupon/approvalReq.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;신청목록</a></li>
-							<li><a href="/AraCoupon/str/coupon/approvalRes.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;승인목록</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰제공<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/provide/giveCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
-							<li><a href="/AraCoupon/str/provide/listCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰결제<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/payment/listPayment.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/calculate/listCalculate.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+							<li><a href="/AraCoupon/usr/coupon/takeCoupon.do?usrid=${info.USR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰수집</a></li>
+							<li><a href="/AraCoupon/usr/coupon/listCoupon.do?usrid=${info.USR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰목록(사용)</a></li>
 						</ul>
 					</li>
 					<!--
@@ -81,9 +60,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="/AraCoupon/str/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="/AraCoupon/str/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+							<li><a href="/AraCoupon/usr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="/AraCoupon/usr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="/AraCoupon/usr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -98,12 +77,28 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- container for jumbotron -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- container for table -->
 	<div class="container">
-		<!-- jumbotron -->
-		<div class="jumbotron text-center">
-			<h1>아라쿠폰서비스시스템(ACSS)을 소개합니다.</h1>
-			<p>아라쿠폰서비스시스템은 여러분이 쿠폰서비스를 이용하여 많은 부가가치를 창출하기를 바라는 마음으로 ...</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="javascript:fn_console('아라쿠폰서비스시스템 가기');">아라쿠폰서비스시스템 가기</a></p>
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>쿠폰목록</h3>
+				<div class="panel panel-primary">
+					<table id="campTable" class="table">
+						<thead>
+							<tr>
+								<td>번호</td>
+								<td>쿠폰번호</td>
+								<td>쿠폰단계</td>
+								<td>쿠폰금액</td>
+								<td>받은고객</td>
+								<td>사용거래처</td>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- gap -->
@@ -227,8 +222,12 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
+
+	var list;
+	
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
+		fn_listCouponList();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -242,6 +241,55 @@
 		} else {
 			return false;
 		}
+	}
+	function fn_listCouponList(){
+		jQuery.ajax({
+			url           : "/AraCoupon/usr/coupon/listCouponList.do",
+			dataType      : "JSON",
+			scriptCharset : "UTF-8",
+			type          : "POST",
+			data          : {
+				usrid: '${info.USR_ID}',
+				key01: "val01",
+				key02: "val02",
+			},
+			success: function(result, option) {
+				if (option == "success"){
+					fn_console("success");
+					list = result.list;
+					$("#campTable > tbody").empty();
+					list.forEach(function(value, index, array) {
+						var rowHtml = "";
+						rowHtml += "<tr>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + (index + 1);
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CPN_NO;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CPN_PHS_NM;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CPN_TYP_DESC;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.USR_ID;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.USD_STR_ID;
+						rowHtml += "  </td>";
+						rowHtml += "</tr>";
+						$("#campTable > tbody:last").append(rowHtml);
+					});
+				} else {
+					alert("에러가 발생하였습니다.");
+				}
+			},
+			error: function(result, option) {
+				alert("에러가 발생하였습니다.");
+			}
+		});
 	}
 </script>
 </html>

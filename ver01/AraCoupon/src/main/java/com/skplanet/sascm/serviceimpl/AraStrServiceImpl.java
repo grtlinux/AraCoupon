@@ -30,4 +30,24 @@ public class AraStrServiceImpl implements AraStrService {
 	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.selectApprovalRes(param);
 	}
+
+	@Override
+	public List<Map<String, Object>> giveCouponList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.giveCouponList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> listCouponList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.listCouponList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> listPaymentList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.listPaymentList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> listCalculateList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.listCalculateList(param);
+	}
 }

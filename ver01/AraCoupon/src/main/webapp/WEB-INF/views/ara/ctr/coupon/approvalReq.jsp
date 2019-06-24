@@ -50,6 +50,12 @@
 							<li><a href="/AraCoupon/ctr/coupon/approvalRes.do?ctrid=${info.CTR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;승인목록</a></li>
 						</ul>
 					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/AraCoupon/ctr/calculate/listCalculate.do?ctrid=${info.CTR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+						</ul>
+					</li>
 					<!--
 					<li><a href="/sample05/">통계</a></li>
 					-->
@@ -97,26 +103,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>거래처번호</td>
-								<td>거래처명</td>
-								<td>캠페인번호</td>
-								<td>캠페인명</td>
-								<td>시작일</td>
-								<td>종료일</td>
-								<td>쿠폰단가</td>
-								<td>쿠폰매수</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-10">
-			</div>
-			<div class="col-xs-2">
-				<button>Hello</button>
+				<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
+					<button type="button" class="btn btn-danger btn-sm" onclick="fn_insertCouponPackage();"><i class="fa fa-floppy-o" aria-hidden="true"></i>쿠폰페키지생성</button>
+					<!--
+					<button type="button" class="btn btn-success btn-sm" onclick="fn_close();"><i class="fa fa-times" aria-hidden="true"></i> 닫기</button>
+					-->
+				</div>
 			</div>
 		</div>
 	</div>
@@ -241,9 +236,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
-
 	var list;
-	
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		fn_selectApprovalReq();
@@ -261,19 +254,16 @@
 			return false;
 		}
 	}
-	function fn_selectApprovalReq(){
+	function fn_selectApprovalReq() {
 		jQuery.ajax({
-			//url           : "http://arajeju.com:8080/AraCoupon/Kang/getIndex.do?serverType=IMSI",
 			url           : "/AraCoupon/ctr/coupon/selectApprovalReq.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
-			//data          : $("#form").serialize(),
-			//data          : {},
 			data          : {
 				ctrid: '${info.CTR_ID}',
-				key01: "val01",
-				key02: "val02",
+				key01: 'val01',
+				key02: 'val02',
 			},
 			success: function(result, option) {
 				if (option == "success"){
@@ -324,6 +314,31 @@
 				alert("에러가 발생하였습니다.");
 			}
 		});
+	}
+	function fn_insertCouponPackage() {
+		jQuery.ajax({
+			url           : "/AraCoupon/ctr/coupon/insertCouponPackage.do",
+			dataType      : "JSON",
+			scriptCharset : "UTF-8",
+			type          : "POST",
+			data          : {
+				ctrid:  '${info.CTR_ID}',
+				campid: '1',
+				key01:  'val01',
+				key02:  'val02',
+			},
+			success: function(result, option) {
+				if (option == "success"){
+					alert("캠페인의 쿠폰페키지를 생성하였습니다.");
+				} else {
+					alert("에러가 발생하였습니다.");
+				}
+			},
+			error: function(result, option) {
+				alert("에러가 발생하였습니다.");
+			}
+		});
+		
 	}
 </script>
 </html>

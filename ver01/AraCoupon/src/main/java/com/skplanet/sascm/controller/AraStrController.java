@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import com.skplanet.sascm.service.AraStrService;
+import com.skplanet.sascm.util.Common;
 import com.skplanet.sascm.util.Flag;
 
 @SuppressWarnings("unchecked")
@@ -62,6 +63,10 @@ public class AraStrController {
 		return PATH + "/index";
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
 	@RequestMapping(value = "/coupon/create.do", method = RequestMethod.GET)
 	public String create(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
@@ -79,6 +84,10 @@ public class AraStrController {
 
 		return PATH + "/coupon/create";
 	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(value = "/coupon/approvalReq.do", method = RequestMethod.GET)
 	public String approvalReq(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
@@ -125,6 +134,10 @@ public class AraStrController {
 		jsonView.render(modelMap, request, response);
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
 	@RequestMapping(value = "/coupon/approvalRes.do", method = RequestMethod.GET)
 	public String approvalRes(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
@@ -163,6 +176,246 @@ public class AraStrController {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("strid", request.getParameter("strid"));
 			List<Map<String,Object>> list = this.araStrService.selectApprovalRes(param);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(value = "/provide/giveCoupon.do", method = RequestMethod.GET)
+	public String giveCoupon(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", request.getParameter("strid"));
+			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+
+		return PATH + "/provide/giveCoupon";
+	}
+
+	@RequestMapping(value = "/provide/giveCouponList.do", method = RequestMethod.POST)
+	public void giveCouponList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", Common.nvl(request.getParameter("strid"), "7"));
+			List<Map<String,Object>> list = this.araStrService.giveCouponList(param);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(value = "/provide/listCoupon.do", method = RequestMethod.GET)
+	public String listCoupon(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", request.getParameter("strid"));
+			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+
+		return PATH + "/provide/listCoupon";
+	}
+
+	@RequestMapping(value = "/provide/listCouponList.do", method = RequestMethod.POST)
+	public void listCouponList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", Common.nvl(request.getParameter("strid"), "7"));
+			List<Map<String,Object>> list = this.araStrService.listCouponList(param);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(value = "/payment/listPayment.do", method = RequestMethod.GET)
+	public String listPayment(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", request.getParameter("strid"));
+			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+
+		return PATH + "/payment/listPayment";
+	}
+
+	@RequestMapping(value = "/payment/listPaymentList.do", method = RequestMethod.POST)
+	public void listPaymentList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", Common.nvl(request.getParameter("strid"), "7"));
+			List<Map<String,Object>> list = this.araStrService.listPaymentList(param);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(value = "/calculate/listCalculate.do", method = RequestMethod.GET)
+	public String listCalculate(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", request.getParameter("strid"));
+			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+
+		return PATH + "/calculate/listCalculate";
+	}
+
+	@RequestMapping(value = "/calculate/listCalculateList.do", method = RequestMethod.POST)
+	public void listCalculateList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("strid", Common.nvl(request.getParameter("strid"), "7"));
+			List<Map<String,Object>> list = this.araStrService.listCalculateList(param);
 			log.debug("list: " + list);
 			modelMap.addAttribute("list", list);
 		}

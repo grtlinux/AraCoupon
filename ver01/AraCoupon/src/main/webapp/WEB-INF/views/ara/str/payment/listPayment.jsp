@@ -98,12 +98,28 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- container for jumbotron -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- container for table -->
 	<div class="container">
-		<!-- jumbotron -->
-		<div class="jumbotron text-center">
-			<h1>아라쿠폰서비스시스템(ACSS)을 소개합니다.</h1>
-			<p>아라쿠폰서비스시스템은 여러분이 쿠폰서비스를 이용하여 많은 부가가치를 창출하기를 바라는 마음으로 ...</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="javascript:fn_console('아라쿠폰서비스시스템 가기');">아라쿠폰서비스시스템 가기</a></p>
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>제공한 쿠폰</h3>
+				<div class="panel panel-primary">
+					<table id="campTable" class="table">
+						<thead>
+							<tr>
+								<td>번호</td>
+								<td>쿠폰번호</td>
+								<td>쿠폰단계</td>
+								<td>쿠폰금액</td>
+								<td>받은고객</td>
+								<td>사용거래처</td>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- gap -->
@@ -227,8 +243,12 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
+
+	var list;
+	
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
+		fn_listCouponList();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -242,6 +262,55 @@
 		} else {
 			return false;
 		}
+	}
+	function fn_listCouponList(){
+		jQuery.ajax({
+			url           : "/AraCoupon/str/payment/listPaymentList.do",
+			dataType      : "JSON",
+			scriptCharset : "UTF-8",
+			type          : "POST",
+			data          : {
+				strid: '${info.STR_ID}',
+				key01: "val01",
+				key02: "val02",
+			},
+			success: function(result, option) {
+				if (option == "success"){
+					fn_console("success");
+					list = result.list;
+					$("#campTable > tbody").empty();
+					list.forEach(function(value, index, array) {
+						var rowHtml = "";
+						rowHtml += "<tr>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + (index + 1);
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CPN_NO;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CPN_PHS_NM;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CPN_TYP_DESC;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.USR_ID;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.USD_STR_ID;
+						rowHtml += "  </td>";
+						rowHtml += "</tr>";
+						$("#campTable > tbody:last").append(rowHtml);
+					});
+				} else {
+					alert("에러가 발생하였습니다.");
+				}
+			},
+			error: function(result, option) {
+				alert("에러가 발생하였습니다.");
+			}
+		});
 	}
 </script>
 </html>

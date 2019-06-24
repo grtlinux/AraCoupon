@@ -10,7 +10,7 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- select center information -->
-	<select id="AraCtr.selectCenterInfo" parameterType="Map" resultType="Map">
+	<select id="selectCenterInfo" parameterType="Map" resultType="Map">
 		SELECT  /* AraCtr.selectCenterInfo */
 			A.CTR_ID
 			, A.CTR_NM
@@ -24,7 +24,7 @@
 
 
 	<!-- 캠페인 생성하고 승인신청 전인 캠페인 -->
-	<select id="AraCtr.selectApprovalReq" parameterType="Map" resultType="Map">
+	<select id="selectApprovalReq" parameterType="Map" resultType="Map">
 		SELECT  /* AraCtr.selectApprovalReq */
 			A.STR_ID          AS STR_ID
 			, A.STR_NM        AS STR_NM
@@ -78,7 +78,7 @@
 	-->
 	
 	<!-- 캠페인 생성하고 승인 완료된 캠페인 -->
-	<select id="AraCtr.selectApprovalRes" parameterType="Map" resultType="Map">
+	<select id="selectApprovalRes" parameterType="Map" resultType="Map">
 		SELECT  /* AraCtr.selectApprovalRes */
 			A.STR_ID          AS STR_ID
 			, A.STR_NM        AS STR_NM
@@ -127,6 +127,92 @@
 			AND F.MST_CD = 'C007' AND F.DTL_CD = D1.CPN_TYP
 			AND B1.CAMP_ID IS NOT NULL
 			AND B2.CAMP_ID IS NOT NULL
+	</select>
+
+	<!-- 캠페인 정보를 얻는다. -->
+	<select id="selectCampaignInfo" parameterType="Map" resultType="Map">
+		SELECT  /* AraCtr.selectCampaignInfo */
+			A.STR_ID          AS STR_ID
+			, A.STR_NM        AS STR_NM
+			, A.MBL_NO        AS MBL_NO
+			, B.CAMP_ID       AS CAMP_ID
+			, B.CAMP_NM       AS CAMP_NM
+			, C.INFO_DESC     AS INFO_DESC
+			, TO_CHAR(C.BGN_DT, 'YYYY-MM-DD')        AS BGN_DT
+			, TO_CHAR(C.END_DT, 'YYYY-MM-DD')        AS END_DT
+			, D.OFF_DESC      AS OFF_DESC
+			, D.OFF_TYP       AS OFF_TYP
+			, D1.OFFCPN_NM    AS OFFCPN_NM
+			, D1.CPN_TYP      AS CPN_TYP
+			, F.DTL_NM        AS DTL_NM
+			, D1.FRM_SEQ      AS FRM_SEQ
+			, D1.TO_SEQ       AS TO_SEQ
+			, D2.OFFGFT_NM    AS OFFGFT_NM
+			, E.CHL_DESC      AS CHL_DESC
+			, E.CHL_TYP       AS CHL_TYP
+			, E1.CHLEML_NM    AS CHLEML_NM
+			, E2.CHLSMS_NM    AS CHLSMS_NM
+			, A1.CTR_ID       AS CTR_ID
+			, A1.CTR_NM       AS CTR_NM
+			, B1.CAMP_ID      AS REQ_CAMP_ID
+			, B2.CAMP_ID      AS RES_CAMP_ID
+		FROM
+			ARA_STR A
+				LEFT JOIN ARA_CTR A1 ON A1.CTR_ID = A.CTR_ID
+			, ARA_CAMP B
+				LEFT JOIN ARA_APPRREQ B1 ON B1.CAMP_ID = B.CAMP_ID
+				LEFT JOIN ARA_APPRRES B2 ON B2.CAMP_ID = B.CAMP_ID
+			, ARA_CAMPINFO C
+			, ARA_CAMPOFF D
+				LEFT JOIN ARA_OFFCPN D1 ON D.CAMP_ID = D1.CAMP_ID
+				LEFT JOIN ARA_OFFGFT D2 ON D.CAMP_ID = D2.CAMP_ID
+			, ARA_CAMPCHL E
+				LEFT JOIN ARA_CHLEML E1 ON E.CAMP_ID = E1.CAMP_ID
+				LEFT JOIN ARA_CHLSMS E2 ON E.CAMP_ID = E2.CAMP_ID
+			, ARA_CD_DTL F
+		WHERE 1=1
+			AND B.CAMP_ID = #{campid}
+			AND B.STR_ID = A.STR_ID
+			AND C.CAMP_ID = B.CAMP_ID
+			AND D.CAMP_ID = B.CAMP_ID
+			AND E.CAMP_ID = B.CAMP_ID
+			AND F.MST_CD = 'C007' AND F.DTL_CD = D1.CPN_TYP
+			AND B1.CAMP_ID IS NOT NULL
+			AND B2.CAMP_ID IS NOT NULL
+	</select>
+	
+	<!-- 캠페인 쿠폰을 생성한다. -->
+	<insert id="insertCouponSheet" parameterType="Map">
+		INSERT INTO  /* AraCtr.insertCouponSheet */
+			ARA_CPN
+		VALUES
+			( #{str_id}, #{camp_id}, #{usr_id}, #{usd_str_id}, #{cpn_typ}, #{cpn_phs}, #{cpn_no} )
+	</insert>
+	
+
+
+	<!-- 정산 쿠폰 목록 -->
+	<select id="listCalculateList" parameterType="Map" resultType="Map">
+		SELECT  /* AraCtr.listCalculateList */
+			A.STR_ID        AS STR_ID
+			, A.CAMP_ID     AS CAMP_ID
+			, A.USR_ID      AS USR_ID
+			, A.USD_STR_ID  AS USD_STR_ID
+			, A.CPN_TYP     AS CPN_TYP
+			, A1.DTL_NM     AS CPN_TYP_NM
+			, A1.DTL_DESC   AS CPN_TYP_DESC
+			, A.CPN_PHS     AS CPN_PHS
+			, A2.DTL_NM     AS CPN_PHS_NM
+			, A2.DTL_DESC   AS CPN_PHS_DESC
+			, A.CPN_NO      AS CPN_NO
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.CPN_PHS = '3'
+		ORDER BY
+			A.CPN_NO ASC
 	</select>
 
 

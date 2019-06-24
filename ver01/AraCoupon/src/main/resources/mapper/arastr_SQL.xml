@@ -10,7 +10,7 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- 거래처의 정보를 얻는다 -->
-	<select id="AraStr.selectStoreInfo" parameterType="Map" resultType="Map">
+	<select id="selectStoreInfo" parameterType="Map" resultType="Map">
 		SELECT  /* AraStr.selectStoreInfo */
 			A.STR_ID
 			, A.STR_NM
@@ -23,7 +23,7 @@
 
 
 	<!-- 캠페인 생성하고 승인신청 전인 캠페인 -->
-	<select id="AraStr.selectApprovalReq" parameterType="Map" resultType="Map">
+	<select id="selectApprovalReq" parameterType="Map" resultType="Map">
 		SELECT  /* AraStr.selectApprovalReq */
 			A.STR_ID          AS STR_ID
 			, A.STR_NM        AS STR_NM
@@ -75,9 +75,9 @@
 	<!--
 	<insert></insert>
 	-->
-	
+
 	<!-- 캠페인 생성하고 승인 완료된 캠페인 -->
-	<select id="AraStr.selectApprovalRes" parameterType="Map" resultType="Map">
+	<select id="selectApprovalRes" parameterType="Map" resultType="Map">
 		SELECT  /* AraStr.selectApprovalRes */
 			A.STR_ID          AS STR_ID
 			, A.STR_NM        AS STR_NM
@@ -128,6 +128,112 @@
 			AND B2.CAMP_ID IS NOT NULL
 	</select>
 
+
+	<!-- 배포 가능한 쿠폰 목 -->
+	<select id="giveCouponList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.giveCouponList */
+			A.STR_ID        AS STR_ID
+			, A.CAMP_ID     AS CAMP_ID
+			, A.USR_ID      AS USR_ID
+			, A.USD_STR_ID  AS USD_STR_ID
+			, A.CPN_TYP     AS CPN_TYP
+			, A1.DTL_NM     AS CPN_TYP_NM
+			, A1.DTL_DESC   AS CPN_TYP_DESC
+			, A.CPN_PHS     AS CPN_PHS
+			, A2.DTL_NM     AS CPN_PHS_NM
+			, A2.DTL_DESC   AS CPN_PHS_DESC
+			, A.CPN_NO      AS CPN_NO
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.STR_ID = #{strid}
+			AND A.CPN_PHS = '1'
+			AND A.USR_ID = -1
+			AND A.USD_STR_ID = -1
+		ORDER BY
+			A.CPN_NO ASC
+	</select>
+
+
+	<!-- 배포한 쿠폰 목록 -->
+	<select id="listCouponList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.listCouponList */
+			A.STR_ID        AS STR_ID
+			, A.CAMP_ID     AS CAMP_ID
+			, A.USR_ID      AS USR_ID
+			, A.USD_STR_ID  AS USD_STR_ID
+			, A.CPN_TYP     AS CPN_TYP
+			, A1.DTL_NM     AS CPN_TYP_NM
+			, A1.DTL_DESC   AS CPN_TYP_DESC
+			, A.CPN_PHS     AS CPN_PHS
+			, A2.DTL_NM     AS CPN_PHS_NM
+			, A2.DTL_DESC   AS CPN_PHS_DESC
+			, A.CPN_NO      AS CPN_NO
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.STR_ID = #{strid}
+			AND A.CPN_PHS in ( '2','3','4','9' )
+			/* AND A.USD_STR_ID = -1 */
+		ORDER BY
+			A.CPN_NO ASC
+	</select>
+
+
+	<!-- 배포한 쿠폰 목록 -->
+	<select id="listPaymentList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.listPaymentList */
+			A.STR_ID        AS STR_ID
+			, A.CAMP_ID     AS CAMP_ID
+			, A.USR_ID      AS USR_ID
+			, A.USD_STR_ID  AS USD_STR_ID
+			, A.CPN_TYP     AS CPN_TYP
+			, A1.DTL_NM     AS CPN_TYP_NM
+			, A1.DTL_DESC   AS CPN_TYP_DESC
+			, A.CPN_PHS     AS CPN_PHS
+			, A2.DTL_NM     AS CPN_PHS_NM
+			, A2.DTL_DESC   AS CPN_PHS_DESC
+			, A.CPN_NO      AS CPN_NO
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.CPN_PHS = '3'
+			AND A.USD_STR_ID = #{strid}
+		ORDER BY
+			A.CPN_NO ASC
+	</select>
+
+
+	<!-- 정산 쿠폰 목록 -->
+	<select id="listCalculateList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.listCalculateList */
+			A.STR_ID        AS STR_ID
+			, A.CAMP_ID     AS CAMP_ID
+			, A.USR_ID      AS USR_ID
+			, A.USD_STR_ID  AS USD_STR_ID
+			, A.CPN_TYP     AS CPN_TYP
+			, A1.DTL_NM     AS CPN_TYP_NM
+			, A1.DTL_DESC   AS CPN_TYP_DESC
+			, A.CPN_PHS     AS CPN_PHS
+			, A2.DTL_NM     AS CPN_PHS_NM
+			, A2.DTL_DESC   AS CPN_PHS_DESC
+			, A.CPN_NO      AS CPN_NO
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.CPN_PHS = '3'
+			AND A.USD_STR_ID = #{strid}
+		ORDER BY
+			A.CPN_NO ASC
+	</select>
 
 
 

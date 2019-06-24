@@ -50,6 +50,12 @@
 							<li><a href="/AraCoupon/ctr/coupon/approvalRes.do?ctrid=${info.CTR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;승인목록</a></li>
 						</ul>
 					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/AraCoupon/ctr/calculate/listCalculate.do?ctrid=${info.CTR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+						</ul>
+					</li>
 					<!--
 					<li><a href="/sample05/">통계</a></li>
 					-->
