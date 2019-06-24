@@ -1,5 +1,6 @@
 package com.skplanet.sascm.serviceimpl;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -18,5 +19,15 @@ public class AraCtrServiceImpl implements AraCtrService {
 	@Override
 	public Map<String,Object> selectCenterInfo(Map<String, Object> param) throws Exception {
 		return this.araCtrDAO.selectCenterInfo(param);
+	}
+
+	@Override
+	public List<Map<String,Object>> selectApprovalReq(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.selectApprovalReq(param);
+	}
+
+	@Override
+	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.selectApprovalRes(param);
 	}
 }

@@ -77,12 +77,47 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- container for jumbotron -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- container for table -->
 	<div class="container">
-		<!-- jumbotron -->
-		<div class="jumbotron text-center">
-			<h1>아라쿠폰서비스시스템(ACSS)을 소개합니다.</h1>
-			<p>아라쿠폰서비스시스템은 여러분이 쿠폰서비스를 이용하여 많은 부가가치를 창출하기를 바라는 마음으로 ...</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="javascript:fn_console('아라쿠폰서비스시스템 가기');">아라쿠폰서비스시스템 가기</a></p>
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>신청목록</h3>
+				<div class="panel panel-primary">
+					<table id="campTable" class="table">
+						<thead>
+							<tr>
+								<td>거래처번호</td>
+								<td>거래처명</td>
+								<td>캠페인번호</td>
+								<td>캠페인명</td>
+								<td>시작일</td>
+								<td>종료일</td>
+								<td>쿠폰단가</td>
+								<td>쿠폰매수</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>거래처번호</td>
+								<td>거래처명</td>
+								<td>캠페인번호</td>
+								<td>캠페인명</td>
+								<td>시작일</td>
+								<td>종료일</td>
+								<td>쿠폰단가</td>
+								<td>쿠폰매수</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-10">
+			</div>
+			<div class="col-xs-2">
+				<button>Hello</button>
+			</div>
 		</div>
 	</div>
 	<!-- gap -->
@@ -143,27 +178,23 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						내 정보(센터)<button class="close" data-dismiss="modal">&times;</button>
+						내 정보(거래처)<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
 						<div class="panel panel-primary">
 							<table class="table">
 								<tbody>
 									<tr>
-										<td>센터번호</td>
-										<td class="align-left">${info.CTR_ID}</td>
+										<td>거래처번호</td>
+										<td class="align-left">${info.STR_ID}</td>
 									</tr>
 									<tr>
-										<td>센터별명</td>
-										<td>${info.CTR_NM}</td>
+										<td>거래처별명</td>
+										<td>${info.STR_NM}</td>
 									</tr>
 									<tr>
 										<td>핸드폰번호</td>
 										<td>${info.MBL_NO}</td>
-									</tr>
-									<tr>
-										<td>전화번호</td>
-										<td>${info.TEL_NO}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -210,8 +241,12 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
+
+	var list;
+	
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
+		fn_selectApprovalReq();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -225,6 +260,70 @@
 		} else {
 			return false;
 		}
+	}
+	function fn_selectApprovalReq(){
+		jQuery.ajax({
+			//url           : "http://arajeju.com:8080/AraCoupon/Kang/getIndex.do?serverType=IMSI",
+			url           : "/AraCoupon/ctr/coupon/selectApprovalReq.do",
+			dataType      : "JSON",
+			scriptCharset : "UTF-8",
+			type          : "POST",
+			//data          : $("#form").serialize(),
+			//data          : {},
+			data          : {
+				ctrid: '${info.CTR_ID}',
+				key01: "val01",
+				key02: "val02",
+			},
+			success: function(result, option) {
+				if (option == "success"){
+					fn_console("success");
+					if (!true) {
+						console.log("result:", result);
+						result.list.forEach(function(value, index, array) {
+							fn_console("list[" + index + "]=>" + value.COMM_CODE_ID + ", " + value.COMM_CODE_NAME + ", " + value.CODE_ID + ", " + value.CODE_NAME + ", " + value.DTL_CODE_DESC);
+						});
+					}
+					list = result.list;
+					$("#campTable > tbody").empty();
+					list.forEach(function(value, index, array) {
+						var rowHtml = "";
+						rowHtml += "<tr>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.STR_ID;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.STR_NM;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CAMP_ID;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CAMP_NM;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.BGN_DT;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.END_DT;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.DTL_NM;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.TO_SEQ;
+						rowHtml += "  </td>";
+						rowHtml += "</tr>";
+						$("#campTable > tbody:last").append(rowHtml);
+					});
+				} else {
+					alert("에러가 발생하였습니다.");
+				}
+			},
+			error: function(result, option) {
+				alert("에러가 발생하였습니다.");
+			}
+		});
 	}
 </script>
 </html>

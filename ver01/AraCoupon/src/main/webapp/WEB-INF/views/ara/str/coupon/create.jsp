@@ -42,7 +42,7 @@
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modal0" data-toggle="modal" href="#">내 정보</a></li>
+					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -93,35 +93,70 @@
 								<a href="#"><img class="media-object" src="/AraCoupon/bootstrap3/images/PNG.jpg" style="width:80px;"></a>
 							</div>
 							<div class="media-body">
+								<h4>캠페인</h4>
 								<div class="panel panel-primary">
 									<table id="codeTable" class="table">
 										<tbody>
 											<tr>
-												<td style="width:20%;">코드대분류</td>
+												<td style="width:20%;">캠페인 명칭</td>
 												<td><input type='text' style="width:90%;"></td>
 											</tr>
 											<tr>
-												<td>코드대분류</td>
+												<td>캠페인 설명</td>
 												<td><input type='text' style="width:90%;"></td>
 											</tr>
 											<tr>
-												<td>코드대분류</td>
+												<td>캠페인 시작일</td>
 												<td><input type='text' style="width:90%;"></td>
 											</tr>
 											<tr>
-												<td>코드대분류</td>
+												<td>캠페인 종료일</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<h4>제공오퍼</h4>
+								<div class="panel panel-primary">
+									<table id="codeTable" class="table">
+										<tbody>
+											<tr>
+												<td style="width:20%;">오퍼 종류</td>
 												<td><input type='text' style="width:90%;"></td>
 											</tr>
 											<tr>
-												<td>코드대분류</td>
+												<td>오퍼 설명</td>
 												<td><input type='text' style="width:90%;"></td>
 											</tr>
 											<tr>
-												<td>코드대분류</td>
+												<td>쿠폰 명칭</td>
 												<td><input type='text' style="width:90%;"></td>
 											</tr>
 											<tr>
-												<td>코드대분류</td>
+												<td>쿠폰 종류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>쿠폰 갯수</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<h4>알림채널</h4>
+								<div class="panel panel-primary">
+									<table id="codeTable" class="table">
+										<tbody>
+											<tr>
+												<td style="width:20%;">채널 종류</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>채널 설명</td>
+												<td><input type='text' style="width:90%;"></td>
+											</tr>
+											<tr>
+												<td>SMS 명칭</td>
 												<td><input type='text' style="width:90%;"></td>
 											</tr>
 										</tbody>
@@ -137,6 +172,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- gap -->
+	<div style="height:70px;"></div>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->

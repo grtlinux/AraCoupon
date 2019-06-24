@@ -42,7 +42,7 @@
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modal0" data-toggle="modal" href="#">내 정보</a></li>
+					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
@@ -85,29 +85,27 @@
 			<div class="col-xs-12">
 				<h3>신청목록</h3>
 				<div class="panel panel-primary">
-					<table id="codeTable" class="table">
+					<table id="campTable" class="table">
 						<thead>
 							<tr>
-								<td>코드대분류</td>
-								<td>코드대분류명</td>
-								<td>코드소분류</td>
+								<td>캠페인번호</td>
+								<td>캠페인명</td>
+								<td>캠페인설명</td>
+								<td>시작일</td>
+								<td>종료일</td>
+								<td>쿠폰단가</td>
+								<td>쿠폰매수</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>코드대분류</td>
-								<td>코드대분류명</td>
-								<td>코드소분류</td>
-							</tr>
-							<tr>
-								<td>코드대분류</td>
-								<td>코드대분류명</td>
-								<td>코드소분류</td>
-							</tr>
-							<tr>
-								<td>코드대분류</td>
-								<td>코드대분류명</td>
-								<td>코드소분류</td>
+								<td>캠페인번호</td>
+								<td>캠페인명</td>
+								<td>캠페인설명</td>
+								<td>시작일</td>
+								<td>종료일</td>
+								<td>쿠폰단가</td>
+								<td>쿠폰매수</td>
 							</tr>
 						</tbody>
 					</table>
@@ -115,6 +113,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- gap -->
+	<div style="height:70px;"></div>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -234,11 +234,86 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
+
+	var list;
+	
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
+		fn_selectApprovalReq();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 	});
+	function fn_console(msg) {
+		if (true) console.log(">>>>> " + msg);
+	}
+	function isEmpty(value) {
+		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function fn_selectApprovalReq(){
+		jQuery.ajax({
+			//url           : "http://arajeju.com:8080/AraCoupon/Kang/getIndex.do?serverType=IMSI",
+			url           : "/AraCoupon/str/coupon/selectApprovalReq.do",
+			dataType      : "JSON",
+			scriptCharset : "UTF-8",
+			type          : "POST",
+			//data          : $("#form").serialize(),
+			//data          : {},
+			data          : {
+				strid: '${info.STR_ID}',
+				key01: "val01",
+				key02: "val02",
+			},
+			success: function(result, option) {
+				if (option == "success"){
+					fn_console("success");
+					if (!true) {
+						console.log("result:", result);
+						result.list.forEach(function(value, index, array) {
+							fn_console("list[" + index + "]=>" + value.COMM_CODE_ID + ", " + value.COMM_CODE_NAME + ", " + value.CODE_ID + ", " + value.CODE_NAME + ", " + value.DTL_CODE_DESC);
+						});
+					}
+					list = result.list;
+					$("#campTable > tbody").empty();
+					list.forEach(function(value, index, array) {
+						var rowHtml = "";
+						rowHtml += "<tr>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CAMP_ID;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CAMP_NM;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.INFO_DESC;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.BGN_DT;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.END_DT;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.DTL_NM;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.TO_SEQ;
+						rowHtml += "  </td>";
+						rowHtml += "</tr>";
+						$("#campTable > tbody:last").append(rowHtml);
+					});
+				} else {
+					alert("에러가 발생하였습니다.");
+				}
+			},
+			error: function(result, option) {
+				alert("에러가 발생하였습니다.");
+			}
+		});
+	}
 </script>
 </html>
