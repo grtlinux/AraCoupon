@@ -95,6 +95,14 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			} else if (url.indexOf("/Kang/") > -1) {
 				return true;
+			} else if (url.indexOf("/ara.do") > -1) {
+				return true;
+			} else if (url.indexOf("/araUsr.do") > -1) {
+				return true;
+			} else if (url.indexOf("/araStr.do") > -1) {
+				return true;
+			} else if (url.indexOf("/araCtr.do") > -1) {
+				return true;
 			} else if (url.indexOf("/ctr/") > -1) {
 				return true;
 			} else if (url.indexOf("/str/") > -1) {

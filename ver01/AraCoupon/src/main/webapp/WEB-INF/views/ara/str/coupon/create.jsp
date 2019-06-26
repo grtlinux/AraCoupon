@@ -24,7 +24,19 @@
 		color: white;
 	}
 </style>
+<script type="text/javascript">
+	// no backward on history
+	history.pushState(null, null, document.URL);
+	window.addEventListener('popstate', function () {
+		history.pushState(null, null, document.URL);
+	});
+	//window.history.forward();
+	//function noBack() {
+	//	window.history.forward();
+	//}
+</script>
 <body>
+<!-- body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" -->
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- navigation -->
@@ -37,7 +49,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/AraCoupon/str/index.do?strid=${info.STR_ID}">ACSS</a>
+				<a class="navbar-brand" href="#" data-toggle="tooltip" title="Ara Coupon Service System..">ACSS</a>
+				<!-- a class="navbar-brand" href="/AraCoupon/str/index.do?strid=${info.STR_ID}" data-toggle="tooltip" title="Ara Coupon Service System..">ACSS</a -->
 			</div>
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
@@ -94,100 +107,105 @@
 	<div style="height:70px;"></div>
 
 
-
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- container for jumbotron -->
+	<!-- container for table panel -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- container for panel -->
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;쿠폰을 만든다.</h3>
-					</div>
-					<div class="panel-body">
-						<div class="media">
-							<div class="media-left">
-								<a href="#"><img class="media-object" src="/AraCoupon/bootstrap3/images/PNG.jpg" style="width:80px;"></a>
-							</div>
-							<div class="media-body">
-								<h4>캠페인</h4>
-								<div class="panel panel-primary">
-									<table id="codeTable" class="table">
-										<tbody>
-											<tr>
-												<td style="width:20%;">캠페인 명칭</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>캠페인 설명</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>캠페인 시작일</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>캠페인 종료일</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<h4>제공오퍼</h4>
-								<div class="panel panel-primary">
-									<table id="codeTable" class="table">
-										<tbody>
-											<tr>
-												<td style="width:20%;">오퍼 종류</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>오퍼 설명</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>쿠폰 명칭</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>쿠폰 종류</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>쿠폰 갯수</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<h4>알림채널</h4>
-								<div class="panel panel-primary">
-									<table id="codeTable" class="table">
-										<tbody>
-											<tr>
-												<td style="width:20%;">채널 종류</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>채널 설명</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-											<tr>
-												<td>SMS 명칭</td>
-												<td><input type='text' style="width:90%;"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="panel-footer">
-						<blockquote>&nbsp;&nbsp;Do And Forget!!</blockquote>
+	<div class="container-fluid">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;캠페인 쿠폰페키지를 만든다.</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table id="codeTable" class="table">
+						<tbody>
+							<tr>
+								<td style="width:20%;"> 캠페인 명칭 </td>
+								<td><input id='campNm' class='form-control' type='text' value='캠페인명'></td>
+							</tr>
+							<tr>
+								<td>캠페인 설명</td>
+								<td><input id='campDesc' class='form-control' type='text' value='캠페인설명 00 000 YYMMDD 9'></td>
+							</tr>
+							<tr>
+								<td>캠페인 시작일</td>
+								<td><input id='campBgnDt' type="date" placeholder="date" value='2019-06-01'></td>
+							</tr>
+							<tr>
+								<td>캠페인 종료일</td>
+								<td><input id='campEndDt' type="date" placeholder="date" value='2019-06-30'> (보통 시작일에서 1개월 정도로 한다.)</td>
+							</tr>
+							<tr>
+								<td>오퍼 종류</td>
+								<td>
+									<input id='offTypCpn' type='radio' name='campOffTyp' value='CPN' checked> 쿠폰(Coupon)<br>
+									<input id='offTypGft' type='radio' name='campOffTyp' value='GFT' disabled> 선물(Gift)
+								</td>
+							</tr>
+							<tr>
+								<td>쿠폰 종류</td>
+								<td>
+									<select id="cpnTyp" name='cpnTyp'>
+										<option value="5000">  5,000원</option>
+										<option value="10000" selected> 10,000원</option>
+										<option value="20000"> 20,000원</option>
+										<option value="50000"> 50,000원</option>
+										<option value="100000">100,000원</option>
+										<option value="200000">200,000원</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>쿠폰 갯수</td>
+								<td>
+									<label class="label-inline"><input id='campCpnCnt' type='number' value='0'></label>
+									<label class="label-inline"> &nbsp;&nbsp; 금액=</label>
+									<label class="label-inline"><input id='campMulti' class='commaNumbers bg-danger' type='text' value='0' readonly></label>
+									<br>
+									(0보다 큰값을 입력하세요. 반드시 금액을 확인한다.)
+								</td>
+							</tr>
+							<tr id='hidden' style="display:none;">
+								<td>그룹 선택</td>
+								<td>
+									<input id='campGrp' type='checkbox' name='campGrp' value='FOOD'> 음식업 <br>
+									<input id='campGrp' type='checkbox' name='campGrp' value='SEEING'> 여행업 <br>
+									<input id='campGrp' type='checkbox' name='campGrp' value='VIHICLE'> 교통업
+								</td>
+							</tr>
+							<tr>
+								<td>오퍼 설명</td>
+								<td><input id='offDesc' class='form-control' type='text' value='오퍼설명'></td>
+							</tr>
+							<tr>
+								<td>쿠폰 명칭</td>
+								<td><input id='cpnNm' class='form-control' type='text' value='쿠폰명'></td>
+							</tr>
+							<tr>
+								<td>채널 종류</td>
+								<td>
+									<input id='chlTypSms' type='radio' name='campChlTyp' value='SMS' checked> 문자메시지(SMS)<br>
+									<input id='chlTypEml' type='radio' name='campChlTyp' value='EML' disabled> 이메일(Email)
+								</td>
+							</tr>
+							<tr>
+								<td>채널 설명</td>
+								<td><input id='chlDesc' class='form-control' type='text' value='채널설명'></td>
+							</tr>
+							<tr>
+								<td>SMS 명칭</td>
+								<td><input id='smsNm' class='form-control' type='text' value='SMS명'></td>
+							</tr>
+						</tbody>
+					</table>
+					<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
+						<button type="button" class="btn btn-danger btn-sm" onclick="fn_save();"><i class="fa fa-floppy-o" aria-hidden="true"></i> 저장</button>
+						<button type="button" class="btn btn-success btn-sm" onclick="fn_close();"><i class="fa fa-times" aria-hidden="true"></i> 닫기</button>
 					</div>
 				</div>
+			</div>
+			<div class="panel-footer">
+				<blockquote>&nbsp;&nbsp;Do And Forget!!</blockquote>
 			</div>
 		</div>
 	</div>
@@ -306,14 +324,61 @@
 	</div>
 
 
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- all of forms -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<form id='saveForm' name='form'>
+		<input type='hidden' id='_campNm'       name='campNm'        value='' />
+		<input type='hidden' id='_campDesc'     name='campDesc'      value='' />
+		<input type='hidden' id='_campBgnDt'    name='campBgnDt'     value='' />
+		<input type='hidden' id='_campEndDt'    name='campEndDt'     value='' />
+		<input type='hidden' id='_campOffTyp'   name='campOffTyp'    value='' />
+		<input type='hidden' id='_campCpnTyp'   name='campCpnTyp'    value='' />
+		<input type='hidden' id='_campCpnCnt'   name='campCpnCnt'    value='' />
+		<input type='hidden' id='_campGrp'      name='campGrp'       value='' />
+		<input type='hidden' id='_offDesc'      name='offDesc'       value='' />
+		<input type='hidden' id='_cpnNm'        name='cpnNm'         value='' />
+		<input type='hidden' id='_campChlTyp'   name='campChlTyp'    value='' />
+		<input type='hidden' id='_chlDesc'      name='chlDesc'       value='' />
+		<input type='hidden' id='_smsNm'        name='smsNm'         value='' />
+	</form>
+
 
 </body>
 <!-- script -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- script type="text/javascript" src="/AraCoupon/bootstrap3/js/jquery.numberformatter-1.2.4.jsmin.js"></script -->
+<script type="text/javascript" src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
+		// $('[data-toggle="tooltip"]').tooltip();
 		if (true) console.log("step-1: $(function() {});");
+		if (!true) $('input[name=campOffTyp]').on('click', function() {
+			console.log(">>>>> radio: " + $(this).val());
+		});
+		if (!true) $('#cpnTyp').on('change', function() {
+			console.log(">>>>> select: " + $(this).find('option:selected').val());
+		});
+		if (true) $('#campCpnCnt').on('change', function() {
+			var price = $('#cpnTyp').find('option:selected').val();
+			var count = $('#campCpnCnt').val();
+			if (count < 0) {
+				$('#campCpnCnt').val(0)
+				$('#campCpnCnt').focus();
+				return;
+			}
+			var multi = price * count;
+			if (!true) console.log(">>>>> multi = " + multi.toLocaleString());
+			$('#campMulti').val(multi.toLocaleString());
+		});
+		if (!true) {
+			$(".commaNumbers").each(function() {
+				$(this).format({format:"#,###", locale:"us"});
+			});
+		}
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -327,6 +392,105 @@
 		} else {
 			return false;
 		}
+	}
+	function fn_printCheckboxs() {
+		var grp = [];
+		$.each($('input[name=campGrp]:checked'), function() {
+			grp.push($(this).val());
+		});
+		console.log(">>>>> " + grp.join(', '));
+	}
+	function fn_save() {
+		if (true) {
+			// validate
+			if (isEmpty($('#campNm').val())) {
+				$('#campNm').focus();
+				return false;
+			}
+			if (isEmpty($('#campDesc').val())) {
+				$('#campDesc').focus();
+				return false;
+			}
+			if (isEmpty($('#campBgnDt').val())) {
+				$('#campBgnDt').focus();
+				return false;
+			}
+			if (isEmpty($('#campEndDt').val())) {
+				$('#campEndDt').focus();
+				return false;
+			}
+			if (isEmpty($('#campCpnCnt').val())) {
+				$('#campCpnCnt').focus();
+				return false;
+			}
+			if ($('#campCpnCnt').val() <= 0) {
+				$('#campCpnCnt').focus();
+				return false;
+			}
+			if (isEmpty($('#offDesc').val())) {
+				$('#offDesc').focus();
+				return false;
+			}
+			if (isEmpty($('#cpnNm').val())) {
+				$('#cpnNm').focus();
+				return false;
+			}
+			if (isEmpty($('#chlDesc').val())) {
+				$('#chlDesc').focus();
+				return false;
+			}
+			if (isEmpty($('#smsNm').val())) {
+				$('#smsNm').focus();
+				return false;
+			}
+		}
+		if (true) {
+			var grp = [];
+			$.each($('input[name=campGrp]:checked'), function() {
+				grp.push($(this).val());
+			});
+			console.log(">>>>> " + grp.join(', '));
+			
+			// transfer data
+			$("#_campNm").val($("#campNm").val());
+			$("#_campDesc").val($("#campDesc").val());
+			$("#_campBgnDt").val($("#campBgnDt").val());
+			$("#_campEndDt").val($("#campEndDt").val());
+			$("#_campOffTyp").val($('input[name=campOffTyp]:checked').val());
+			$("#_campCpnTyp").val($('#cpnTyp').find('option:selected').val());
+			$("#_campCpnCnt").val($("#campCpnCnt").val());
+			$("#_campGrp").val(grp.join(','));
+			$("#_offDesc").val($("#offDesc").val());
+			$("#_cpnNm").val($("#cpnNm").val());
+			$("#_campChlTyp").val($('input[name=campChlTyp]:checked').val());
+			$("#_chlDesc").val($("#chlDesc").val());
+			$("#_smsNm").val($("#smsNm").val());
+		}
+		if (true) {
+			// call ajax
+			jQuery.ajax({
+				url           : "/AraCoupon/str/coupon/createSave.do",
+				dataType      : "JSON",
+				scriptCharset : "UTF-8",
+				type          : "POST",
+				data          : $("#saveForm").serialize(),
+				success: function(result, option) {
+					if (option == "success") {
+						alert("발송하였습니다. RET=" + result.RET);
+					} else {
+						alert("에러가 발생하였습니다. RET=" + result.RET);
+					}
+					fn_close();
+				},
+				error: function(result, option) {
+					alert("에러가 발생하였습니다.");
+					fn_close();
+				}
+			});
+		}
+	}
+	function fn_close() {
+		
 	}
 </script>
 </html>

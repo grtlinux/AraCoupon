@@ -146,7 +146,7 @@ public class AraCtrController {
 			cpnMst = String.format("%02d%03d%s%d%s"
 					, Integer.parseInt(String.valueOf(map.get("CTR_ID")))
 					, Integer.parseInt(String.valueOf(map.get("STR_ID")))
-					, Flag.getYYYYMMDD()
+					, Flag.getYYMMDD()
 					, 1
 					, (String) map.get("CPN_TYP")
 					);

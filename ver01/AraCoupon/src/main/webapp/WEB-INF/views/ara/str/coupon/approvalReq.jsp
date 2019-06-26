@@ -24,6 +24,17 @@
 		color: white;
 	}
 </style>
+<script type="text/javascript">
+	// no backward on history
+	history.pushState(null, null, document.URL);
+	window.addEventListener('popstate', function () {
+		history.pushState(null, null, document.URL);
+	});
+	//window.history.forward();
+	//function noBack() {
+	//	window.history.forward();
+	//}
+</script>
 <body>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -96,17 +107,19 @@
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- container for jumbotron -->
+	<!-- container for table panel -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- container for table -->
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<h3>신청목록</h3>
-				<div class="panel panel-primary">
-					<table id="campTable" class="table">
+	<div class="container-fluid">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;신청목록</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table id="campTable" class="table table-hover table-condensed">
 						<thead>
-							<tr>
+							<tr class="info">
+								<td><input id='allCheckbox' type='checkbox'></td>
 								<td>캠페인번호</td>
 								<td>캠페인명</td>
 								<td>캠페인설명</td>
@@ -120,6 +133,13 @@
 						</tbody>
 					</table>
 				</div>
+				<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
+					<button type="button" class="btn btn-danger btn-sm" onclick="fn_save();"><i class="fa fa-floppy-o" aria-hidden="true"></i> 저장</button>
+					<button type="button" class="btn btn-success btn-sm" onclick="fn_close();"><i class="fa fa-times" aria-hidden="true"></i> 닫기</button>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<blockquote>&nbsp;&nbsp;Do And Forget!!</blockquote>
 			</div>
 		</div>
 	</div>
@@ -210,13 +230,29 @@
 		<div class="modal" id="modal1" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header">
-						코딩부스터의 특징<button class="close" data-dismiss="modal">&times;</button>
+					<div class="modal-header alert alert-success">
+						캠페인 정보<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
-						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/LEGO_Logo.jpg" style="width:250px;">
+						<table class="table text-left">
+							<tr>
+								<td>캠페인 명칭</td>
+								<td><div id="modalCampNm"></div></td>
+							</tr>
+							<tr>
+								<td>캠페인 설명</td>
+								<td><div id="modalCampDesc"></div></td>
+							</tr>
+							<tr>
+								<td>캠페인 시작일</td>
+								<td><div id="modalCampBgnDt"></div></td>
+							</tr>
+							<tr>
+								<td>캠페인 종료일</td>
+								<td><div id="modalCampEndDt"></div></td>
+							</tr>
+						</table>
+						<img src="/AraCoupon/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
 					</div>
 				</div>
 			</div>
@@ -250,6 +286,11 @@
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		fn_selectApprovalReq();
+		if (true) $('#allCheckbox').on('change', function() {
+			var flgAllCheckbox = $('#allCheckbox').is(':checked');
+			if (!true) console.log('>>>>> #allCheckbox change is ' + flgAllCheckbox);
+			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
+		});
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -290,6 +331,9 @@
 						var rowHtml = "";
 						rowHtml += "<tr>";
 						rowHtml += "  <td>";
+						rowHtml += "    <input type='checkbox' name='rowCheckbox'>";
+						rowHtml += "  </td>";
+						rowHtml += "  <td class='text-left'>";
 						rowHtml += "    " + value.CAMP_ID;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
@@ -313,6 +357,33 @@
 						rowHtml += "</tr>";
 						$("#campTable > tbody:last").append(rowHtml);
 					});
+					if (!true) $('#campTable > tbody tr').on('click', function() {
+						var tr = $(this);
+						if (!true) console.log(">>>>> (" + tr.index() + ")" + tr.text());
+						var td = tr.children();
+						var arr = [];
+						td.each(function(idx) {
+							arr.push(td.eq(idx).text().trim());
+						});
+						if (true) console.log(">>>>> (" + tr.index() + ")" + arr.join(','));
+					});
+					if (true) $('#campTable > tbody tr td').on('click', function() {
+						var td = $(this);
+						if (td.index() == 0)
+							return;
+						
+						var tr = td.parent();
+						if (true) console.log(">>>>> (tr, td) = (" + tr.index() + ", " + td.index() + ")");
+						
+						var info = list[tr.index()];
+						if (true) console.log(">>>>> info ", info);
+						$('#modalCampNm').text(info.CAMP_NM);
+						$('#modalCampDesc').text(info.INFO_DESC);
+						$('#modalCampBgnDt').text(info.BGN_DT);
+						$('#modalCampEndDt').text(info.END_DT);
+						
+						$('#modal1').modal('toggle');
+					});
 				} else {
 					alert("에러가 발생하였습니다.");
 				}
@@ -321,6 +392,9 @@
 				alert("에러가 발생하였습니다.");
 			}
 		});
+	}
+	function fn_modalToggle() {
+		$('#modal0').modal('toggle');
 	}
 </script>
 </html>

@@ -45,10 +45,28 @@ public class AraUsrController {
 	/////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String index(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String indexGet(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
 		if (Flag.flag) {
-			log.debug("usrid: " + request.getParameter("usrid"));
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("usrid", request.getParameter("usrid"));
+			Map<String,Object> map = this.araUsrService.selectUserInfo(param);
+			log.debug("map: " + map);
+			model.addAttribute("info", map);
+		}
+
+		return PATH + "/index";
+	}
+
+	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
+	public String indexPost(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
 		}
 
 		if (Flag.flag) {

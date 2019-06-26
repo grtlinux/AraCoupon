@@ -63,10 +63,18 @@ public class Flag {
 		if (flag) printRequestAttributes(request);
 	}
 	
-	public static String getYYYYMMDD() throws Exception {
-		return new SimpleDateFormat("yyMMdd").format(new Date());
+	public static String getYYMMDD() throws Exception {
+		return getDateTime("yyMMdd");
 	}
 	
+	public static String getYYYYMMDD() throws Exception {
+		return getDateTime("yyyyMMdd");
+	}
+
+	public static String getDateTime(String strFormat) throws Exception {
+		return new SimpleDateFormat(strFormat).format(new Date());
+	}
+
 	private static final int[] MULTI = { 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9 };
 	
 	public static String getCouponNo(String cpnMst, int seq) throws Exception {
