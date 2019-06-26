@@ -46,7 +46,26 @@ public class AraCtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String index(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String indexGet(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+		}
+
+		if (Flag.flag) {
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("ctrid", Common.nvl(request.getParameter("ctrid"), "01"));
+			log.debug("param: " + param);
+			Map<String,Object> map = this.araCtrService.selectCenterInfo(param);
+			log.debug("map: " + map);
+			model.addAttribute("info", map);
+		}
+
+		return PATH + "/index";
+	}
+
+	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
+	public String indexPost(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);

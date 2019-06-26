@@ -62,6 +62,19 @@
 						</ul>
 					</li>
 				</ul>
+				<!-- login menu -->
+				<!--
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="${staticPATH}/usr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="${staticPATH}/usr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="${staticPATH}/usr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+						</ul>
+					</li>
+				</ul>
+				-->
 			</div>
 		</div>
 	</nav>
@@ -563,6 +576,45 @@
 	/////////////////////////////////////////////////
 	// KANG-20190326: type-1 script END
 	/////////////////////////////////////////////////
+		/*
+		if (!true) {
+			if (true) console.log(">>>>> call ajax");
+			// call ajax
+			jQuery.ajax({
+				url           : "${staticPATH}/araUsr.do",
+				//dataType      : "JSON",
+				dataType      : "html",
+				scriptCharset : "UTF-8",
+				type          : "POST",
+				data          : $("#connectUsrForm").serialize(),
+				success: function(result, option) {
+					if (option == "success") {
+						alert("발송하였습니다. RET=" + result.RET);
+					} else {
+						alert("에러가 발생하였습니다. RET=" + result.RET);
+					}
+				},
+				error: function(result, option) {
+					alert("에러가 발생하였습니다.");
+				}
+			});
+		}
+		if (!true) {
+			if (true) console.log(">>>>> call submit");
+			$('#connectUsrForm').submit(function(evt) {
+				evt.preventDefault();
+				$(this).attr('action', "${staticPATH}/usr/index.do?usrid=2");
+				var data = $(this).serialize();
+				$.post("${staticPATH}/usr/index.do?usrid=2", data).done(function(data) {
+					console.log( data );
+				});
+			});
+		}
+		if (!true) {
+			if (true) console.log(">>>>> location");
+			window.location = "${staticPATH}/usr/index.do?usrid=2";
+		}
+		*/
 </script>
 
 </html>

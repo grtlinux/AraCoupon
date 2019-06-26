@@ -103,6 +103,18 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			} else if (url.indexOf("/araCtr.do") > -1) {
 				return true;
+			} else if (url.indexOf("/requestUsrAraKey.do") > -1) {
+				return true;
+			} else if (url.indexOf("/confirmUsr.do") > -1) {
+				return true;
+			} else if (url.indexOf("/requestStrAraKey.do") > -1) {
+				return true;
+			} else if (url.indexOf("/confirmStr.do") > -1) {
+				return true;
+			} else if (url.indexOf("/requestCtrAraKey.do") > -1) {
+				return true;
+			} else if (url.indexOf("/confirmCtr.do") > -1) {
+				return true;
 			} else if (url.indexOf("/ctr/") > -1) {
 				return true;
 			} else if (url.indexOf("/str/") > -1) {

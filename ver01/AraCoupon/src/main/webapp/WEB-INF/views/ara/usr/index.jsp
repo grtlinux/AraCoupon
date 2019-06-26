@@ -5,20 +5,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--
-	<base href="http://arajeju.com:8080/AraCoupon/" target="_self">
-	<base href="http://172.30.1.20:8080/AraCoupon/" target="_self">
-	<base href="http://192.168.1.117:8080/AraCoupon/" target="_self">
-	-->
-	<title>고객 - ${info.USR_NM}</title>
+	<title>Ara Main</title>
 </head>
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<link rel="stylesheet" href="/AraCoupon/bootstrap3/css/bootstrap.css">
-<link rel="stylesheet" href="/AraCoupon/bootstrap3/css/codingBooster5.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/codingBooster5.css">
 <style type="text/css">
 	.jumbotron {
-		background-image: url('/AraCoupon/bootstrap3/images/jumbotronBackground.jpg');
+		background-image: url('${staticPATH}/bootstrap3/images/jumbotronBackground.jpg');
 		background-size: cover;
 		text-shadow: black 0.4em 0.4em 0.4em;
 		color: white;
@@ -37,7 +32,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/AraCoupon/usr/index.do?usrid=${info.USR_ID}">ACSS</a>
+				<a class="navbar-brand" href="${staticPATH}/ara.do">ACSS</a>
 			</div>
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
@@ -46,8 +41,8 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/usr/coupon/takeCoupon.do?usrid=${info.USR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰수집</a></li>
-							<li><a href="/AraCoupon/usr/coupon/listCoupon.do?usrid=${info.USR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰목록(사용)</a></li>
+							<li><a href="${staticPATH}/usr/coupon/takeCoupon.do?usrid=${info.USR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰수집</a></li>
+							<li><a href="${staticPATH}/usr/coupon/listCoupon.do?usrid=${info.USR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰목록(사용)</a></li>
 						</ul>
 					</li>
 					<!--
@@ -60,9 +55,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/usr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="/AraCoupon/usr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="/AraCoupon/usr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+							<li><a href="${staticPATH}/usr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="${staticPATH}/usr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="${staticPATH}/usr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -163,7 +158,7 @@
 								</tbody>
 							</table>
 						</div>
-						<img src="/AraCoupon/bootstrap3/images/steve-jobs.png" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -177,7 +172,7 @@
 					<div class="modal-body text-center">
 						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
 						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/LEGO_Logo.jpg" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -191,7 +186,7 @@
 					<div class="modal-body text-center">
 						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
 						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -203,7 +198,7 @@
 </body>
 <!-- script -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
+<script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
