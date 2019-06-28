@@ -280,24 +280,17 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
-
+	// Global variables
 	var list;
 	
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
-		fn_selectApprovalReq();
-		if (true) $('#allCheckbox').on('change', function() {
-			var flgAllCheckbox = $('#allCheckbox').is(':checked');
-			if (!true) console.log('>>>>> #allCheckbox change is ' + flgAllCheckbox);
-			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
-		});
+		processEvent();
+		selectApprovalReq();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 	});
-	function fn_console(msg) {
-		if (true) console.log(">>>>> " + msg);
-	}
 	function isEmpty(value) {
 		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
 			return true;
@@ -305,9 +298,16 @@
 			return false;
 		}
 	}
-	function fn_selectApprovalReq(){
+	function processEvent() {
+		if (true) $('#allCheckbox').on('change', function() {
+			var flgAllCheckbox = $('#allCheckbox').is(':checked');
+			if (!true) console.log('>>>>> #allCheckbox change is ' + flgAllCheckbox);
+			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
+		});
+	}
+	function selectApprovalReq(){
 		jQuery.ajax({
-			url           : "/AraCoupon/str/coupon/selectApprovalReq.do",
+			url           : "/AraCoupon/str/coupon/selectApprReqList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -392,6 +392,9 @@
 				alert("에러가 발생하였습니다.");
 			}
 		});
+	}
+	function fn_console(msg) {
+		if (true) console.log(">>>>> " + msg);
 	}
 	function fn_modalToggle() {
 		$('#modal0').modal('toggle');

@@ -53,29 +53,29 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="${staticPATH}/str/coupon/create.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 생성</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/coupon/createCampFormPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 생성</a></li>
 							<!-- li class="divider"></li -->
-							<li><a href="${staticPATH}/str/coupon/approvalReq.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
-							<li><a href="${staticPATH}/str/coupon/approvalRes.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰펰키지 승인목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/coupon/apprReqListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/coupon/apprResListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰펰키지 승인목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰제공<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="${staticPATH}/str/provide/giveCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
-							<li><a href="${staticPATH}/str/provide/listCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/giveCoupon.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/listCoupon.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰결제<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="${staticPATH}/str/payment/listPayment.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/payment/listPayment.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="${staticPATH}/str/calculate/listCalculate.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/calculate/listCalculate.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
 						</ul>
 					</li>
 					<!--
@@ -195,7 +195,7 @@
 						</tbody>
 					</table>
 					<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
-						<button type="button" class="btn btn-danger btn-sm" onclick="fn_save();"><i class="fa fa-floppy-o" aria-hidden="true"></i> 저장</button>
+						<button type="button" class="btn btn-danger btn-sm" onclick="fn_saveCampInfo();"><i class="fa fa-floppy-o" aria-hidden="true"></i> 저장</button>
 						<button type="button" class="btn btn-success btn-sm" onclick="fn_close();"><i class="fa fa-times" aria-hidden="true"></i> 닫기</button>
 					</div>
 				</div>
@@ -301,6 +301,9 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<form id='tempForm'>
+		<input type='hidden' id='_strid' name='strid' value='${info.STR_ID}' />
+	</form>
 	<form id='saveCampInfoForm'>
 		<input type='hidden' id='_strid'        name='strid'         value='${info.STR_ID}' />
 		<input type='hidden' id='_campNm'       name='campNm'        value='' />
@@ -330,8 +333,20 @@
 <script type="text/javascript" src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
-		// $('[data-toggle="tooltip"]').tooltip();
 		if (true) console.log("step-1: $(function() {});");
+		processEvent();
+	});
+	$(document).ready(function(){
+		if (true) console.log("step-2: $(document).ready(function(){})");
+	});
+	function isEmpty(value) {
+		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function processEvent() {
 		if (!true) $('input[name=campOffTyp]').on('click', function() {
 			console.log(">>>>> radio: " + $(this).val());
 		});
@@ -365,19 +380,12 @@
 				$(this).format({format:"#,###", locale:"us"});
 			});
 		}
-	});
-	$(document).ready(function(){
-		if (true) console.log("step-2: $(document).ready(function(){})");
-	});
+	}
 	function fn_console(msg) {
 		if (true) console.log(">>>>> " + msg);
 	}
-	function isEmpty(value) {
-		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
-			return true;
-		} else {
-			return false;
-		}
+	function fn_loadPostPage(url) {
+		$('#tempForm').attr('method', 'POST').attr('action', url).submit();
 	}
 	function fn_printCheckboxs() {
 		var grp = [];
@@ -386,7 +394,7 @@
 		});
 		console.log(">>>>> " + grp.join(', '));
 	}
-	function fn_save() {
+	function fn_saveCampInfo() {
 		if (true) {
 			// validate
 			if (isEmpty($('#campNm').val())) {
@@ -466,7 +474,7 @@
 						//window.location = "${staticPATH}/str/coupon/approvalReq.do?strid=${info.STR_ID}";
 						$('#approvalReqForm > #_strid').val(result.strid);
 						$('#approvalReqForm > #_campid').val(result.CAMP_ID);
-						$('#approvalReqForm').attr('method', 'POST').attr('action', '${staticPATH}/str/coupon/approvalReq.do').submit();
+						$('#tempForm').attr('method', 'POST').attr('action', '${staticPATH}/str/coupon/apprReqListPage.do').submit();
 					} else {
 						alert("에러가 발생하였습니다. RET=" + result.RET);
 					}

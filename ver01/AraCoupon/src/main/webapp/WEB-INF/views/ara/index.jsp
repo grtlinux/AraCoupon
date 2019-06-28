@@ -320,6 +320,7 @@
 						$('#modalUsr #btnRequestAraKey').attr('disabled', true);
 						$('#modalUsr #arakey').attr('disabled', false);
 						$('#modalUsr #connectUsr').attr('disabled', false);
+						$('#modalUsr #arakey').focus();
 					} else {
 						alert("에러가 발생하였습니다. retMsg=" + result.retMsg);
 					}
@@ -419,6 +420,7 @@
 						$('#modalStr #btnRequestAraKey').attr('disabled', true);
 						$('#modalStr #arakey').attr('disabled', false);
 						$('#modalStr #connectStr').attr('disabled', false);
+						$('#modalStr #arakey').focus();
 					} else {
 						alert("에러가 발생하였습니다. retMsg=" + result.retMsg);
 					}
@@ -518,6 +520,7 @@
 						$('#modalCtr #btnRequestAraKey').attr('disabled', true);
 						$('#modalCtr #arakey').attr('disabled', false);
 						$('#modalCtr #connectCtr').attr('disabled', false);
+						$('#modalCtr #arakey').focus();
 					} else {
 						alert("에러가 발생하였습니다. retMsg=" + result.retMsg);
 					}

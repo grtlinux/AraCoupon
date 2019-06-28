@@ -67,26 +67,6 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	/*
-	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String indexGet(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("strid", request.getParameter("strid"));
-			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
-			log.debug("map: " + map);
-			model.addAttribute("info", map);
-		}
-
-		return PATH + "/index";
-	}
-	*/
-	
 	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
 	public String indexPost(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
@@ -108,7 +88,7 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/coupon/create.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/coupon/createCampFormPage.do", method = RequestMethod.POST)
 	public String create(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
@@ -122,7 +102,7 @@ public class AraStrController {
 			modelMap.addAttribute("info", map);
 		}
 
-		return PATH + "/coupon/create";
+		return PATH + "/coupon/createCampFormPage";
 	}
 
 	@RequestMapping(value = "/coupon/saveCampInfo.do", method = RequestMethod.POST)
@@ -170,7 +150,7 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/coupon/approvalReq.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/coupon/apprReqListPage.do", method = RequestMethod.POST)
 	public String approvalReqPost(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
@@ -186,10 +166,10 @@ public class AraStrController {
 
 		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 
-		return PATH + "/coupon/approvalReq";
+		return PATH + "/coupon/apprReqListPage";
 	}
 
-	@RequestMapping(value = "/coupon/selectApprovalReq.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/coupon/selectApprReqList.do", method = RequestMethod.POST)
 	public void selectApprovalReq(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
@@ -212,7 +192,7 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/coupon/approvalRes.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/coupon/apprResListPage.do", method = RequestMethod.GET)
 	public String approvalRes(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
 		if (Flag.flag) {
@@ -227,10 +207,10 @@ public class AraStrController {
 			model.addAttribute("info", map);
 		}
 
-		return PATH + "/coupon/approvalRes";
+		return PATH + "/coupon/apprResListPage";
 	}
 
-	@RequestMapping(value = "/coupon/selectApprovalRes.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/coupon/selectApprResList.do", method = RequestMethod.POST)
 	public void selectApprovalRes(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
