@@ -5,20 +5,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--
-	<base href="http://arajeju.com:8080/AraCoupon/" target="_self">
-	<base href="http://172.30.1.20:8080/AraCoupon/" target="_self">
-	<base href="http://192.168.1.117:8080/AraCoupon/" target="_self">
-	-->
 	<title>거래처 - ${info.STR_NM}</title>
 </head>
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<link rel="stylesheet" href="/AraCoupon/bootstrap3/css/bootstrap.css">
-<link rel="stylesheet" href="/AraCoupon/bootstrap3/css/codingBooster5.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/codingBooster5.css">
 <style type="text/css">
 	.jumbotron {
-		background-image: url('/AraCoupon/bootstrap3/images/jumbotronBackground.jpg');
+		background-image: url('${staticPATH}/bootstrap3/images/jumbotronBackground.jpg');
 		background-size: cover;
 		text-shadow: black 0.4em 0.4em 0.4em;
 		color: white;
@@ -49,8 +44,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" data-toggle="tooltip" title="Ara Coupon Service System..">ACSS</a>
-				<!-- a class="navbar-brand" href="/AraCoupon/str/index.do?strid=${info.STR_ID}" data-toggle="tooltip" title="Ara Coupon Service System..">ACSS</a -->
+				<a class="navbar-brand" href="${staticPATH}/ara.do">ACSS</a>
 			</div>
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
@@ -59,29 +53,29 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/coupon/create.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;생성</a></li>
-							<li class="divider"></li>
-							<li><a href="/AraCoupon/str/coupon/approvalReq.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;신청목록</a></li>
-							<li><a href="/AraCoupon/str/coupon/approvalRes.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;승인목록</a></li>
+							<li><a href="${staticPATH}/str/coupon/create.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 생성</a></li>
+							<!-- li class="divider"></li -->
+							<li><a href="${staticPATH}/str/coupon/approvalReq.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
+							<li><a href="${staticPATH}/str/coupon/approvalRes.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰펰키지 승인목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰제공<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/provide/giveCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
-							<li><a href="/AraCoupon/str/provide/listCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
+							<li><a href="${staticPATH}/str/provide/giveCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
+							<li><a href="${staticPATH}/str/provide/listCoupon.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰결제<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/payment/listPayment.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
+							<li><a href="${staticPATH}/str/payment/listPayment.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/calculate/listCalculate.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+							<li><a href="${staticPATH}/str/calculate/listCalculate.do?strid=${info.STR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
 						</ul>
 					</li>
 					<!--
@@ -94,9 +88,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/str/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="/AraCoupon/str/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="/AraCoupon/str/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+							<li><a href="${staticPATH}/str/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="${staticPATH}/str/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="${staticPATH}/str/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -145,13 +139,15 @@
 							<tr>
 								<td>쿠폰 종류</td>
 								<td>
-									<select id="cpnTyp" name='cpnTyp'>
-										<option value="5000">  5,000원</option>
-										<option value="10000" selected> 10,000원</option>
-										<option value="20000"> 20,000원</option>
-										<option value="50000"> 50,000원</option>
-										<option value="100000">100,000원</option>
-										<option value="200000">200,000원</option>
+									<select id="cpnTyp">
+										<option value="01:10000">10,000원</option>
+										<option value="02:20000">20,000원</option>
+										<option value="03:50000" selected>50,000원</option>
+										<option value="04:100000">100,000원</option>
+										<option value="05:150000">150,000원</option>
+										<option value="06:200000">200,000원</option>
+										<option value="07:300000">300,000원</option>
+										<option value="08:500000">500,000원</option>
 									</select>
 								</td>
 							</tr>
@@ -159,10 +155,10 @@
 								<td>쿠폰 갯수</td>
 								<td>
 									<label class="label-inline"><input id='campCpnCnt' type='number' value='0'></label>
-									<label class="label-inline"> &nbsp;&nbsp; 금액=</label>
+									<label class="label-inline"> &nbsp;&nbsp; 쿠폰패키지금액=</label>
 									<label class="label-inline"><input id='campMulti' class='commaNumbers bg-danger' type='text' value='0' readonly></label>
 									<br>
-									(0보다 큰값을 입력하세요. 반드시 금액을 확인한다.)
+									(0보다 큰값을 입력하세요. 반드시 쿠폰패키지금액을 확인한다.)
 								</td>
 							</tr>
 							<tr id='hidden' style="display:none;">
@@ -218,38 +214,13 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<footer class="footer-default">
 		<div class="container">
-			<br>
 			<div class="row">
 				<div class="col-sm-12 text-center">
 					<h6>
+						ACSS ( Ara Coupon Service System )<br>
 						Copyright &copy; 2014 ~ 2018, 2019 TAIN Inc.
 					</h6>
 				</div>
-				<!--
-				<div class="col-sm-4">
-					<h5>소개</h5>
-					<p>ACSS(Ara Coupon Service System)</p>
-				</div>
-				<div class="col-sm-2">
-					<h5>네비게이션</h5>
-					<div class="list-group">
-						<a class="list-group-item" href="/sample05/">소개</a>
-						<a class="list-group-item" href="/sample05/instructor">강사진</a>
-						<a class="list-group-item" href="/sample05/lecture">강의</a>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<h5>SNS</h5>
-					<div class="list-group">
-						<a class="list-group-item" href="javascript:fn_console('facebook');">facebook</a>
-						<a class="list-group-item" href="javascript:fn_console('YouTube');">YouTube</a>
-						<a class="list-group-item" href="javascript:fn_console('Naver');">Naver</a>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<h5><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;by TAIN Inc.</h5>
-				</div>
-				-->
 			</div>
 		</div>
 	</footer>
@@ -288,7 +259,7 @@
 								</tbody>
 							</table>
 						</div>
-						<img src="/AraCoupon/bootstrap3/images/steve-jobs.png" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -302,7 +273,7 @@
 					<div class="modal-body text-center">
 						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
 						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/LEGO_Logo.jpg" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -316,7 +287,7 @@
 					<div class="modal-body text-center">
 						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
 						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -330,7 +301,8 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<form id='saveForm' name='form'>
+	<form id='saveCampInfoForm'>
+		<input type='hidden' id='_strid'        name='strid'         value='${info.STR_ID}' />
 		<input type='hidden' id='_campNm'       name='campNm'        value='' />
 		<input type='hidden' id='_campDesc'     name='campDesc'      value='' />
 		<input type='hidden' id='_campBgnDt'    name='campBgnDt'     value='' />
@@ -345,13 +317,17 @@
 		<input type='hidden' id='_chlDesc'      name='chlDesc'       value='' />
 		<input type='hidden' id='_smsNm'        name='smsNm'         value='' />
 	</form>
+	<form id='approvalReqForm'>
+		<input type='hidden' id='_strid'        name='strid'         value='' />
+		<input type='hidden' id='_campid'       name='campid'        value='' />
+	</form>
 
 
 </body>
 <!-- script -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<!-- script type="text/javascript" src="/AraCoupon/bootstrap3/js/jquery.numberformatter-1.2.4.jsmin.js"></script -->
-<script type="text/javascript" src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
+<!-- script type="text/javascript" src="${staticPATH}/bootstrap3/js/jquery.numberformatter-1.2.4.jsmin.js"></script -->
+<script type="text/javascript" src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
 		// $('[data-toggle="tooltip"]').tooltip();
@@ -359,11 +335,21 @@
 		if (!true) $('input[name=campOffTyp]').on('click', function() {
 			console.log(">>>>> radio: " + $(this).val());
 		});
-		if (!true) $('#cpnTyp').on('change', function() {
+		if (true) $('#cpnTyp').on('change', function() {
 			console.log(">>>>> select: " + $(this).find('option:selected').val());
+			var price = $('#cpnTyp').find('option:selected').val().substring(3);
+			var count = $('#campCpnCnt').val();
+			if (count < 0) {
+				$('#campCpnCnt').val(0)
+				$('#campCpnCnt').focus();
+				return;
+			}
+			var multi = price * count;
+			if (!true) console.log(">>>>> multi = " + multi.toLocaleString());
+			$('#campMulti').val(multi.toLocaleString());
 		});
 		if (true) $('#campCpnCnt').on('change', function() {
-			var price = $('#cpnTyp').find('option:selected').val();
+			var price = $('#cpnTyp').find('option:selected').val().substring(3);
 			var count = $('#campCpnCnt').val();
 			if (count < 0) {
 				$('#campCpnCnt').val(0)
@@ -469,14 +455,18 @@
 		if (true) {
 			// call ajax
 			jQuery.ajax({
-				url           : "/AraCoupon/str/coupon/createSave.do",
+				url           : "${staticPATH}/str/coupon/saveCampInfo.do",
 				dataType      : "JSON",
 				scriptCharset : "UTF-8",
 				type          : "POST",
-				data          : $("#saveForm").serialize(),
+				data          : $("#saveCampInfoForm").serialize(),
 				success: function(result, option) {
 					if (option == "success") {
-						alert("발송하였습니다. RET=" + result.RET);
+						alert("메시지:" + result.RET);
+						//window.location = "${staticPATH}/str/coupon/approvalReq.do?strid=${info.STR_ID}";
+						$('#approvalReqForm > #_strid').val(result.strid);
+						$('#approvalReqForm > #_campid').val(result.CAMP_ID);
+						$('#approvalReqForm').attr('method', 'POST').attr('action', '${staticPATH}/str/coupon/approvalReq.do').submit();
 					} else {
 						alert("에러가 발생하였습니다. RET=" + result.RET);
 					}

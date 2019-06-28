@@ -1,5 +1,6 @@
 package com.skplanet.sascm.serviceimpl;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -49,5 +50,40 @@ public class AraStrServiceImpl implements AraStrService {
 	@Override
 	public List<Map<String, Object>> listCalculateList(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.listCalculateList(param);
+	}
+
+	@Override
+	public Map<String, Object> selectCampId(Map<String, Object> param) throws SQLException {
+		return this.araStrDAO.selectCampId(param);
+	}
+
+	@Override
+	public int insertAraCamp(Map<String, Object> param) throws SQLException {
+		return this.araStrDAO.insertAraCamp(param);
+	}
+
+	@Override
+	public int insertAraCampInfo(Map<String, Object> param) throws SQLException {
+		return this.araStrDAO.insertAraCampInfo(param);
+	}
+
+	@Override
+	public int insertAraCampOff(Map<String, Object> param) throws SQLException {
+		return this.araStrDAO.insertAraCampOff(param);
+	}
+
+	@Override
+	public int insertAraCampChl(Map<String, Object> param) throws SQLException {
+		return this.araStrDAO.insertAraCampChl(param);
+	}
+
+	@Override
+	public int insertAraOffCpn(Map<String, Object> param) throws SQLException {
+		return this.araStrDAO.insertAraOffCpn(param);
+	}
+
+	@Override
+	public int insertAraChlSms(Map<String, Object> param) throws SQLException {
+		return this.araStrDAO.insertAraChlSms(param);
 	}
 }

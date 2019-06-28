@@ -69,6 +69,8 @@
 			AND E.CAMP_ID = B.CAMP_ID
 			AND F.MST_CD = 'C007' AND F.DTL_CD = D1.CPN_TYP
 			AND B1.CAMP_ID IS NULL
+		ORDER BY
+			B.CAMP_ID DESC
 	</select>
 
 	<!-- 캠페인 승인신청을 한다. -->
@@ -234,6 +236,62 @@
 		ORDER BY
 			A.CPN_NO ASC
 	</select>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- create Camp -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<select id="selectCampId" parameterType="Map" resultType="Map">
+		SELECT SEQ_CAMP.NEXTVAL AS CAMP_ID FROM DUAL  /* AraStr.selectCampId */
+	</select>
+
+	<insert id="insertAraCamp" parameterType="Map">
+		INSERT INTO  /* AraStr.insertAraCamp */
+			ARA_CAMP
+		VALUES
+			( #{strid}, #{CAMP_ID}, '${campNm}' )
+	</insert>
+
+	<insert id="insertAraCampInfo" parameterType="Map">
+		INSERT INTO  /* AraStr.insertAraCampInfo */
+			ARA_CAMPINFO
+		VALUES
+			( #{CAMP_ID}, '${campDesc}', '${campBgnDt}', '${campEndDt}' )
+	</insert>
+
+	<insert id="insertAraCampOff" parameterType="Map">
+		INSERT INTO  /* AraStr.insertAraCampOff */
+			ARA_CAMPOFF
+		VALUES
+			( #{CAMP_ID}, '${offDesc}', '${campOffTyp}' )
+	</insert>
+
+	<insert id="insertAraCampChl" parameterType="Map">
+		INSERT INTO  /* AraStr.insertAraCampChl */
+			ARA_CAMPCHL
+		VALUES
+			( #{CAMP_ID}, '${chlDesc}', '${campChlTyp}' )
+	</insert>
+
+	<insert id="insertAraOffCpn" parameterType="Map">
+		INSERT INTO  /* AraStr.insertAraOffCpn */
+			ARA_OFFCPN
+		VALUES
+			( #{CAMP_ID}, '${cpnNm}', '${cpnTyp}', ${frmSeq}, ${toSeq} )
+	</insert>
+
+	<insert id="insertAraChlSms" parameterType="Map">
+		INSERT INTO  /* AraStr.insertAraChlSms */
+			ARA_CHLSMS
+		VALUES
+			( #{CAMP_ID}, '${smsNm}' )
+	</insert>
 
 
 

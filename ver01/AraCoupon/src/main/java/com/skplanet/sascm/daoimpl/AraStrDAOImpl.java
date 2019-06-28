@@ -47,4 +47,39 @@ public class AraStrDAOImpl extends AbstractDAO implements AraStrDAO {
 	public List<Map<String, Object>> listCalculateList(Map<String, Object> param) throws Exception {
 		return (List<Map<String, Object>>) selectList("AraStr.listCalculateList", param);
 	}
+
+	@Override
+	public Map<String, Object> selectCampId(Map<String, Object> param) throws SQLException {
+		return (Map<String,Object>) selectOne("AraStr.selectCampId", param);
+	}
+
+	@Override
+	public int insertAraCamp(Map<String, Object> param) throws SQLException {
+		return (int) insert("AraStr.insertAraCamp", param);
+	}
+
+	@Override
+	public int insertAraCampInfo(Map<String, Object> param) throws SQLException {
+		return (int) insert("AraStr.insertAraCampInfo", param);
+	}
+
+	@Override
+	public int insertAraCampOff(Map<String, Object> param) throws SQLException {
+		return (int) insert("AraStr.insertAraCampOff", param);
+	}
+
+	@Override
+	public int insertAraCampChl(Map<String, Object> param) throws SQLException {
+		return (int) insert("AraStr.insertAraCampChl", param);
+	}
+
+	@Override
+	public int insertAraOffCpn(Map<String, Object> param) throws SQLException {
+		return (int) insert("AraStr.insertAraOffCpn", param);
+	}
+
+	@Override
+	public int insertAraChlSms(Map<String, Object> param) throws SQLException {
+		return (int) insert("AraStr.insertAraChlSms", param);
+	}
 }

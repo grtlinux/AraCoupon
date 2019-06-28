@@ -99,7 +99,7 @@ public class AraController {
 		if (Flag.flag) {
 			// arakey를 ARA_CNNT 테이블에 넣는다.
 			this.araService.insertUsrAraKey(modelMap);
-			modelMap.addAttribute("retMsg", "정상적으로 아라키(AraKey)를 생성하였습니다. => " + modelMap.get("arakey"));
+			modelMap.addAttribute("retMsg", String.format("정상적으로 아라키(AraKey)[%s]를 생성하였습니다.\n인증에 사용하세요.", modelMap.get("arakey")));
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("KANG-20190626 >>>>> modelMap: " + modelMap);
@@ -170,7 +170,7 @@ public class AraController {
 		if (Flag.flag) {
 			// arakey를 ARA_CNNT 테이블에 넣는다.
 			this.araService.insertStrAraKey(modelMap);
-			modelMap.addAttribute("retMsg", "정상적으로 아라키(AraKey)를 생성하였습니다. => " + modelMap.get("arakey"));
+			modelMap.addAttribute("retMsg", String.format("정상적으로 아라키(AraKey)[%s]를 생성하였습니다.\n인증에 사용하세요.", modelMap.get("arakey")));
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("KANG-20190626 >>>>> modelMap: " + modelMap);
@@ -241,7 +241,7 @@ public class AraController {
 		if (Flag.flag) {
 			// arakey를 ARA_CNNT 테이블에 넣는다.
 			this.araService.insertCtrAraKey(modelMap);
-			modelMap.addAttribute("retMsg", "정상적으로 아라키(AraKey)를 생성하였습니다. => " + modelMap.get("arakey"));
+			modelMap.addAttribute("retMsg", String.format("정상적으로 아라키(AraKey)[%s]를 생성하였습니다.\n인증에 사용하세요.", modelMap.get("arakey")));
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("KANG-20190626 >>>>> modelMap: " + modelMap);

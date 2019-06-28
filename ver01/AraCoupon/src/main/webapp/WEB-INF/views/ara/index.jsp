@@ -315,7 +315,7 @@
 				data          : $("#requestUsrAraKeyForm").serialize(),
 				success: function(result, option) {
 					if (option == "success") {
-						alert("retMsg=" + result.retMsg);
+						if (true) alert("[알림] " + result.retMsg);
 						$('#modalUsr #usrid').attr('disabled', true);
 						$('#modalUsr #btnRequestAraKey').attr('disabled', true);
 						$('#modalUsr #arakey').attr('disabled', false);
@@ -414,7 +414,7 @@
 				data          : $("#requestStrAraKeyForm").serialize(),
 				success: function(result, option) {
 					if (option == "success") {
-						alert("retMsg=" + result.retMsg);
+						if (true) alert("[알림] " + result.retMsg);
 						$('#modalStr #strid').attr('disabled', true);
 						$('#modalStr #btnRequestAraKey').attr('disabled', true);
 						$('#modalStr #arakey').attr('disabled', false);
@@ -513,7 +513,7 @@
 				data          : $("#requestCtrAraKeyForm").serialize(),
 				success: function(result, option) {
 					if (option == "success") {
-						alert("retMsg=" + result.retMsg);
+						if (true) alert("[알림] " + result.retMsg);
 						$('#modalCtr #ctrid').attr('disabled', true);
 						$('#modalCtr #btnRequestAraKey').attr('disabled', true);
 						$('#modalCtr #arakey').attr('disabled', false);
