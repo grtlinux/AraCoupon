@@ -5,20 +5,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--
-	<base href="http://arajeju.com:8080/AraCoupon/" target="_self">
-	<base href="http://172.30.1.20:8080/AraCoupon/" target="_self">
-	<base href="http://192.168.1.117:8080/AraCoupon/" target="_self">
-	-->
 	<title>센터 - ${info.CTR_NM}</title>
 </head>
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<link rel="stylesheet" href="/AraCoupon/bootstrap3/css/bootstrap.css">
-<link rel="stylesheet" href="/AraCoupon/bootstrap3/css/codingBooster5.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/codingBooster5.css">
 <style type="text/css">
 	.jumbotron {
-		background-image: url('/AraCoupon/bootstrap3/images/jumbotronBackground.jpg');
+		background-image: url('${staticPATH}/bootstrap3/images/jumbotronBackground.jpg');
 		background-size: cover;
 		text-shadow: black 0.4em 0.4em 0.4em;
 		color: white;
@@ -46,14 +41,14 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/ctr/coupon/approvalReq.do?ctrid=${info.CTR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;신청목록</a></li>
-							<li><a href="/AraCoupon/ctr/coupon/approvalRes.do?ctrid=${info.CTR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;승인목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/coupon/apprReqListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/coupon/apprResListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 승인목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/ctr/calculate/listCalculate.do?ctrid=${info.CTR_ID}"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/calculate/calcListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
 						</ul>
 					</li>
 					<!--
@@ -66,9 +61,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/AraCoupon/ctr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="/AraCoupon/ctr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="/AraCoupon/ctr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+							<li><a href="${staticPATH}/ctr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="${staticPATH}/ctr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="${staticPATH}/ctr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -100,38 +95,13 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<footer class="footer-default">
 		<div class="container">
-			<br>
 			<div class="row">
 				<div class="col-sm-12 text-center">
 					<h6>
+						ACSS ( Ara Coupon Service System )<br>
 						Copyright &copy; 2014 ~ 2018, 2019 TAIN Inc.
 					</h6>
 				</div>
-				<!--
-				<div class="col-sm-4">
-					<h5>소개</h5>
-					<p>ACSS(Ara Coupon Service System)</p>
-				</div>
-				<div class="col-sm-2">
-					<h5>네비게이션</h5>
-					<div class="list-group">
-						<a class="list-group-item" href="/sample05/">소개</a>
-						<a class="list-group-item" href="/sample05/instructor">강사진</a>
-						<a class="list-group-item" href="/sample05/lecture">강의</a>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<h5>SNS</h5>
-					<div class="list-group">
-						<a class="list-group-item" href="javascript:fn_console('facebook');">facebook</a>
-						<a class="list-group-item" href="javascript:fn_console('YouTube');">YouTube</a>
-						<a class="list-group-item" href="javascript:fn_console('Naver');">Naver</a>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<h5><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;by TAIN Inc.</h5>
-				</div>
-				-->
 			</div>
 		</div>
 	</footer>
@@ -174,7 +144,7 @@
 								</tbody>
 							</table>
 						</div>
-						<img src="/AraCoupon/bootstrap3/images/steve-jobs.png" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -188,7 +158,7 @@
 					<div class="modal-body text-center">
 						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
 						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/LEGO_Logo.jpg" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -202,7 +172,7 @@
 					<div class="modal-body text-center">
 						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
 						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -210,27 +180,45 @@
 	</div>
 
 
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- Form -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<form id='tempForm'>
+		<input type='hidden' id='_ctrid' name='ctrid' value='${info.CTR_ID}' />
+	</form>
+
+
+
 
 </body>
 <!-- script -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
+<script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
+		processEvent();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 	});
-	function fn_console(msg) {
-		if (true) console.log(">>>>> " + msg);
-	}
 	function isEmpty(value) {
 		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
 			return true;
 		} else {
 			return false;
 		}
+	}
+	function processEvent() {
+	}
+	function fn_console(msg) {
+		if (true) console.log(">>>>> " + msg);
+	}
+	function fn_loadPostPage(url) {
+		$('#tempForm').attr('method', 'POST').attr('action', url).submit();
 	}
 </script>
 </html>

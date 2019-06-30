@@ -15,7 +15,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +45,9 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	
+	/*
+	 * request.Parameters   ->  modelMap
+	 */
 	private ModelMap setModelMap(ModelMap modelMap, HttpServletRequest request) throws Exception {
 		//copy request.Parameters to modelMap
 		//modelMap.putAll(request.getParameterMap());
@@ -67,6 +69,9 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
+	/*
+	 * index.jsp POST
+	 */
 	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
 	public String indexPost(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
@@ -88,6 +93,9 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
+	/*
+	 * createCampFormPage.jsp   POST
+	 */
 	@RequestMapping(value = "/coupon/createCampFormPage.do", method = RequestMethod.POST)
 	public String create(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
@@ -105,6 +113,9 @@ public class AraStrController {
 		return PATH + "/coupon/createCampFormPage";
 	}
 
+	/*
+	 * create campaign
+	 */
 	@RequestMapping(value = "/coupon/saveCampInfo.do", method = RequestMethod.POST)
 	public void saveCampInfo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
@@ -114,14 +125,25 @@ public class AraStrController {
 		}
 
 		if (Flag.flag) {
-			modelMap.put("cpnTyp", ((String)modelMap.get("campCpnTyp")).substring(0,2));
-			modelMap.put("frmSeq", 1);
-			modelMap.put("toSeq", Integer.parseInt(String.valueOf(modelMap.get("campCpnCnt"))));
-		}
-		
-		if (Flag.flag) {
 			// get CAMP_ID
 			Map<String,Object> map = this.araStrService.selectCampId(modelMap);
+			int seq = 0;
+			if (map.get("MAX_CPN_MST") != null) {
+				String cpnMst = String.valueOf(map.get("MAX_CPN_MST"));
+				seq = Integer.parseInt(cpnMst.substring(11)) + 1;
+			}
+			if (seq >= 10) {
+				modelMap.addAttribute("retCode", "9999");
+				modelMap.addAttribute("retMsg", "[FAIL] 하루에 10개 이상의 쿠폰패키지를 만들 수 없습니다.");
+				jsonView.render(modelMap, request, response);
+				return;
+			}
+			String cpnMst = String.format("%2s%3s%6s%1d"
+					, String.valueOf(map.get("CTR_ID"))
+					, String.valueOf(map.get("STR_ID"))
+					, String.valueOf(map.get("TODAY"))
+					, seq);
+			modelMap.put("cpnMst", cpnMst);
 			modelMap.put("CAMP_ID", map.get("CAMP_ID"));
 		}
 		
@@ -137,12 +159,8 @@ public class AraStrController {
 			this.araStrService.insertAraChlSms(modelMap);
 		}
 		
-		if (Flag.flag) {
-			modelMap.addAttribute("RET", "[성공] 성공적으로 처리 되었습니다.");
-		} else {
-			modelMap.addAttribute("RET", "[실패] 처리되지 못했습니다.");
-		}
-		
+		modelMap.addAttribute("retCode", "0000");
+		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		jsonView.render(modelMap, request, response);
 	}
 
@@ -150,6 +168,9 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
+	/*
+	 * 캠페인을 생성한 후 승인요청을 위한 목록 페이지
+	 */
 	@RequestMapping(value = "/coupon/apprReqListPage.do", method = RequestMethod.POST)
 	public String approvalReqPost(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
@@ -169,6 +190,9 @@ public class AraStrController {
 		return PATH + "/coupon/apprReqListPage";
 	}
 
+	/*
+	 * 승인요청에 대한 자료를 얻어 온다.
+	 */
 	@RequestMapping(value = "/coupon/selectApprReqList.do", method = RequestMethod.POST)
 	public void selectApprovalReq(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
@@ -178,7 +202,83 @@ public class AraStrController {
 		}
 
 		if (Flag.flag) {
-			List<Map<String,Object>> list = this.araStrService.selectApprovalReq(modelMap);
+			List<Map<String,Object>> list = this.araStrService.selectApprReqList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/*
+	 * 승인요청을 보낸다.
+	 */
+	@RequestMapping(value = "/coupon/insertApprReq.do", method = RequestMethod.POST)
+	public void insertApprReq(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+		
+		if (Flag.flag) {
+			String[] arrCampId = String.valueOf(modelMap.get("campIds")).split(",");
+			modelMap.addAttribute("arrCampId", arrCampId);
+		}
+
+		if (Flag.flag) {
+			this.araStrService.insertApprReq(modelMap);
+			
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * 승인완료된 캠페인목록 페이지
+	 */
+	@RequestMapping(value = "/coupon/apprResListPage.do", method = RequestMethod.GET)
+	public String approvalRes(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			Map<String,Object> map = this.araStrService.selectStoreInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.put("info", map);
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		return PATH + "/coupon/apprResListPage";
+	}
+
+	/*
+	 * 승인완료된 자료를 얻어 온다.
+	 */
+	@RequestMapping(value = "/coupon/selectApprResList.do", method = RequestMethod.POST)
+	public void selectApprovalRes(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.araStrService.selectApprResList(modelMap);
 			log.debug("list: " + list);
 			modelMap.addAttribute("list", list);
 		}
@@ -191,52 +291,30 @@ public class AraStrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
-
-	@RequestMapping(value = "/coupon/apprResListPage.do", method = RequestMethod.GET)
-	public String approvalRes(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("strid", request.getParameter("strid"));
-			Map<String,Object> map = this.araStrService.selectStoreInfo(param);
-			log.debug("map: " + map);
-			model.addAttribute("info", map);
-		}
-
-		return PATH + "/coupon/apprResListPage";
-	}
-
-	@RequestMapping(value = "/coupon/selectApprResList.do", method = RequestMethod.POST)
-	public void selectApprovalRes(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
-		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-		}
-		
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("strid", request.getParameter("strid"));
-			List<Map<String,Object>> list = this.araStrService.selectApprovalRes(param);
-			log.debug("list: " + list);
-			modelMap.addAttribute("list", list);
-		}
-
-		jsonView.render(modelMap, request, response);
-	}
-
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

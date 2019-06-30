@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>거래처 - ${info.STR_NM}</title>
+	<title>센터 - ${info.CTR_NM}</title>
 </head>
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -13,23 +13,12 @@
 <link rel="stylesheet" href="${staticPATH}/bootstrap3/css/codingBooster5.css">
 <style type="text/css">
 	.jumbotron {
-		background-image: url('/AraCoupon/bootstrap3/images/jumbotronBackground.jpg');
+		background-image: url('${staticPATH}/bootstrap3/images/jumbotronBackground.jpg');
 		background-size: cover;
 		text-shadow: black 0.4em 0.4em 0.4em;
 		color: white;
 	}
 </style>
-<script type="text/javascript">
-	// no backward on history
-	history.pushState(null, null, document.URL);
-	window.addEventListener('popstate', function () {
-		history.pushState(null, null, document.URL);
-	});
-	//window.history.forward();
-	//function noBack() {
-	//	window.history.forward();
-	//}
-</script>
 <body>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -52,29 +41,14 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/coupon/createCampFormPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 생성</a></li>
-							<!-- li class="divider"></li -->
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/coupon/apprReqListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/coupon/apprResListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰펰키지 승인목록</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰제공<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/giveCoupon.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/listCoupon.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰결제<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/payment/listPayment.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/coupon/apprReqListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/coupon/apprResListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 승인목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/calculate/listCalculate.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/calculate/calcListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
 						</ul>
 					</li>
 					<!--
@@ -87,9 +61,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/login/login.do');"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/login/register.do');"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/login/logout.do');"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+							<li><a href="${staticPATH}/ctr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="${staticPATH}/ctr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="${staticPATH}/ctr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -131,7 +105,8 @@
 				</div>
 				<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
 					<button type="button" class="btn btn-info btn-sm" onclick="fn_refreshApprReq();"> 새로고침 </button>
-					<button type="button" class="btn btn-danger btn-sm" onclick="fn_insertApprReq();"> 발행승인신청 </button>
+					<button type="button" class="btn btn-danger btn-sm" onclick="fn_rejectApprReq();"> 승인취소 </button>
+					<button type="button" class="btn btn-danger btn-sm" onclick="fn_insertApprRes();"> 승인완료 </button>
 				</div>
 			</div>
 			<div class="panel-footer">
@@ -141,6 +116,7 @@
 	</div>
 	<!-- gap -->
 	<div style="height:70px;"></div>
+
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -193,7 +169,7 @@
 								</tbody>
 							</table>
 						</div>
-						<img src="/AraCoupon/bootstrap3/images/steve-jobs.png" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -261,7 +237,7 @@
 					<div class="modal-body text-center">
 						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
 						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -269,29 +245,25 @@
 	</div>
 
 
-
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- all of forms -->
+	<!-- Form -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
-		<input type='hidden' id='_strid' name='strid' value='${info.STR_ID}' />
+		<input type='hidden' id='_ctrid' name='ctrid' value='${info.CTR_ID}' />
 		<input type='hidden' id='_campIds' name='campIds' value='' />
 	</form>
-
 
 
 
 </body>
 <!-- script -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
+<script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
-	// Global variables
 	var list;
-
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		processEvent();
@@ -314,17 +286,13 @@
 			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
 		});
 	}
-	function selectApprovalReq(){
+	function selectApprovalReq() {
 		jQuery.ajax({
-			url           : "/AraCoupon/str/coupon/selectApprReqList.do",
+			url           : "${staticPATH}/ctr/coupon/selectApprReqList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
-			data          : {
-				strid: '${info.STR_ID}',
-				key01: "val01",
-				key02: "val02",
-			},
+			data          : $('#tempForm').serialize(),
 			success: function(result, option) {
 				if (option == "success"){
 					list = result.list;
@@ -433,19 +401,29 @@
 	function fn_refreshApprReq() {
 		selectApprovalReq();
 	}
-	function fn_insertApprReq() {
+	function fn_rejectApprReq() {
+		if (true) console.log(">>>>> fn_rejectApprReq()");
 		var campIds = [];
 		var rowChecked = $('#campTable input:checkbox[name=rowCheckbox]:checked');
 		rowChecked.each(function (index) {
 			var campId = $(this).parent().parent().children().eq(1).text();
-			// console.log(">>>>> " + index + ", " + campId);
 			campIds.push(campId.trim());
 		});
 		console.log(">>>>> campIds = " + campIds.join(','));
 		$('#tempForm #_campIds').val(campIds.join(','));
-		
+	}
+	function fn_insertApprRes() {
+		if (true) console.log(">>>>> fn_insertApprRes()");
+		var campIds = [];
+		var rowChecked = $('#campTable input:checkbox[name=rowCheckbox]:checked');
+		rowChecked.each(function (index) {
+			var campId = $(this).parent().parent().children().eq(1).text();
+			campIds.push(campId.trim());
+		});
+		console.log(">>>>> campIds = " + campIds.join(','));
+		$('#tempForm #_campIds').val(campIds.join(','));
 		jQuery.ajax({
-			url           : "/AraCoupon/str/coupon/insertApprReq.do",
+			url           : "${staticPATH}/ctr/coupon/insertCouponPackage.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -462,6 +440,7 @@
 				alert("에러가 발생하였습니다.");
 			}
 		});
+		
 	}
 </script>
 </html>

@@ -31,8 +31,6 @@
 	//}
 </script>
 <body>
-<!-- body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" -->
-
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- navigation -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -88,9 +86,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="${staticPATH}/str/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="${staticPATH}/str/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="${staticPATH}/str/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/login/login.do');"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/login/register.do');"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/login/logout.do');"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -312,7 +310,9 @@
 		<input type='hidden' id='_campEndDt'    name='campEndDt'     value='' />
 		<input type='hidden' id='_campOffTyp'   name='campOffTyp'    value='' />
 		<input type='hidden' id='_campCpnTyp'   name='campCpnTyp'    value='' />
+		<input type='hidden' id='_campCpnMny'   name='campCpnMny'    value='' />
 		<input type='hidden' id='_campCpnCnt'   name='campCpnCnt'    value='' />
+		<input type='hidden' id='_campCpnSum'   name='campCpnSum'    value='' />
 		<input type='hidden' id='_campGrp'      name='campGrp'       value='' />
 		<input type='hidden' id='_offDesc'      name='offDesc'       value='' />
 		<input type='hidden' id='_cpnNm'        name='cpnNm'         value='' />
@@ -445,14 +445,22 @@
 			});
 			console.log(">>>>> " + grp.join(', '));
 			
+			var typ = $('#cpnTyp').find('option:selected').val();
+			var mny = typ.substring(3);
+			var typ = typ.substring(0, 2);
+			var cnt = $("#campCpnCnt").val();
+			var sum = cnt * mny;
+			
 			// transfer data
 			$("#_campNm").val($("#campNm").val());
 			$("#_campDesc").val($("#campDesc").val());
 			$("#_campBgnDt").val($("#campBgnDt").val());
 			$("#_campEndDt").val($("#campEndDt").val());
 			$("#_campOffTyp").val($('input[name=campOffTyp]:checked').val());
-			$("#_campCpnTyp").val($('#cpnTyp').find('option:selected').val());
-			$("#_campCpnCnt").val($("#campCpnCnt").val());
+			$("#_campCpnTyp").val(typ);
+			$("#_campCpnMny").val(mny);
+			$("#_campCpnCnt").val(cnt);
+			$("#_campCpnSum").val(sum);
 			$("#_campGrp").val(grp.join(','));
 			$("#_offDesc").val($("#offDesc").val());
 			$("#_cpnNm").val($("#cpnNm").val());
@@ -469,14 +477,14 @@
 				type          : "POST",
 				data          : $("#saveCampInfoForm").serialize(),
 				success: function(result, option) {
-					if (option == "success") {
-						alert("메시지:" + result.RET);
+					if (option == "success" && result.retCode == "0000") {
+						alert("메시지: " + result.retMsg);
 						//window.location = "${staticPATH}/str/coupon/approvalReq.do?strid=${info.STR_ID}";
 						$('#approvalReqForm > #_strid').val(result.strid);
 						$('#approvalReqForm > #_campid').val(result.CAMP_ID);
 						$('#tempForm').attr('method', 'POST').attr('action', '${staticPATH}/str/coupon/apprReqListPage.do').submit();
 					} else {
-						alert("에러가 발생하였습니다. RET=" + result.RET);
+						alert("메시지: " + result.retMsg + " (" + result.retCode + ")");
 					}
 					fn_close();
 				},

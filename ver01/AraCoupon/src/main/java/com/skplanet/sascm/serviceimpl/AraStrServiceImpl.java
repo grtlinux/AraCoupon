@@ -23,16 +23,6 @@ public class AraStrServiceImpl implements AraStrService {
 	}
 
 	@Override
-	public List<Map<String,Object>> selectApprovalReq(Map<String, Object> param) throws Exception {
-		return this.araStrDAO.selectApprovalReq(param);
-	}
-
-	@Override
-	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws Exception {
-		return this.araStrDAO.selectApprovalRes(param);
-	}
-
-	@Override
 	public List<Map<String, Object>> giveCouponList(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.giveCouponList(param);
 	}
@@ -85,5 +75,20 @@ public class AraStrServiceImpl implements AraStrService {
 	@Override
 	public int insertAraChlSms(Map<String, Object> param) throws SQLException {
 		return this.araStrDAO.insertAraChlSms(param);
+	}
+
+	@Override
+	public int insertApprReq(Map<String, Object> param) throws SQLException {
+		return this.araStrDAO.insertApprReq(param);
+	}
+
+	@Override
+	public List<Map<String,Object>> selectApprReqList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.selectApprReqList(param);
+	}
+
+	@Override
+	public List<Map<String,Object>> selectApprResList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.selectApprResList(param);
 	}
 }

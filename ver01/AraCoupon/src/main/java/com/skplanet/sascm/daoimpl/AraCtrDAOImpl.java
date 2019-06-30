@@ -19,20 +19,28 @@ public class AraCtrDAOImpl extends AbstractDAO implements AraCtrDAO {
 	}
 	
 	@Override
-	public List<Map<String,Object>> selectApprovalReq(Map<String, Object> param) throws SQLException {
-		return (List<Map<String, Object>>) selectList("AraCtr.selectApprovalReq", param);
+	public List<Map<String,Object>> selectApprReqList(Map<String, Object> param) throws SQLException {
+		return (List<Map<String, Object>>) selectList("AraCtr.selectApprReqList", param);
 	}
 
 	@Override
-	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws SQLException {
-		return (List<Map<String, Object>>) selectList("AraCtr.selectApprovalRes", param);
+	public int insertApprRes(Map<String, Object> param) throws SQLException {
+		return (int) insert("AraCtr.insertApprRes", param);
 	}
 
 	@Override
-	public Map<String, Object> selectCampaignInfo(Map<String, Object> param) throws SQLException {
-		return (Map<String,Object>) selectOne("AraCtr.selectCampaignInfo", param);
+	public Map<String, Object> selectCampInfoForCpnPkg(Map<String, Object> param) throws SQLException {
+		return (Map<String,Object>) selectOne("AraCtr.selectCampInfoForCpnPkg", param);
 	}
 
+	@Override
+	public List<Map<String,Object>> selectApprResList(Map<String, Object> param) throws SQLException {
+		return (List<Map<String, Object>>) selectList("AraCtr.selectApprResList", param);
+	}
+
+	
+	
+	
 	@Override
 	public int insertCouponSheet(Map<String, Object> param) throws SQLException {
 		return (int) insert("AraCtr.insertCouponSheet", param);

@@ -19,16 +19,6 @@ public class AraStrDAOImpl extends AbstractDAO implements AraStrDAO {
 	}
 	
 	@Override
-	public List<Map<String,Object>> selectApprovalReq(Map<String, Object> param) throws SQLException {
-		return (List<Map<String, Object>>) selectList("AraStr.selectApprovalReq", param);
-	}
-
-	@Override
-	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws SQLException {
-		return (List<Map<String, Object>>) selectList("AraStr.selectApprovalRes", param);
-	}
-
-	@Override
 	public List<Map<String, Object>> giveCouponList(Map<String, Object> param) throws Exception {
 		return (List<Map<String, Object>>) selectList("AraStr.giveCouponList", param);
 	}
@@ -81,5 +71,20 @@ public class AraStrDAOImpl extends AbstractDAO implements AraStrDAO {
 	@Override
 	public int insertAraChlSms(Map<String, Object> param) throws SQLException {
 		return (int) insert("AraStr.insertAraChlSms", param);
+	}
+
+	@Override
+	public int insertApprReq(Map<String, Object> param) throws SQLException {
+		return (int) insert("AraStr.insertApprReq", param);
+	}
+
+	@Override
+	public List<Map<String,Object>> selectApprReqList(Map<String, Object> param) throws SQLException {
+		return (List<Map<String, Object>>) selectList("AraStr.selectApprReqList", param);
+	}
+
+	@Override
+	public List<Map<String,Object>> selectApprResList(Map<String, Object> param) throws SQLException {
+		return (List<Map<String, Object>>) selectList("AraStr.selectApprResList", param);
 	}
 }

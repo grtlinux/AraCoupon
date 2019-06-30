@@ -90,4 +90,18 @@ public class Flag {
 		
 		return String.format("%s%02d", ret, sum);
 	}
+	
+	public static String getCouponNo(String cpnMst, String cpnTyp, int seq) throws Exception {
+		String ret = String.format("%s%s%03d", cpnMst, cpnTyp, seq);
+		char[] arrChar = ret.toCharArray();
+		int sum = 0;
+		for (int i=0; i < arrChar.length; i++) {
+			int val = (arrChar[i] - '0') * MULTI[i];
+			sum += val;
+			if (!flag) System.out.printf(">>>>> %c * %d = %d   sum = %d%n", arrChar[i], MULTI[i], val, sum);
+		}
+		sum %= 100;
+		
+		return String.format("%s%02d", ret, sum);
+	}
 }

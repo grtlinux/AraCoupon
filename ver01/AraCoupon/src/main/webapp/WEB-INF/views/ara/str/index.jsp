@@ -223,7 +223,6 @@
 		}
 	}
 	function processEvent() {
-		
 	}
 	function fn_console(msg) {
 		if (true) console.log(">>>>> " + msg);

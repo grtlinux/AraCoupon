@@ -1,6 +1,5 @@
 package com.skplanet.sascm.serviceimpl;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -23,22 +22,30 @@ public class AraCtrServiceImpl implements AraCtrService {
 	}
 
 	@Override
-	public List<Map<String,Object>> selectApprovalReq(Map<String, Object> param) throws Exception {
-		return this.araCtrDAO.selectApprovalReq(param);
+	public List<Map<String,Object>> selectApprReqList(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.selectApprReqList(param);
 	}
 
 	@Override
-	public List<Map<String,Object>> selectApprovalRes(Map<String, Object> param) throws Exception {
-		return this.araCtrDAO.selectApprovalRes(param);
+	public int insertApprRes(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.insertApprRes(param);
 	}
 
 	@Override
-	public Map<String, Object> selectCampaignInfo(Map<String, Object> param) throws Exception {
-		return this.araCtrDAO.selectCampaignInfo(param);
+	public Map<String, Object> selectCampInfoForCpnPkg(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.selectCampInfoForCpnPkg(param);
 	}
 
 	@Override
-	public int insertCouponSheet(Map<String, Object> param) throws SQLException {
+	public List<Map<String,Object>> selectApprResList(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.selectApprResList(param);
+	}
+
+	
+	
+	
+	@Override
+	public int insertCouponSheet(Map<String, Object> param) throws Exception {
 		return this.araCtrDAO.insertCouponSheet(param);
 	}
 

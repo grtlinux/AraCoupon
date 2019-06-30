@@ -1,5 +1,6 @@
 package com.skplanet.sascm.controller;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -15,12 +16,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
+import com.google.gson.GsonBuilder;
 import com.skplanet.sascm.service.AraCtrService;
 import com.skplanet.sascm.util.Common;
 import com.skplanet.sascm.util.Flag;
@@ -45,73 +46,12 @@ public class AraCtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String indexGet(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("ctrid", Common.nvl(request.getParameter("ctrid"), "01"));
-			log.debug("param: " + param);
-			Map<String,Object> map = this.araCtrService.selectCenterInfo(param);
-			log.debug("map: " + map);
-			model.addAttribute("info", map);
-		}
-
-		return PATH + "/index";
-	}
-
-	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
-	public String indexPost(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("ctrid", Common.nvl(request.getParameter("ctrid"), "01"));
-			log.debug("param: " + param);
-			Map<String,Object> map = this.araCtrService.selectCenterInfo(param);
-			log.debug("map: " + map);
-			model.addAttribute("info", map);
-		}
-
-		return PATH + "/index";
-	}
-
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-
-	@RequestMapping(value = "/coupon/approvalReq.do", method = RequestMethod.GET)
-	public String approvalReq(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("ctrid", Common.nvl(request.getParameter("ctrid"), "01"));
-			Map<String,Object> map = this.araCtrService.selectCenterInfo(param);
-			log.debug("map: " + map);
-			model.addAttribute("info", map);
-		}
-
-		return PATH + "/coupon/approvalReq";
-	}
-
-	@RequestMapping(value = "/coupon/selectApprovalReq.do", method = RequestMethod.POST)
-	public void selectApprovalReq(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
+	/*
+	 * request.Parameters   ->  modelMap
+	 */
+	private ModelMap setModelMap(ModelMap modelMap, HttpServletRequest request) throws Exception {
+		//copy request.Parameters to modelMap
+		//modelMap.putAll(request.getParameterMap());
 		if (Flag.flag) {
 			Enumeration<String> enums = request.getParameterNames();
 			while (enums.hasMoreElements()) {
@@ -120,81 +60,127 @@ public class AraCtrController {
 				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
 			}
 		}
+		//modelMap.addAttribute("TODAY1", Flag.getDateTime("yyyy-MM-dd"));
+		//modelMap.addAttribute("TODAY2", Flag.getDateTime("yyyyMMdd"));
+		
+		return modelMap;
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * index.jsp POST
+	 */
+	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
+	public String indexPost(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("ctrid", Common.nvl(request.getParameter("ctrid"), "01"));
-			List<Map<String,Object>> list = this.araCtrService.selectApprovalReq(param);
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			Map<String,Object> map = this.araCtrService.selectCenterInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+
+		return PATH + "/index";
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * 승인요청 목록 페이지
+	 */
+	@RequestMapping(value = "/coupon/apprReqListPage.do", method = RequestMethod.POST)
+	public String apprReqListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			Map<String,Object> map = this.araCtrService.selectCenterInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+
+		return PATH + "/coupon/apprReqListPage";
+	}
+
+	/*
+	 * 승인요청한 자료를 얻는다.
+	 */
+	@RequestMapping(value = "/coupon/selectApprReqList.do", method = RequestMethod.POST)
+	public void selectApprReqList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.araCtrService.selectApprReqList(modelMap);
 			log.debug("list: " + list);
 			modelMap.addAttribute("list", list);
 		}
 
+		modelMap.addAttribute("retCode", "0000");
+		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		jsonView.render(modelMap, request, response);
 	}
 
+	/*
+	 * 승인처리를 한다.
+	 */
 	@RequestMapping(value = "/coupon/insertCouponPackage.do", method = RequestMethod.POST)
 	public void insertCouponPackage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		String[] arrCampId = new String[] {};
+		if (Flag.flag) {
+			arrCampId = String.valueOf(modelMap.get("campIds")).split(",");
+			modelMap.addAttribute("arrCampId", arrCampId);
 		}
 
 		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-			System.out.println(">>>>> modelMap: " + modelMap);
+			// insert ara_apprres
+			this.araCtrService.insertApprRes(modelMap);
 		}
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		String cpnMst = "";
-		int frmSeq = 0;
-		int toSeq = 0;
+		
 		if (Flag.flag) {
-			/* AraCtr.selectCampaignInfo */
-			param.put("campid", Common.nvl(request.getParameter("campid"), "1"));
-			Map<String,Object> map = this.araCtrService.selectCampaignInfo(param);
-			log.debug("map: " + map);
-			
-			frmSeq = Integer.parseInt(String.valueOf(map.get("FRM_SEQ")));
-			toSeq = Integer.parseInt(String.valueOf(map.get("TO_SEQ")));
-			
-			cpnMst = String.format("%02d%03d%s%d%s"
-					, Integer.parseInt(String.valueOf(map.get("CTR_ID")))
-					, Integer.parseInt(String.valueOf(map.get("STR_ID")))
-					, Flag.getYYMMDD()
-					, 1
-					, (String) map.get("CPN_TYP")
-					);
-			param.put("str_id"    , map.get("STR_ID"));
-			param.put("camp_id"   , map.get("CAMP_ID"));
-			param.put("usr_id"    , -1);
-			param.put("usd_str_id", -1);
-			param.put("cpn_typ"   , (String) map.get("CPN_TYP"));
-			param.put("cpn_phs"   , "1");
-			param.put("cpn_mst"   , cpnMst);
-			param.put("cpn_no"    , Flag.getCouponNo(cpnMst, 123));
-			System.out.println(">>>>> param: " + param);
-		}
-
-		if (Flag.flag) {
-			/* AraCtr.insertCouponSheet */
-			//	#{str_id}         /* STR_ID     */
-			//	, #{camp_id}      /* CAMP_ID    */
-			//	, #{usr_id}       /* USR_ID     */
-			//	, #{usd_str_id}   /* USD_STR_ID */
-			//	, #{cpn_typ}      /* CPN_TYP    */
-			//	, #{cpn_phs}      /* CPN_PHS    */
-			//	, #{cpn_no}       /* CPN_NO     */
-			for (int seq=frmSeq; 0 < seq && seq <= toSeq; seq++) {
-				param.put("cpn_no", Flag.getCouponNo(cpnMst, seq));
-				this.araCtrService.insertCouponSheet(param);
+			// insert ara_cpn
+			for (int i=0; i < arrCampId.length; i++) {
+				modelMap.put("campid", arrCampId[i]);
+				Map<String,Object> param = this.araCtrService.selectCampInfoForCpnPkg(modelMap);
+				if (Flag.flag) System.out.println(">>>>> param: " + new GsonBuilder().setPrettyPrinting().create().toJson(param));
+				
+				if (Flag.flag) {
+					// insert Coupon Sheet
+					String cpnMst = (String) param.get("CPN_MST");
+					String cpnTyp = (String) param.get("CPN_TYP");
+					int cpnCnt = ((BigDecimal) param.get("CPN_CNT")).intValue();
+					for (int cpnNo = 1; cpnNo <= cpnCnt; cpnNo++) {
+						param.put("CPN_NO", Flag.getCouponNo(cpnMst, cpnTyp, cpnNo));
+						if (!Flag.flag) System.out.println(">>>>> param: " + param);
+						this.araCtrService.insertCouponSheet(param);
+					}
+				}
 			}
 		}
-
+		
+		modelMap.addAttribute("retCode", "0000");
+		modelMap.addAttribute("retMsg", "[성공] 캠페인을 승인했습니다. 쿠폰을 발행했습니다.");
 		jsonView.render(modelMap, request, response);
 	}
 
@@ -202,51 +188,60 @@ public class AraCtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/coupon/approvalRes.do", method = RequestMethod.GET)
-	public String approvalRes(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	/*
+	 * 승인완료 목록 페이지
+	 */
+	@RequestMapping(value = "/coupon/apprResListPage.do", method = RequestMethod.POST)
+	public String apprResListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
 		}
 
 		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("ctrid", Common.nvl(request.getParameter("ctrid"), "01"));
-			Map<String,Object> map = this.araCtrService.selectCenterInfo(param);
+			Map<String,Object> map = this.araCtrService.selectCenterInfo(modelMap);
 			log.debug("map: " + map);
-			model.addAttribute("info", map);
+			modelMap.addAttribute("info", map);
 		}
 
-		return PATH + "/coupon/approvalRes";
+		return PATH + "/coupon/apprResListPage";
 	}
 
-	@RequestMapping(value = "/coupon/selectApprovalRes.do", method = RequestMethod.POST)
-	public void selectApprovalRes(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+	/*
+	 * 승인완료한 자료를 얻는다.
+	 */
+	@RequestMapping(value = "/coupon/selectApprResList.do", method = RequestMethod.POST)
+	public void selectApprResList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
 		}
 
 		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("ctrid", Common.nvl(request.getParameter("ctrid"), "01"));
-			List<Map<String,Object>> list = this.araCtrService.selectApprovalRes(param);
+			List<Map<String,Object>> list = this.araCtrService.selectApprResList(modelMap);
 			log.debug("list: " + list);
 			modelMap.addAttribute("list", list);
 		}
 
+		modelMap.addAttribute("retCode", "0000");
+		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		jsonView.render(modelMap, request, response);
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
