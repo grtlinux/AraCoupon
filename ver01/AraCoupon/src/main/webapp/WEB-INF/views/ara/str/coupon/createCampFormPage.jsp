@@ -49,7 +49,7 @@
 				<ul class="nav navbar-nav navbar-left">
 					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰패키지발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/coupon/createCampFormPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 생성</a></li>
 							<!-- li class="divider"></li -->
@@ -60,14 +60,15 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰제공<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/giveCoupon.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/listCoupon.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/givableCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/allCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰결제<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/payment/listPayment.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/payment/payCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제 쿠폰목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/payment/noPayCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;미결제 쿠폰목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">

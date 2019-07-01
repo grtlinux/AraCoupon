@@ -57,5 +57,24 @@ a:focus {
 }
 
 
+/* ---------------------------- */
+.show {
+	display: block !important;
+}
+.display {
+	display: block !important;
+}
+.hide {
+	display: none !important;
+	visibility: hidden !important;
+}
+.hidden {
+	display: none !important;
+	visibility: hidden !important;
+}
+.invisible {
+	visibility: hidden;
+}
+
 
 

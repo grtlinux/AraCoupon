@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${staticPATH}/bootstrap3/css/codingBooster5.css">
 <style type="text/css">
 	.jumbotron {
-		background-image: url('/AraCoupon/bootstrap3/images/jumbotronBackground.jpg');
+		background-image: url('${staticPATH}/bootstrap3/images/jumbotronBackground.jpg');
 		background-size: cover;
 		text-shadow: black 0.4em 0.4em 0.4em;
 		color: white;
@@ -50,7 +50,7 @@
 				<ul class="nav navbar-nav navbar-left">
 					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰패키지발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/coupon/createCampFormPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 생성</a></li>
 							<!-- li class="divider"></li -->
@@ -61,14 +61,15 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰제공<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/giveCoupon.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/listCoupon.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공된 쿠폰목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/givableCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/provide/allCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰결제<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/payment/listPayment.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/payment/payCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제 쿠폰목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/payment/noPayCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;미결제 쿠폰목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -193,7 +194,7 @@
 								</tbody>
 							</table>
 						</div>
-						<img src="/AraCoupon/bootstrap3/images/steve-jobs.png" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -247,7 +248,7 @@
 								<td><div id="modalCpnCnt"></div></td>
 							</tr>
 						</table>
-						<img src="/AraCoupon/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
+						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
 					</div>
 				</div>
 			</div>
@@ -261,7 +262,7 @@
 					<div class="modal-body text-center">
 						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
 						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="/AraCoupon/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
+						<img src="${staticPATH}/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
 					</div>
 				</div>
 			</div>
@@ -287,7 +288,7 @@
 </body>
 <!-- script -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
+<script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
 	// Global variables
 	var list;
@@ -316,15 +317,11 @@
 	}
 	function selectApprovalReq(){
 		jQuery.ajax({
-			url           : "/AraCoupon/str/coupon/selectApprReqList.do",
+			url           : "${staticPATH}/str/coupon/selectApprReqList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
-			data          : {
-				strid: '${info.STR_ID}',
-				key01: "val01",
-				key02: "val02",
-			},
+			data          : $("#tempForm").serialize(),
 			success: function(result, option) {
 				if (option == "success"){
 					list = result.list;
@@ -445,7 +442,7 @@
 		$('#tempForm #_campIds').val(campIds.join(','));
 		
 		jQuery.ajax({
-			url           : "/AraCoupon/str/coupon/insertApprReq.do",
+			url           : "${staticPATH}/str/coupon/insertApprReq.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",

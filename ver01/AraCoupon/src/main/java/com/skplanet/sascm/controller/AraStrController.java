@@ -247,7 +247,7 @@ public class AraStrController {
 	/*
 	 * 승인완료된 캠페인목록 페이지
 	 */
-	@RequestMapping(value = "/coupon/apprResListPage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/coupon/apprResListPage.do", method = RequestMethod.POST)
 	public String approvalRes(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
@@ -284,6 +284,223 @@ public class AraStrController {
 		}
 
 		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * 쿠폰목록 페이지
+	 */
+	@RequestMapping(value = "/provide/allCpnListPage.do", method = RequestMethod.POST)
+	public String allCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			Map<String,Object> map = this.araStrService.selectStoreInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.put("info", map);
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		return PATH + "/provide/allCpnListPage";
+	}
+
+	/*
+	 * 쿠폰목록 자료를 얻어 온다.
+	 */
+	@RequestMapping(value = "/provide/selectAllCpnList.do", method = RequestMethod.POST)
+	public void selectAllCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.araStrService.selectAllCpnList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		if (!Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * 쿠폰목록 페이지
+	 */
+	@RequestMapping(value = "/provide/givableCpnListPage.do", method = RequestMethod.POST)
+	public String givableCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			Map<String,Object> map = this.araStrService.selectStoreInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.put("info", map);
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		return PATH + "/provide/givableCpnListPage";
+	}
+
+	/*
+	 * 쿠폰목록 자료를 얻어 온다.
+	 */
+	@RequestMapping(value = "/provide/selectCouponList.do", method = RequestMethod.POST)
+	public void selectCouponList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.araStrService.selectCouponList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		if (!Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/*
+	 * 선택된 쿠폰을 제공한다.
+	 */
+	@RequestMapping(value = "/provide/giveCpnList.do", method = RequestMethod.POST)
+	public void giveCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			String[] arrCpnNo = String.valueOf(modelMap.get("arrCpnNo")).split(",");
+			modelMap.addAttribute("arrCpnNo", arrCpnNo);
+			this.araStrService.giveCpnList(modelMap);
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		
+		modelMap.addAttribute("retCode", "0000");
+		modelMap.addAttribute("retMsg", "[성공] 성공적으로 쿠폰을 제공하였습니다.");
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * 쿠폰목록 페이지
+	 */
+	@RequestMapping(value = "/payment/payCpnListPage.do", method = RequestMethod.POST)
+	public String payCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			Map<String,Object> map = this.araStrService.selectStoreInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.put("info", map);
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		return PATH + "/payment/payCpnListPage";
+	}
+
+	/*
+	 * 쿠폰목록 자료를 얻어 온다.
+	 */
+	@RequestMapping(value = "/payment/selectPayCpnList.do", method = RequestMethod.POST)
+	public void selectPayCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.araStrService.selectPayCpnList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		if (!Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * 쿠폰목록 페이지
+	 */
+	@RequestMapping(value = "/payment/noPayCpnListPage.do", method = RequestMethod.POST)
+	public String noPayCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			Map<String,Object> map = this.araStrService.selectStoreInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.put("info", map);
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		return PATH + "/payment/noPayCpnListPage";
+	}
+
+	/*
+	 * 쿠폰목록 자료를 얻어 온다.
+	 */
+	@RequestMapping(value = "/payment/selectNoPayCpnList.do", method = RequestMethod.POST)
+	public void selectNoPayCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.araStrService.selectNoPayCpnList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		if (!Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 
 		jsonView.render(modelMap, request, response);
 	}

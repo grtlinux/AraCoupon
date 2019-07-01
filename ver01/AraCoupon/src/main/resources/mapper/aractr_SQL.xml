@@ -177,7 +177,7 @@
 		INSERT INTO  /* AraCtr.insertCouponSheet */
 			ARA_CPN
 		VALUES
-			( #{STR_ID}, #{CAMP_ID}, NULL, NULL, #{CPN_MST}, #{CPN_TYP}, #{CPN_MNY}, '1', #{CPN_NO}, SYSDATE, SYSDATE )
+			( #{STR_ID}, #{CAMP_ID}, -1, -1, #{CPN_MST}, #{CPN_TYP}, #{CPN_MNY}, '1', #{CPN_NO}, SYSDATE, SYSDATE )
 	</insert>
 
 

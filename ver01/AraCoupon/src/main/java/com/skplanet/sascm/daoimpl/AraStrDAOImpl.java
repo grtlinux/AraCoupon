@@ -1,6 +1,5 @@
 package com.skplanet.sascm.daoimpl;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ import com.skplanet.sascm.dao.AraStrDAO;
 public class AraStrDAOImpl extends AbstractDAO implements AraStrDAO {
 
 	@Override
-	public Map<String,Object> selectStoreInfo(Map<String, Object> param) throws SQLException {
+	public Map<String,Object> selectStoreInfo(Map<String, Object> param) throws Exception {
 		return (Map<String,Object>) selectOne("AraStr.selectStoreInfo", param);
 	}
 	
@@ -39,52 +38,77 @@ public class AraStrDAOImpl extends AbstractDAO implements AraStrDAO {
 	}
 
 	@Override
-	public Map<String, Object> selectCampId(Map<String, Object> param) throws SQLException {
+	public Map<String, Object> selectCampId(Map<String, Object> param) throws Exception {
 		return (Map<String,Object>) selectOne("AraStr.selectCampId", param);
 	}
 
 	@Override
-	public int insertAraCamp(Map<String, Object> param) throws SQLException {
+	public int insertAraCamp(Map<String, Object> param) throws Exception {
 		return (int) insert("AraStr.insertAraCamp", param);
 	}
 
 	@Override
-	public int insertAraCampInfo(Map<String, Object> param) throws SQLException {
+	public int insertAraCampInfo(Map<String, Object> param) throws Exception {
 		return (int) insert("AraStr.insertAraCampInfo", param);
 	}
 
 	@Override
-	public int insertAraCampOff(Map<String, Object> param) throws SQLException {
+	public int insertAraCampOff(Map<String, Object> param) throws Exception {
 		return (int) insert("AraStr.insertAraCampOff", param);
 	}
 
 	@Override
-	public int insertAraCampChl(Map<String, Object> param) throws SQLException {
+	public int insertAraCampChl(Map<String, Object> param) throws Exception {
 		return (int) insert("AraStr.insertAraCampChl", param);
 	}
 
 	@Override
-	public int insertAraOffCpn(Map<String, Object> param) throws SQLException {
+	public int insertAraOffCpn(Map<String, Object> param) throws Exception {
 		return (int) insert("AraStr.insertAraOffCpn", param);
 	}
 
 	@Override
-	public int insertAraChlSms(Map<String, Object> param) throws SQLException {
+	public int insertAraChlSms(Map<String, Object> param) throws Exception {
 		return (int) insert("AraStr.insertAraChlSms", param);
 	}
 
 	@Override
-	public int insertApprReq(Map<String, Object> param) throws SQLException {
+	public int insertApprReq(Map<String, Object> param) throws Exception {
 		return (int) insert("AraStr.insertApprReq", param);
 	}
 
 	@Override
-	public List<Map<String,Object>> selectApprReqList(Map<String, Object> param) throws SQLException {
+	public List<Map<String,Object>> selectApprReqList(Map<String, Object> param) throws Exception {
 		return (List<Map<String, Object>>) selectList("AraStr.selectApprReqList", param);
 	}
 
 	@Override
-	public List<Map<String,Object>> selectApprResList(Map<String, Object> param) throws SQLException {
+	public List<Map<String,Object>> selectApprResList(Map<String, Object> param) throws Exception {
 		return (List<Map<String, Object>>) selectList("AraStr.selectApprResList", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllCpnList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraStr.selectAllCpnList", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCouponList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraStr.selectCouponList", param);
+	}
+
+	@Override
+	public int giveCpnList(Map<String, Object> param) throws Exception {
+		return (int) insert("AraStr.giveCpnList", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectPayCpnList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraStr.selectPayCpnList", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectNoPayCpnList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraStr.selectNoPayCpnList", param);
 	}
 }

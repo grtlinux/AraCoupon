@@ -17,11 +17,6 @@ public class AraUsrServiceImpl implements AraUsrService {
 	private AraUsrDAO araUsrDAO;
 
 	@Override
-	public Map<String,Object> selectUserInfo(Map<String, Object> param) throws Exception {
-		return this.araUsrDAO.selectUserInfo(param);
-	}
-
-	@Override
 	public List<Map<String, Object>> listCouponList(Map<String, Object> param) throws Exception {
 		return this.araUsrDAO.listCouponList(param);
 	}
@@ -29,5 +24,28 @@ public class AraUsrServiceImpl implements AraUsrService {
 	@Override
 	public List<Map<String, Object>> takeCouponList(Map<String, Object> param) throws Exception {
 		return this.araUsrDAO.takeCouponList(param);
+	}
+
+
+
+
+	@Override
+	public Map<String,Object> selectUserInfo(Map<String, Object> param) throws Exception {
+		return this.araUsrDAO.selectUserInfo(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllCpnList(Map<String, Object> param) throws Exception {
+		return this.araUsrDAO.selectAllCpnList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectUseCpnList(Map<String, Object> param) throws Exception {
+		return this.araUsrDAO.selectUseCpnList(param);
+	}
+
+	@Override
+	public int useCpnList(Map<String, Object> param) throws Exception {
+		return this.araUsrDAO.useCpnList(param);
 	}
 }

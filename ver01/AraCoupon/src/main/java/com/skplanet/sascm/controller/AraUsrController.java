@@ -2,7 +2,6 @@ package com.skplanet.sascm.controller;
 
 import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +14,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,38 +41,46 @@ public class AraUsrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
-
-	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
-	public String indexGet(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-
+	
+	/*
+	 * request.Parameters   ->  modelMap
+	 */
+	private ModelMap setModelMap(ModelMap modelMap, HttpServletRequest request) throws Exception {
+		//copy request.Parameters to modelMap
+		//modelMap.putAll(request.getParameterMap());
 		if (Flag.flag) {
-			Flag.printRequest(request);
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
 		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("usrid", request.getParameter("usrid"));
-			Map<String,Object> map = this.araUsrService.selectUserInfo(param);
-			log.debug("map: " + map);
-			model.addAttribute("info", map);
-		}
-
-		return PATH + "/index";
+		//modelMap.addAttribute("TODAY1", Flag.getDateTime("yyyy-MM-dd"));
+		//modelMap.addAttribute("TODAY2", Flag.getDateTime("yyyyMMdd"));
+		
+		return modelMap;
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * index.jsp POST
+	 */
 	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
-	public String indexPost(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String indexPost(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
 		}
 
 		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("usrid", request.getParameter("usrid"));
-			Map<String,Object> map = this.araUsrService.selectUserInfo(param);
+			Map<String,Object> map = this.araUsrService.selectUserInfo(modelMap);
 			log.debug("map: " + map);
-			model.addAttribute("info", map);
+			modelMap.addAttribute("info", map);
 		}
 
 		return PATH + "/index";
@@ -84,59 +90,45 @@ public class AraUsrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/coupon/takeCoupon.do", method = RequestMethod.GET)
-	public String takeCoupon(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+	/*
+	 * all coupon list page
+	 */
+	@RequestMapping(value = "/coupon/allCouponListPage.do", method = RequestMethod.POST)
+	public String allCouponListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
 		}
 
 		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("usrid", request.getParameter("usrid"));
-			Map<String,Object> map = this.araUsrService.selectUserInfo(param);
+			Map<String,Object> map = this.araUsrService.selectUserInfo(modelMap);
 			log.debug("map: " + map);
-			modelMap.addAttribute("info", map);
+			modelMap.put("info", map);
 		}
 
-		return PATH + "/coupon/takeCoupon";
+		return PATH + "/coupon/allCouponListPage";
 	}
 
-	@RequestMapping(value = "/coupon/takeCouponList.do", method = RequestMethod.POST)
-	public void takeCouponList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+	/*
+	 * get all coupon list
+	 */
+	@RequestMapping(value = "/coupon/selectAllCpnList.do", method = RequestMethod.POST)
+	public void selectAllCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
 		}
 
 		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("usrid", request.getParameter("usrid"));
-			List<Map<String,Object>> list = this.araUsrService.takeCouponList(param);
+			List<Map<String,Object>> list = this.araUsrService.selectAllCpnList(modelMap);
 			log.debug("list: " + list);
 			modelMap.addAttribute("list", list);
 		}
 
+		modelMap.addAttribute("retCode", "0000");
+		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		jsonView.render(modelMap, request, response);
 	}
 
@@ -144,62 +136,80 @@ public class AraUsrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/coupon/listCoupon.do", method = RequestMethod.GET)
-	public String listCoupon(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+	/*
+	 * use coupon list page
+	 */
+	@RequestMapping(value = "/coupon/useCouponListPage.do", method = RequestMethod.POST)
+	public String useCouponListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
 		}
 
 		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("usrid", request.getParameter("usrid"));
-			Map<String,Object> map = this.araUsrService.selectUserInfo(param);
+			Map<String,Object> map = this.araUsrService.selectUserInfo(modelMap);
 			log.debug("map: " + map);
-			modelMap.addAttribute("info", map);
+			modelMap.put("info", map);
 		}
 
-		return PATH + "/coupon/listCoupon";
+		return PATH + "/coupon/useCouponListPage";
 	}
 
-	@RequestMapping(value = "/coupon/listCouponList.do", method = RequestMethod.POST)
-	public void listCouponList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+	/*
+	 * get use coupon list
+	 */
+	@RequestMapping(value = "/coupon/selectUseCpnList.do", method = RequestMethod.POST)
+	public void selectUseCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
 		}
 
 		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("usrid", request.getParameter("usrid"));
-			List<Map<String,Object>> list = this.araUsrService.listCouponList(param);
+			List<Map<String,Object>> list = this.araUsrService.selectUseCpnList(modelMap);
 			log.debug("list: " + list);
 			modelMap.addAttribute("list", list);
 		}
 
+		modelMap.addAttribute("retCode", "0000");
+		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		jsonView.render(modelMap, request, response);
 	}
 
+
+	/*
+	 * use coupon list
+	 */
+	@RequestMapping(value = "/coupon/useCpnList.do", method = RequestMethod.POST)
+	public void useCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			String[] arrCpnNo = String.valueOf(modelMap.get("arrCpnNo")).split(",");
+			modelMap.addAttribute("arrCpnNo", arrCpnNo);
+			this.araUsrService.useCpnList(modelMap);
+		}
+
+		modelMap.addAttribute("retCode", "0000");
+		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,5 @@
 package com.skplanet.sascm.serviceimpl;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -43,42 +42,42 @@ public class AraStrServiceImpl implements AraStrService {
 	}
 
 	@Override
-	public Map<String, Object> selectCampId(Map<String, Object> param) throws SQLException {
+	public Map<String, Object> selectCampId(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.selectCampId(param);
 	}
 
 	@Override
-	public int insertAraCamp(Map<String, Object> param) throws SQLException {
+	public int insertAraCamp(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.insertAraCamp(param);
 	}
 
 	@Override
-	public int insertAraCampInfo(Map<String, Object> param) throws SQLException {
+	public int insertAraCampInfo(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.insertAraCampInfo(param);
 	}
 
 	@Override
-	public int insertAraCampOff(Map<String, Object> param) throws SQLException {
+	public int insertAraCampOff(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.insertAraCampOff(param);
 	}
 
 	@Override
-	public int insertAraCampChl(Map<String, Object> param) throws SQLException {
+	public int insertAraCampChl(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.insertAraCampChl(param);
 	}
 
 	@Override
-	public int insertAraOffCpn(Map<String, Object> param) throws SQLException {
+	public int insertAraOffCpn(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.insertAraOffCpn(param);
 	}
 
 	@Override
-	public int insertAraChlSms(Map<String, Object> param) throws SQLException {
+	public int insertAraChlSms(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.insertAraChlSms(param);
 	}
 
 	@Override
-	public int insertApprReq(Map<String, Object> param) throws SQLException {
+	public int insertApprReq(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.insertApprReq(param);
 	}
 
@@ -90,5 +89,30 @@ public class AraStrServiceImpl implements AraStrService {
 	@Override
 	public List<Map<String,Object>> selectApprResList(Map<String, Object> param) throws Exception {
 		return this.araStrDAO.selectApprResList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAllCpnList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.selectAllCpnList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCouponList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.selectCouponList(param);
+	}
+
+	@Override
+	public int giveCpnList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.giveCpnList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectPayCpnList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.selectPayCpnList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectNoPayCpnList(Map<String, Object> param) throws Exception {
+		return this.araStrDAO.selectNoPayCpnList(param);
 	}
 }

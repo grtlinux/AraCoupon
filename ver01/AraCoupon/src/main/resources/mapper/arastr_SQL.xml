@@ -202,10 +202,11 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	
+	
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- create Camp -->
+	<!-- get Camp ID -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-
 	<select id="selectCampId" parameterType="Map" resultType="Map">
 		SELECT    /* AraStr.selectCampId */
 			B.CTR_ID
@@ -233,6 +234,10 @@
 		WHERE 1=1
 	</select>
 
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- create Camp -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<insert id="insertAraCamp" parameterType="Map">
 		INSERT INTO  /* AraStr.insertAraCamp */
 			ARA_CAMP
@@ -277,10 +282,8 @@
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- 승인요청 -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	
 	<!-- 캠페인 생성하고 승인신청 전인 캠페인 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<select id="selectApprReqList" parameterType="Map" resultType="Map">
 		SELECT  /* AraStr.selectApprReqList */
 			A.STR_ID
@@ -332,7 +335,10 @@
 			B.CAMP_ID DESC
 	</select>
 
-	<!-- 승인요청 -->
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 승인요청 처리한다. -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<insert id="insertApprReq" parameterType="Map">
 		INSERT INTO  /* AraStr.insertApprReq */
 			ARA_APPRREQ (
@@ -366,10 +372,8 @@
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- 승인완료 -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	
 	<!-- 센타로부터 승인완료된 캠페인 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<select id="selectApprResList" parameterType="Map" resultType="Map">
 		SELECT  /* AraStr.selectApprResList */
 			A.STR_ID
@@ -420,6 +424,168 @@
 		ORDER BY
 			B.CAMP_ID DESC
 	</select>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 센타로부터 승인완료된 캠페인 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="selectAllCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.selectAllCpnList */
+			A.STR_ID
+			, A.CAMP_ID
+			, A.USR_ID
+			, A.USD_STR_ID
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A1.DTL_NM       AS TYP_NM
+			, A1.DTL_DESC     AS TYP_DESC
+			, A.CPN_MNY
+			, A.CPN_PHS
+			, A2.DTL_NM       AS PHS_NM
+			, A2.DTL_DESC     AS PHS_DESC
+			, A.CPN_NO
+			, TO_CHAR(A.CRE_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS UPD_DTTM
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.STR_ID = #{strid}
+			/* AND A.CPN_PHS = '1' */
+			/* AND A.USR_ID = -1 */
+			/* AND A.USD_STR_ID = -1 */
+		ORDER BY
+			A.CAMP_ID ASC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 고객에게 제공 가능한 쿠폰 목록 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="selectCouponList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.selectCouponList */
+			A.STR_ID
+			, A.CAMP_ID
+			, A.USR_ID
+			, A.USD_STR_ID
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A1.DTL_NM       AS TYP_NM
+			, A1.DTL_DESC     AS TYP_DESC
+			, A.CPN_MNY
+			, A.CPN_PHS
+			, A2.DTL_NM       AS PHS_NM
+			, A2.DTL_DESC     AS PHS_DESC
+			, A.CPN_NO
+			, TO_CHAR(A.CRE_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS UPD_DTTM
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.STR_ID = #{strid}
+			AND A.CPN_PHS = '1'
+			AND A.USR_ID = -1
+			AND A.USD_STR_ID = -1
+		ORDER BY
+			A.CAMP_ID ASC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 고객에게 쿠폰을 제공한다. -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<update id="giveCpnList" parameterType="Map">
+		UPDATE  /* AraStr.giveCpnList */
+			ARA_CPN
+		SET
+			USR_ID = #{usrid}
+			, CPN_PHS = '2'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND STR_ID = #{strid}
+			AND CPN_NO IN ( ''
+			<if test="arrCpnNo != ''">
+				,<foreach collection="arrCpnNo" separator="," index="index" >'${arrCpnNo[index]}'</foreach>
+			</if>
+			)
+	</update>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 해당 거래처에서 사용한 쿠폰 목록 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="selectPayCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.selectPayCpnList */
+			A.STR_ID
+			, A.CAMP_ID
+			, A.USR_ID
+			, A.USD_STR_ID
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A1.DTL_NM       AS TYP_NM
+			, A1.DTL_DESC     AS TYP_DESC
+			, A.CPN_MNY
+			, A.CPN_PHS
+			, A2.DTL_NM       AS PHS_NM
+			, A2.DTL_DESC     AS PHS_DESC
+			, A.CPN_NO
+			, TO_CHAR(A.CRE_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS UPD_DTTM
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.CPN_PHS = '3'
+			AND A.USD_STR_ID = #{strid}
+		ORDER BY
+			A.CAMP_ID ASC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 해당 거래처에서 제공했지만 아직 미사용한 쿠폰 목록 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="selectNoPayCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.selectNoPayCpnList */
+			A.STR_ID
+			, A.CAMP_ID
+			, A.USR_ID
+			, A.USD_STR_ID
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A1.DTL_NM       AS TYP_NM
+			, A1.DTL_DESC     AS TYP_DESC
+			, A.CPN_MNY
+			, A.CPN_PHS
+			, A2.DTL_NM       AS PHS_NM
+			, A2.DTL_DESC     AS PHS_DESC
+			, A.CPN_NO
+			, TO_CHAR(A.CRE_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS UPD_DTTM
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.STR_ID = #{strid}
+			AND A.CPN_PHS = '2'
+		ORDER BY
+			A.CAMP_ID ASC
+			, A.CPN_NO ASC
+	</select>
+
+
+
+
+
 
 
 

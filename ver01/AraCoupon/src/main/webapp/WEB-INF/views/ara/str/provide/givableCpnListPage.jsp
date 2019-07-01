@@ -19,6 +19,17 @@
 		color: white;
 	}
 </style>
+<script type="text/javascript">
+	// no backward on history
+	history.pushState(null, null, document.URL);
+	window.addEventListener('popstate', function () {
+		history.pushState(null, null, document.URL);
+	});
+	//window.history.forward();
+	//function noBack() {
+	//	window.history.forward();
+	//}
+</script>
 <body>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -90,36 +101,42 @@
 	<div style="height:70px;"></div>
 
 
+
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- container for table panel -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="container-fluid">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;승인목록</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;고객에게 제공 가능한 쿠폰목록</h3>
 			</div>
 			<div class="panel-body">
+				<div id="sysbtn1" class="text-right show" style="margin-bottom:10px;">
+					<button type="button" class="btn btn-info btn-sm" onclick="fn_refreshApprReq();"> 새로고침 </button>
+					<button type="button" class="btn btn-danger btn-sm" onclick="fn_choiceCpnNos();"> 쿠폰제공 </button>
+				</div>
 				<div class="table-responsive">
 					<table id="campTable" class="table table-hover table-condensed">
 						<thead>
 							<tr class="info">
 								<td><input id='allCheckbox' type='checkbox'></td>
+								<td>쿠폰번호</td>
+								<td>쿠폰금액</td>
+								<td class='hide'>쿠폰금액2</td>
+								<td>쿠폰단계</td>
 								<td>캠페인번호</td>
-								<td>캠페인명</td>
-								<td>쿠폰패키지번호</td>
-								<td>쿠폰단가</td>
-								<td>쿠폰매수</td>
-								<td>시작일</td>
-								<td>종료일</td>
-								<td>생성일</td>
+								<td>발행거래처번호</td>
+								<td>제공고객번호</td>
+								<td>사용거래처번호</td>
 							</tr>
 						</thead>
 						<tbody>
 						</tbody>
 					</table>
 				</div>
-				<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
-					<button type="button" class="btn btn-info btn-sm" onclick="fn_refreshApprRes();"> 새로고침 </button>
+				<div id="sysbtn2" class="text-right show" style="margin-bottom:10px;">
+					<button type="button" class="btn btn-info btn-sm" onclick="fn_refreshApprReq();"> 새로고침 </button>
+					<button type="button" class="btn btn-danger btn-sm" onclick="fn_choiceCpnNos();"> 쿠폰제공 </button>
 				</div>
 			</div>
 			<div class="panel-footer">
@@ -195,47 +212,50 @@
 					<div class="modal-body text-center">
 						<table class="table text-left">
 							<tr>
-								<td>쿠폰발행 가게</td>
-								<td><div id="modalStrNm"></div></td>
+								<td>쿠폰번호</td>
+								<td><div id="modalCpnNo"></div></td>
 							</tr>
 							<tr>
-								<td>캠페인 명칭</td>
-								<td><div id="modalCampNm"></div></td>
-							</tr>
-							<tr>
-								<td>캠페인 설명</td>
-								<td><div id="modalCampDesc"></div></td>
-							</tr>
-							<tr>
-								<td>캠페인 기간</td>
-								<td><div id="modalCampPeriod"></div></td>
-							</tr>
-							<tr>
-								<td>캠페인 생성일</td>
-								<td><div id="modalCampCreDt"></div></td>
-							</tr>
-							<tr>
-								<td>쿠폰명</td>
-								<td><div id="modalCpnNm"></div></td>
-							</tr>
-							<tr>
-								<td>쿠폰패키지 코드</td>
+								<td>쿠폰마스터번호</td>
 								<td><div id="modalCpnMst"></div></td>
 							</tr>
 							<tr>
-								<td>쿠폰패키지 금액</td>
-								<td><div id="modalCpnSum"></div></td>
-							</tr>
-							<tr>
-								<td>쿠폰 금액</td>
+								<td>쿠폰금액</td>
 								<td><div id="modalCpnMny"></div></td>
 							</tr>
+							<tr class="hide">
+								<td>쿠폰금액2</td>
+								<td><div id="modalCpnMny2"></div></td>
+							</tr>
 							<tr>
-								<td>쿠폰 갯수</td>
-								<td><div id="modalCpnCnt"></div></td>
+								<td>캠페인번호</td>
+								<td><div id="modalCampId"></div></td>
+							</tr>
+							<tr>
+								<td>발행거래처</td>
+								<td><div id="modalStrId"></div></td>
+							</tr>
+							<tr>
+								<td>제공고객</td>
+								<td><div id="modalUsrId"></div></td>
+							</tr>
+							<tr>
+								<td>사용거래처</td>
+								<td><div id="modalUsdStrId"></div></td>
+							</tr>
+							<tr>
+								<td>쿠폰단계</td>
+								<td><div id="modalCpnPhs"></div></td>
+							</tr>
+							<tr>
+								<td>쿠폰생성일시</td>
+								<td><div id="modalCreDttm"></div></td>
 							</tr>
 						</table>
 						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
+					</div>
+					<div class="modal-footer text-right">
+						<button type="button" class="btn btn-info btn-sm" onclick="fn_cancelModal1();"> 취소 </button>
 					</div>
 				</div>
 			</div>
@@ -244,17 +264,57 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						폭넓은 강사진<button class="close" data-dismiss="modal">&times;</button>
+						고객에게 쿠폰을 제공<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
-						저희 서비스의 특징은 바로 강의를 들을 수 있다는 점입니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="${staticPATH}/bootstrap3/images/JPG-logo-highres.jpg" style="width:250px;">
+						<div class="table-responsive">
+							<table id="cpnTable" class="table table-hover table-condensed">
+								<thead>
+									<tr class="info">
+										<td class='hide'><input id='cpnCheckbox' type='checkbox'></td>
+										<td>쿠폰번호</td>
+										<td>쿠폰금액</td>
+										<td class='hide'>쿠폰금액2</td>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+						<div class="text-center">
+							고객에게 위 쿠폰(들)을 제공하려 합니다. 쿠폰을 제공할 고객ID를 입력하세요.<br>
+						</div>
+						<div class="text-center">
+							<table id="tempTable0" class="table table-hover table-condensed">
+								<tbody>
+									<tr>
+										<td>제공 고객ID</td>
+										<td><input id='usrid' type="text" value=''></td>
+										<td class='text-right'><button type='button' class='btn btn-success btn-sm' onclick="fn_console('아라키 전송');">아라키 전송</button>
+									</tr>
+									<tr>
+										<td>아라키 입력</td>
+										<td><input id='arakey' type="text" value=''></td>
+										<td class='text-right'><button type='button' class='btn btn-danger btn-sm' onclick="fn_giveCpnList();">쿠폰제공</button>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="hide">
+							<img src="${staticPATH}/bootstrap3/images/JPG-logo-highres.jpg" style="width:100px;">
+						</div>
+					</div>
+					<div class="modal-footer text-right show">
+						<button type="button" class="btn btn-info btn-sm" onclick="fn_cancelModal2();"> 취소 </button>
+						<!--
+						<button type="button" class="btn btn-danger btn-sm" onclick="fn_giveCpnList();"> 쿠폰제공 </button>
+						-->
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -265,8 +325,11 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
 		<input type='hidden' id='_strid' name='strid' value='${info.STR_ID}' />
-		<input type='hidden' id='_campIds' name='campIds' value='' />
+		<input type='hidden' id='_usrid' name='usrid' value='' />
+		<input type='hidden' id='_arakey' name='arakey' value='' />
+		<input type='hidden' id='_arrCpnNo' name='arrCpnNo' value='' />
 	</form>
+
 
 
 
@@ -275,11 +338,12 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
+	// Global variables
 	var list;
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		processEvent();
-		selectApprovalRes();
+		selectApprovalReq();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -298,9 +362,9 @@
 			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
 		});
 	}
-	function selectApprovalRes(){
+	function selectApprovalReq(){
 		jQuery.ajax({
-			url           : "${staticPATH}/str/coupon/selectApprResList.do",
+			url           : "${staticPATH}/str/provide/selectCouponList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -316,28 +380,28 @@
 						rowHtml += "    <input type='checkbox' name='rowCheckbox'>";
 						rowHtml += "  </td>";
 						rowHtml += "  <td class='text-left'>";
+						rowHtml += "    " + value.CPN_NO;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + fn_comma(value.CPN_MNY) + " 원";
+						rowHtml += "  </td>";
+						rowHtml += "  <td class='hide'>";
+						rowHtml += "    " + value.CPN_MNY;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.PHS_NM + " (" + value.CPN_PHS + ")";
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
 						rowHtml += "    " + value.CAMP_ID;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
-						rowHtml += "    " + value.CAMP_NM;
+						rowHtml += "    " + value.STR_ID;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
-						rowHtml += "    " + value.CPN_MST;
+						rowHtml += "    " + value.USR_ID;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
-						rowHtml += "    " + value.DTL_DESC;
-						rowHtml += "  </td>";
-						rowHtml += "  <td>";
-						rowHtml += "    " + value.CPN_CNT;
-						rowHtml += "  </td>";
-						rowHtml += "  <td>";
-						rowHtml += "    " + value.BGN_DT;
-						rowHtml += "  </td>";
-						rowHtml += "  <td>";
-						rowHtml += "    " + value.END_DT;
-						rowHtml += "  </td>";
-						rowHtml += "  <td>";
-						rowHtml += "    " + value.CRE_DT;
+						rowHtml += "    " + value.USD_STR_ID;
 						rowHtml += "  </td>";
 						rowHtml += "</tr>";
 						$("#campTable > tbody:last").append(rowHtml);
@@ -361,18 +425,16 @@
 						if (true) console.log(">>>>> (tr, td) = (" + tr.index() + ", " + td.index() + ")");
 						var info = list[tr.index()];
 						if (true) console.log(">>>>> info ", info);
-						$('#modalStrNm').text(info.STR_NM + "(" + info.STR_ID + ")");
-						$('#modalCampNm').text(info.CAMP_NM);
-						$('#modalCampDesc').text(info.INFO_DESC);
-						$('#modalCampPeriod').text(info.BGN_DT + " ~ " + info.END_DT);
-						$('#modalCampCreDt').text(info.CRE_DT);
-						$('#modalCpnNm').text(info.OFFCPN_NM);
+						$('#modalCpnNo').text(info.CPN_NO);
 						$('#modalCpnMst').text(info.CPN_MST);
-						$('#modalCpnSum').text(info.CPN_SUM + " 원");
-						$('#modalCpnMny').text(info.CPN_MNY + " 원");
-						$('#modalCpnSum').text(fn_comma(info.CPN_SUM) + " 원");
-						$('#modalCpnMny').text(fn_comma(info.CPN_MNY) + " 원");
-						$('#modalCpnCnt').text(info.CPN_CNT + " 장");
+						$('#modalCpnMny').text(info.TYP_DESC + "(" + info.CPN_TYP + ")");
+						$('#modalCpnMny2').text(info.CPN_MNY);
+						$('#modalCampId').text(info.CAMP_ID);
+						$('#modalStrId').text(info.STR_ID);
+						$('#modalUsrId').text(info.USR_ID);
+						$('#modalUsdStrId').text(info.USD_STR_ID);
+						$('#modalCpnPhs').text(info.PHS_NM + "(" + info.CPN_PHS + ")");
+						$('#modalCreDttm').text(info.CRE_DTTM);
 						$('#modal1').modal('toggle');
 					});
 					if (true) {
@@ -410,8 +472,106 @@
 		}
 		return str;
 	}
-	function fn_refreshApprRes() {
-		selectApprovalRes();
+	function fn_refreshApprReq() {
+		selectApprovalReq();
+	}
+	function fn_choiceCpnNos() {
+		var sum = 0;
+		$("#cpnTable > tbody").empty();
+		// 쿠폰금액
+		$('#campTable input:checkbox[name=rowCheckbox]:checked').each(function (index) {
+			var cpnNo = $(this).parent().parent().children().eq(1).text().trim();
+			var cpnMny = $(this).parent().parent().children().eq(2).text().trim();
+			var cpnMny2 = $(this).parent().parent().children().eq(3).text().trim();
+			var rowHtml = "";
+			rowHtml += "<tr>";
+			rowHtml += "  <td class='hide'>";
+			rowHtml += "    <input type='checkbox' name='rowCheckbox' checked>";
+			rowHtml += "  </td>";
+			rowHtml += "  <td class='text-center'>";
+			rowHtml += "    " + cpnNo;
+			rowHtml += "  </td>";
+			rowHtml += "  <td>";
+			rowHtml += "    " + cpnMny;
+			rowHtml += "  </td>";
+			rowHtml += "  <td class='hide'>";
+			rowHtml += "    " + cpnMny2;
+			rowHtml += "  </td>";
+			rowHtml += "</tr>";
+			$("#cpnTable > tbody:last").append(rowHtml);
+			sum += Number(cpnMny2);
+		});
+		// 쿠폰금액 합계
+		var rowHtml = "";
+		rowHtml += "<tr>";
+		rowHtml += "  <td class='hide'>";
+		rowHtml += "    <input type='checkbox' name='rowCheckbox'>";
+		rowHtml += "  </td>";
+		rowHtml += "  <td class='text-center'>";
+		rowHtml += "    쿠폰금액 합계";
+		rowHtml += "  </td>";
+		rowHtml += "  <td>";
+		rowHtml += "    " + fn_comma(sum) + " 원";
+		rowHtml += "  </td>";
+		rowHtml += "  <td class='hide'>";
+		rowHtml += "    " + sum;
+		rowHtml += "  </td>";
+		rowHtml += "</tr>";
+		$("#cpnTable > tbody:last").append(rowHtml);
+		//
+		$('#modal2').modal('toggle');
+	}
+	function fn_cancelModal1() {
+		$('#modal1').modal('toggle');
+	}
+	function fn_cancelModal2() {
+		$('#modal2').modal('toggle');
+	}
+	function fn_giveCpnList() {
+		// validate
+		if (true) {
+			if (isEmpty($('#modal2 #usrid').val())) {
+				$('#modal2 #usrid').focus();
+				return false;
+			}
+			if (isEmpty($('#modal2 #arakey').val())) {
+				$('#modal2 #arakey').focus();
+				return false;
+			}
+		}
+		// transfer
+		if (true) {
+			$("#tempForm #_usrid").val($("#modal2 #usrid").val());
+			$("#tempForm #_arakey").val($("#modal2 #arakey").val());
+			var arrCpnNo = [];
+			$('#cpnTable input:checkbox[name=rowCheckbox]:checked').each(function (index) {
+				var cpnNo = $(this).parent().parent().children().eq(1).text().trim();
+				arrCpnNo.push(cpnNo);
+			});
+			if (true) console.log(">>>>> arrCpnNo = " + arrCpnNo.join(','));
+			//$('#tempForm #_arrCpnNo').val(arrCpnNo.join(','));
+			$('#tempForm #_arrCpnNo').val(arrCpnNo);
+		}
+		// ajax
+		jQuery.ajax({
+			url           : "${staticPATH}/str/provide/giveCpnList.do",
+			dataType      : "JSON",
+			scriptCharset : "UTF-8",
+			type          : "POST",
+			data          : $('#tempForm').serialize(),
+			success: function(result, option) {
+				if (option == "success"){
+					alert("메시지: " + result.retMsg);
+					selectApprovalReq();
+					fn_cancelModal2();
+				} else {
+					alert("에러가 발생하였습니다.");
+				}
+			},
+			error: function(result, option) {
+				alert("에러가 발생하였습니다.");
+			}
+		});
 	}
 </script>
 </html>

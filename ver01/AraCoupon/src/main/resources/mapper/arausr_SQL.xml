@@ -9,7 +9,9 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- select user information -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<select id="AraUsr.selectUserInfo" parameterType="Map" resultType="Map">
 		SELECT  /* AraUsr.selectUserInfo */
 			A.USR_ID
@@ -22,20 +24,60 @@
 	</select>
 
 
-	<!-- 제공 받은 쿠폰 목록 -->
-	<select id="takeCouponList" parameterType="Map" resultType="Map">
-		SELECT  /* AraUsr.takeCouponList */
-			A.STR_ID        AS STR_ID
-			, A.CAMP_ID     AS CAMP_ID
-			, A.USR_ID      AS USR_ID
-			, A.USD_STR_ID  AS USD_STR_ID
-			, A.CPN_TYP     AS CPN_TYP
-			, A1.DTL_NM     AS CPN_TYP_NM
-			, A1.DTL_DESC   AS CPN_TYP_DESC
-			, A.CPN_PHS     AS CPN_PHS
-			, A2.DTL_NM     AS CPN_PHS_NM
-			, A2.DTL_DESC   AS CPN_PHS_DESC
-			, A.CPN_NO      AS CPN_NO
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 제공 받은 모든 쿠폰 목록 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="selectAllCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* AraUsr.selectAllCpnList */
+			A.STR_ID
+			, A.CAMP_ID
+			, A.USR_ID
+			, A.USD_STR_ID
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A1.DTL_NM       AS TYP_NM
+			, A1.DTL_DESC     AS TYP_DESC
+			, A.CPN_MNY
+			, A.CPN_PHS
+			, A2.DTL_NM       AS PHS_NM
+			, A2.DTL_DESC     AS PHS_DESC
+			, A.CPN_NO
+			, TO_CHAR(A.CRE_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS UPD_DTTM
+		FROM
+			ARA_CPN A
+				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
+				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			AND A.USR_ID = #{usrid}
+			/* AND A.CPN_PHS = '2' */
+			/* AND A.USD_STR_ID = -1 */
+		ORDER BY
+			A.CAMP_ID ASC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 제공 가능한 쿠폰 목록 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="selectUseCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* AraUsr.selectUseCpnList */
+			A.STR_ID
+			, A.CAMP_ID
+			, A.USR_ID
+			, A.USD_STR_ID
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A1.DTL_NM       AS TYP_NM
+			, A1.DTL_DESC     AS TYP_DESC
+			, A.CPN_MNY
+			, A.CPN_PHS
+			, A2.DTL_NM       AS PHS_NM
+			, A2.DTL_DESC     AS PHS_DESC
+			, A.CPN_NO
+			, TO_CHAR(A.CRE_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YYYY-MM-DD HH24:MI:SS')  AS UPD_DTTM
 		FROM
 			ARA_CPN A
 				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
@@ -45,36 +87,29 @@
 			AND A.CPN_PHS = '2'
 			AND A.USD_STR_ID = -1
 		ORDER BY
-			A.CPN_NO ASC
+			A.CAMP_ID ASC
+			, A.CPN_NO ASC
 	</select>
 
 
-	<!-- 제공 받은 쿠폰 목록 -->
-	<select id="listCouponList" parameterType="Map" resultType="Map">
-		SELECT  /* AraUsr.listCouponList */
-			A.STR_ID        AS STR_ID
-			, A.CAMP_ID     AS CAMP_ID
-			, A.USR_ID      AS USR_ID
-			, A.USD_STR_ID  AS USD_STR_ID
-			, A.CPN_TYP     AS CPN_TYP
-			, A1.DTL_NM     AS CPN_TYP_NM
-			, A1.DTL_DESC   AS CPN_TYP_DESC
-			, A.CPN_PHS     AS CPN_PHS
-			, A2.DTL_NM     AS CPN_PHS_NM
-			, A2.DTL_DESC   AS CPN_PHS_DESC
-			, A.CPN_NO      AS CPN_NO
-		FROM
-			ARA_CPN A
-				LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C007' AND A1.DTL_CD = A.CPN_TYP
-				LEFT JOIN ARA_CD_DTL A2 ON A2.MST_CD = 'C002' AND A2.DTL_CD = A.CPN_PHS
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 거래처에서 쿠폰을 사용한다. -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<update id="useCpnList" parameterType="Map">
+		UPDATE  /* AraUsr.useCpnList */
+			ARA_CPN
+		SET
+			USD_STR_ID = #{strid}
+			, CPN_PHS = '3'
+			, UPD_DTTM = SYSDATE
 		WHERE 1=1
-			AND A.USR_ID = #{usrid}
-			AND A.CPN_PHS = '3'
-		ORDER BY
-			A.CPN_NO ASC
-	</select>
-
-
+			AND USR_ID = #{usrid}
+			AND CPN_NO IN ( ''
+			<if test="arrCpnNo != ''">
+				,<foreach collection="arrCpnNo" separator="," index="index" >'${arrCpnNo[index]}'</foreach>
+			</if>
+			)
+	</update>
 
 
 
