@@ -34,4 +34,6 @@ public interface AraStrDAO {
 
 	public List<Map<String,Object>> selectPayCpnList(Map<String, Object> param) throws Exception;
 	public List<Map<String,Object>> selectNoPayCpnList(Map<String, Object> param) throws Exception;
+
+	public List<Map<String,Object>> selectTempCalcList(Map<String, Object> param) throws Exception;
 }

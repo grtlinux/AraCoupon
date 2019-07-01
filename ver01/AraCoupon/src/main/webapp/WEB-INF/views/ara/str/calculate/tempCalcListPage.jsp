@@ -108,7 +108,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;거래처발행 쿠폰목록</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;임시정산</h3>
 			</div>
 			<div class="panel-body">
 				<div id="sysbtn1" class="text-right" style="margin-bottom:10px;">
@@ -122,6 +122,7 @@
 								<td><input id='allCheckbox' type='checkbox'></td>
 								<td>쿠폰번호</td>
 								<td>쿠폰금액</td>
+								<td class='hide'>쿠폰금액2</td>
 								<td>쿠폰단계</td>
 								<td>캠페인번호</td>
 								<td>발행거래처번호</td>
@@ -206,7 +207,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header alert alert-success">
-						캠페인 정보<button class="close" data-dismiss="modal">&times;</button>
+						쿠폰 정보<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
 						<table class="table text-left">
@@ -221,6 +222,10 @@
 							<tr>
 								<td>쿠폰금액</td>
 								<td><div id="modalCpnMny"></div></td>
+							</tr>
+							<tr class="hide">
+								<td>쿠폰금액2</td>
+								<td><div id="modalCpnMny2"></div></td>
 							</tr>
 							<tr>
 								<td>캠페인번호</td>
@@ -289,12 +294,11 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script type="text/javascript">
-	// Global variables
 	var list;
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		processEvent();
-		selectApprovalReq();
+		selectTempCalcList();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -313,9 +317,9 @@
 			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
 		});
 	}
-	function selectApprovalReq(){
+	function selectTempCalcList(){
 		jQuery.ajax({
-			url           : "${staticPATH}/str/provide/selectAllCpnList.do",
+			url           : "${staticPATH}/str/calculate/selectTempCalcList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -335,7 +339,9 @@
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
 						rowHtml += "    " + fn_comma(value.CPN_MNY) + " 원";
-						//rowHtml += "    " + value.TYP_DESC;
+						rowHtml += "  </td>";
+						rowHtml += "  <td class='hide'>";
+						rowHtml += "    " + value.CPN_MNY;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
 						rowHtml += "    " + value.PHS_NM + " (" + value.CPN_PHS + ")";
@@ -377,6 +383,7 @@
 						$('#modalCpnNo').text(info.CPN_NO);
 						$('#modalCpnMst').text(info.CPN_MST);
 						$('#modalCpnMny').text(info.TYP_DESC + "(" + info.CPN_TYP + ")");
+						$('#modalCpnMny2').text(info.CPN_MNY);
 						$('#modalCampId').text(info.CAMP_ID);
 						$('#modalStrId').text(info.STR_ID);
 						$('#modalUsrId').text(info.USR_ID);
@@ -421,7 +428,7 @@
 		return str;
 	}
 	function fn_refresh() {
-		selectApprovalReq();
+		selectTempCalcList();
 	}
 	function fn_insertApprReq() {
 		var campIds = [];
@@ -443,7 +450,7 @@
 			success: function(result, option) {
 				if (option == "success"){
 					alert("메시지: " + result.retMsg);
-					selectApprovalReq();
+					selectTempCalcList();
 				} else {
 					alert("에러가 발생하였습니다.");
 				}

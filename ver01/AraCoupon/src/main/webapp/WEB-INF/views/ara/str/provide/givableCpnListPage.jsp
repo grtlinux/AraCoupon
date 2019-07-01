@@ -75,7 +75,7 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/calculate/listCalculate.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('${staticPATH}/str/calculate/tempCalcListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;임시정산</a></li>
 						</ul>
 					</li>
 					<!--
