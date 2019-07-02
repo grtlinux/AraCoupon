@@ -239,6 +239,41 @@
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 쿠폰정산 내역 -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<select id="selectCalcList" parameterType="Map" resultType="Map">
+		SELECT  /* AraStr.selectTempCalcList */
+			A.STR_ID             AS STR_ID
+			, A.CPN_PHS          AS CPN_PHS
+			, A1.DTL_NM          AS PHS_NM
+			, CASE
+				WHEN A.CPN_PHS = '1' THEN '[미제공]'
+				WHEN A.CPN_PHS = '2' THEN '[미사용]'
+				WHEN A.CPN_PHS = '3' THEN TO_CHAR(USD_STR_ID)
+				ELSE '정산완료됨'
+				END              AS USD_STR_NO
+			, A.USD_STR_ID       AS USD_STR_ID
+			, COUNT(1)           AS USD_CNT
+			, SUM(A.CPN_MNY)     AS USD_SUM
+		FROM
+			ARA_CPN A
+		 		LEFT JOIN ARA_CD_DTL A1 ON A1.MST_CD = 'C002' AND A1.DTL_CD = A.CPN_PHS
+		WHERE 1=1
+			/* AND A.STR_ID = 7 */
+			AND A.CPN_PHS NOT IN ( 8, 9 ) /* 정산완료됨 */
+		GROUP BY
+			A.STR_ID
+			, A.CPN_PHS
+			, A1.DTL_NM
+			, A.USD_STR_ID
+		ORDER BY
+			A.CPN_PHS DESC
+			, A.USD_STR_ID ASC
+	</select>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->

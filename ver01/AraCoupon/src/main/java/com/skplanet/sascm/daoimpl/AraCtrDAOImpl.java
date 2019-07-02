@@ -47,6 +47,14 @@ public class AraCtrDAOImpl extends AbstractDAO implements AraCtrDAO {
 	}
 
 	@Override
+	public List<Map<String, Object>> selectCalcList(Map<String, Object> param) throws Exception {
+		return (List<Map<String, Object>>) selectList("AraCtr.selectCalcList", param);
+	}
+
+	
+	
+	
+	@Override
 	public List<Map<String, Object>> listCalculateList(Map<String, Object> param) throws SQLException {
 		return (List<Map<String, Object>>) selectList("AraCtr.listCalculateList", param);
 	}

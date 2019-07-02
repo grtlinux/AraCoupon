@@ -13,5 +13,8 @@ public interface AraCtrService {
 	public List<Map<String,Object>> selectApprResList(Map<String, Object> param) throws Exception;
 
 	public int insertCouponSheet(Map<String, Object> param) throws Exception;
+
+	public List<Map<String,Object>> selectCalcList(Map<String, Object> param) throws Exception;
+
 	public List<Map<String,Object>> listCalculateList(Map<String, Object> param) throws Exception;
 }

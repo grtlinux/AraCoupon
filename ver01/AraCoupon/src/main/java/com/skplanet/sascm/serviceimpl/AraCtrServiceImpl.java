@@ -50,6 +50,15 @@ public class AraCtrServiceImpl implements AraCtrService {
 	}
 
 	@Override
+	public List<Map<String, Object>> selectCalcList(Map<String, Object> param) throws Exception {
+		return this.araCtrDAO.selectCalcList(param);
+	}
+
+
+
+
+
+	@Override
 	public List<Map<String, Object>> listCalculateList(Map<String, Object> param) throws Exception {
 		return this.araCtrDAO.listCalculateList(param);
 	}

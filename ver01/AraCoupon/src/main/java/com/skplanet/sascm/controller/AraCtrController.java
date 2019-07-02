@@ -233,6 +233,51 @@ public class AraCtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * 쿠폰목록 페이지
+	 */
+	@RequestMapping(value = "/calculate/calcListPage.do", method = RequestMethod.POST)
+	public String tempCalcListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			Map<String,Object> map = this.araCtrService.selectCenterInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.put("info", map);
+		}
+
+		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		return PATH + "/calculate/calcListPage";
+	}
+
+	/*
+	 * 쿠폰목록 자료를 얻어 온다.
+	 */
+	@RequestMapping(value = "/calculate/selectCalcList.do", method = RequestMethod.POST)
+	public void selectTempCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = setModelMap(modelMap, request);
+		}
+
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.araCtrService.selectCalcList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+
+		if (!Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+
+		jsonView.render(modelMap, request, response);
+	}
+
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
@@ -246,7 +291,7 @@ public class AraCtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(value = "/calculate/listCalculate.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/calculate/listCalculate.do", method = RequestMethod.POST)
 	public String listCalculate(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {

@@ -260,6 +260,7 @@
 <!-- script -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
+<script src="${staticPATH}/bootstrap3/js/ara.common.v01.js"></script>
 <script type="text/javascript">
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
@@ -267,16 +268,6 @@
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 	});
-	function fn_console(msg) {
-		if (true) console.log(">>>>> " + msg);
-	}
-	function isEmpty(value) {
-		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
-			return true;
-		} else {
-			return false;
-		}
-	}
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////

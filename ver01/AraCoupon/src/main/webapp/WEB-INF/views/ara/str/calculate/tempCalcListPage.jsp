@@ -115,19 +115,16 @@
 					<button type="button" class="btn btn-info btn-sm" onclick="fn_refresh();"> 새로고침 </button>
 					<button type="button" class="btn btn-danger btn-sm hide" onclick="fn_insertApprReq();"> 쿠폰제공 </button>
 				</div>
-				<div class="table-responsive">
+				<div class="table-responsive text-center">
 					<table id="campTable" class="table table-hover table-condensed">
 						<thead>
 							<tr class="info">
 								<td><input id='allCheckbox' type='checkbox'></td>
-								<td>쿠폰번호</td>
-								<td>쿠폰금액</td>
-								<td class='hide'>쿠폰금액2</td>
+								<td>거래처</td>
 								<td>쿠폰단계</td>
-								<td>캠페인번호</td>
-								<td>발행거래처번호</td>
-								<td>제공고객번호</td>
-								<td>사용거래처번호</td>
+								<td>사용거래처</td>
+								<td>사용쿠폰수</td>
+								<td>사용쿠폰액</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -212,44 +209,24 @@
 					<div class="modal-body text-center">
 						<table class="table text-left">
 							<tr>
-								<td>쿠폰번호</td>
-								<td><div id="modalCpnNo"></div></td>
-							</tr>
-							<tr>
-								<td>쿠폰마스터번호</td>
-								<td><div id="modalCpnMst"></div></td>
-							</tr>
-							<tr>
-								<td>쿠폰금액</td>
-								<td><div id="modalCpnMny"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>쿠폰금액2</td>
-								<td><div id="modalCpnMny2"></div></td>
-							</tr>
-							<tr>
-								<td>캠페인번호</td>
-								<td><div id="modalCampId"></div></td>
-							</tr>
-							<tr>
-								<td>발행거래처</td>
+								<td>거래처</td>
 								<td><div id="modalStrId"></div></td>
-							</tr>
-							<tr>
-								<td>제공고객</td>
-								<td><div id="modalUsrId"></div></td>
-							</tr>
-							<tr>
-								<td>사용거래처</td>
-								<td><div id="modalUsdStrId"></div></td>
 							</tr>
 							<tr>
 								<td>쿠폰단계</td>
 								<td><div id="modalCpnPhs"></div></td>
 							</tr>
 							<tr>
-								<td>쿠폰생성일시</td>
-								<td><div id="modalCreDttm"></div></td>
+								<td>사용거래처</td>
+								<td><div id="modalUsdStrId"></div></td>
+							</tr>
+							<tr>
+								<td>사용쿠폰수</td>
+								<td><div id="modalUsdCnt"></div></td>
+							</tr>
+							<tr>
+								<td>사용쿠폰액</td>
+								<td><div id="modalUsdMny"></div></td>
 							</tr>
 						</table>
 						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
@@ -334,29 +311,20 @@
 						rowHtml += "  <td>";
 						rowHtml += "    <input type='checkbox' name='rowCheckbox'>";
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-left'>";
-						rowHtml += "    " + value.CPN_NO;
-						rowHtml += "  </td>";
 						rowHtml += "  <td>";
-						rowHtml += "    " + fn_comma(value.CPN_MNY) + " 원";
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='hide'>";
-						rowHtml += "    " + value.CPN_MNY;
+						rowHtml += "    " + value.STR_ID;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
 						rowHtml += "    " + value.PHS_NM + " (" + value.CPN_PHS + ")";
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
-						rowHtml += "    " + value.CAMP_ID;
+						rowHtml += "    " + value.USD_STR_NO;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
-						rowHtml += "    " + value.STR_ID;
+						rowHtml += "    " + value.USD_CNT;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
-						rowHtml += "    " + value.USR_ID;
-						rowHtml += "  </td>";
-						rowHtml += "  <td>";
-						rowHtml += "    " + value.USD_STR_ID;
+						rowHtml += "    " + fn_comma(value.USD_SUM) + " 원";
 						rowHtml += "  </td>";
 						rowHtml += "</tr>";
 						$("#campTable > tbody:last").append(rowHtml);
@@ -380,16 +348,11 @@
 						if (true) console.log(">>>>> (tr, td) = (" + tr.index() + ", " + td.index() + ")");
 						var info = list[tr.index()];
 						if (true) console.log(">>>>> info ", info);
-						$('#modalCpnNo').text(info.CPN_NO);
-						$('#modalCpnMst').text(info.CPN_MST);
-						$('#modalCpnMny').text(info.TYP_DESC + "(" + info.CPN_TYP + ")");
-						$('#modalCpnMny2').text(info.CPN_MNY);
-						$('#modalCampId').text(info.CAMP_ID);
 						$('#modalStrId').text(info.STR_ID);
-						$('#modalUsrId').text(info.USR_ID);
-						$('#modalUsdStrId').text(info.USD_STR_ID);
-						$('#modalCpnPhs').text(info.PHS_NM + "(" + info.CPN_PHS + ")");
-						$('#modalCreDttm').text(info.CRE_DTTM);
+						$('#modalCpnPhs').text(info.CPN_PHS + "(" + info.PHS_NM + ")");
+						$('#modalUsdStrId').text(info.USD_STR_NO);
+						$('#modalUsdCnt').text(info.USD_CNT);
+						$('#modalUsdMny').text(fn_comma(info.USD_SUM) + " 원");
 						$('#modal1').modal('toggle');
 					});
 					if (true) {
