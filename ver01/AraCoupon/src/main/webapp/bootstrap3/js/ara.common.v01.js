@@ -14,6 +14,7 @@ $(function() {
 $(document).ready(function(){
 	if (true) console.log(">>>>> ara.common.v01.js > step-2: $(document).ready(function(){})");
 	classPhoneFormatter();
+	classMoneyFormatter();
 });
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -42,6 +43,10 @@ function classPhoneFormatter() {
 		}
 		$(this).val(number);
 	});
+}
+// Used to format money number
+function classMoneyFormatter() {
+	
 }
 // remain only number string
 function onlyNumber(str) {

@@ -10,55 +10,13 @@
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="stylesheet" href="${staticPATH}/bootstrap3/css/bootstrap.css">
-<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/codingBooster5.css">
-<style type="text/css">
-	.jumbotron {
-		background-image: url('${staticPATH}/bootstrap3/images/jumbotronBackground.jpg');
-		background-size: cover;
-		text-shadow: black 0.4em 0.4em 0.4em;
-		color: white;
-	}
-</style>
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara.codingBooster5.v01.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara.jumbotron.v01.css">
 <body>
 
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- navigation -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="${staticPATH}/ara/index.do">ACSS</a>
-			</div>
-			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-				<!-- navbar menu -->
-				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalUsr();">고객</a></li>
-					<li><a data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalStr();">가게</a></li>
-					<li><a data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalCtr();">센타</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- gap -->
-	<div style="height:70px;"></div>
 
-
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- container for jumbotron -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<div class="container">
-		<!-- jumbotron -->
-		<div class="jumbotron text-center">
-			<h1>아라쿠폰서비스시스템(ACSS)을 소개합니다.</h1>
-			<p>아라쿠폰서비스시스템은 여러분이 쿠폰서비스를 이용하여 많은 부가가치를 창출하기를 바라는 마음으로 ...</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="javascript:fn_console('아라쿠폰서비스시스템 가기');">아라쿠폰서비스시스템 가기</a></p>
-		</div>
-	</div>
+<%@ include file="/WEB-INF/views/ara/common/_navbarAra.jsp"%>
+<%@ include file="/WEB-INF/views/ara/common/_jumbotron.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -85,21 +43,7 @@
 	</div>
 
 
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- footer -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<footer class="footer-default">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 text-center">
-					<h6>
-						ACSS ( Ara Coupon Service System )<br>
-						Copyright &copy; 2014 ~ 2018, 2019 TAIN Inc.
-					</h6>
-				</div>
-			</div>
-		</div>
-	</footer>
+<%@ include file="/WEB-INF/views/ara/common/_footer.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
