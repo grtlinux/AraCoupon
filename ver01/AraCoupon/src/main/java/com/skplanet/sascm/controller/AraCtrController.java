@@ -3,7 +3,6 @@ package com.skplanet.sascm.controller;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,6 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import com.google.gson.GsonBuilder;
 import com.skplanet.sascm.service.AraCtrService;
-import com.skplanet.sascm.util.Common;
 import com.skplanet.sascm.util.Flag;
 
 @SuppressWarnings("unchecked")
@@ -235,10 +233,10 @@ public class AraCtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 
 	/*
-	 * 쿠폰목록 페이지
+	 * 정산 확인을 위한 페이지
 	 */
 	@RequestMapping(value = "/calculate/calcListPage.do", method = RequestMethod.POST)
-	public String tempCalcListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+	public String calcListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
@@ -257,10 +255,10 @@ public class AraCtrController {
 	}
 
 	/*
-	 * 쿠폰목록 자료를 얻어 온다.
+	 * 정산처리 목록을 얻는다.
 	 */
 	@RequestMapping(value = "/calculate/selectCalcList.do", method = RequestMethod.POST)
-	public void selectTempCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+	public void selectCalcList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
 		if (Flag.flag) {
 			Flag.printRequest(request);
@@ -290,63 +288,6 @@ public class AraCtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
-
-	@RequestMapping(value = "/calculate/listCalculate.do", method = RequestMethod.POST)
-	public String listCalculate(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
-		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("ctrid", request.getParameter("ctrid"));
-			Map<String,Object> map = this.araCtrService.selectCenterInfo(param);
-			log.debug("map: " + map);
-			modelMap.addAttribute("info", map);
-		}
-
-		return PATH + "/calculate/listCalculate";
-	}
-
-	@RequestMapping(value = "/calculate/listCalculateList.do", method = RequestMethod.POST)
-	public void listCalculateList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-		}
-
-		if (Flag.flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
-			}
-			if (Flag.flag) System.out.println(">>>>> modelMap: " + modelMap);
-		}
-
-		if (Flag.flag) {
-			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("ctrid", Common.nvl(request.getParameter("ctrid"), "7"));
-			List<Map<String,Object>> list = this.araCtrService.listCalculateList(param);
-			log.debug("list: " + list);
-			modelMap.addAttribute("list", list);
-		}
-
-		jsonView.render(modelMap, request, response);
-	}
-
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

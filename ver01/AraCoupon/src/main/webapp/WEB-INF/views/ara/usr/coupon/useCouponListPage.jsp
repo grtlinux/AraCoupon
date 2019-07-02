@@ -10,59 +10,11 @@
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="stylesheet" href="${staticPATH}/bootstrap3/css/bootstrap.css">
-<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/codingBooster5.css">
-<style type="text/css">
-	.jumbotron {
-		background-image: url('${staticPATH}/bootstrap3/images/jumbotronBackground.jpg');
-		background-size: cover;
-		text-shadow: black 0.4em 0.4em 0.4em;
-		color: white;
-	}
-</style>
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara.codingBooster5.v01.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara.jumbotron.v01.css">
 <body>
 
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- navigation -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="${staticPATH}/ara.do">ACSS</a>
-			</div>
-			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-				<!-- navbar menu -->
-				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/usr/coupon/useCouponListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;사용가능한 쿠폰목록</a></li>
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/usr/coupon/allCouponListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;제공받은 쿠폰목록</a></li>
-						</ul>
-					</li>
-				</ul>
-
-				<!-- login menu -->
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="${staticPATH}/usr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="${staticPATH}/usr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="${staticPATH}/usr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- gap -->
-	<div style="height:70px;"></div>
+<%@ include file="/WEB-INF/views/ara/common/_navbarUsr.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -111,21 +63,7 @@
 	<div style="height:70px;"></div>
 
 
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- footer -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<footer class="footer-default">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 text-center">
-					<h6>
-						ACSS ( Ara Coupon Service System )<br>
-						Copyright &copy; 2014 ~ 2018, 2019 TAIN Inc.
-					</h6>
-				</div>
-			</div>
-		</div>
-	</footer>
+<%@ include file="/WEB-INF/views/ara/common/_footer.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -218,7 +156,7 @@
 						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
 					</div>
 					<div class="modal-footer text-right">
-						<button type="button" class="btn btn-info btn-sm" onclick="fn_cancelModal1();"> 취소 </button>
+						<button type="button" class="btn btn-info btn-sm" onclick="fn_modalToggle('#modal1');"> 취소 </button>
 					</div>
 				</div>
 			</div>
@@ -268,7 +206,7 @@
 						</div>
 					</div>
 					<div class="modal-footer text-right show">
-						<button type="button" class="btn btn-info btn-sm" onclick="fn_cancelModal2();"> 취소 </button>
+						<button type="button" class="btn btn-info btn-sm" onclick="fn_modalToggle('#modal2');"> 취소 </button>
 						<button type="button" class="btn btn-danger btn-sm hide" onclick="fn_useCpnList();"> 쿠폰사용 </button>
 					</div>
 				</div>
@@ -297,6 +235,7 @@
 <!-- script -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
+<script src="${staticPATH}/bootstrap3/js/ara.common.v01.js"></script>
 <script type="text/javascript">
 	var list;
 	$(function() {
@@ -307,13 +246,6 @@
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 	});
-	function isEmpty(value) {
-		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
-			return true;
-		} else {
-			return false;
-		}
-	}
 	function processEvent() {
 		if (true) $('#allCheckbox').on('change', function() {
 			var flgAllCheckbox = $('#allCheckbox').is(':checked');
@@ -394,7 +326,7 @@
 						$('#modalUsdStrId').text(info.USD_STR_ID);
 						$('#modalCpnPhs').text(info.PHS_NM + "(" + info.CPN_PHS + ")");
 						$('#modalCreDttm').text(info.CRE_DTTM);
-						$('#modal1').modal('toggle');
+						fn_modalToggle('#modal1');
 					});
 					if (true) {
 						// console.log(">>>>> allCheckbos");
@@ -408,28 +340,6 @@
 				alert("에러가 발생하였습니다.");
 			}
 		});
-	}
-	function fn_console(msg) {
-		if (true) console.log(">>>>> " + msg);
-	}
-	function fn_loadPostPage(url) {
-		$('#tempForm').attr('method', 'POST').attr('action', url).submit();
-	}
-	function fn_modalToggle() {
-		$('#modal0').modal('toggle');
-	}
-	function fn_comma(num){
-		var len, point, str;
-		num = num + "";
-		point = num.length % 3 ;
-		len = num.length;
-		str = num.substring(0, point);
-		while (point < len) {
-			if (str != "") str += ",";
-			str += num.substring(point, point + 3);
-			point += 3;
-		}
-		return str;
 	}
 	function fn_refresh() {
 		selectUseCpnList();
@@ -478,13 +388,7 @@
 		rowHtml += "</tr>";
 		$("#cpnTable > tbody:last").append(rowHtml);
 		//
-		$('#modal2').modal('toggle');
-	}
-	function fn_cancelModal1() {
-		$('#modal1').modal('toggle');
-	}
-	function fn_cancelModal2() {
-		$('#modal2').modal('toggle');
+		fn_modalToggle('#modal2');
 	}
 	function fn_useCpnList() {
 		// validate
@@ -522,7 +426,7 @@
 				if (option == "success"){
 					alert("메시지: " + result.retMsg);
 					selectUseCpnList();
-					fn_cancelModal2();
+					fn_modalToggle('#modal2');
 				} else {
 					alert("에러가 발생하였습니다.");
 				}

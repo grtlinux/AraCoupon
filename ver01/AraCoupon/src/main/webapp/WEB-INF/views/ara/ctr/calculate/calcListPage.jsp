@@ -10,68 +10,11 @@
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="stylesheet" href="${staticPATH}/bootstrap3/css/bootstrap.css">
-<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/codingBooster5.css">
-<style type="text/css">
-	.jumbotron {
-		background-image: url('${staticPATH}/bootstrap3/images/jumbotronBackground.jpg');
-		background-size: cover;
-		text-shadow: black 0.4em 0.4em 0.4em;
-		color: white;
-	}
-</style>
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara.codingBooster5.v01.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara.jumbotron.v01.css">
 <body>
 
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- navigation -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="${staticPATH}/ara.do">ACSS</a>
-			</div>
-			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-				<!-- navbar menu -->
-				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰패키지발행<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/coupon/apprReqListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/coupon/apprResListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 승인목록</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('${staticPATH}/ctr/calculate/calcListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
-						</ul>
-					</li>
-					<!--
-					<li><a href="/sample05/">통계</a></li>
-					-->
-				</ul>
-
-				<!-- login menu -->
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="${staticPATH}/ctr/login/login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-							<li><a href="${staticPATH}/ctr/login/register.do"><span class="glyphicon glyphicon-edit"></span>&nbsp;회원등록</a></li>
-							<li><a href="${staticPATH}/ctr/login/logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- gap -->
-	<div style="height:70px;"></div>
+<%@ include file="/WEB-INF/views/ara/common/_navbarCtr.jsp"%>
 
 
 
@@ -118,21 +61,7 @@
 	<div style="height:70px;"></div>
 
 
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- footer -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<footer class="footer-default">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 text-center">
-					<h6>
-						ACSS ( Ara Coupon Service System )<br>
-						Copyright &copy; 2014 ~ 2018, 2019 TAIN Inc.
-					</h6>
-				</div>
-			</div>
-		</div>
-	</footer>
+<%@ include file="/WEB-INF/views/ara/common/_footer.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -241,24 +170,18 @@
 </body>
 <!-- script -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/AraCoupon/bootstrap3/js/bootstrap.js"></script>
+<script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
+<script src="${staticPATH}/bootstrap3/js/ara.common.v01.js"></script>
 <script type="text/javascript">
 	var list;
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		processEvent();
-		selectTempCalcList();
+		selectCalcList();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 	});
-	function isEmpty(value) {
-		if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
-			return true;
-		} else {
-			return false;
-		}
-	}
 	function processEvent() {
 		if (true) $('#allCheckbox').on('change', function() {
 			var flgAllCheckbox = $('#allCheckbox').is(':checked');
@@ -266,9 +189,9 @@
 			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
 		});
 	}
-	function selectTempCalcList(){
+	function selectCalcList(){
 		jQuery.ajax({
-			url           : "${staticPATH}/str/calculate/selectTempCalcList.do",
+			url           : "${staticPATH}/ctr/calculate/selectCalcList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -325,7 +248,7 @@
 						$('#modalUsdStrId').text(info.USD_STR_NO);
 						$('#modalUsdCnt').text(info.USD_CNT);
 						$('#modalUsdMny').text(fn_comma(info.USD_SUM) + " 원");
-						$('#modal1').modal('toggle');
+						fn_modalToggle('#modal1');
 					});
 					if (true) {
 						// console.log(">>>>> allCheckbos");
@@ -340,30 +263,8 @@
 			}
 		});
 	}
-	function fn_console(msg) {
-		if (true) console.log(">>>>> " + msg);
-	}
-	function fn_loadPostPage(url) {
-		$('#tempForm').attr('method', 'POST').attr('action', url).submit();
-	}
-	function fn_modalToggle() {
-		$('#modal0').modal('toggle');
-	}
-	function fn_comma(num){
-		var len, point, str;
-		num = num + "";
-		point = num.length % 3 ;
-		len = num.length;
-		str = num.substring(0, point);
-		while (point < len) {
-			if (str != "") str += ",";
-			str += num.substring(point, point + 3);
-			point += 3;
-		}
-		return str;
-	}
 	function fn_refresh() {
-		selectTempCalcList();
+		selectCalcList();
 	}
 	function fn_insertApprReq() {
 		var campIds = [];
@@ -377,7 +278,7 @@
 		$('#tempForm #_campIds').val(campIds.join(','));
 		
 		jQuery.ajax({
-			url           : "${staticPATH}/str/coupon/insertApprReq.do",
+			url           : "${staticPATH}/ctr/coupon/insertApprReq.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -385,7 +286,7 @@
 			success: function(result, option) {
 				if (option == "success"){
 					alert("메시지: " + result.retMsg);
-					selectTempCalcList();
+					selectCalcList();
 				} else {
 					alert("에러가 발생하였습니다.");
 				}

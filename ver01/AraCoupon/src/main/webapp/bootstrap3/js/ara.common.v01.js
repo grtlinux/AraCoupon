@@ -4,9 +4,9 @@
  * create date: 2019. July. 2nd
  * comment:
  *     2019.07.02: be created
- *     
- *     
- *     
+ *
+ *
+ *
  */
 $(function() {
 	if (true) console.log(">>>>> ara.common.v01.js > step-1: $(function() {});");
@@ -46,7 +46,7 @@ function classPhoneFormatter() {
 }
 // Used to format money number
 function classMoneyFormatter() {
-	
+
 }
 // remain only number string
 function onlyNumber(str) {
@@ -63,6 +63,19 @@ function fn_loadPostPage(id, url) {
 }
 function fn_modalToggle(id) {
 	$(id).modal("toggle");
+}
+function fn_comma(num){
+	var len, point, str;
+	num = num + "";
+	point = num.length % 3 ;
+	len = num.length;
+	str = num.substring(0, point);
+	while (point < len) {
+		if (str != "") str += ",";
+		str += num.substring(point, point + 3);
+		point += 3;
+	}
+	return str;
 }
 
 
