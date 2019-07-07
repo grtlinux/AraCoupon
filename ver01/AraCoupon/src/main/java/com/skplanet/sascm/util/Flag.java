@@ -8,12 +8,16 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.ui.ModelMap;
 
 @SuppressWarnings("unchecked")
 public class Flag {
 
 	public static boolean flag = true;
 	
+	/*
+	 * request
+	 */
 	public static void printRequestParameters(HttpServletRequest request) throws Exception {
 		if (!flag) {
 			Enumeration<String> enums = request.getParameterNames();
@@ -62,7 +66,26 @@ public class Flag {
 		if (flag) printRequestParameters(request);
 		if (flag) printRequestAttributes(request);
 	}
+
+	public static ModelMap setModelMap(ModelMap modelMap, HttpServletRequest request) throws Exception {
+		//copy request.Parameters to modelMap
+		//modelMap.putAll(request.getParameterMap());
+		if (Flag.flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
+			}
+		}
+		//modelMap.addAttribute("TODAY1", Flag.getDateTime("yyyy-MM-dd"));
+		//modelMap.addAttribute("TODAY2", Flag.getDateTime("yyyyMMdd"));
+		return modelMap;
+	}
 	
+	/*
+	 * get date time
+	 */
 	public static String getYYMMDD() throws Exception {
 		return getDateTime("yyMMdd");
 	}
@@ -75,6 +98,9 @@ public class Flag {
 		return new SimpleDateFormat(strFormat).format(new Date());
 	}
 
+	/*
+	 * coupon number
+	 */
 	private static final int[] MULTI = { 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9 };
 	
 	public static String getCouponNo(String cpnMst, int seq) throws Exception {

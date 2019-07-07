@@ -95,13 +95,13 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			} else if (url.indexOf("/Kang/") > -1) {
 				return true;
-			} else if (url.indexOf("/ara/") > -1) {
+			} else if (url.indexOf("/ara2/") > -1) {
 				return true;
-			} else if (url.indexOf("/ctr/") > -1) {
+			} else if (url.indexOf("/ctr2/") > -1) {
 				return true;
-			} else if (url.indexOf("/str/") > -1) {
+			} else if (url.indexOf("/str2/") > -1) {
 				return true;
-			} else if (url.indexOf("/usr/") > -1) {
+			} else if (url.indexOf("/usr2/") > -1) {
 				return true;
 			} else {
 				throw new ModelAndViewDefiningException(new ModelAndView("redirect:/login.do?url="+url));
