@@ -104,7 +104,8 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			} else if (url.indexOf("/usr2/") > -1) {
 				return true;
 			} else {
-				throw new ModelAndViewDefiningException(new ModelAndView("redirect:/login.do?url="+url));
+				//throw new ModelAndViewDefiningException(new ModelAndView("redirect:/login.do?url="+url));
+				throw new ModelAndViewDefiningException(new ModelAndView("redirect:/ara2/index.do"));
 			}
 		}
 

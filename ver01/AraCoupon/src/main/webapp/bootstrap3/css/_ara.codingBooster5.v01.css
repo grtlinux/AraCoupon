@@ -1,12 +1,16 @@
 /*
 	css: ara.codingBooster5.v01.css
 */
+/* ---------------------------- */
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 * {
 	font-family: 'Nanum Gothic';
 }
 
+/* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
 a,
 a:hover,
 a:focus {
@@ -15,6 +19,8 @@ a:focus {
 	cursor: point;
 }
 
+/* ---------------------------- */
+/* ---------------------------- */
 /* ---------------------------- */
 .navbar-default {
 	background-color: #1e235a;
@@ -29,6 +35,8 @@ a:focus {
 }
 
 /* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
 .dropdown-menu > li > a,
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
@@ -36,6 +44,8 @@ a:focus {
 }
 
 
+/* ---------------------------- */
+/* ---------------------------- */
 /* ---------------------------- */
 @media (max-width: 767px) {
 	.navbar-default .navbar-nav .open .dropdown-menu > li > a,
@@ -47,6 +57,8 @@ a:focus {
 
 
 /* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
 .footer-default {
 	background-color: #1e235a;
 	color: lightgray;
@@ -57,6 +69,8 @@ a:focus {
 }
 
 
+/* ---------------------------- */
+/* ---------------------------- */
 /* ---------------------------- */
 .show {
 	display: block !important;
