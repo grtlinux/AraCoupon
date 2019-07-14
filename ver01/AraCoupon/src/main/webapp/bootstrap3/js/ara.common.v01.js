@@ -77,7 +77,60 @@ function fn_comma(num){
 	}
 	return str;
 }
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+/*
+<html>
+<head>
+    <title>호출된 함수명 출력 TEST</title>
+    <script type="text/javascript" charset="EUC-KR">
+            <![CDATA[
+        function $F(caller) {
+            var f = arguments.callee.caller;
+            if(caller) f = f.caller;
+            var pat = /^function\s+([a-zA-Z0-9_]+)\s*\(/i;
+            pat.exec(f);
+            var func = new Object();
+            func.name = RegExp.$1;
+            return func;
+        }
+ 
+        function foo() {
+            var name = $F().name;   // 함수 자신의 이름 가져오기
+            console.log(name);      // 또는 alert($F().name);
+        }
+ 
+        function testArguments() {
+            console.log(arguments);
+        }
+ 
+        function testCallee() {
+            console.log(arguments.callee);
+        }
+ 
+        function testCaller() {
+            console.log(arguments.callee.toString());
+            console.log(arguments.callee.caller.toString());
+        }
+ 
+        function testCaller2() {
+            testCaller();
+        }
+            ]]>
+    </script>
+</head>
+<body>
+<a href="javascript:testArguments(1, 2, 3);">arguments test</a><p/>
+<a href="javascript:testCallee();">callee test</a><p/>
+<a href="javascript:testCaller2();">callee.caller test</a><p/>
+<a href="javascript:foo();">호출 함수 test</a><p/>
+</body>
+</html>
 
+
+출처: https://citron413.tistory.com/entry/호출된-함수명-얻어오는-방법 [Noit's Blog]
+ */
 
 
 

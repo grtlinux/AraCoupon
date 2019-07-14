@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Ara2Ib">
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ARA2 IB -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment. -->
+	<select id="selectAraInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ib.selectAraInfo */
+			A.ARA_ID
+			, A.ARA_NM
+			, A.ARA_MBL
+			, A.ARA_PWD
+			, A.ARA_ENC
+		FROM
+			ARA2_ARA  A
+		WHERE 1=1
+			AND A.ARA_ID IS NOT NULL
+	</select>
+
+
+	<!-- comment. -->
+	<insert id="insertIbTkn" parameterType="Map">
+		INSERT INTO  /* Ara2Ib.insertIbTkn */
+			ARA2_IBTKN
+		VALUES (
+			SEQ_TKN.NEXTVAL
+			, #{tknNm}
+			, SYSDATE
+			, #{accsTkn}
+			, #{schm}
+			, #{expd}
+			, TO_DATE(#{expd}, 'YYYYMMDDHH24MISS')
+		)
+	</insert>
+
+
+
+	<!-- comment. -->
+	<select id="selectLastIbTkn" parameterType="Map" resultType="Map">
+		select  /* Ara2Ib.selectLastIbTkn */
+			ROWNUM
+			, A.TKN_NO
+			, A.TKN_NM
+			, A.CNNT_DTTM
+			, A.ACCS_TKN
+			, A.SCHM
+			, A.EXPD
+			, A.EXPD_DTTM
+			, A.DIFF_HOURS
+		from
+			(
+				SELECT
+					TKN_NO
+					, TKN_NM
+					, TRUNC(SYSDATE, 'MI')                                   AS SYS_MI
+					, TRUNC(CNNT_DTTM, 'MI')                                 AS CNNT_MI
+					, (TRUNC(SYSDATE, 'MI') - TRUNC(CNNT_DTTM, 'MI')) * 24   AS DIFF_HOURS
+					, TO_CHAR(CNNT_DTTM, 'YY/MM/DD HH24:MI:SS')              AS STR_CNNT_DTTM
+					, CNNT_DTTM
+					, ACCS_TKN
+					, SCHM
+					, EXPD
+					, EXPD_DTTM
+				FROM
+					ARA2_IBTKN
+				WHERE 1=1
+				ORDER BY
+					CNNT_DTTM DESC NULLS LAST
+			) A
+		where 1=1
+			AND ROWNUM = 1
+	</select>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+</mapper>
+
+
+

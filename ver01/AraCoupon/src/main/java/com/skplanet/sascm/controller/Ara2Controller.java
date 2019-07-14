@@ -63,6 +63,41 @@ public class Ara2Controller {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
+	// Ara
+	
+	@RequestMapping(value = "/requestAraKey.do", method = RequestMethod.POST)
+	public void requestAraKey(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			// 이미 진행중인 아라키는 사용하지 못하도록 한다.
+			this.araService.updateAllCnntByUsrid(modelMap);
+		}
+		if (Flag.flag) {
+			// arakey를 얻는다.
+			String arakey = GenerateAraKey.getAraKey();
+			//arakey = "2025";  // KANG-20190702: 임시 for test
+			modelMap.addAttribute("arakey", arakey);
+		}
+		if (Flag.flag) {
+			// arakey를 ARA_CNNT 테이블에 넣는다.
+			this.araService.insertUsrAraKey(modelMap);
+		}
+		if (Flag.flag) {
+			// SMS 전송
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", String.format("정상적으로 아라키(AraKey)[%s]를 생성하였습니다. 인증에 사용하세요.", modelMap.get("arakey")));
+		}
+		jsonView.render(modelMap, request, response);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	// Usr-2
 	
 	@RequestMapping(value = "/requestUsrAraKey.do", method = RequestMethod.POST)
