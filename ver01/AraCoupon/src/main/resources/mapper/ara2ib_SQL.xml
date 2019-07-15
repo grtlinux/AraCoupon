@@ -41,41 +41,65 @@
 	</insert>
 
 
-
 	<!-- comment. -->
 	<select id="selectLastIbTkn" parameterType="Map" resultType="Map">
-		select  /* Ara2Ib.selectLastIbTkn */
-			ROWNUM
-			, A.TKN_NO
-			, A.TKN_NM
-			, A.CNNT_DTTM
-			, A.ACCS_TKN
-			, A.SCHM
-			, A.EXPD
-			, A.EXPD_DTTM
-			, A.DIFF_HOURS
-		from
+		SELECT  /* Ara2Ib.selectLastIbTkn */
+			B.ROWNO
+			, B.TKN_NO
+			, B.TKN_NM
+			, B.CNNT_DTTM
+			, B.ACCS_TKN
+			, B.SCHM
+			, B.EXPD
+			, B.EXPD_DTTM
+			, B.DIFF_HOURS
+			, B1.MSG_NO
+			, B1.MSG_CD
+			, B1.MSG_NM
+			, B1.MSG_CNTNT
+			, B1.CRE_DTTM
+			, B2.ARA_ID
+			, B2.ARA_NM
+			, B2.ARA_MBL
+			, B2.ARA_ENC
+		FROM
 			(
 				SELECT
-					TKN_NO
-					, TKN_NM
-					, TRUNC(SYSDATE, 'MI')                                   AS SYS_MI
-					, TRUNC(CNNT_DTTM, 'MI')                                 AS CNNT_MI
-					, (TRUNC(SYSDATE, 'MI') - TRUNC(CNNT_DTTM, 'MI')) * 24   AS DIFF_HOURS
-					, TO_CHAR(CNNT_DTTM, 'YY/MM/DD HH24:MI:SS')              AS STR_CNNT_DTTM
-					, CNNT_DTTM
-					, ACCS_TKN
-					, SCHM
-					, EXPD
-					, EXPD_DTTM
+					ROWNUM     AS ROWNO
+					, A.TKN_NO
+					, A.TKN_NM
+					, A.CNNT_DTTM
+					, A.ACCS_TKN
+					, A.SCHM
+					, A.EXPD
+					, A.EXPD_DTTM
+					, A.DIFF_HOURS
 				FROM
-					ARA2_IBTKN
+					(
+						SELECT
+							TKN_NO
+							, TKN_NM
+							, TRUNC(SYSDATE, 'MI')                                   AS SYS_MI
+							, TRUNC(CNNT_DTTM, 'MI')                                 AS CNNT_MI
+							, (TRUNC(SYSDATE, 'MI') - TRUNC(CNNT_DTTM, 'MI')) * 24   AS DIFF_HOURS
+							, TO_CHAR(CNNT_DTTM, 'YY/MM/DD HH24:MI:SS')              AS STR_CNNT_DTTM
+							, CNNT_DTTM
+							, ACCS_TKN
+							, SCHM
+							, EXPD
+							, EXPD_DTTM
+						FROM
+							ARA2_IBTKN
+						WHERE 1=1
+						ORDER BY
+							CNNT_DTTM DESC NULLS LAST
+					) A
 				WHERE 1=1
-				ORDER BY
-					CNNT_DTTM DESC NULLS LAST
-			) A
-		where 1=1
-			AND ROWNUM = 1
+					AND ROWNUM = 1
+			) B
+				LEFT JOIN ARA2_IBMSG B1 ON B1.MSG_CD = 'IBMSG001'
+				LEFT JOIN ARA2_ARA B2 ON B2.ARA_ID = 'tain_msg'
+		WHERE 1=1
 	</select>
 
 

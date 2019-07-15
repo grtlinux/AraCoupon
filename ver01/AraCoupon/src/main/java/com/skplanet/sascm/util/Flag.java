@@ -275,50 +275,6 @@ public class Flag {
 		}
 	}
 
-	public static String testJsonObject() throws Exception {
-		String jsonMsg = "";
-
-		if (flag) {
-			JsonArray jsonArr = new JsonArray();
-
-			JsonObject jsonSub = null;
-			jsonSub = new JsonObject();
-			jsonSub.addProperty("to", "+8201042582025");
-			jsonSub.addProperty("replaceWord1", "강석1");
-			jsonSub.addProperty("replaceWord2", "1억");
-			jsonSub.addProperty("replaceWord3", "");
-			jsonSub.addProperty("replaceWord4", "");
-			jsonSub.addProperty("replaceWord5", "");
-			jsonArr.add(jsonSub);
-
-			jsonSub = new JsonObject();
-			jsonSub.addProperty("to", "+8201033882025");
-			jsonSub.addProperty("replaceWord1", "강석2");
-			jsonSub.addProperty("replaceWord2", "2억");
-			jsonSub.addProperty("replaceWord3", "");
-			jsonSub.addProperty("replaceWord4", "");
-			jsonSub.addProperty("replaceWord5", "");
-			jsonArr.add(jsonSub);
-
-			JsonObject jsonRoot = new JsonObject();
-			jsonRoot.addProperty("title", "임시타이틀");   // 타이틀입니다.
-			jsonRoot.addProperty("from", "01042582025"); // SMS보내는 전화번호 국가코드 불필요.
-			jsonRoot.addProperty("text", "%CHANGEWORD1%님의 결제금액 %CHANGEWORD2%원이 입급되었습니다."); // 메시지
-			jsonRoot.addProperty("fileKey", "");        // MMS 전송시 필요하며 나중에 확인한다.
-			jsonRoot.add("destinations", jsonArr);
-			jsonRoot.addProperty("ref", "refKey");      // 고객이 설정할수 있고 DB의 키로 활용가능
-			jsonRoot.addProperty("ttl", "120");         // 2분후 SMS 못받으면 무시하시라
-			jsonRoot.addProperty("paymentCode", "10");  // 센터관리용으로
-			jsonRoot.addProperty("clientSubId", "1");   // 영업담당자와 협의후 사용
-
-			if (flag) System.out.println(">>>>> root: " + jsonRoot.toString());
-			if (flag) System.out.println(">>>>> root: " + new GsonBuilder().setPrettyPrinting().create().toJson(jsonRoot));
-			jsonMsg = jsonRoot.toString();
-		}
-
-		return jsonMsg;
-	}
-
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
@@ -376,9 +332,112 @@ public class Flag {
 		return map;
 	}
 
+	private static final String URL_IB_SEMD_SMS = "https://sms.supersms.co:7020/sms/v3/multiple-destinations";
+
+	public static Map<String,Object> sendIbSms(Map<String,Object> map) throws Exception {
+		if (flag) {
+			List<Header> defaultHeaders = new ArrayList<>();
+			defaultHeaders.add(new BasicHeader("Authorization", String.format("%s %s", String.valueOf(map.get("SCHM")), String.valueOf(map.get("ACCS_TKN")))));
+
+			// setting custom http headers on the httpclient
+			CloseableHttpClient httpClient = HttpClients.custom().setDefaultHeaders(defaultHeaders).build();
+			// setting custom http headers on the httpclient
+			//CloseableHttpClient httpClient = HttpClients.createDefault();
+			try {
+				String json = testJsonObject(map);
+				StringEntity entity = new StringEntity(json, StandardCharsets.UTF_8);
+
+				// setting custom http headers on the http request
+				HttpUriRequest request = RequestBuilder.post()
+						.setUri(URL_IB_SEMD_SMS)
+						.setHeader("Content-Type", "application/json")
+						//.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+						.setHeader("Accept", "application/json")
+						.setEntity(entity)
+						.build();
+				if (flag) System.out.println(">>>>> Executing Request: " + request.getRequestLine());
+
+				// create a custom response handler
+				ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+					@Override
+					public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
+						int status = response.getStatusLine().getStatusCode();
+						if (status >= 200 && status < 300) {
+							HttpEntity entity = response.getEntity();
+							String responseStr = "";
+							if (entity != null) {
+								responseStr = EntityUtils.toString(entity);
+							}
+							return responseStr;
+						} else {
+							throw new ClientProtocolException("Unexpected response status: " + status);
+						}
+					}
+				};
+				// http execution
+				String responseBody = httpClient.execute(request, responseHandler);
+				if (flag) System.out.println("----------------------------------------------");
+				if (flag) System.out.println(">>>>> ResponseBody: " + responseBody);
+
+				// get new map
+				map = gson.fromJson(responseBody, new TypeToken<Map<String, Object>>(){}.getType());
+				if (flag) System.out.println(">>>>> ResponseBody: " + new GsonBuilder().setPrettyPrinting().create().toJson(map));
+			} finally {
+				httpClient.close();
+			}
+		}
+		return map;
+	}
+	
+	private static String testJsonObject(Map<String,Object> map) throws Exception {
+		String jsonMsg = "";
+
+		if (flag) {
+			JsonArray jsonArr = new JsonArray();
+
+			JsonObject jsonSub = null;
+			jsonSub = new JsonObject();
+			jsonSub.addProperty("to", "+8201042582025");
+			jsonSub.addProperty("replaceWord1", "2025");
+			jsonSub.addProperty("replaceWord2", "아라");
+			jsonSub.addProperty("replaceWord3", "");
+			jsonSub.addProperty("replaceWord4", "");
+			jsonSub.addProperty("replaceWord5", "");
+			jsonArr.add(jsonSub);
+
+			/*
+			jsonSub = new JsonObject();
+			jsonSub.addProperty("to", "+8201033882025");
+			jsonSub.addProperty("replaceWord1", "1234");
+			jsonSub.addProperty("replaceWord2", "고객");
+			jsonSub.addProperty("replaceWord3", "");
+			jsonSub.addProperty("replaceWord4", "");
+			jsonSub.addProperty("replaceWord5", "");
+			jsonArr.add(jsonSub);
+			*/
+			
+			JsonObject jsonRoot = new JsonObject();
+			jsonRoot.addProperty("title", String.valueOf(map.get("MSG_NM")));   // 타이틀입니다.
+			jsonRoot.addProperty("from", String.valueOf(map.get("ARA_MBL"))); // SMS보내는 전화번호 국가코드 불필요.
+			jsonRoot.addProperty("text", String.valueOf(map.get("MSG_CNTNT"))); // 메시지
+			jsonRoot.addProperty("fileKey", "");        // MMS 전송시 필요하며 나중에 확인한다.
+			jsonRoot.add("destinations", jsonArr);
+			jsonRoot.addProperty("ref", "refKey");      // 고객이 설정할수 있고 DB의 키로 활용가능
+			jsonRoot.addProperty("ttl", "120");         // 2분후 SMS 못받으면 무시하시라
+			jsonRoot.addProperty("paymentCode", "10");  // 센터관리용으로
+			jsonRoot.addProperty("clientSubId", "1");   // 영업담당자와 협의후 사용
+
+			if (flag) System.out.println(">>>>> root: " + jsonRoot.toString());
+			if (flag) System.out.println(">>>>> root: " + new GsonBuilder().setPrettyPrinting().create().toJson(jsonRoot));
+			jsonMsg = jsonRoot.toString();
+		}
+
+		return jsonMsg;
+	}
+
 	private static final String URL_IB_TRANS_FILE = "https://file.supersms.co:7010/sms/v3/file";
 
-	public static Map<String,Object> transIbFile(Map<String,Object> map) throws Exception {
+	public static Map<String,Object> notBeUsed_transIbFile(Map<String,Object> map) throws Exception {
 		if (flag) {
 			// create custom http headers for httpclient
 			List<Header> defaultHeaders = new ArrayList<>();
@@ -421,63 +480,6 @@ public class Flag {
 
 				// get new map
 				map = gson.fromJson(responseBody, new TypeToken<Map<String, Object>>(){}.getType());
-			} finally {
-				httpClient.close();
-			}
-		}
-		return map;
-	}
-
-	private static final String URL_IB_SEMD_SMS = "https://sms.supersms.co:7020/sms/v3/multiple-destinations";
-
-	public static Map<String,Object> sendIbSms(Map<String,Object> map) throws Exception {
-		if (flag) {
-			List<Header> defaultHeaders = new ArrayList<>();
-			defaultHeaders.add(new BasicHeader("Authorization", String.format("%s %s", String.valueOf(map.get("SCHM")), String.valueOf(map.get("ACCS_TKN")))));
-
-			// setting custom http headers on the httpclient
-			CloseableHttpClient httpClient = HttpClients.custom().setDefaultHeaders(defaultHeaders).build();
-			// setting custom http headers on the httpclient
-			//CloseableHttpClient httpClient = HttpClients.createDefault();
-			try {
-				String json = testJsonObject();
-				StringEntity entity = new StringEntity(json, StandardCharsets.UTF_8);
-
-				// setting custom http headers on the http request
-				HttpUriRequest request = RequestBuilder.post()
-						.setUri(URL_IB_SEMD_SMS)
-						.setHeader("Content-Type", "application/json")
-						//.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-						.setHeader("Accept", "application/json")
-						.setEntity(entity)
-						.build();
-				if (flag) System.out.println(">>>>> Executing Request: " + request.getRequestLine());
-
-				// create a custom response handler
-				ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
-					@Override
-					public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
-						int status = response.getStatusLine().getStatusCode();
-						if (status >= 200 && status < 300) {
-							HttpEntity entity = response.getEntity();
-							String responseStr = "";
-							if (entity != null) {
-								responseStr = EntityUtils.toString(entity);
-							}
-							return responseStr;
-						} else {
-							throw new ClientProtocolException("Unexpected response status: " + status);
-						}
-					}
-				};
-				// http execution
-				String responseBody = httpClient.execute(request, responseHandler);
-				if (flag) System.out.println("----------------------------------------------");
-				if (flag) System.out.println(">>>>> ResponseBody: " + responseBody);
-
-				// get new map
-				map = gson.fromJson(responseBody, new TypeToken<Map<String, Object>>(){}.getType());
-				if (flag) System.out.println(">>>>> ResponseBody: " + new GsonBuilder().setPrettyPrinting().create().toJson(map));
 			} finally {
 				httpClient.close();
 			}
