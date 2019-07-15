@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import com.skplanet.sascm.service.Ara2IbService;
 import com.skplanet.sascm.util.Flag;
+import com.skplanet.sascm.util.IbMsg;
 
 @Controller
 @RequestMapping(value = "/ara2/ib")
@@ -81,7 +82,7 @@ public class Ara2IbController {
 				log.debug(">>>>> more then 2 hours.....and select new token information....so, insert the infos");
 				map = this.ara2IbService.selectAraInfo(null);
 				log.debug("2. map: " + map);
-				map = Flag.getIbTokenInfo(map);
+				map = IbMsg.getIbTokenInfo(map);
 				map.put("tknNm", String.format("to update token at %s", Flag.getDateTime("yyyy-MM-dd HH:mm:ss")));
 				map.put("accsTkn", (String) map.get("accessToken"));
 				map.put("schm", (String) map.get("schema"));
@@ -96,7 +97,7 @@ public class Ara2IbController {
 			}
 			modelMap.addAttribute("info", map);
 			
-			modelMap.addAttribute("retIbSend", Flag.sendIbSms(map));
+			modelMap.addAttribute("retIbSend", IbMsg.sendIbSms(map));
 		}
 		if (Flag.flag) {
 			modelMap.addAttribute("retCode", "0000");
