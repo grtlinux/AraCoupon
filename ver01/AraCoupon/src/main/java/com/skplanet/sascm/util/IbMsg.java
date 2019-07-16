@@ -34,7 +34,7 @@ public class IbMsg {
 	/////////////////////////////////////////////////////////////////////////////////
 
 	private static final Gson gson = new Gson();
-	
+
 	/*
 	 * getIbTokenInfo
 	 */
@@ -94,9 +94,11 @@ public class IbMsg {
 
 	public static Map<String,Object> sendIbSms(Map<String,Object> map) throws Exception {
 		if (flag) System.out.println(">>>>> map for Request: " + new GsonBuilder().setPrettyPrinting().create().toJson(map));
+		@SuppressWarnings("unchecked")
+		Map<String, Object> mapToken = (Map<String,Object>) map.get("mapToken");
 		if (flag) {
 			List<Header> defaultHeaders = new ArrayList<>();
-			defaultHeaders.add(new BasicHeader("Authorization", String.format("%s %s", String.valueOf(map.get("SCHM")), String.valueOf(map.get("ACCS_TKN")))));
+			defaultHeaders.add(new BasicHeader("Authorization", String.format("%s %s", String.valueOf(mapToken.get("SCHM")), String.valueOf(mapToken.get("ACCS_TKN")))));
 			// setting custom http headers on the httpclient
 			CloseableHttpClient httpClient = HttpClients.custom().setDefaultHeaders(defaultHeaders).build();
 			//CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -142,43 +144,33 @@ public class IbMsg {
 		}
 		return map;
 	}
-	
+
 	private static String testJsonObject(Map<String,Object> map) throws Exception {
 		String jsonMsg = "";
-
+		@SuppressWarnings("unchecked")
+		Map<String, Object> mapToken = (Map<String,Object>) map.get("mapToken");
 		if (flag) {
 			JsonArray jsonArr = new JsonArray();
-
+			//
 			JsonObject jsonSub = null;
 			jsonSub = new JsonObject();
-			jsonSub.addProperty("to", "+8201042582025");
-			jsonSub.addProperty("replaceWord1", "2025");
-			jsonSub.addProperty("replaceWord2", "아라");
+			jsonSub.addProperty("to", "+82" + String.valueOf(map.get("MBL_NUM")));  // to mobile
+			jsonSub.addProperty("replaceWord1", String.valueOf(map.get("arakey")));  // param1
+			jsonSub.addProperty("replaceWord2", "아라");   // param2
 			jsonSub.addProperty("replaceWord3", "");
 			jsonSub.addProperty("replaceWord4", "");
 			jsonSub.addProperty("replaceWord5", "");
 			jsonArr.add(jsonSub);
-
-			/*
-			jsonSub = new JsonObject();
-			jsonSub.addProperty("to", "+8201033882025");
-			jsonSub.addProperty("replaceWord1", "1234");
-			jsonSub.addProperty("replaceWord2", "고객");
-			jsonSub.addProperty("replaceWord3", "");
-			jsonSub.addProperty("replaceWord4", "");
-			jsonSub.addProperty("replaceWord5", "");
-			jsonArr.add(jsonSub);
-			*/
-			
+			//
 			JsonObject jsonRoot = new JsonObject();
-			jsonRoot.addProperty("title", String.valueOf(map.get("MSG_NM")));   // 타이틀입니다.
-			jsonRoot.addProperty("from", String.valueOf(map.get("ARA_MBL"))); // SMS보내는 전화번호 국가코드 불필요.
-			jsonRoot.addProperty("text", String.valueOf(map.get("MSG_CNTNT"))); // 메시지
+			jsonRoot.addProperty("title", String.valueOf(mapToken.get("MSG_NM")));   // 타이틀입니다.
+			jsonRoot.addProperty("from", String.valueOf(mapToken.get("ARA_MBL"))); // SMS보내는 전화번호 국가코드 불필요.
+			jsonRoot.addProperty("text", String.valueOf(mapToken.get("MSG_CNTNT"))); // 메시지
 			jsonRoot.addProperty("fileKey", "");        // MMS 전송시 필요하며 나중에 확인한다.
 			jsonRoot.add("destinations", jsonArr);
-			jsonRoot.addProperty("ref", "refKey");      // 고객이 설정할수 있고 DB의 키로 활용가능
-			jsonRoot.addProperty("ttl", "120");         // 2분후 SMS 못받으면 무시하시라
-			jsonRoot.addProperty("paymentCode", "10");  // 센터관리용으로
+			jsonRoot.addProperty("ref", "refKey");      // 고객이 설정할수 있고 DB의 키로 활용가능, from seq_ref
+			jsonRoot.addProperty("ttl", "120");         // 2분후 SMS 못받으면 무시하시라    from ttl
+			jsonRoot.addProperty("paymentCode", "10");  // 센터관리용으로                 from center no
 			jsonRoot.addProperty("clientSubId", "1");   // 영업담당자와 협의후 사용
 
 			if (flag) System.out.println(">>>>> root: " + jsonRoot.toString());

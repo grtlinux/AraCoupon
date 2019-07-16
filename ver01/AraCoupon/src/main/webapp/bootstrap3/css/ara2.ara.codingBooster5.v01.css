@@ -23,8 +23,12 @@ a:focus {
 /* ---------------------------- */
 /* ---------------------------- */
 .navbar-default {
+	/*
 	background-color: #1e235a;
 	border-color: #1e235a;
+	*/
+	background-color: #080808;
+	border-color: #080808;
 }
 
 .navbar-default .navbar-brand,
@@ -40,7 +44,7 @@ a:focus {
 .dropdown-menu > li > a,
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-	color: gray;
+	color: lightgray;
 }
 
 
@@ -60,7 +64,10 @@ a:focus {
 /* ---------------------------- */
 /* ---------------------------- */
 .footer-default {
+	/*
 	background-color: #1e235a;
+	*/
+	background-color: #080808;
 	color: lightgray;
 }
 

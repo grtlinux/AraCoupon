@@ -5,41 +5,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Ara Main</title>
+	<title>가게 - ${info.STR_NM}</title>
 </head>
-<%@ include file="/WEB-INF/views/ara2/common/cssAra.jsp"%>
+<%@ include file="/WEB-INF/views/ara2/common/cssStr.jsp"%>
 <body>
-<%@ include file="/WEB-INF/views/ara2/common/navbarAra.jsp"%>
+<%@ include file="/WEB-INF/views/ara2/common/navbarStr.jsp"%>
 <%@ include file="/WEB-INF/views/ara2/common/jumbotron.jsp"%>
 
-
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- container for column -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-4 hide">
-				<h4>아라</h4>
-				<p>저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다. 많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다. 특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<p>
-				<p class="text-center"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
-			</div>
-			<div class="col-sm-4">
-				<h4>고객</h4>
-				<p>저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다. 많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다. 특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<p>
-				<p class="text-center"><a class="btn btn-default" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
-			</div>
-			<div class="col-sm-4">
-				<h4>가게</h4>
-				<p>저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다. 많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다. 특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<p>
-				<p class="text-center"><a class="btn btn-default" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
-			</div>
-			<div class="col-sm-4">
-				<h4>센터</h4>
-				<p>저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다. 많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다. 특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<p>
-				<p class="text-center"><a class="btn btn-default" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
-			</div>
-		</div>
-	</div>
 
 
 <%@ include file="/WEB-INF/views/ara2/common/footer.jsp"%>

@@ -17,7 +17,7 @@
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라</a></li>
+					<li class="hide"><a data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라</a></li>
 					<li><a data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객</a></li>
 					<li><a data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게</a></li>
 					<li><a data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센타</a></li>

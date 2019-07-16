@@ -149,6 +149,22 @@
 			SELECT * FROM DUAL
 		</update>
 
+	/////////////////////////////////////////////////////////////////////
+	<update id="useCpnList" parameterType="Map">
+		UPDATE  /* Ara2Usr.useCpnList */
+			ARA_CPN
+		SET
+			USD_STR_ID = #{strid}
+			, CPN_PHS = '3'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND USR_ID = #{usrid}
+			AND CPN_NO IN ( ''
+			<if test="arrCpnNo != ''">
+				,<foreach collection="arrCpnNo" separator="," index="index" >'${arrCpnNo[index]}'</foreach>
+			</if>
+			)
+	</update>
 
 -->
 

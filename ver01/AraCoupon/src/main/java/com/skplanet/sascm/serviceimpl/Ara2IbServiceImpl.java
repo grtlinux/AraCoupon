@@ -1,6 +1,5 @@
 package com.skplanet.sascm.serviceimpl;
 
-import java.sql.SQLException;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,17 +16,17 @@ public class Ara2IbServiceImpl implements Ara2IbService {
 	private Ara2IbDAO ara2IbDAO;
 
 	@Override
-	public Map<String, Object> selectAraInfo(Map<String, Object> param) throws SQLException {
+	public Map<String, Object> selectAraInfo(Map<String, Object> param) throws Exception {
 		return this.ara2IbDAO.selectAraInfo(param);
 	}
 
 	@Override
-	public Map<String, Object> selectLastIbTkn(Map<String, Object> param) throws SQLException {
+	public Map<String, Object> selectLastIbTkn(Map<String, Object> param) throws Exception {
 		return this.ara2IbDAO.selectLastIbTkn(param);
 	}
 
 	@Override
-	public int insertIbTkn(Map<String, Object> param) throws SQLException {
+	public int insertIbTkn(Map<String, Object> param) throws Exception {
 		return this.ara2IbDAO.insertIbTkn(param);
 	}
 
