@@ -17,8 +17,9 @@
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
-					<li><a data-target="#modal0" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
-					<li class="dropdown">
+					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
+					
+					<li class="dropdown hide">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr/coupon/useCouponListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;사용가능한 쿠폰목록</a></li>

@@ -62,7 +62,7 @@
 								</tbody>
 							</table>
 						</div>
-						<img src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
+						<img class="hide" src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>

@@ -16,7 +16,7 @@
 	<!-- container for table panel -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="container-fluid">
-		<div class="panel panel-primary">
+		<div class="panel panel-danger">
 			<div class="panel-heading">
 				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;쿠폰을 발행한 캠페인 목록. 아래 캠페인은 쿠폰갯수 만큼 쿠폰을 발행했다. 다음으로 가게에서는 아래 쿠폰들을 구매할 수 있다.</h3>
 			</div>
@@ -38,7 +38,7 @@
 								<td>쿠폰타입</td>
 								<td>액면가</td>
 								<td class='text-danger'>갯수</td>
-								<td>쿠폰합</td>
+								<td>쿠폰합계</td>
 								<td>쿠폰마스터</td>
 								<!--
 								<td>캠페인내</td>
@@ -116,7 +116,7 @@
 								</tbody>
 							</table>
 						</div>
-						<img src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
+						<img class="hide" src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>

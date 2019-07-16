@@ -16,7 +16,7 @@
 	<!-- container for table panel -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="container-fluid">
-		<div class="panel panel-primary">
+		<div class="panel panel-danger">
 			<div class="panel-heading">
 				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;캠페인을 만든다. 캠페인은 쿠폰페키지를 만드는 행사이다. 쿠폰페키지는 같은 액면가의 쿠폰뭉치이다.</h3>
 			</div>
@@ -137,7 +137,7 @@
 								</tbody>
 							</table>
 						</div>
-						<img src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
+						<img class="hide" src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>

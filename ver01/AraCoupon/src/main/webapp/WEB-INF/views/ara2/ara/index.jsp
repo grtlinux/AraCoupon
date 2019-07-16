@@ -25,17 +25,17 @@
 			</div>
 			<div class="col-sm-4">
 				<h4>고객</h4>
-				<p>저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다. 많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다. 특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<p>
+				<p>가게로부터 제공받은 쿠폰을 갖고있다가 쿠폰가게에서 제공쿠폰을 사용한다. 즉, 쿠폰시스템 서비스 해택을 누리는 주체이다.<p>
 				<p class="text-center"><a class="btn btn-default" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>가게</h4>
-				<p>저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다. 많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다. 특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<p>
+				<p>센터에서 발행한 쿠폰을 구매하고 고객에게 서비스로 제공한다. 고객은 갖고 있는 쿠폰을 사용하면 받아서 일정시간이 흐르면 정산을 실행한다. 정산을 처리하고 나면 가게 통장으로 입금이 이뤄진다.<p>
 				<p class="text-center"><a class="btn btn-default" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>센터</h4>
-				<p>저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다. 많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다. 특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<p>
+				<p>쿠폰시스템 전체를 관리하는 곳이다. 쿠폰을 생성하고 가게로 분배하고 마지막으로 쿠폰을 정산한다. 매월 정산에 대한 결산을 진행한다.<p>
 				<p class="text-center"><a class="btn btn-default" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
 			</div>
 		</div>
@@ -71,7 +71,7 @@
 									<td>아라ID</td>
 									<td class="text-left">
 										<input id="araid" type="text" value=''>
-										<button id='btnRequestAraKey' type="button" class="btn btn-success btn-sm" onclick="fn_requestAraKey('ARA');"> 아라키(AraKey) 요청 </button>
+										<button id='btnRequestAraKey' type="button" class="btn btn-dark btn-sm" onclick="fn_requestAraKey('ARA');"> 아라키(AraKey) 요청 </button>
 									</td>
 								</tr>
 								<tr>
@@ -109,7 +109,7 @@
 									<td>고객ID</td>
 									<td class="text-left">
 										<input id="usrid" type="text" value=''>
-										<button id='btnRequestAraKey' type="button" class="btn btn-success btn-sm" onclick="fn_requestAraKey('USR');"> 아라키(AraKey) 요청 </button>
+										<button id='btnRequestAraKey' type="button" class="btn btn-info btn-sm" onclick="fn_requestAraKey('USR');"> 아라키(AraKey) 요청 </button>
 									</td>
 								</tr>
 								<tr>
@@ -121,7 +121,7 @@
 							</tbody>
 						</table>
 						<br>
-						<button id='btnConnect' type="button" class="btn btn-danger btn-sm" onclick="fn_connect('USR');"> 접속 </button>
+						<button id='btnConnect' type="button" class="btn btn-info btn-sm" onclick="fn_connect('USR');"> 접속 </button>
 					</div>
 				</div>
 			</div>
@@ -159,7 +159,7 @@
 							</tbody>
 						</table>
 						<br>
-						<button id='btnConnect' type="button" class="btn btn-danger btn-sm" onclick="fn_connect('STR');"> 접속 </button>
+						<button id='btnConnect' type="button" class="btn btn-success btn-sm" onclick="fn_connect('STR');"> 접속 </button>
 					</div>
 				</div>
 			</div>
@@ -185,7 +185,7 @@
 									<td>센터ID</td>
 									<td class="text-left">
 										<input id="ctrid" type="text" value=''>
-										<button id='btnRequestAraKey' type="button" class="btn btn-success btn-sm" onclick="fn_requestAraKey('CTR');"> 아라키(AraKey) 요청 </button>
+										<button id='btnRequestAraKey' type="button" class="btn btn-danger btn-sm" onclick="fn_requestAraKey('CTR');"> 아라키(AraKey) 요청 </button>
 									</td>
 								</tr>
 								<tr>

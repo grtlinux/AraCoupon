@@ -25,156 +25,49 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="row">
 		<!-- user information -->
-		<div class="modal" id="modalAra" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header alert alert-dark">
-						아라 접속<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body text-center">
-						저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다.<br>
-						많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:150px;">
-						<br><br>
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>아라ID</td>
-									<td class="text-left">
-										<input id="araid" type="text" value=''>
-										<button id='btnRequestAraKey' type="button" class="btn btn-success btn-sm" onclick="fn_requestAraKey('ARA');"> 아라키(AraKey) 요청 </button>
-									</td>
-								</tr>
-								<tr>
-									<td>아라키(Ara Key)</td>
-									<td class="text-left">
-										<input id="arakey" type="text" value=''>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<br>
-						<button id='btnConnect' type="button" class="btn btn-danger btn-sm" onclick="fn_connect('ARA');"> 접속 </button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<!-- user information -->
-		<div class="modal" id="modalUsr" tabindex="-1">
+		<div class="modal" id="modalSelfInfo" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header alert alert-info">
-						고객 접속<button class="close" data-dismiss="modal">&times;</button>
+						내 정보(고객)<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
-						저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다.<br>
-						많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:150px;">
-						<br><br>
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>고객ID</td>
-									<td class="text-left">
-										<input id="usrid" type="text" value=''>
-										<button id='btnRequestAraKey' type="button" class="btn btn-success btn-sm" onclick="fn_requestAraKey('USR');"> 아라키(AraKey) 요청 </button>
-									</td>
-								</tr>
-								<tr>
-									<td>아라키(Ara Key)</td>
-									<td class="text-left">
-										<input id="arakey" type="text" value=''>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<br>
-						<button id='btnConnect' type="button" class="btn btn-danger btn-sm" onclick="fn_connect('USR');"> 접속 </button>
+						<div class="panel panel-primary">
+							<table class="table">
+								<tbody>
+									<tr>
+										<td>고객ID</td>
+										<td class="align-left">${info.USR_ID}</td>
+									</tr>
+									<tr>
+										<td>고객명</td>
+										<td>${info.USR_NM}</td>
+									</tr>
+									<tr>
+										<td>전화번호</td>
+										<td>${info.TEL_NUM}</td>
+									</tr>
+									<tr>
+										<td>핸드폰번호</td>
+										<td>${info.MBL_NUM}</td>
+									</tr>
+									<tr>
+										<td>이메일</td>
+										<td>${info.EML_ADDR}</td>
+									</tr>
+									<tr class="hide">
+										<td>전화번호</td>
+										<td>${info.TEL_NO}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<img class="hide" src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<!-- store information -->
-		<div class="modal" id="modalStr" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header alert alert-success">
-						가게 접속<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body text-center">
-						저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다.<br>
-						많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:150px;">
-						<br><br>
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>가게ID</td>
-									<td class="text-left">
-										<input id="strid" type="text" value=''>
-										<button id='btnRequestAraKey' type="button" class="btn btn-success btn-sm" onclick="fn_requestAraKey('STR');"> 아라키(AraKey) 요청 </button>
-									</td>
-								</tr>
-								<tr>
-									<td>아라키(Ara Key)</td>
-									<td class="text-left">
-										<input id="arakey" type="text" value=''>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<br>
-						<button id='btnConnect' type="button" class="btn btn-danger btn-sm" onclick="fn_connect('STR');"> 접속 </button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<!-- center information -->
-		<div class="modal" id="modalCtr" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header alert alert-danger">
-						센터 접속<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body text-center">
-						저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다.<br>
-						많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:150px;">
-						<br><br>
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>센터ID</td>
-									<td class="text-left">
-										<input id="ctrid" type="text" value=''>
-										<button id='btnRequestAraKey' type="button" class="btn btn-success btn-sm" onclick="fn_requestAraKey('CTR');"> 아라키(AraKey) 요청 </button>
-									</td>
-								</tr>
-								<tr>
-									<td>아라키(Ara Key)</td>
-									<td class="text-left">
-										<input id="arakey" type="text" value=''>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<br>
-						<button id='btnConnect' type="button" class="btn btn-danger btn-sm" onclick="fn_connect('CTR');"> 접속 </button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	</div>	
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -184,12 +77,7 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
-		<input type='hidden' id='_conntyp'  name='conntyp'  value='' />
-		<input type='hidden' id='_connid'  name='connid'  value='' />
-		<input type='hidden' id='_araid'  name='araid'  value='' />
-		<input type='hidden' id='_ctrid'  name='ctrid'  value='' />
-		<input type='hidden' id='_strid'  name='strid'  value='' />
-		<input type='hidden' id='_usrid'  name='usrid'  value='' />
+		<input type='hidden' id='_usrid'  name='usrid'  value='${info.USR_ID}' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
 	</form>
 
@@ -205,7 +93,7 @@
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		processEvent();
-		selectUseCpnList();
+		selectList();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -213,282 +101,13 @@
 	function processEvent() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 	}
-	function selectUseCpnList() {
+	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
-		if (!true) {
-			if (true) console.log(">>>>> call ajax:", arguments.callee.caller);
-			// call ajax
-			jQuery.ajax({
-				url           : "${staticPATH}/ara2/ib/selectLastIbTkn.do",
-				dataType      : "JSON",
-				scriptCharset : "UTF-8",
-				type          : "POST",
-				data          : $("#tempForm").serialize(),
-				success: function(result, option) {
-					if (option == "success") {
-						if (result.retCode == "0000") {
-							if (true) alert("[알림] " + result.retMsg);
-						} else {
-							alert("에러메시지: " + result.retMsg);
-						}
-					} else {
-						alert("에러가 발생하였습니다.(1)");
-					}
-				},
-				error: function(result, option) {
-					alert("에러가 발생하였습니다.(9)");
-				}
-			});
-		}
 	}
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
-	// Ara
-	function fn_clearModalAra(connTyp) {
-		if (true) console.log(">>>>> ", arguments.callee.caller);
-		switch (connTyp) {
-		case "ARA":
-			$('#modalAra #araid').val('').attr('disabled', false);
-			$('#modalAra #btnRequestAraKey').attr('disabled', false);
-			$('#modalAra #arakey').val('').attr('disabled', true);
-			$('#modalAra #btnConnect').attr('disabled', true);
-			break;
-		case "USR":
-			$('#modalUsr #usrid').val('').attr('disabled', false);
-			$('#modalUsr #btnRequestAraKey').attr('disabled', false);
-			$('#modalUsr #arakey').val('').attr('disabled', true);
-			$('#modalUsr #btnConnect').attr('disabled', true);
-			break;
-		case "STR":
-			$('#modalStr #strid').val('').attr('disabled', false);
-			$('#modalStr #btnRequestAraKey').attr('disabled', false);
-			$('#modalStr #arakey').val('').attr('disabled', true);
-			$('#modalStr #btnConnect').attr('disabled', true);
-			break;
-		case "CTR":
-			$('#modalCtr #ctrid').val('').attr('disabled', false);
-			$('#modalCtr #btnRequestAraKey').attr('disabled', false);
-			$('#modalCtr #arakey').val('').attr('disabled', true);
-			$('#modalCtr #btnConnect').attr('disabled', true);
-			break;
-		}
-	}
-	function fn_requestAraKey(connTyp) {
-		if (true) console.log(">>>>> ", arguments.callee.caller);
-		if (true) {
-			// validate
-			switch (connTyp) {
-			case "ARA":
-				if (isEmpty($('#modalAra #araid').val())) {
-					$('#modalAra #araid').focus();
-					return false;
-				}
-				break;
-			case "USR":
-				if (isEmpty($('#modalUsr #usrid').val())) {
-					$('#modalUsr #usrid').focus();
-					return false;
-				}
-				break;
-			case "STR":
-				if (isEmpty($('#modalStr #strid').val())) {
-					$('#modalStr #strid').focus();
-					return false;
-				}
-				break;
-			case "CTR":
-				if (isEmpty($('#modalCtr #ctrid').val())) {
-					$('#modalCtr #ctrid').focus();
-					return false;
-				}
-				break;
-			}
-		}
-		if (true) {
-			// clear form data
-			$("#tempForm > #_conntyp").val('');
-			$("#tempForm > #_araid").val('');
-			$("#tempForm > #_usrid").val('');
-			$("#tempForm > #_strid").val('');
-			$("#tempForm > #_ctrid").val('');
-			
-		}
-		if (true) {
-			// transfer data
-			$("#tempForm > #_conntyp").val(connTyp);
-			switch (connTyp) {
-			case "ARA":
-				$("#tempForm > #_araid").val($("#modalAra #araid").val());
-				$("#tempForm > #_connid").val($("#modalAra #araid").val());
-				break;
-			case "USR":
-				$("#tempForm > #_usrid").val($("#modalUsr #usrid").val());
-				$("#tempForm > #_connid").val($("#modalUsr #usrid").val());
-				break;
-			case "STR":
-				$("#tempForm > #_strid").val($("#modalStr #strid").val());
-				$("#tempForm > #_connid").val($("#modalStr #strid").val());
-				break;
-			case "CTR":
-				$("#tempForm > #_ctrid").val($("#modalCtr #ctrid").val());
-				$("#tempForm > #_connid").val($("#modalCtr #ctrid").val());
-				break;
-			}
-		}
-		if (true) {
-			if (true) console.log(">>>>> call ajax:", arguments.callee.caller);
-			// call ajax
-			jQuery.ajax({
-				url           : "${staticPATH}/ara2/requestAraKey.do",
-				dataType      : "JSON",
-				scriptCharset : "UTF-8",
-				type          : "POST",
-				data          : $("#tempForm").serialize(),
-				success: function(result, option) {
-					if (option == "success") {
-						if (result.retCode == "0000") {
-							if (true) alert("[알림] " + result.retMsg);
-							switch (result.conntyp) {
-							case "ARA":
-								$('#modalAra #araid').attr('disabled', true);
-								$('#modalAra #btnRequestAraKey').attr('disabled', true);
-								$('#modalAra #btnConnect').attr('disabled', false);
-								$('#modalAra #arakey').attr('disabled', false).focus();
-								break;
-							case "USR":
-								$('#modalUsr #usrid').attr('disabled', true);
-								$('#modalUsr #btnRequestAraKey').attr('disabled', true);
-								$('#modalUsr #btnConnect').attr('disabled', false);
-								$('#modalUsr #arakey').attr('disabled', false).focus();
-								break;
-							case "STR":
-								$('#modalStr #strid').attr('disabled', true);
-								$('#modalStr #btnRequestAraKey').attr('disabled', true);
-								$('#modalStr #btnConnect').attr('disabled', false);
-								$('#modalStr #arakey').attr('disabled', false).focus();
-								break;
-							case "CTR":
-								$('#modalCtr #ctrid').attr('disabled', true);
-								$('#modalCtr #btnRequestAraKey').attr('disabled', true);
-								$('#modalCtr #btnConnect').attr('disabled', false);
-								$('#modalCtr #arakey').attr('disabled', false).focus();
-								break;
-							}
-						} else {
-							alert("에러메시지: " + result.retMsg);
-						}
-					} else {
-						alert("에러가 발생하였습니다.(1)");
-					}
-				},
-				error: function(result, option) {
-					alert("에러가 발생하였습니다.(9)");
-				}
-			});
-		}
-	}
-	function fn_connect(connTyp) {
-		if (true) console.log(">>>>> ", arguments.callee.caller);
-		if (true) {
-			// validate
-			switch (connTyp) {
-			case "ARA":
-				if (isEmpty($('#modalAra #arakey').val())) {
-					$('#modalAra #arakey').focus();
-					return false;
-				}
-				break;
-			case "USR":
-				if (isEmpty($('#modalUsr #arakey').val())) {
-					$('#modalUsr #arakey').focus();
-					return false;
-				}
-				break;
-			case "STR":
-				if (isEmpty($('#modalStr #arakey').val())) {
-					$('#modalStr #arakey').focus();
-					return false;
-				}
-				break;
-			case "CTR":
-				if (isEmpty($('#modalCtr #arakey').val())) {
-					$('#modalCtr #arakey').focus();
-					return false;
-				}
-				break;
-			}
-		}
-		if (true) {
-			// transfer data
-			switch (connTyp) {
-			case "ARA":
-				$("#tempForm > #_arakey").val($("#modalAra #arakey").val());
-				break;
-			case "USR":
-				$("#tempForm > #_arakey").val($("#modalUsr #arakey").val());
-				break;
-			case "STR":
-				$("#tempForm > #_arakey").val($("#modalStr #arakey").val());
-				break;
-			case "CTR":
-				$("#tempForm > #_arakey").val($("#modalCtr #arakey").val());
-				break;
-			}
-		}
-		if (true) {
-			// confirm connection Authentication
-			jQuery.ajax({
-				url           : "${staticPATH}/ara2/connect.do",
-				dataType      : "JSON",
-				scriptCharset : "UTF-8",
-				type          : "POST",
-				data          : $("#tempForm").serialize(),
-				success: function(result, option) {
-					if (option == "success") {
-						switch (connTyp) {
-						case "ARA":
-							if (result.retCode == "0000") {
-								fn_loadPostPage("#tempForm", "${staticPATH}/ara2/index.do");
-							} else {
-								alert("에러메시지: " + result.retMsg);
-								fn_modalToggle('#modalAra');
-							}
-							break;
-						case "USR":
-							if (result.retCode == "0000") {
-								fn_loadPostPage("#tempForm", "${staticPATH}/usr2/index.do");
-							} else {
-								alert("에러메시지: " + result.retMsg);
-								fn_modalToggle('#modalUsr');
-							}
-							break;
-						case "STR":
-							if (result.retCode == "0000") {
-								fn_loadPostPage("#tempForm", "${staticPATH}/str2/index.do");
-							} else {
-								alert("에러메시지: " + result.retMsg);
-								fn_modalToggle('#modalStr');
-							}
-							break;
-						case "CTR":
-							if (result.retCode == "0000") {
-								fn_loadPostPage("#tempForm", "${staticPATH}/ctr2/index.do");
-							} else {
-								alert("에러메시지: " + result.retMsg);
-								fn_modalToggle('#modalCtr');
-							}
-							break;
-						}
-					} else {
-						alert("에러가 발생하였습니다.(1)");
-					}
-				},
-				error: function(result, option) {
-					alert("에러가 발생하였습니다.(9)");
-				}
-			});
-		}
-	}
+</script>
+<script type="text/javascript">
 </script>
 </html>
