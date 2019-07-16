@@ -134,7 +134,7 @@ public class Flag {
 	private static final int[] MULTI = { 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 	public static String getCouponNo(String cpnMst, int seq) throws Exception {
-		String ret = String.format("%s%03d", cpnMst, seq);
+		String ret = String.format("%s%04d", cpnMst, seq);
 		char[] arrChar = ret.toCharArray();
 		int sum = 0;
 		for (int i=0; i < arrChar.length; i++) {

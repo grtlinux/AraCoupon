@@ -10,8 +10,9 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- select item information -->
+	<!-- /index.do -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- comment -->
 	<select id="selectItemInfo" parameterType="Map" resultType="Map">
 		SELECT  /* Ara2Ctr.selectItemInfo */
 			A.CTR_NO
@@ -40,16 +41,211 @@
 	</select>
 
 
+	<!-- comment -->
+	<select id="selectCampPeriod" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCampPeriod */
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD')   AS BGN_DT
+			, TO_CHAR(SYSDATE + 30, 'YYYY-MM-DD') AS END_DT
+		FROM
+			DUAL
+	</select>
+
+
+	<!-- comment -->
+	<select id="selectAraCpnTyp" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectAraCpnTyp */
+			A.GRP_CD
+			, A.GRP_NM
+			, A1.CODE
+			, A1.CD_NM
+			, A1.CD_DESC
+			, A1.SORT_NO
+			, A1.USE_YN
+		FROM
+			ARA2_CDGRP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = A.GRP_CD AND A1.USE_YN = 'Y'
+		WHERE 1=1
+			AND A.USE_YN = 'Y'
+			AND A.GRP_CD = 'C009'
+		ORDER BY
+			A.GRP_CD
+			, A1.SORT_NO
+	</select>
+
+
+
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/createCampFormPage.do -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectSeqCampKey" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectSeqCampKey */
+			NVL(MOD(MAX(CAMP_NO), 1000), 0)   AS KEY_SEQ_CAMP
+		FROM
+			ARA2_CAMP
+	</select>
+	<select id="NOTUSE_selectSeqCampKey" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectSeqCampKey */
+			SEQ_CAMP.CURRVAL               AS CURR_SEQ_CAMP
+			, MOD(SEQ_CAMP.CURRVAL, 1000)  AS KEY_SEQ_CAMP
+			, MOD(1923, 1000)              AS TEST_MOD
+		FROM
+			DUAL
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertCampInfo" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertCampInfo */
+			ARA2_CAMP
+		VALUES (
+			SEQ_CAMP.NEXTVAL
+			, #{campNm}
+			, #{campDesc}
+			, '1'
+			, #{campBgnDt}
+			, #{campEndDt}
+			, #{campCpnTyp}
+			, #{campCpnMny}
+			, #{campCpnCnt}
+			, #{campCpnSum}
+			, #{cpnMst}
+			, #{campCpnCntnt}
+			, SYSDATE
+			, NULL
+		)
+	</insert>
+
+
+
+
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/executeCampListPage.do -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectCampList1" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCampList1 */
+			A.CAMP_NO
+			, A.CAMP_NM
+			, A.CAMP_DESC
+			, A.CAMP_PHS
+			, TO_CHAR(A.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(A.END_DT, 'YY-MM-DD')   AS END_DT
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_CNT
+			, A.CPN_SUM
+			, A.CPN_MST
+			, A.CAMP_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, A.UPD_DTTM
+			, A1.CD_NM
+		FROM
+			ARA2_CAMP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C012' AND A1.CODE = A.CAMP_PHS
+		WHERE 1=1
+			AND A.CAMP_PHS = '1'
+		ORDER BY
+			A.CAMP_NO DESC
+	</select>
+
+
+	<!-- comment -->
+	<update id="deleteCampCpnSht" parameterType="Map">
+		DELETE  /* Ara2Ctr.deleteCampCpnSht */
+			ARA2_CPN
+		WHERE 1=1
+			AND CAMP_NO = #{campNo}
+	</update>
+
+
+	<!-- comment -->
+	<select id="selectCampNoInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCampNoInfo */
+			A.CAMP_NO
+			, A.CAMP_NM
+			, A.CAMP_DESC
+			, A.CAMP_PHS
+			, TO_CHAR(A.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(A.END_DT, 'YY-MM-DD')   AS END_DT
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_CNT
+			, A.CPN_SUM
+			, A.CPN_MST
+			, A.CAMP_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, A.UPD_DTTM
+			, A1.CD_NM
+		FROM
+			ARA2_CAMP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C012' AND A1.CODE = A.CAMP_PHS
+		WHERE 1=1
+			AND A.CAMP_PHS = '1'
+			AND A.camp_no = #{campNo}
+		ORDER BY
+			A.CAMP_NO DESC
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertCampCpnSht" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertCampCpnSht */
+			ARA2_CPN
+		VALUES ( #{CAMP_NO}, #{ctrid}, 'CTR', '1', #{CPN_MST}, #{CPN_TYP}, #{CPN_MNY}, #{cpnNo}, '쿠폰을 발행합니다', SYSDATE, NULL )
+	</insert>
+
+
+	<!-- comment -->
+	<update id="updateCampNoInfo" parameterType="Map">
+		UPDATE  /* Ara2Ctr.updateCampNoInfo */
+			ARA2_CAMP
+		SET
+			CAMP_PHS = '2'
+			, CAMP_CNTNT = '쿠폰패키지를 발행했습니다'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CAMP_PHS = '1'
+			AND CAMP_NO = #{CAMP_NO}
+	</update>
+
+
+
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/resultCampListPage.do -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectCampList2" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCampList2 */
+			A.CAMP_NO
+			, A.CAMP_NM
+			, A.CAMP_DESC
+			, A.CAMP_PHS
+			, TO_CHAR(A.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(A.END_DT, 'YY-MM-DD')   AS END_DT
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_CNT
+			, A.CPN_SUM
+			, A.CPN_MST
+			, A.CAMP_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, A.UPD_DTTM
+			, A1.CD_NM
+		FROM
+			ARA2_CAMP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C012' AND A1.CODE = A.CAMP_PHS
+		WHERE 1=1
+			AND A.CAMP_PHS = '2'
+		ORDER BY
+			A.CAMP_NO DESC
+	</select>
+
+
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->

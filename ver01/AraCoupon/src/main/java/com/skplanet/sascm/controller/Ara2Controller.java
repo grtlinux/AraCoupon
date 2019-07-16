@@ -98,13 +98,14 @@ public class Ara2Controller {
 				if (Flag.flag) {
 					// arakey를 얻는다.
 					String arakey = GenerateAraKey.getAraKey();
+					arakey = "2025";  // KANG-20190716: imsi
 					modelMap.addAttribute("arakey", arakey);
 				}
 				if (Flag.flag) {
 					// arakey를 ARA_CNNT 테이블에 넣는다.
 					this.ara2Service.insertCnntAraKey(modelMap);
 				}
-				if (Flag.flag) {
+				if (!Flag.flag) {
 					// SMS 전송
 					map = this.ara2IbService.selectLastIbTkn(null);
 					if (map == null || ((BigDecimal) map.get("DIFF_HOURS")).compareTo(new BigDecimal("2")) > 0) {
