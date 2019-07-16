@@ -33,7 +33,7 @@
 					</div>
 					<div class="modal-body text-center">
 						<div class="panel panel-primary">
-							<table class="table">
+							<table class="table text-left">
 								<tbody>
 									<tr>
 										<td>가게ID</td>

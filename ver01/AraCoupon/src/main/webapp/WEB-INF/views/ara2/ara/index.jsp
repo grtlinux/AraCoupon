@@ -20,7 +20,7 @@
 		<div class="row">
 			<div class="col-sm-4 hide">
 				<h4>아라</h4>
-				<p>저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다. 많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다. 특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<p>
+				<p>쿠폰시스템 서비스를 만들고 유지하고 운영하는 주체이다. 유지보수를 한다.<p>
 				<p class="text-center"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
 			</div>
 			<div class="col-sm-4">
@@ -60,9 +60,7 @@
 						아라 접속<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
-						저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다.<br>
-						많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
+						쿠폰시스템 서비스를 만들고 유지하고 운영하는 주체이다. 유지보수를 한다.<br>
 						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:150px;">
 						<br><br>
 						<table class="table">
@@ -98,10 +96,9 @@
 						고객 접속<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
-						저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다.<br>
-						많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:150px;">
+						가게로부터 제공받은 쿠폰을 갖고있다가 쿠폰가게에서 제공쿠폰을 사용한다.<br>
+						즉, 쿠폰시스템 서비스 해택을 누리는 주체이다.<br><br>
+						<img src="${staticPATH}/bootstrap3/images/user_03.png" style="width:150px;">
 						<br><br>
 						<table class="table">
 							<tbody>
@@ -136,10 +133,10 @@
 						가게 접속<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
-						저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다.<br>
-						많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:150px;">
+						센터에서 발행한 쿠폰을 구매하고 고객에게 서비스로 제공한다.<br>
+						고객은 갖고 있는 쿠폰을 사용하면 받아서 일정시간이 흐르면 정산을 실행한다.<br>
+						정산을 처리하고 나면 가게 통장으로 입금이 이뤄진다.<br><br>
+						<img src="${staticPATH}/bootstrap3/images/store_02.png" style="width:150px;">
 						<br><br>
 						<table class="table">
 							<tbody>
@@ -174,10 +171,10 @@
 						센터 접속<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
-						저희 서비스의 특징은 아라쿠폰을 활용한 고객들의 만족을 높이는데 있습니다.<br>
-						많은 참여와 다양한 서비스의 활용을 누리시기 바랍니다.<br>
-						특히 다양한 무료 강의가 유튜브와 연동되어 제공됩니다.<br><br>
-						<img src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:150px;">
+						쿠폰시스템 전체를 관리하는 곳이다.<br>
+						쿠폰을 생성하고 가게로 분배하고 마지막으로 쿠폰을 정산한다.<br>
+						매월 정산에 대한 결산을 진행한다.<br><br>
+						<img src="${staticPATH}/bootstrap3/images/system_02.png" style="width:150px;">
 						<br><br>
 						<table class="table">
 							<tbody>

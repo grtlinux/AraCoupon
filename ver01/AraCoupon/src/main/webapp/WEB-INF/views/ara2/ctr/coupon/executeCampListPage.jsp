@@ -87,7 +87,7 @@
 					</div>
 					<div class="modal-body text-center">
 						<div class="panel panel-primary">
-							<table class="table">
+							<table class="table text-left">
 								<tbody>
 									<tr>
 										<td>센터ID</td>
@@ -109,7 +109,7 @@
 										<td>이메일</td>
 										<td>${info.EML_ADDR}</td>
 									</tr>
-									<tr class="show">
+									<tr class="hide">
 										<td>전화번호</td>
 										<td>${info.TEL_NO}</td>
 									</tr>
