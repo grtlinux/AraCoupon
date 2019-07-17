@@ -10,8 +10,10 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- select item information -->
+	<!-- /index.do -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
 	<select id="selectItemInfo" parameterType="Map" resultType="Map">
 		SELECT  /* Ara2Str.selectItemInfo */
 			A.STR_NO
@@ -41,6 +43,160 @@
 	</select>
 
 
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/buyCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectCampList2" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Str.selectCampList2 */
+			A.CAMP_NO
+			, A.CAMP_NM
+			, A.CAMP_DESC
+			, A.CAMP_PHS
+			, TO_CHAR(A.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(A.END_DT, 'YY-MM-DD')   AS END_DT
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_CNT
+			, A.CPN_SUM
+			, A.CPN_MST
+			, A.CAMP_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, A.UPD_DTTM
+			, A1.CD_NM
+			, A2.BUY_CNT
+			, A2.RMN_CNT
+			, A2.TTL_CNT
+		FROM
+			ARA2_CAMP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C012' AND A1.CODE = A.CAMP_PHS
+				LEFT JOIN (
+					SELECT
+						A.CAMP_NO
+						, SUM(CASE WHEN A.CPN_PHS != '1' THEN 1 ELSE 0 END)  AS BUY_CNT
+						, SUM(CASE WHEN A.CPN_PHS = '1' THEN 1 ELSE 0 END)   AS RMN_CNT
+						, SUM(1)                                             AS TTL_CNT
+					FROM
+						ARA2_CPN A
+					WHERE 1=1
+					GROUP BY
+						A.CAMP_NO
+				) A2 ON A2.CAMP_NO = A.CAMP_NO 
+		WHERE 1=1
+			AND A.CAMP_PHS = '2'
+		ORDER BY
+			A.CAMP_NO DESC
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateBuyCpnSht" parameterType="Map">
+		UPDATE  /* Ara2Str.updateBuyCpnSht */
+			ARA2_CPN
+		SET
+			CPN_PHS = '2'
+			, ITM_NO = #{strid}
+			, ITM_TYP = 'STR'
+			, CPN_CNTNT = '쿠폰을 구매함'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CPN_NO IN (
+				SELECT
+					MIN(CPN_NO)    AS MIN_CPN_NO
+				FROM
+					ARA2_CPN A
+				WHERE 1=1
+					AND A.CAMP_NO = #{campNo}
+					AND A.CPN_PHS = '1'
+			)
+	</update>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/stateCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectStateCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Str.selectStateCpnList */
+			AA.CAMP_NO
+			, AA.OCC_CNT
+			, B.CAMP_NM
+			, B.CAMP_DESC
+			, B.CAMP_PHS
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')   AS END_DT
+			, B.CPN_TYP
+			, B.CPN_MNY
+			, B.CPN_CNT
+			, B.CPN_SUM
+			, B.CPN_MST
+			, B.CAMP_CNTNT
+			, TO_CHAR(B.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, B.UPD_DTTM
+			, B1.CD_NM
+		FROM
+			(
+				SELECT
+					A.CAMP_NO
+					, COUNT(1)   AS OCC_CNT
+				FROM
+					ARA2_CPN A
+				WHERE 1=1
+					AND A.ITM_NO = #{strid}
+				GROUP BY
+					A.CAMP_NO
+			) AA
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = AA.CAMP_NO
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/giveCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectGiveCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Str.selectGiveCpnList */
+			AA.CAMP_NO
+			, AA.OCC_CNT
+			, B.CAMP_NM
+			, B.CAMP_DESC
+			, B.CAMP_PHS
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')   AS END_DT
+			, B.CPN_TYP
+			, B.CPN_MNY
+			, B.CPN_CNT
+			, B.CPN_SUM
+			, B.CPN_MST
+			, B.CAMP_CNTNT
+			, TO_CHAR(B.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, B.UPD_DTTM
+			, B1.CD_NM
+		FROM
+			(
+				SELECT
+					A.CAMP_NO
+					, COUNT(1)   AS OCC_CNT
+				FROM
+					ARA2_CPN A
+				WHERE 1=1
+					AND A.ITM_NO = #{strid}
+				GROUP BY
+					A.CAMP_NO
+			) AA
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = AA.CAMP_NO
+	</select>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->

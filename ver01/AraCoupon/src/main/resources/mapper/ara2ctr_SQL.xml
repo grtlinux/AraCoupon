@@ -205,7 +205,7 @@
 			ARA2_CAMP
 		SET
 			CAMP_PHS = '2'
-			, CAMP_CNTNT = '쿠폰패키지를 발행했습니다'
+			, CAMP_CNTNT = '쿠폰패키지를 발행'
 			, UPD_DTTM = SYSDATE
 		WHERE 1=1
 			AND CAMP_PHS = '1'

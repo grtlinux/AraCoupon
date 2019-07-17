@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-success">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;쿠폰패키지목록에서 원하는 쿠폰패키지를 선택하면 원하는 쿠폰갯수 만큼 구매할 수 있다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;쿠폰패키지목록에서 원하는 쿠폰패키지의 상태를 확인한다.</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -39,9 +39,12 @@
 								<td>액면가</td>
 								<!--
 								<td class='text-danger'>갯수</td>
-								-->
 								<td class='text-danger'>사용/남음/전체</td>
+								-->
+								<td class='text-danger'>소유갯수</td>
+								<!--
 								<td>쿠폰합계</td>
+								-->
 								<td>쿠폰마스터</td>
 								<!--
 								<td>캠페인내</td>
@@ -173,15 +176,15 @@
 								<td>쿠폰 갯수</td>
 								<td><div id="modalCpnCnt"></div></td>
 							</tr>
-							<tr>
+							<tr class="hide">
 								<td>구매된 갯수</td>
 								<td><div id="modalBuyCnt"></div></td>
 							</tr>
-							<tr>
+							<tr class="hide">
 								<td>미사용 갯수</td>
-								<td><span id="modalRmnCnt"></span>&nbsp;&nbsp;<input id="cpnSiz" class="text-success" type="number"></td>
+								<td><span id="modalRmnCnt"></span></td>
 							</tr>
-							<tr>
+							<tr class="hide">
 								<td>전체 갯수</td>
 								<td><div id="modalTtlCnt"></div></td>
 							</tr>
@@ -189,7 +192,11 @@
 								<td>쿠폰패키지 금액</td>
 								<td><div id="modalCpnSum"></div></td>
 							</tr>
-							<tr class="hide">
+							<tr>
+								<td>소유 쿠폰갯수</td>
+								<td><div id="modalOccCnt"></div></td>
+							</tr>
+							<tr>
 								<td>쿠폰 마스터키</td>
 								<td><div id="modalCpnMst"></div></td>
 							</tr>
@@ -208,7 +215,7 @@
 						</table>
 						<img class="hide" src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
 						<br>
-						<button id='btnBuyCpnList' type="button" class="btn btn-success btn-sm" onclick="fn_buyCpnList();"> 쿠폰 구매 </button>
+						<button id='btnBuyCpnList' type="button" class="btn btn-success btn-sm hide" onclick="fn_buyCpnList();"> 쿠폰 구매 </button>
 					</div>
 				</div>
 			</div>
@@ -258,7 +265,7 @@
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		jQuery.ajax({
-			url           : "${staticPATH}/str2/coupon/selectCampList2.do",
+			url           : "${staticPATH}/str2/coupon/selectStateCpnList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -303,12 +310,15 @@
 						//rowHtml += "  <td class='text-center text-danger'>";
 						//rowHtml += "    " + fn_comma(value.CPN_CNT);
 						//rowHtml += "  </td>";
+						//rowHtml += "  <td class='text-center text-danger'>";
+						//rowHtml += "    " + value.BUY_CNT + "/" + value.RMN_CNT + "/" + value.TTL_CNT;
+						//rowHtml += "  </td>";
 						rowHtml += "  <td class='text-center text-danger'>";
-						rowHtml += "    " + value.BUY_CNT + "/" + value.RMN_CNT + "/" + value.TTL_CNT;
+						rowHtml += "    " + value.OCC_CNT;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + fn_comma(value.CPN_SUM);
-						rowHtml += "  </td>";
+						//rowHtml += "  <td class='text-center'>";
+						//rowHtml += "    " + fn_comma(value.CPN_SUM);
+						//rowHtml += "  </td>";
 						rowHtml += "  <td>";
 						rowHtml += "    " + value.CPN_MST;
 						rowHtml += "  </td>";
@@ -346,6 +356,7 @@
 						$('#modalRmnCnt').text(info.RMN_CNT);
 						$('#modalTtlCnt').text(info.TTL_CNT);
 						$('#modalCpnSum').text(info.CPN_SUM);
+						$('#modalOccCnt').text(info.OCC_CNT);
 						$('#modalCpnMst').text(info.CPN_MST);
 						$('#modalCampCntnt').text(info.CAMP_CNTNT);
 						$('#modalCreDttm').text(info.CRE_DTTM);

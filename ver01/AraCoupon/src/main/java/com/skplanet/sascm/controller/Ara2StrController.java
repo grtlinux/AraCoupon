@@ -70,6 +70,177 @@ public class Ara2StrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = "/coupon/buyCpnListPage.do", method = RequestMethod.POST)
+	public String buyCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			Map<String,Object> map = this.ara2StrService.selectItemInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+		return PATH + "/coupon/buyCpnListPage";
+	}
+	
+	@RequestMapping(value = "/coupon/selectCampList2.do", method = RequestMethod.POST)
+	public void selectCampList2(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2StrService.selectCampList2(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "성공적으로 자료를 얻었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	@RequestMapping(value = "/coupon/buyCpnList.do", method = RequestMethod.POST)
+	public void buyCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			//
+			// 구매하려는 쿠폰금액이 계좌에 충분한지 확인한다.
+			//
+			int cpnSiz = Integer.parseInt(String.valueOf(modelMap.get("cpnSiz")));
+			long cpnMny = Long.parseLong(String.valueOf(modelMap.get("cpnMny")));
+			long cpnSum = cpnMny * cpnSiz;  // 계좌에 이 금액 이상이 있는지 확인한다.
+			// 쿠폰을 원하는 갯수 만큼 구매한다.
+			int updCnt = 0;
+			for (int i=0; i < cpnSiz; i++) {
+				int ret = this.ara2StrService.updateBuyCpnSht(modelMap);
+				if (Flag.flag) log.debug(">>>>> ret of this.ara2StrService.updateBuyCpnSht is " + ret);
+				updCnt += ret;
+			}
+			cpnSum = cpnMny * updCnt;  // 실재 쿠폰구매에 사용한 금액
+			//
+			// 구매한 쿠폰금액은 계좌에서 차감한다.
+			//
+			modelMap.addAttribute("updCnt", updCnt);
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", String.format("액면가[%,d] 쿠폰 [%,d]장을 금액[%,d]에 구매하였습니다.", cpnMny, updCnt, cpnSum));
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = "/coupon/stateCpnListPage.do", method = RequestMethod.POST)
+	public String stateCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			Map<String,Object> map = this.ara2StrService.selectItemInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+		return PATH + "/coupon/stateCpnListPage";
+	}
+	
+	@RequestMapping(value = "/coupon/selectStateCpnList.do", method = RequestMethod.POST)
+	public void selectStateCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2StrService.selectStateCpnList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "성공적으로 자료를 얻었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = "/coupon/giveCpnListPage.do", method = RequestMethod.POST)
+	public String giveCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			Map<String,Object> map = this.ara2StrService.selectItemInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+		return PATH + "/coupon/giveCpnListPage";
+	}
+	
+	@RequestMapping(value = "/coupon/selectGiveCpnList.do", method = RequestMethod.POST)
+	public void selectGiveCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2StrService.selectGiveCpnList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "성공적으로 자료를 얻었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	@RequestMapping(value = "/coupon/giveCpnList.do", method = RequestMethod.POST)
+	public void giveCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		/*
+		if (Flag.flag) {
+			//
+			// 구매하려는 쿠폰금액이 계좌에 충분한지 확인한다.
+			//
+			int cpnSiz = Integer.parseInt(String.valueOf(modelMap.get("cpnSiz")));
+			long cpnMny = Long.parseLong(String.valueOf(modelMap.get("cpnMny")));
+			long cpnSum = cpnMny * cpnSiz;  // 계좌에 이 금액 이상이 있는지 확인한다.
+			// 쿠폰을 원하는 갯수 만큼 구매한다.
+			int updCnt = 0;
+			for (int i=0; i < cpnSiz; i++) {
+				int ret = this.ara2StrService.updateBuyCpnSht(modelMap);
+				if (Flag.flag) log.debug(">>>>> ret of this.ara2StrService.updateBuyCpnSht is " + ret);
+				updCnt += ret;
+			}
+			cpnSum = cpnMny * updCnt;  // 실재 쿠폰구매에 사용한 금액
+			//
+			// 구매한 쿠폰금액은 계좌에서 차감한다.
+			//
+			modelMap.addAttribute("updCnt", updCnt);
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", String.format("액면가[%,d] 쿠폰 [%,d]장을 금액[%,d]에 구매하였습니다.", cpnMny, updCnt, cpnSum));
+		}
+		*/
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
@@ -395,6 +566,7 @@ public class Ara2StrController {
 	/*
 	 * 선택된 쿠폰을 제공한다.
 	 */
+	/*
 	@RequestMapping(value = "/provide/giveCpnList.do", method = RequestMethod.POST)
 	public void giveCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
@@ -416,7 +588,8 @@ public class Ara2StrController {
 
 		jsonView.render(modelMap, request, response);
 	}
-
+	*/
+	
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

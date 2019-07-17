@@ -23,6 +23,7 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰창고<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/buyCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰구매</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/stateCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰상황</a></li>
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/giveCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
 						</ul>
 					</li>
