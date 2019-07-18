@@ -83,7 +83,7 @@
 					WHERE 1=1
 					GROUP BY
 						A.CAMP_NO
-				) A2 ON A2.CAMP_NO = A.CAMP_NO 
+				) A2 ON A2.CAMP_NO = A.CAMP_NO
 		WHERE 1=1
 			AND A.CAMP_PHS = '2'
 		ORDER BY
@@ -227,8 +227,8 @@
 		WHERE 1=1
 			AND A.USR_NO = #{usrid}
 	</select>
-	
-	
+
+
 	<!-- comment -->
 	<update id="updateAllCnntByCnntid" parameterType="Map">
 		UPDATE  /* Ara2Str.updateAllCnntByCnntid */
@@ -242,8 +242,8 @@
 			AND A.CNNT_TYP = 'USR'
 			AND A.CNNT_YN = 'Y'
 	</update>
-	
-	
+
+
 	<!-- comment -->
 	<insert id="insertCnntAraKey" parameterType="Map">
 		INSERT INTO  /* Ara2Str.insertCnntAraKey */
@@ -251,8 +251,8 @@
 		VALUES
 			( SEQ_CNNT.NEXTVAL, #{usrid}, 'USR', #{arakey}, 'Y', SYSDATE, null, null )
 	</insert>
-	
-	
+
+
 	<!-- comment -->
 	<select id="selectCnntArakeyInfo" parameterType="Map" resultType="Map">
 		SELECT  /* Ara2Str.selectCnntArakeyInfo */
@@ -270,8 +270,8 @@
 			AND A.ARA_KEY = #{arakey}
 			AND A.CNNT_YN = 'Y'
 	</select>
-	
-	
+
+
 	<!-- comment -->
 	<update id="updateCnntByCnntid" parameterType="Map">
 		UPDATE  /* Ara2Str.updateCnntByCnntid */
@@ -286,8 +286,8 @@
 			AND A.ARA_KEY = #{arakey}
 			AND A.CNNT_YN = 'Y'
 	</update>
-	
-	
+
+
 	<!-- comment -->
 	<update id="updateCpnNo" parameterType="Map">
 		UPDATE  /* Ara2Str.updateCpnNo */
@@ -311,32 +311,171 @@
 					AND A.CPN_PHS = '2'
 			)
 	</update>
-	
-	
-	
-	
-		
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /payment/paymentCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectPaymentCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectUseCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_NO = #{strid}
+			AND A.ITM_TYP = 'STR'
+			AND A.CPN_PHS = '4'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- comment -->
+	<select id="selectCtrInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Str.selectCtrInfo */
+			A.CTR_NO
+			, A.CTR_ID
+			, A.CTR_NM
+			, A1.TEL_NM
+			, A1.TEL_NUM
+			, A2.MBL_NM
+			, A2.MBL_NUM
+			, A3.EML_NM
+			, A3.EML_ADDR
+			, A4.BNK_NM
+			, A4.BNK_ACNT
+			, A4.ACNT_NM
+		FROM
+			ARA2_CTR A
+				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.CTR_NO AND A1.ITM_TYP = 'CTR'
+				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.CTR_NO AND A2.ITM_TYP = 'CTR'
+				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.CTR_NO AND A3.ITM_TYP = 'CTR'
+				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.CTR_NO AND A4.ITM_TYP = 'CTR'
+		WHERE 1=1
+			AND A.CTR_NO = #{ctrid}
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateAllCnntByCnntidOnCtr" parameterType="Map">
+		UPDATE  /* Ara2Str.updateAllCnntByCnntidOnCtr */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'FAIL'
+		WHERE 1=1
+			AND A.CNNT_ID = #{ctrid}
+			AND A.CNNT_TYP = 'CTR'
+			AND A.CNNT_YN = 'Y'
+	</update>
+
+
+	<!-- comment -->
+	<insert id="insertCnntAraKeyOnCtr" parameterType="Map">
+		INSERT INTO  /* Ara2Str.insertCnntAraKeyOnCtr */
+			ARA2_CNNT
+		VALUES
+			( SEQ_CNNT.NEXTVAL, #{ctrid}, 'CTR', #{arakey}, 'Y', SYSDATE, null, null )
+	</insert>
+
+
+	<!-- comment -->
+	<select id="selectCnntArakeyInfoOnCtr" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Str.selectCnntArakeyInfoOnCtr */
+			A.CNNT_NO
+			, A.CNNT_ID
+			, A.CNNT_TYP
+			, A.ARA_KEY
+			, A.CNNT_YN
+			, A.CNNT_DTTM
+		FROM
+			ARA2_CNNT A
+		WHERE 1=1
+			AND A.CNNT_ID = #{ctrid}
+			AND A.CNNT_TYP = 'CTR'
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateCpnNoListOnCtr" parameterType="Map">
+		UPDATE  /* Ara2Str.updateCpnNoListOnCtr */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'SUCCESS'
+		WHERE 1=1
+			AND A.CNNT_ID = #{ctrid}
+			AND A.CNNT_TYP = 'CTR'
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</update>
+
+
+	<!-- comment -->
+	<update id="updateCnntByCnntidOnCtr" parameterType="Map">
+		UPDATE  /* Ara2Usr.updateCnntByCnntidOnCtr */
+			ARA2_CPN
+		SET
+			CPN_PHS = '5'
+			, ITM_NO = #{strid}
+			, ITM_TYP = 'STR'
+			, CPN_CNTNT = '가게에서 센타로 정산을 요청함'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CPN_NO IN ( ''
+			<if test="arrCpnNo != ''">
+				,<foreach collection="arrCpnNo" separator="," index="index" >'${arrCpnNo[index]}'</foreach>
+			</if>
+			)
+	</update>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 
 

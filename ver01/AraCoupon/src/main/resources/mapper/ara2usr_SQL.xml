@@ -122,6 +122,113 @@
 	</select>
 
 
+	<!-- comment -->
+	<select id="selectStrInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectStrInfo */
+			A.STR_NO
+			, A.STR_ID
+			, A.STR_NM
+			, A.REL_CTR_NO
+			, A1.TEL_NM
+			, A1.TEL_NUM
+			, A2.MBL_NM
+			, A2.MBL_NUM
+			, A3.EML_NM
+			, A3.EML_ADDR
+			, A4.BNK_NM
+			, A4.BNK_ACNT
+			, A4.ACNT_NM
+			, A5.MRRG_DT
+			, A5.MRRG_LOC
+		FROM
+			ARA2_STR A
+				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.STR_NO AND A2.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.STR_NO AND A3.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
+		WHERE 1=1
+			AND A.STR_NO = #{strid}
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateAllCnntByCnntid" parameterType="Map">
+		UPDATE  /* Ara2Usr.updateAllCnntByCnntid */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'FAIL'
+		WHERE 1=1
+			AND A.CNNT_ID = #{strid}
+			AND A.CNNT_TYP = 'STR'
+			AND A.CNNT_YN = 'Y'
+	</update>
+
+
+	<!-- comment -->
+	<insert id="insertCnntAraKey" parameterType="Map">
+		INSERT INTO  /* Ara2Usr.insertCnntAraKey */
+			ARA2_CNNT
+		VALUES
+			( SEQ_CNNT.NEXTVAL, #{strid}, 'STR', #{arakey}, 'Y', SYSDATE, null, null )
+	</insert>
+
+
+	<!-- comment -->
+	<select id="selectCnntArakeyInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectCnntArakeyInfo */
+			A.CNNT_NO
+			, A.CNNT_ID
+			, A.CNNT_TYP
+			, A.ARA_KEY
+			, A.CNNT_YN
+			, A.CNNT_DTTM
+		FROM
+			ARA2_CNNT A
+		WHERE 1=1
+			AND A.CNNT_ID = #{strid}
+			AND A.CNNT_TYP = 'STR'
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateCnntByCnntid" parameterType="Map">
+		UPDATE  /* Ara2Usr.updateCnntByCnntid */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'SUCCESS'
+		WHERE 1=1
+			AND A.CNNT_ID = #{strid}
+			AND A.CNNT_TYP = 'STR'
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</update>
+
+
+	<!-- comment -->
+	<update id="updateCpnNoList" parameterType="Map">
+		UPDATE  /* Ara2Usr.updateCpnNoList */
+			ARA2_CPN
+		SET
+			CPN_PHS = '4'
+			, ITM_NO = #{strid}
+			, ITM_TYP = 'STR'
+			, CPN_CNTNT = '가게에서 고객이 쿠폰사용함(결제)'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CPN_NO IN ( ''
+			<if test="arrCpnNo != ''">
+				,<foreach collection="arrCpnNo" separator="," index="index" >'${arrCpnNo[index]}'</foreach>
+			</if>
+			)
+	</update>
+
 
 
 

@@ -74,4 +74,40 @@ public class Ara2StrServiceImpl implements Ara2StrService {
 	public int updateCpnNo(Map<String, Object> param) throws Exception {
 		return this.ara2StrDAO.updateCpnNo(param);
 	}
+
+	// /payment/paymentCpnListPage.do
+	@Override
+	public List<Map<String, Object>> selectPaymentCpnList(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.selectPaymentCpnList(param);
+	}
+
+	@Override
+	public Map<String, Object> selectCtrInfo(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.selectCtrInfo(param);
+	}
+
+	@Override
+	public int updateAllCnntByCnntidOnCtr(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.updateAllCnntByCnntidOnCtr(param);
+	}
+
+	@Override
+	public int insertCnntAraKeyOnCtr(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.insertCnntAraKeyOnCtr(param);
+	}
+
+	@Override
+	public Map<String, Object> selectCnntArakeyInfoOnCtr(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.selectCnntArakeyInfoOnCtr(param);
+	}
+
+	@Override
+	public int updateCpnNoListOnCtr(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.updateCpnNoListOnCtr(param);
+	}
+
+	@Override
+	public int updateCnntByCnntidOnCtr(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.updateCnntByCnntidOnCtr(param);
+	}
 }

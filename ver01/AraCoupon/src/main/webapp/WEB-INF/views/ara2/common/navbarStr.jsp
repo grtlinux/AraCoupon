@@ -18,13 +18,18 @@
 				<!-- navbar menu -->
 				<ul class="nav navbar-nav navbar-left">
 					<li><a data-target="#modalSelfInfo" data-toggle="modal" href="#" onclick="fn_console('toggle event after click event.....');">내 정보</a></li>
-
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰창고<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/buyCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰구매</a></li>
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/stateCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰상황</a></li>
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/giveCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">결제쿠폰창고<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/payment/paymentCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제쿠폰목록</a></li>
 						</ul>
 					</li>
 

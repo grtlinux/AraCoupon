@@ -27,10 +27,10 @@
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/coupon/resultCampListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;캠페인 결과</a></li>
 						</ul>
 					</li>
-					<li class="dropdown hide">
+					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr/calculate/calcListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/payment/paymentCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산요청처리</a></li>
 						</ul>
 					</li>
 					<li class="hide"><a href="/sample05/">통계</a></li>

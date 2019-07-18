@@ -13,4 +13,10 @@ public interface Ara2UsrDAO {
 
 	// /coupon/useCpnListPage.do
 	public List<Map<String,Object>> selectUseCpnList(Map<String, Object> param) throws Exception;
+	public Map<String,Object> selectStrInfo(Map<String, Object> param) throws Exception;
+	public int updateAllCnntByCnntid(Map<String, Object> param) throws Exception;
+	public int insertCnntAraKey(Map<String, Object> param) throws Exception;
+	public Map<String,Object> selectCnntArakeyInfo(Map<String, Object> param) throws Exception;
+	public int updateCnntByCnntid(Map<String, Object> param) throws Exception;
+	public int updateCpnNoList(Map<String, Object> param) throws Exception;
 }

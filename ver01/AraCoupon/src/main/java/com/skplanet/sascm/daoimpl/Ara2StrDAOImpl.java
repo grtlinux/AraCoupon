@@ -70,4 +70,40 @@ public class Ara2StrDAOImpl extends AbstractDAO implements Ara2StrDAO {
 	public int updateCpnNo(Map<String, Object> param) throws Exception {
 		return (int) update("Ara2Str.updateCpnNo", param);
 	}
+
+	// /payment/paymentCpnListPage.do
+	@Override
+	public List<Map<String, Object>> selectPaymentCpnList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Str.selectPaymentCpnList", param);
+	}
+
+	@Override
+	public Map<String, Object> selectCtrInfo(Map<String, Object> param) throws Exception {
+		return (Map<String,Object>) selectOne("Ara2Str.selectCtrInfo", param);
+	}
+
+	@Override
+	public int updateAllCnntByCnntidOnCtr(Map<String, Object> param) throws Exception {
+		return (int) update("Ara2Str.updateAllCnntByCnntidOnCtr", param);
+	}
+
+	@Override
+	public int insertCnntAraKeyOnCtr(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2Str.insertCnntAraKeyOnCtr", param);
+	}
+
+	@Override
+	public Map<String, Object> selectCnntArakeyInfoOnCtr(Map<String, Object> param) throws Exception {
+		return (Map<String,Object>) selectOne("Ara2Str.selectCnntArakeyInfoOnCtr", param);
+	}
+
+	@Override
+	public int updateCpnNoListOnCtr(Map<String, Object> param) throws Exception {
+		return (int) update("Ara2Str.updateCpnNoListOnCtr", param);
+	}
+
+	@Override
+	public int updateCnntByCnntidOnCtr(Map<String, Object> param) throws Exception {
+		return (int) update("Ara2Str.updateCnntByCnntidOnCtr", param);
+	}
 }

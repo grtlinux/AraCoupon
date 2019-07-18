@@ -5,20 +5,20 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>고객 - ${info.USR_NM}</title>
+	<title>센터 - ${info.CTR_NM}</title>
 </head>
-<%@ include file="/WEB-INF/views/ara2/common/cssUsr.jsp"%>
+<%@ include file="/WEB-INF/views/ara2/common/cssCtr.jsp"%>
 <body>
-<%@ include file="/WEB-INF/views/ara2/common/navbarUsr.jsp"%>
+<%@ include file="/WEB-INF/views/ara2/common/navbarCtr.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- container for table panel -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="container-fluid">
-		<div class="panel panel-info">
+		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;고객의 갖고 있는 쿠폰을 사용할 수 있다. 즉, 결제할 수 있다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;가게에서 수거한 쿠폰에 대해 정산을 요청한다. 여기서는 쿠폰갯수와 금액을 확인하고 정산처리를 한다.</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -61,7 +61,7 @@
 				</div>
 				<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
 					<input id="sumMsg" type="text" size="40" value="선택된 쿠폰금액: 0 원 (0 장)">
-					<button type="button" class="btn btn-info btn-sm" onclick="fn_modalToggle('#modalBuyCpnList');"> 쿠폰결제(사용) </button>
+					<button type="button" class="btn btn-info btn-sm" onclick="fn_modalToggle('#modelReqCalcCpnList');"> 쿠폰정산요청 </button>
 					<button type="button" class="btn btn-info btn-sm" onclick="fn_refresh();"> 새로고침 </button>
 					<button type="button" class="btn btn-success btn-sm" onclick="fn_index();"><i class="fa fa-times" aria-hidden="true"></i> 닫기</button>
 				</div>
@@ -89,20 +89,20 @@
 		<div class="modal" id="modalSelfInfo" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header alert alert-info">
-						내 정보(고객)<button class="close" data-dismiss="modal">&times;</button>
+					<div class="modal-header alert alert-danger">
+						내 정보(센터)<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
 						<div class="panel panel-primary">
 							<table class="table text-left">
 								<tbody>
 									<tr>
-										<td>고객ID</td>
-										<td class="align-left">${info.USR_ID}</td>
+										<td>센터ID</td>
+										<td class="align-left">${info.CTR_ID}</td>
 									</tr>
 									<tr>
-										<td>고객명</td>
-										<td>${info.USR_NM}</td>
+										<td>센터명</td>
+										<td>${info.CTR_NM}</td>
 									</tr>
 									<tr>
 										<td>전화번호</td>
@@ -130,120 +130,33 @@
 		</div>
 	</div>	
 	<div class="row">
-		<!-- NOT USE -->
-		<div class="modal" id="modalCampNoInfo" tabindex="-1">
+		<div class="modal" id="modelReqCalcCpnList" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header alert alert-success">
-						쿠폰 정보<button class="close" data-dismiss="modal">&times;</button>
+						결제쿠폰 정산요청<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
 						<table class="table text-left">
 							<tr>
-								<td>캠페인 번호</td>
-								<td><div id="modalCampNo"></div></td>
-							</tr>
-							<tr>
-								<td>고객 번호</td>
-								<td><div id="modalItmNo"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>고객 타입</td>
-								<td><div id="modalItmTyp"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>쿠폰단계 번호</td>
-								<td><div id="modalCpnPhs"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>쿠폰 단계</td>
-								<td><div id="modalCdDesc"></div></td>
-							</tr>
-							<tr>
-								<td>쿠폰 마스터</td>
-								<td><div id="modalCpnMst"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>쿠폰 타입</td>
-								<td><div id="modalCpnTyp"></div></td>
-							</tr>
-							<tr>
-								<td>쿠폰 액면가</td>
-								<td><div id="modalCpnMny"></div></td>
-							</tr>
-							<tr>
-								<td>쿠폰 번호</td>
-								<td><div id="modalCpnNo"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>쿠폰 내용</td>
-								<td><span id="modalCpnCntnt"></span></td>
-							</tr>
-							<tr class="hide">
-								<td>쿠폰 생성일</td>
-								<td><div id="modalCreDttm"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>쿠폰 갱신일</td>
-								<td><div id="modalUpdDttm"></div></td>
-							</tr>
-							<tr>
-								<td>캠페인 명</td>
-								<td><div id="modalCampNm"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>캠페인단계 번호</td>
-								<td><div id="modalCampPhs"></div></td>
-							</tr>
-							<tr class="hide">
-								<td>캠페인 단계</td>
-								<td><div id="modalCampCdDesc"></div></td>
-							</tr>
-							<tr>
-								<td>캠페인 시작일</td>
-								<td><div id="modalCampBgnDt"></div></td>
-							</tr>
-							<tr>
-								<td>캠페인 종료일</td>
-								<td><div id="modalCampEndDt"></div></td>
-							</tr>
-						</table>
-						<img class="hide" src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
-						<br>
-						<button id='btnBuyCpnList' type="button" class="btn btn-success btn-sm hide" onclick="fn_buyCpnList();"> 쿠폰 구매 </button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="modal" id="modalBuyCpnList" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header alert alert-success">
-						쿠폰 구매<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body text-center">
-						<table class="table text-left">
-							<tr>
-								<td>사용할 쿠폰 금액</td>
+								<td>정산할 쿠폰 금액</td>
 								<td><span id="modalSumMny">0</span> 원</td>
 							</tr>
 							<tr>
-								<td>사용할 쿠폰 갯수</td>
+								<td>정산할 쿠폰 갯수</td>
 								<td><span id="modalSumCnt">0</span> 장</td>
 							</tr>
 							<tr>
-								<td>가게ID</td>
+								<td>센터ID</td>
 								<td>
 									<div>
-										<input id="strid" type="text" value=''>
-										<button id='btnSendAraKeyToStr' type="button" class="btn btn-danger btn-sm" onclick="fn_sendAraKeyToStr();"> 가게에게 아라키 전송 </button>
+										<input id="ctrid" type="text" value=''>
+										<button id='btnSendAraKeyToCtr' type="button" class="btn btn-danger btn-sm" onclick="fn_sendAraKeyToCtr();"> 센터에게 아라키 전송 </button>
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td>가게의 아라키 입력</td>
+								<td>센터의 아라키 입력</td>
 								<td>
 									<div>
 										<input id="arakey" type="text" value=''>
@@ -252,7 +165,7 @@
 							</tr>
 						</table>
 						<br>
-						<button id='btnUseCpnList' type="button" class="btn btn-success btn-sm" onclick="fn_useCpnList();"> 쿠폰결제(사용) </button>
+						<button id='btnCalculateCpnNoList' type="button" class="btn btn-success btn-sm" onclick="fn_calculateCpnNoList();"> 결제쿠폰 정산처리 </button>
 					</div>
 				</div>
 			</div>
@@ -266,8 +179,8 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
-		<input type='hidden' id='_usrid' name='usrid' value='${info.USR_ID}' />
-		<input type="hidden" id="_strid" name="strid" value='' />
+		<input type="hidden" id="_strid" name="strid" value='${info.STR_ID}' />
+		<input type='hidden' id='_ctrid' name='ctrid' value='' />
 		<input type='hidden' id='_sumMny' name='sumMny' value='' />
 		<input type='hidden' id='_sumCnt' name='sumCnt' value='' />
 		<input type='hidden' id='_cpnNoList' name='cpnNoList' value='' />
@@ -321,8 +234,8 @@
 					$('#tempForm > #_sumMny').val(sumMny);
 					$('#tempForm > #_sumCnt').val(sumCnt);
 					$('#tempForm > #_cpnNoList').val(cpnNoArr.join(','));
-					$('#modalBuyCpnList #modalSumMny').text(fn_comma(sumMny));
-					$('#modalBuyCpnList #modalSumCnt').text(fn_comma(sumCnt));
+					$('#modelReqCalcCpnList #modalSumMny').text(fn_comma(sumMny));
+					$('#modelReqCalcCpnList #modalSumCnt').text(fn_comma(sumCnt));
 				}
 			});
 		}
@@ -330,7 +243,7 @@
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		jQuery.ajax({
-			url           : "${staticPATH}/usr2/coupon/selectUseCpnList.do",
+			url           : "${staticPATH}/str2/payment/selectPaymentCpnList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -482,8 +395,8 @@
 							$('#tempForm > #_sumMny').val(sumMny);
 							$('#tempForm > #_sumCnt').val(sumCnt);
 							$('#tempForm > #_cpnNoList').val(cpnNoArr.join(','));
-							$('#modalBuyCpnList #modalSumMny').text(fn_comma(sumMny));
-							$('#modalBuyCpnList #modalSumCnt').text(fn_comma(sumCnt));
+							$('#modelReqCalcCpnList #modalSumMny').text(fn_comma(sumMny));
+							$('#modelReqCalcCpnList #modalSumCnt').text(fn_comma(sumCnt));
 						});
 					}
 					if (true) {
@@ -507,19 +420,19 @@
 	function fn_refresh() {
 		selectList();
 	}
-	function fn_sendAraKeyToStr() {
+	function fn_sendAraKeyToCtr() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		if (true) {
 			// validation
 		}
 		if (true) {
 			// transfer
-			$('#tempForm #_strid').val($('#modalBuyCpnList #strid').val());
+			$('#tempForm #_ctrid').val($('#modelReqCalcCpnList #ctrid').val());
 		}
 		if (true) {
 			// ajax call
 			jQuery.ajax({
-				url           : "${staticPATH}/usr2/coupon/sendAraKeyToStr.do",
+				url           : "${staticPATH}/str2/payment/sendAraKeyToCtr.do",
 				dataType      : "JSON",
 				scriptCharset : "UTF-8",
 				type          : "POST",
@@ -527,7 +440,7 @@
 				success: function(result, option) {
 					if (option == "success"){
 						alert("메시지: " + result.retMsg);
-						//fn_modalToggle('#modalBuyCpnList');
+						//fn_modalToggle('#modelReqCalcCpnList');
 						//fn_refresh();
 					} else {
 						alert("에러가 발생하였습니다.");
@@ -539,19 +452,19 @@
 			});
 		}
 	}
-	function fn_useCpnList() {
+	function fn_calculateCpnNoList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		if (true) {
 			// validation
 		}
 		if (true) {
 			// transfer
-			$('#tempForm #_arakey').val($('#modalBuyCpnList #arakey').val());
+			$('#tempForm #_arakey').val($('#modelReqCalcCpnList #arakey').val());
 		}
 		if (true) {
 			// ajax call
 			jQuery.ajax({
-				url           : "${staticPATH}/usr2/coupon/useCpnNoList.do",
+				url           : "${staticPATH}/str2/payment/calculateCpnNoList.do",
 				dataType      : "JSON",
 				scriptCharset : "UTF-8",
 				type          : "POST",
@@ -559,7 +472,7 @@
 				success: function(result, option) {
 					if (option == "success"){
 						alert("메시지: " + result.retMsg);
-						fn_modalToggle('#modalBuyCpnList');
+						fn_modalToggle('#modelReqCalcCpnList');
 						fn_refresh();
 					} else {
 						alert("에러가 발생하였습니다.");
@@ -572,7 +485,7 @@
 		}
 	}
 	function fn_index() {
-		fn_loadPostPage('#tempForm', '${staticPATH}/usr2/index.do');
+		fn_loadPostPage('#tempForm', '${staticPATH}/str2/index.do');
 	}
 </script>
 </html>

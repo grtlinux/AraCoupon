@@ -33,4 +33,34 @@ public class Ara2UsrServiceImpl implements Ara2UsrService {
 	public List<Map<String, Object>> selectUseCpnList(Map<String, Object> param) throws Exception {
 		return this.ara2UsrDAO.selectUseCpnList(param);
 	}
+
+	@Override
+	public Map<String, Object> selectStrInfo(Map<String, Object> param) throws Exception {
+		return this.ara2UsrDAO.selectStrInfo(param);
+	}
+
+	@Override
+	public int updateAllCnntByCnntid(Map<String, Object> param) throws Exception {
+		return this.ara2UsrDAO.updateAllCnntByCnntid(param);
+	}
+
+	@Override
+	public int insertCnntAraKey(Map<String, Object> param) throws Exception {
+		return this.ara2UsrDAO.insertCnntAraKey(param);
+	}
+
+	@Override
+	public Map<String, Object> selectCnntArakeyInfo(Map<String, Object> param) throws Exception {
+		return this.ara2UsrDAO.selectCnntArakeyInfo(param);
+	}
+
+	@Override
+	public int updateCnntByCnntid(Map<String, Object> param) throws Exception {
+		return this.ara2UsrDAO.updateCnntByCnntid(param);
+	}
+
+	@Override
+	public int updateCpnNoList(Map<String, Object> param) throws Exception {
+		return this.ara2UsrDAO.updateCpnNoList(param);
+	}
 }
