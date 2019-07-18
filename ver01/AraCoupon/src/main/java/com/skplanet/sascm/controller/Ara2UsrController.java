@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
+import com.google.gson.GsonBuilder;
 import com.skplanet.sascm.service.Ara2IbService;
 import com.skplanet.sascm.service.Ara2UsrService;
 import com.skplanet.sascm.service.AraUsrService;
@@ -66,6 +67,79 @@ public class Ara2UsrController {
 		return PATH + "/index";
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = "/coupon/stateCpnListPage.do", method = RequestMethod.POST)
+	public String stateCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			Map<String,Object> map = this.ara2UsrService.selectItemInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+		return PATH + "/coupon/stateCpnListPage";
+	}
+	
+	@RequestMapping(value = "/coupon/selectStateCpnList", method = RequestMethod.POST)
+	public void selectStateCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2UsrService.selectStateCpnList(modelMap);
+			modelMap.addAttribute("list", list);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", String.format("성공적으로 자료를 갖고왔습니다."));
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = "/coupon/useCpnListPage.do", method = RequestMethod.POST)
+	public String useCpnListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			Map<String,Object> map = this.ara2UsrService.selectItemInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+		return PATH + "/coupon/useCpnListPage";
+	}
+	
+	
+	@RequestMapping(value = "/coupon/selectUseCpnList", method = RequestMethod.POST)
+	public void selectUseCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2UsrService.selectUseCpnList(modelMap);
+			modelMap.addAttribute("list", list);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", String.format("성공적으로 자료를 갖고왔습니다."));
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+	
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
@@ -157,6 +231,7 @@ public class Ara2UsrController {
 	/*
 	 * get use coupon list
 	 */
+	/*
 	@RequestMapping(value = "/coupon/selectUseCpnList.do", method = RequestMethod.POST)
 	public void selectUseCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 
@@ -175,7 +250,7 @@ public class Ara2UsrController {
 		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		jsonView.render(modelMap, request, response);
 	}
-
+	*/
 
 	/*
 	 * use coupon list

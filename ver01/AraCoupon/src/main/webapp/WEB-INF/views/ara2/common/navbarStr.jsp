@@ -12,7 +12,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${staticPATH}/ara/index.do">ACSS</a>
+				<a class="navbar-brand" href="${staticPATH}/ara2/index.do">ACSS</a>
 			</div>
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<!-- navbar menu -->

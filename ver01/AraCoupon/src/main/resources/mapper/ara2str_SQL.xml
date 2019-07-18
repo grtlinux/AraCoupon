@@ -198,6 +198,124 @@
 			AND B.CAMP_NO = AA.CAMP_NO
 	</select>
 
+
+	<!-- comment -->
+	<select id="selectUsrInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Str.selectUsrInfo */
+			A.USR_NO
+			, A.USR_ID
+			, A.USR_NM
+			, A.REL_STR_NO
+			, A1.TEL_NM
+			, A1.TEL_NUM
+			, A2.MBL_NM
+			, A2.MBL_NUM
+			, A3.EML_NM
+			, A3.EML_ADDR
+			, A4.BNK_NM
+			, A4.BNK_ACNT
+			, A4.ACNT_NM
+			, A5.MRRG_DT
+			, A5.MRRG_LOC
+		FROM
+			ARA2_USR A
+				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+		WHERE 1=1
+			AND A.USR_NO = #{usrid}
+	</select>
+	
+	
+	<!-- comment -->
+	<update id="updateAllCnntByCnntid" parameterType="Map">
+		UPDATE  /* Ara2Str.updateAllCnntByCnntid */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'FAIL'
+		WHERE 1=1
+			AND A.CNNT_ID = #{usrid}
+			AND A.CNNT_TYP = 'USR'
+			AND A.CNNT_YN = 'Y'
+	</update>
+	
+	
+	<!-- comment -->
+	<insert id="insertCnntAraKey" parameterType="Map">
+		INSERT INTO  /* Ara2Str.insertCnntAraKey */
+			ARA2_CNNT
+		VALUES
+			( SEQ_CNNT.NEXTVAL, #{usrid}, 'USR', #{arakey}, 'Y', SYSDATE, null, null )
+	</insert>
+	
+	
+	<!-- comment -->
+	<select id="selectCnntArakeyInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Str.selectCnntArakeyInfo */
+			A.CNNT_NO
+			, A.CNNT_ID
+			, A.CNNT_TYP
+			, A.ARA_KEY
+			, A.CNNT_YN
+			, A.CNNT_DTTM
+		FROM
+			ARA2_CNNT A
+		WHERE 1=1
+			AND A.CNNT_ID = #{usrid}
+			AND A.CNNT_TYP = 'USR'
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</select>
+	
+	
+	<!-- comment -->
+	<update id="updateCnntByCnntid" parameterType="Map">
+		UPDATE  /* Ara2Str.updateCnntByCnntid */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'SUCCESS'
+		WHERE 1=1
+			AND A.CNNT_ID = #{usrid}
+			AND A.CNNT_TYP = 'USR'
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</update>
+	
+	
+	<!-- comment -->
+	<update id="updateCpnNo" parameterType="Map">
+		UPDATE  /* Ara2Str.updateCpnNo */
+			ARA2_CPN
+		SET
+			CPN_PHS = '3'
+			, ITM_NO = #{usrid}
+			, ITM_TYP = 'USR'
+			, CPN_CNTNT = '쿠폰을 고객에게 제공함'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CPN_NO IN (
+				SELECT
+					MIN(CPN_NO)    AS MIN_CPN_NO
+				FROM
+					ARA2_CPN A
+				WHERE 1=1
+					AND A.CAMP_NO = #{campNo}
+					AND ITM_NO = #{strid}
+					AND ITM_TYP = 'STR'
+					AND A.CPN_PHS = '2'
+			)
+	</update>
+	
+	
+	
+	
+		
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->

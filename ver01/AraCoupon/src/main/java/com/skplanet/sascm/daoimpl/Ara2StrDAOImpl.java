@@ -40,4 +40,34 @@ public class Ara2StrDAOImpl extends AbstractDAO implements Ara2StrDAO {
 	public List<Map<String, Object>> selectGiveCpnList(Map<String, Object> param) throws Exception {
 		return (List<Map<String,Object>>) selectList("Ara2Str.selectGiveCpnList", param);
 	}
+
+	@Override
+	public Map<String, Object> selectUsrInfo(Map<String, Object> param) throws Exception {
+		return (Map<String,Object>) selectOne("Ara2Str.selectUsrInfo", param);
+	}
+
+	@Override
+	public int updateAllCnntByCnntid(Map<String, Object> param) throws Exception {
+		return (int) update("Ara2Str.updateAllCnntByCnntid", param);
+	}
+
+	@Override
+	public int insertCnntAraKey(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2Str.insertCnntAraKey", param);
+	}
+
+	@Override
+	public Map<String, Object> selectCnntArakeyInfo(Map<String, Object> param) throws Exception {
+		return (Map<String,Object>) selectOne("Ara2Str.selectCnntArakeyInfo", param);
+	}
+
+	@Override
+	public int updateCnntByCnntid(Map<String, Object> param) throws Exception {
+		return (int) update("Ara2Str.updateCnntByCnntid", param);
+	}
+
+	@Override
+	public int updateCpnNo(Map<String, Object> param) throws Exception {
+		return (int) update("Ara2Str.updateCpnNo", param);
+	}
 }

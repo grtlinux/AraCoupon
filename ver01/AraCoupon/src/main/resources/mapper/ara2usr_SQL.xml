@@ -10,8 +10,10 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- select item information -->
+	<!-- /index.do -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment. -->
 	<select id="selectItemInfo" parameterType="Map" resultType="Map">
 		SELECT  /* Ara2Usr.selectItemInfo */
 			A.USR_NO
@@ -39,6 +41,87 @@
 		WHERE 1=1
 			AND A.USR_NO = #{usrid}
 	</select>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/stateCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment. -->
+	<select id="selectStateCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectStateCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_NO = #{usrid}
+			AND A.ITM_TYP = 'USR'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/useCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment. -->
+	<select id="selectUseCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectUseCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_NO = #{usrid}
+			AND A.ITM_TYP = 'USR'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+
 
 
 

@@ -80,10 +80,12 @@ a:focus {
 /* ---------------------------- */
 /* ---------------------------- */
 .show {
-	display: block !important;
+	/* display: block !important; */
+	display: ;
 }
 .display {
-	display: block !important;
+	/* display: block !important; */
+	display: ;
 }
 .hide {
 	display: none !important;

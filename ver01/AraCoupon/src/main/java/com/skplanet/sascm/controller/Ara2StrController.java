@@ -1,5 +1,6 @@
 package com.skplanet.sascm.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ import com.skplanet.sascm.service.Ara2IbService;
 import com.skplanet.sascm.service.Ara2StrService;
 import com.skplanet.sascm.service.AraStrService;
 import com.skplanet.sascm.util.Flag;
+import com.skplanet.sascm.util.GenerateAraKey;
+import com.skplanet.sascm.util.IbMsg;
 
 @Controller
 @RequestMapping(value = "/str2")
@@ -204,36 +207,109 @@ public class Ara2StrController {
 		jsonView.render(modelMap, request, response);
 	}
 
+	@RequestMapping(value = "/coupon/sendAraKeyToUsr.do", method = RequestMethod.POST)
+	public void sendAraKeyToUsr(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			// id를 확인한다.
+			Map<String,Object> map = null;
+			map = this.ara2StrService.selectUsrInfo(modelMap);
+			if (map == null) {
+				modelMap.addAttribute("retCode", "9999");
+				modelMap.addAttribute("retMsg", String.format("요청하신 아이디가 존재하지 않습니다."));
+			} else {
+				// modelMap <- map
+				modelMap.putAll(map);
+				//
+				if (Flag.flag) {
+					// 이미 진행중인 아라키는 사용하지 못하도록 한다.
+					this.ara2StrService.updateAllCnntByCnntid(modelMap);
+				}
+				if (Flag.flag) {
+					// arakey를 얻는다.
+					String arakey = GenerateAraKey.getAraKey();
+					//arakey = "2025";  // KANG-20190716: imsi
+					modelMap.addAttribute("arakey", arakey);
+				}
+				if (Flag.flag) {
+					// arakey를 ARA_CNNT 테이블에 넣는다.
+					this.ara2StrService.insertCnntAraKey(modelMap);
+				}
+				if (Flag.flag) {
+					// SMS 전송
+					map = this.ara2IbService.selectLastIbTkn(null);
+					if (map == null || ((BigDecimal) map.get("DIFF_HOURS")).compareTo(new BigDecimal("2")) > 0) {
+						// more then 2 hours.....and select new token information....so, insert the infos
+						map = this.ara2IbService.selectAraInfo(null);
+						map = IbMsg.getIbTokenInfo(map);
+						map.put("tknNm", String.format("to update token at %s", Flag.getDateTime("yyyy-MM-dd HH:mm:ss")));
+						map.put("accsTkn", (String) map.get("accessToken"));
+						map.put("schm", (String) map.get("schema"));
+						map.put("expd", (String) map.get("expired"));
+						this.ara2IbService.insertIbTkn(map);
+						map = this.ara2IbService.selectLastIbTkn(null);
+					} else {
+						// less then and equal to 2 hours.....
+					}
+					modelMap.addAttribute("mapToken", map);
+					modelMap.addAttribute("retIbSend", IbMsg.sendIbSms(modelMap));
+				}
+				if (Flag.flag) {
+					modelMap.addAttribute("retCode", "0000");
+					modelMap.addAttribute("retMsg", String.format("아라키를 모바일에 전송하였습니다. 인증에 사용하세요."));
+				}
+			}
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
 	@RequestMapping(value = "/coupon/giveCpnList.do", method = RequestMethod.POST)
 	public void giveCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
-		/*
 		if (Flag.flag) {
-			//
-			// 구매하려는 쿠폰금액이 계좌에 충분한지 확인한다.
-			//
-			int cpnSiz = Integer.parseInt(String.valueOf(modelMap.get("cpnSiz")));
-			long cpnMny = Long.parseLong(String.valueOf(modelMap.get("cpnMny")));
-			long cpnSum = cpnMny * cpnSiz;  // 계좌에 이 금액 이상이 있는지 확인한다.
-			// 쿠폰을 원하는 갯수 만큼 구매한다.
-			int updCnt = 0;
-			for (int i=0; i < cpnSiz; i++) {
-				int ret = this.ara2StrService.updateBuyCpnSht(modelMap);
-				if (Flag.flag) log.debug(">>>>> ret of this.ara2StrService.updateBuyCpnSht is " + ret);
-				updCnt += ret;
+			Map<String,Object> map = this.ara2StrService.selectCnntArakeyInfo(modelMap);
+			if (map == null) {
+				// (userid, arakey) 존재하지 않으면 인증 실패
+				if (Flag.flag) {
+					modelMap.addAttribute("retCode", "9999");
+					modelMap.addAttribute("retMsg", String.format("쿠폰제공에 실패하였습니다."));
+				}
+				this.ara2StrService.updateAllCnntByCnntid(modelMap);
+			} else {
+				// (userid, arakey) 존재하면 정보를 리턴하고 자료를 update 한다.
+				/*
+				  "strid": "101",
+				  "campNo": "110",
+				  "cpnSiz": "1",
+				  "cpnMny": "5000",
+				  "usrid": "1001",
+				  "arakey": "7348",
+				*/
+				int cpnSiz = Integer.parseInt(String.valueOf(modelMap.get("cpnSiz")));
+				long cpnMny = Long.parseLong(String.valueOf(modelMap.get("cpnMny")));
+				long cpnSum = cpnMny * cpnSiz; // 쿠폰으로 제공하려는 금액
+				int updCnt = 0;
+				for (int i=0; i < cpnSiz; i++) {
+					int ret = this.ara2StrService.updateCpnNo(modelMap);
+					if (Flag.flag) log.debug(">>>>> ret of this.ara2StrService.updateBuyCpnSht is " + ret);
+					updCnt += ret;
+				}
+				cpnSum = cpnMny * updCnt;  // 실재 쿠폰으로 제공한 금액
+				if (Flag.flag) {
+					modelMap.addAttribute("retCode", "0000");
+					modelMap.addAttribute("retMsg", String.format("금액[%,d]에 해당하는 액면가[%,d] 쿠폰 [%,d]장을 제공하였습니다.", cpnSum, cpnMny, updCnt));
+				}
+				modelMap.addAttribute("map", map);
+				this.ara2StrService.updateCnntByCnntid(modelMap);
 			}
-			cpnSum = cpnMny * updCnt;  // 실재 쿠폰구매에 사용한 금액
-			//
-			// 구매한 쿠폰금액은 계좌에서 차감한다.
-			//
-			modelMap.addAttribute("updCnt", updCnt);
-			modelMap.addAttribute("retCode", "0000");
-			modelMap.addAttribute("retMsg", String.format("액면가[%,d] 쿠폰 [%,d]장을 금액[%,d]에 구매하였습니다.", cpnMny, updCnt, cpnSum));
 		}
-		*/
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		jsonView.render(modelMap, request, response);
 	}
