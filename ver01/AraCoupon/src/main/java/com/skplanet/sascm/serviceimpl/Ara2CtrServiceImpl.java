@@ -74,4 +74,50 @@ public class Ara2CtrServiceImpl implements Ara2CtrService {
 	public List<Map<String, Object>> selectCampList2(Map<String, Object> param) throws Exception {
 		return this.ara2CtrDAO.selectCampList2(param);
 	}
+
+
+	// /payment/paymentCpnListPage.do
+
+
+	// /account/createAcntListPage.do
+	@Override
+	public List<Map<String, Object>> selectStrAcntList(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.selectStrAcntList(param);
+	}
+
+	@Override
+	public int insertStrAcnt(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.insertStrAcnt(param);
+	}
+
+
+
+	// /account/selectAcntListPage.do
+	public List<Map<String,Object>> selectAcntList(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.selectAcntList(param);
+	}
+
+
+	// /account/selectAcntInOutListPage.do
+	@Override
+	public List<Map<String, Object>> selectStrList(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.selectStrList(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAcntInOutList(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.selectAcntInOutList(param);
+	}
+
+	@Override
+	public int insertStrDpstProc(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.insertStrDpstProc(param);
+	}
+
+	@Override
+	public int insertStrWthdProc(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.insertStrWthdProc(param);
+	}
+
+
 }

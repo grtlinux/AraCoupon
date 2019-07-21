@@ -33,6 +33,14 @@
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/payment/paymentCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산요청처리</a></li>
 						</ul>
 					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">가게계좌<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/createAcntListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 생성</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/selectAcntListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/selectAcntInOutListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 입출금내역</a></li>
+						</ul>
+					</li>
 					<li class="hide"><a href="/sample05/">통계</a></li>
 				</ul>
 

@@ -28,4 +28,23 @@ public interface Ara2CtrDAO {
 	public List<Map<String,Object>> selectCampList2(Map<String, Object> param) throws Exception;
 
 
+	// /payment/paymentCpnListPage.do
+
+
+	// /account/createAcntListPage.do
+	public List<Map<String,Object>> selectStrAcntList(Map<String, Object> param) throws Exception;
+	public int insertStrAcnt(Map<String, Object> param) throws Exception;
+
+
+	// /account/selectAcntListPage.do
+	public List<Map<String,Object>> selectAcntList(Map<String, Object> param) throws Exception;
+
+
+	// /account/selectAcntInOutListPage.do
+	public List<Map<String,Object>> selectStrList(Map<String, Object> param) throws Exception;
+	public List<Map<String,Object>> selectAcntInOutList(Map<String, Object> param) throws Exception;
+	public int insertStrDpstProc(Map<String, Object> param) throws Exception;
+	public int insertStrWthdProc(Map<String, Object> param) throws Exception;
+
+
 }

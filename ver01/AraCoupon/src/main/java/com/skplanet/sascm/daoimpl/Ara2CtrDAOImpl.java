@@ -62,7 +62,7 @@ public class Ara2CtrDAOImpl extends AbstractDAO implements Ara2CtrDAO {
 
 	@Override
 	public int updateCampNoInfo(Map<String, Object> param) throws Exception {
-		return (int) insert("Ara2Ctr.updateCampNoInfo", param);
+		return (int) update("Ara2Ctr.updateCampNoInfo", param);
 	}
 
 	// /coupon/resultCampListPage.do
@@ -70,5 +70,48 @@ public class Ara2CtrDAOImpl extends AbstractDAO implements Ara2CtrDAO {
 	public List<Map<String, Object>> selectCampList2(Map<String, Object> param) throws Exception {
 		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectCampList2", param);
 	}
-	
+
+	// /payment/paymentCpnListPage.do
+
+
+	// /account/createAcntListPage.do
+	@Override
+	public List<Map<String, Object>> selectStrAcntList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectStrAcntList", param);
+	}
+
+	@Override
+	public int insertStrAcnt(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2Ctr.insertStrAcnt", param);
+	}
+
+
+	// /account/selectAcntListPage.do
+	@Override
+	public List<Map<String, Object>> selectAcntList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectAcntList", param);
+	}
+
+
+	// /account/selectAcntInOutListPage.do
+	@Override
+	public List<Map<String, Object>> selectStrList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectStrList", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectAcntInOutList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectAcntInOutList", param);
+	}
+
+	@Override
+	public int insertStrDpstProc(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2Ctr.insertStrDpstProc", param);
+	}
+
+	@Override
+	public int insertStrWthdProc(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2Ctr.insertStrWthdProc", param);
+	}
+
 }

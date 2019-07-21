@@ -251,203 +251,198 @@ public class Ara2CtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * 승인요청 목록 페이지
-	 */
-	@RequestMapping(value = "/coupon/apprReqListPage.do", method = RequestMethod.POST)
-	public String apprReqListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
+	
+	@RequestMapping(value = "/account/createAcntListPage.do", method = RequestMethod.POST)
+	public String createAcntListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
-
 		if (Flag.flag) {
-			Map<String,Object> map = this.araCtrService.selectCenterInfo(modelMap);
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		return PATH + "/account/createAcntListPage";
+	}
+	
+	@RequestMapping(value = "/account/selectStrAcntList.do", method = RequestMethod.POST)
+	public void selectStrAcntList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2CtrService.selectStrAcntList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	@RequestMapping(value = "/account/createStrAcnt.do", method = RequestMethod.POST)
+	public void createStrAcnt(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.insertStrAcnt(modelMap);
+			log.debug("ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = "/account/selectAcntListPage.do", method = RequestMethod.POST)
+	public String selectAcntListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			Map<String,Object> map = this.ara2CtrService.selectItemInfo(modelMap);
 			log.debug("map: " + map);
 			modelMap.addAttribute("info", map);
 		}
-
-		return PATH + "/coupon/apprReqListPage";
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		return PATH + "/account/selectAcntListPage";
 	}
-
-	/*
-	 * 승인요청한 자료를 얻는다.
-	 */
-	@RequestMapping(value = "/coupon/selectApprReqList.do", method = RequestMethod.POST)
-	public void selectApprReqList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
+	
+	@RequestMapping(value = "/account/selectAcntList.do", method = RequestMethod.POST)
+	public void selectAcntList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
-
 		if (Flag.flag) {
-			List<Map<String,Object>> list = this.araCtrService.selectApprReqList(modelMap);
+			List<Map<String,Object>> list = this.ara2CtrService.selectAcntList(modelMap);
 			log.debug("list: " + list);
 			modelMap.addAttribute("list", list);
 		}
-
-		modelMap.addAttribute("retCode", "0000");
-		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
-		jsonView.render(modelMap, request, response);
-	}
-
-	/*
-	 * 승인처리를 한다.
-	 */
-	@RequestMapping(value = "/coupon/insertCouponPackage.do", method = RequestMethod.POST)
-	public void insertCouponPackage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
 		if (Flag.flag) {
-			Flag.printRequest(request);
-			modelMap = Flag.setModelMap(modelMap, request);
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		}
-
-		String[] arrCampId = new String[] {};
-		if (Flag.flag) {
-			arrCampId = String.valueOf(modelMap.get("campIds")).split(",");
-			modelMap.addAttribute("arrCampId", arrCampId);
-		}
-
-		if (Flag.flag) {
-			// insert ara_apprres
-			this.araCtrService.insertApprRes(modelMap);
-		}
-		
-		if (Flag.flag) {
-			// insert ara_cpn
-			for (int i=0; i < arrCampId.length; i++) {
-				modelMap.put("campid", arrCampId[i]);
-				Map<String,Object> param = this.araCtrService.selectCampInfoForCpnPkg(modelMap);
-				if (Flag.flag) System.out.println(">>>>> param: " + new GsonBuilder().setPrettyPrinting().create().toJson(param));
-				
-				if (Flag.flag) {
-					// insert Coupon Sheet
-					String cpnMst = (String) param.get("CPN_MST");
-					String cpnTyp = (String) param.get("CPN_TYP");
-					int cpnCnt = ((BigDecimal) param.get("CPN_CNT")).intValue();
-					for (int cpnNo = 1; cpnNo <= cpnCnt; cpnNo++) {
-						param.put("CPN_NO", Flag.getCouponNo(cpnMst, cpnTyp, cpnNo));
-						if (!Flag.flag) System.out.println(">>>>> param: " + param);
-						this.araCtrService.insertCouponSheet(param);
-					}
-				}
-			}
-		}
-		
-		modelMap.addAttribute("retCode", "0000");
-		modelMap.addAttribute("retMsg", "[성공] 캠페인을 승인했습니다. 쿠폰을 발행했습니다.");
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		jsonView.render(modelMap, request, response);
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * 승인완료 목록 페이지
-	 */
-	@RequestMapping(value = "/coupon/apprResListPage.do", method = RequestMethod.POST)
-	public String apprResListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
+	
+	@RequestMapping(value = "/account/selectAcntInOutListPage.do", method = RequestMethod.POST)
+	public String selectAcntInOutListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
-
 		if (Flag.flag) {
-			Map<String,Object> map = this.araCtrService.selectCenterInfo(modelMap);
+			Map<String,Object> map = this.ara2CtrService.selectItemInfo(modelMap);
 			log.debug("map: " + map);
 			modelMap.addAttribute("info", map);
 		}
-
-		return PATH + "/coupon/apprResListPage";
+		if (Flag.flag) {
+			List<Map<String,Object>> listStr = this.ara2CtrService.selectStrList(modelMap);
+			log.debug("listStr: " + listStr);
+			modelMap.addAttribute("listStr", listStr);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		return PATH + "/account/selectAcntInOutListPage";
 	}
-
-	/*
-	 * 승인완료한 자료를 얻는다.
-	 */
-	@RequestMapping(value = "/coupon/selectApprResList.do", method = RequestMethod.POST)
-	public void selectApprResList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
+	
+	@RequestMapping(value = "/account/selectAcntInOutList.do", method = RequestMethod.POST)
+	public void selectInOutAcntList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
-
 		if (Flag.flag) {
-			List<Map<String,Object>> list = this.araCtrService.selectApprResList(modelMap);
+			List<Map<String,Object>> list = this.ara2CtrService.selectAcntInOutList(modelMap);
 			log.debug("list: " + list);
 			modelMap.addAttribute("list", list);
 		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
 
-		modelMap.addAttribute("retCode", "0000");
-		modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+	@RequestMapping(value = "/account/insertStrDpstProc.do", method = RequestMethod.POST)
+	public void insertStrDpstProc(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.insertStrDpstProc(modelMap);
+			log.debug("ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	@RequestMapping(value = "/account/insertStrWthdProc.do", method = RequestMethod.POST)
+	public void insertStrWthdProc(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.insertStrWthdProc(modelMap);
+			log.debug("ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		jsonView.render(modelMap, request, response);
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
-
-	/*
-	 * 정산 확인을 위한 페이지
-	 */
-	@RequestMapping(value = "/calculate/calcListPage.do", method = RequestMethod.POST)
-	public String calcListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-			modelMap = Flag.setModelMap(modelMap, request);
-		}
-
-		if (Flag.flag) {
-			Map<String,Object> map = this.araCtrService.selectCenterInfo(modelMap);
-			log.debug("map: " + map);
-			modelMap.put("info", map);
-		}
-
-		if (Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
-
-		return PATH + "/calculate/calcListPage";
-	}
-
-	/*
-	 * 정산처리 목록을 얻는다.
-	 */
-	@RequestMapping(value = "/calculate/selectCalcList.do", method = RequestMethod.POST)
-	public void selectCalcList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
-		if (Flag.flag) {
-			Flag.printRequest(request);
-			modelMap = Flag.setModelMap(modelMap, request);
-		}
-
-		if (Flag.flag) {
-			List<Map<String,Object>> list = this.araCtrService.selectCalcList(modelMap);
-			log.debug("list: " + list);
-			modelMap.addAttribute("list", list);
-		}
-
-		if (!Flag.flag) System.out.println(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
-
-		jsonView.render(modelMap, request, response);
-	}
-
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

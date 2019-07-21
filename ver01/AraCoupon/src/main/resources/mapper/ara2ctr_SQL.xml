@@ -247,6 +247,205 @@
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /account/createAcntListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectStrAcntList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectStrAcntList */
+			A.STR_ID
+			, A.STR_NM
+			, A1.ACNT_BLNC
+		FROM
+			ARA2_STR A
+				LEFT JOIN (
+					SELECT
+						B.ACNTHIST_NO
+						, B.ITM_ID
+						, B.ITM_TYP
+						, B.ACNT_BLNC
+					FROM
+						ARA2_ACNTHIST B
+						, (
+							SELECT
+								ITM_ID
+								, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+							FROM
+								ARA2_ACNTHIST
+							WHERE 1=1
+							GROUP BY
+								ITM_ID
+						) C
+					WHERE 1=1
+						AND B.ITM_ID = C.ITM_ID
+						AND B.ACNTHIST_NO = C.MAX_ACNTHIST_NO
+				) A1 ON A1.ITM_ID = A.STR_ID
+		WHERE 1=1
+		ORDER BY
+			A.STR_ID
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertStrAcnt" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertStrAcnt */
+			ARA2_ACNTHIST 
+		VALUES ( 
+			SEQ_ACNTHIST.NEXTVAL 
+			, #{strid} 
+			, 'STR' 
+			, 0 , 0 , 0 
+			, '001' 
+			, '계좌를 생성함' 
+			, SYSDATE 
+			, SYSDATE 
+		)
+	</insert>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /account/selectAcntListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectAcntList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectAcntList */
+			A.ACNTHIST_NO
+			, A.ITM_ID
+			, A.ITM_TYP
+			, A1.STR_NM
+			, A.ACNT_BLNC
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+		FROM
+			ARA2_ACNTHIST A
+				LEFT JOIN ARA2_STR A1 ON A1.STR_ID = A.ITM_ID
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+					/* AND ITM_ID = 101 */
+				GROUP BY
+					ITM_ID
+			) B
+		WHERE 1=1
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+		ORDER BY
+			A.ITM_ID
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /account/selectAcntInOutListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectStrList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectStrList */
+			A.STR_ID
+			, A.STR_NM
+		FROM
+			ARA2_STR A
+		WHERE 1=1
+		ORDER BY
+			A.STR_ID
+	</select>
+
+
+	<!-- comment -->
+	<select id="selectAcntInOutList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectAcntInOutList */
+			A.ACNTHIST_NO
+			, A.ITM_ID
+			, A.ITM_TYP
+			, A1.STR_NM
+			, A.ACNT_DPST
+			, A.ACNT_WTHD
+			, A.ACNT_BLNC
+			, A.ETC_CD
+			, A.ETC_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')  AS CRE_DTTM
+		FROM
+			ARA2_ACNTHIST A
+				LEFT JOIN ARA2_STR A1 ON A1.STR_ID = A.ITM_ID
+		WHERE 1=1
+			AND A.ITM_ID = #{strid}
+		ORDER BY
+			A.ACNTHIST_NO DESC
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertStrDpstProc" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertStrDpstProc */
+			ARA2_ACNTHIST
+		SELECT
+			SEQ_ACNTHIST.NEXTVAL
+			, A.ITM_ID
+			, A.ITM_TYP
+			, #{dpst}
+			, 0
+			, A.ACNT_BLNC + #{dpst}
+			, '002'
+			, '센터입금함'
+			, SYSDATE
+			, SYSDATE
+		FROM
+			ARA2_ACNTHIST A
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+					AND ITM_ID = #{strid}
+				GROUP BY
+					ITM_ID
+			) B
+		WHERE 1=1
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+	</insert>
+
+
+	<!-- comment -->
+	<insert id="insertStrWthdProc" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertStrWthdProc */
+			ARA2_ACNTHIST
+		SELECT
+			SEQ_ACNTHIST.NEXTVAL
+			, A.ITM_ID
+			, A.ITM_TYP
+			, 0
+			, #{wthd}
+			, A.ACNT_BLNC - #{wthd}
+			, '002'
+			, '센터입금함'
+			, SYSDATE
+			, SYSDATE
+		FROM
+			ARA2_ACNTHIST A
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+					AND ITM_ID = #{strid}
+				GROUP BY
+					ITM_ID
+			) B
+		WHERE 1=1
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+	</insert>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
