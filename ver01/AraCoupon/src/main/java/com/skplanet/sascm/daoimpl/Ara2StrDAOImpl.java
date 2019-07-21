@@ -25,6 +25,11 @@ public class Ara2StrDAOImpl extends AbstractDAO implements Ara2StrDAO {
 	}
 
 	@Override
+	public Map<String, Object> selectStrAcntInfo(Map<String, Object> param) throws Exception {
+		return (Map<String,Object>) selectOne("Ara2Str.selectStrAcntInfo", param);
+	}
+
+	@Override
 	public int updateBuyCpnSht(Map<String, Object> param) throws Exception {
 		return (int) update("Ara2Str.updateBuyCpnSht", param);
 	}

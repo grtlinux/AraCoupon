@@ -259,6 +259,11 @@ public class Ara2CtrController {
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
 		if (Flag.flag) {
+			Map<String,Object> map = this.ara2CtrService.selectItemInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+		if (Flag.flag) {
 			modelMap.addAttribute("retCode", "0000");
 			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		}

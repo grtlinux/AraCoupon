@@ -92,6 +92,44 @@
 
 
 	<!-- comment -->
+	<select id="selectStrAcntInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectStrAcntInfo */
+			A.STR_ID
+			, A.STR_NM
+			, NVL(A1.ACNT_BLNC, 0)   AS ACNT_BLNC
+		FROM
+			ARA2_STR A
+				LEFT JOIN (
+					SELECT
+						B.ACNTHIST_NO
+						, B.ITM_ID
+						, B.ITM_TYP
+						, B.ACNT_BLNC
+					FROM
+						ARA2_ACNTHIST B
+						, (
+							SELECT
+								ITM_ID
+								, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+							FROM
+								ARA2_ACNTHIST
+							WHERE 1=1
+								AND ITM_ID = #{strid}
+							GROUP BY
+								ITM_ID
+						) C
+					WHERE 1=1
+						AND B.ITM_ID = C.ITM_ID
+						AND B.ACNTHIST_NO = C.MAX_ACNTHIST_NO
+				) A1 ON A1.ITM_ID = A.STR_ID
+		WHERE 1=1
+			AND A.STR_ID = #{strid}
+		ORDER BY
+			A.STR_ID
+	</select>
+
+
+	<!-- comment -->
 	<update id="updateBuyCpnSht" parameterType="Map">
 		UPDATE  /* Ara2Str.updateBuyCpnSht */
 			ARA2_CPN

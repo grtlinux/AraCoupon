@@ -1,0 +1,429 @@
+-- ara2_meta
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('ACCS','ACCESS','access','접근.접촉');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('ACNT','ACCOUNT','account','통장');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('ADDR','ADDRESS','address','주소');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('APPR','APPROVAL','approval','승인');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('ARA','ARA','ara','아라');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('BGN','BEGIN','begin','시작');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('BLNC','BALANCE','balance','잔금');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('BNK','BANK','bank','은행');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CALC','CALCULATE','calculate','정산');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CD','CODE','code','코드');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CHL','CHANNEL','channel','채널');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CMNT','COMMENT','comment','코멘트.설명');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CMP','CAMPAIGN','campaign','캠페인');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CNNT','CONNECT','connect','접속');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CNT','COUNT','count','갯수');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CNTNS','CONTENTS','contents','컨텐츠');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CNTNT','CONTENT','content','컨텐트');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CODE','CODE2','code2','코드2');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CPN','COUPON','coupon','쿠폰');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CRE','CREATE','create','생성');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('CTR','CENTER','center','센터');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DCNT','DISCONNECT','disconnect','미접속');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DEL','DELETE','delete','삭제');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DPST','DEPOSIT','deposit','입금');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DPT','DEPARTMENT','department','부서');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DRCT','DIRECT','direct','직접');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DRP','DROP','drop','제거');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DT','DATE','date','날짜');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DTL','DETAIL','detail','상세,부');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('DTTM','DATETIME','datetime','날짜시간');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('EML','EMAIL','email','이메일');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('EMP','EMPLOYEE','employee','고용인');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('EMPY','EMPLOY','employ','고용자');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('ENC','ENCODING','encoding','인코딩');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('END','END','end','끝');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('ETC','ETC','etc','비고');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('EXPD','EXPIRED','expired','종료일시');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('FILE','FILE','file','파일');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('FRM','FROM','from','부터');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('GFT','GIFT','gift','선물');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('GRP','GROUP','group','그룹');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('HIST','HISTORY','history','내역.기록');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('ID','IDENTIFICATION','identification','아이디');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('IDX','INDEX','index','인덱스');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('INF','INFORMATION','information','정보');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('INS','INSERT','insert','삽입');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('ITM','ITEM','item','아이템');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('KEY','KEY','key','키.열쇠');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('LGI','LOGIN','login','로그인');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('LGO','LOGOUT','logout','로그아웃');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('LOC','LOCATION','location','지역');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('LOG','LOG','log','로그.내역');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('LST','LIST','list','목록');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('MBL','MOBILE','mobile','핸드폰');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('MET','META','meta','메타');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('MGM','MANAGEMENT','management','관리');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('MNY','MONEY','money','금액,돈');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('MRRG','MARRIAGE','marriage','결혼');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('MSG','MESSAGE','message','메시지');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('MST','MASTER','master','마스터,주된');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('NM','MAME','name','이름,명칭');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('NO','SEQ_NUMBER','sequence number','번호.sequence');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('NUM','NUMBER','number','숫자');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('OCC','OCCUPY','occupy','소유하다.점령하다');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('OFF','OFFER','offer','제공');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PAY','PAY','pay','지불하다.결제하다.');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PHS','PHASE','phase','단계');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PKG','PACKAGE','package','페키지');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PMNT','PAYMENT','payment','지불.결제');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PNT','POINT','point','포인트');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PPR','PAPER','paper','종이한장');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PROC','PROCESS','process','처리.진행');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PRSD','PRESIDENT','president','사장,대표');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('PRVD','PROVIDE','provide','제공하다');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('REQ','REQUEST','request','요구');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('RES','RESPOND','respond','응답');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('RMN','REMAIN','remain','여분.나머지');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SCHM','SCHEMA','schema','스키마');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SEL','SELECT','select','검색');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SEQ','SEQUENCE','sequence','연속순번');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SHT','SHEET','sheet','한장');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SIZ','SIZE','size','크기.갯수');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SMS','SMS','sms','문자메시지');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SORT','SORT2','sort2','소트.정렬2');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SRT','SORT','sort','소트.정렬');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('STR','STORE','store','가게,거래처');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('STT','STATE','state','상태.상황');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('SUM','SUM','sum','합계');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TB','TABLE','table','테이블');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TEL','TELEPHONE','telephone','전화');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TEMP','TEMPORARY','temporary','임시');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TKN','TOKEN','token','인증토큰');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TM','TIME','time','시간');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TMPL','TEMPLATE','template','견본.샘플');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TO','TO','to','까지');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TTL','TOTAL','total','합계2');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TTL','TIME TO LIVE','time to live','생존시간');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('TYP','TYPE','type','타입,구분');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('UPD','UPDATE','update','갱신');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('USD','USED','used','사용된');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('USE','USE','use','사용');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('USR','USER','user','고객,사용자');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('WEDD','WEDDING','wedding','결혼하다');
+Insert into ARA2_META (META_CD,META_NM,META_DESC,META_CMNT) values ('WTHD','WITHDRAWAL','withdrawal','출금');
+
+
+-- ara2_cdgrp
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C001','사용유무','사용유무','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C002','쿠폰단계','쿠폰단계','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C003','승인단계','승인단계','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C004','오퍼구분','오퍼구분','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C005','채널구분','채널구분','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C006','남여구분','남여구분','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C007','쿠폰종류','쿠폰종류','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C008','접속구분','접속구분','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C009','아라쿠폰종류','아라쿠폰종류','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C010','아이템구분','아이템구분','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C011','쿠폰그룹','쿠폰그룹구분','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C012','캠페인단계','캠페인단계','Y');
+Insert into ARA2_CDGRP (GRP_CD,GRP_NM,GRP_DESC,USE_YN) values ('C013','계좌적요','계좌적요','Y');
+
+
+-- ara2_code
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C001','Y','use','사용','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C001','N','not use','미사용','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','1','발행','센터 쿠폰발행','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','2','구매','가게 쿠폰구매','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','3','제공','고객에게 쿠폰제공','Y',3);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','4','사용','고객 쿠폰사용','Y',4);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','5','정산요청','가게 정산요청','Y',5);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','6','정산완료','센터 정산완료','Y',6);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','7','미사용정산','고객 미사용정산','Y',7);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','8','결산','가게/센터 결산','Y',8);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C002','9','페기','센터 쿠폰폐기','Y',9);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C003','1','승인요청','승인요청','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C003','2','승인재요청','승인재요청','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C003','4','승인반려','승인요청','Y',3);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C003','9','승인완료','승인완료','Y',4);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C004','CPN','coupon','쿠폰','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C004','GFT','gift','선물','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C005','SMS','SMS','SMS','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C005','EML','Email','Email','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C006','M','male','남','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C006','F','female','여','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C007','01','10000','10,000원','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C007','02','20000','20,000원','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C007','03','50000','50,000원','Y',3);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C007','04','100000','100,000원','Y',4);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C007','05','150000','150,000원','Y',5);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C007','06','200000','200,000원','Y',6);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C007','07','300000','300,000원','Y',7);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C007','08','500000','500,000원','Y',8);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C008','ARA','ara','아라','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C008','USR','user','고객','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C008','STR','store','가게','Y',3);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C008','CTR','center','센터','Y',4);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C009','001','1000','1,000원','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C009','002','2000','2,000원','N',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C009','003','3000','3,000원','N',3);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C009','004','4000','4,000원','N',4);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C009','005','5000','5,000원','Y',5);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C009','010','10000','10,000원','Y',10);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C009','050','50000','50,000원','Y',50);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C009','100','100000','100,000원','Y',100);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C010','ARA','ara','아라','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C010','USR','user','고객','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C010','STR','store','가게','Y',3);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C010','CTR','center','센터','Y',4);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','001','웨딥샾','웨딥샾그룹','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','002','수트','수트그룹','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','003','한복','한복그룹','Y',3);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','004','여행사','여행사그룹','Y',4);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','005','전자','전자그룹','Y',5);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','006','도자기','도자기그룹','Y',6);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','007','미용','미용그룹','Y',7);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','008','보험','보험그룹','Y',8);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','009','예식장','예식장그룹','Y',9);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C011','010','보석','보석그룹','Y',10);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C012','1','캠페인생성','캠페인생성','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C012','2','쿠폰패키지발행','쿠폰패키지발행','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C012','8','캠페인종료','캠페인종료','Y',8);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C012','9','캠페인폐기','캠페인폐기','Y',9);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C013','001','계좌생성','신규계좌 생성함','Y',1);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C013','002','센터입금','센터에서 입금함','Y',2);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C013','003','센터출금','센터에서 출금함','Y',3);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C013','004','쿠폰구매','센터에서 쿠폰을 구매함','Y',4);
+Insert into ARA2_CODE (GRP_CD,CODE,CD_NM,CD_DESC,USE_YN,SORT_NO) values ('C013','005','쿠폰정산','고객에게 받은 쿠폰들을 정산함','Y',5);
+
+
+
+-- ara2_ara
+Insert into ARA2_ARA (ARA_ID,ARA_NM,ARA_MBL,ARA_PWD,ARA_ENC) values ('tain_msg','타인토큰시스템','01042582025','PWFCE101010X0EOZRO95','UTF-8');
+
+
+-- ara2_ctr
+Insert into ARA2_CTR (CTR_NO,CTR_ID,CTR_NM) values (11,'11','아라쿠폰센터');
+
+
+-- ara2_str
+Insert into HR.ARA2_STR (STR_NO,STR_ID,STR_NM,REL_CTR_NO) values (101,'101','웨딩21',11);
+Insert into HR.ARA2_STR (STR_NO,STR_ID,STR_NM,REL_CTR_NO) values (102,'102','에버웨딩',11);
+Insert into HR.ARA2_STR (STR_NO,STR_ID,STR_NM,REL_CTR_NO) values (103,'103','마리아쥬웨딩',11);
+Insert into HR.ARA2_STR (STR_NO,STR_ID,STR_NM,REL_CTR_NO) values (104,'104','포튼가먼트',11);
+Insert into HR.ARA2_STR (STR_NO,STR_ID,STR_NM,REL_CTR_NO) values (105,'105','더수트',11);
+Insert into HR.ARA2_STR (STR_NO,STR_ID,STR_NM,REL_CTR_NO) values (106,'106','인한복',11);
+
+
+-- ara2_usr
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1001,'1001','강석',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1002,'1002','한경헌',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1003,'1003','이미자',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1004,'1004','이아림',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1005,'1005','한경호',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1006,'1006','이경주',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1007,'1007','이철안',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1008,'1008','강봉철',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1009,'1009','한지혁',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1010,'1010','강민지',null);
+Insert into ARA2_USR (USR_NO,USR_ID,USR_NM,REL_STR_NO) values (1011,'1011','이창은',null);
+
+
+-- ara2_tel
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (11,'CTR','Y',1,'tel-11-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (101,'STR','Y',1,'tel-101-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (102,'STR','Y',1,'tel-102-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (103,'STR','Y',1,'tel-103-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (104,'STR','Y',1,'tel-104-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (105,'STR','Y',1,'tel-105-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (106,'STR','Y',1,'tel-106-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1001,'USR','Y',1,'tel-1001-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1002,'USR','Y',1,'tel-1002-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1003,'USR','Y',1,'tel-1003-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1004,'USR','Y',1,'tel-1004-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1005,'USR','Y',1,'tel-1005-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1006,'USR','Y',1,'tel-1006-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1007,'USR','Y',1,'tel-1007-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1008,'USR','Y',1,'tel-1008-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1009,'USR','Y',1,'tel-1009-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1010,'USR','Y',1,'tel-1010-1','0226944638');
+Insert into ARA2_TEL (ITM_NO,ITM_TYP,USE_YN,TEL_SEQ,TEL_NM,TEL_NUM) values (1011,'USR','Y',1,'tel-1011-1','0226944638');
+
+
+-- ara2_mbl
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (11,'CTR','Y',1,'mbl-11-1','01042582025');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (101,'STR','Y',1,'mbl-101-1','01042582025');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (102,'STR','Y',1,'mbl-102-1','01042582025');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (103,'STR','Y',1,'mbl-103-1','01042582025');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (104,'STR','Y',1,'mbl-104-1','01042582025');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (105,'STR','Y',1,'mbl-105-1','01042582025');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (106,'STR','Y',1,'mbl-106-1','01042582025');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1001,'USR','Y',1,'mbl-1001-1','01042582025');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1002,'USR','Y',1,'mbl-1002-1','01050267333');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1003,'USR','Y',1,'mbl-1003-1','01046358625');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1004,'USR','Y',1,'mbl-1004-1','01046268229');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1005,'USR','Y',1,'mbl-1005-1','01086623689');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1006,'USR','Y',1,'mbl-1006-1','01022028229');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1007,'USR','Y',1,'mbl-1007-1','01066854944');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1008,'USR','Y',1,'mbl-1008-1','01024326511');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1009,'USR','Y',1,'mbl-1009-1','01049188625');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1010,'USR','Y',1,'mbl-1010-1','01020761231');
+Insert into ARA2_MBL (ITM_NO,ITM_TYP,USE_YN,MBL_SEQ,MBL_NM,MBL_NUM) values (1011,'USR','Y',1,'mbl-1011-1','01082432272');
+
+
+-- ara2_eml
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (11,'CTR','Y',1,'eml-11-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (101,'STR','Y',1,'eml-101-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (102,'STR','Y',1,'eml-102-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (103,'STR','Y',1,'eml-103-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (104,'STR','Y',1,'eml-104-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (105,'STR','Y',1,'eml-105-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (106,'STR','Y',1,'eml-106-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1001,'USR','Y',1,'eml-1001-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1002,'USR','Y',1,'eml-1002-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1003,'USR','Y',1,'eml-1003-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1004,'USR','Y',1,'eml-1004-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1005,'USR','Y',1,'eml-1005-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1006,'USR','Y',1,'eml-1006-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1007,'USR','Y',1,'eml-1007-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1008,'USR','Y',1,'eml-1008-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1009,'USR','Y',1,'eml-1009-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1010,'USR','Y',1,'eml-1010-1','grtlinux@naver.com');
+Insert into ARA2_EML (ITM_NO,ITM_TYP,USE_YN,EML_SEQ,EML_NM,EML_ADDR) values (1011,'USR','Y',1,'eml-1011-1','grtlinux@naver.com');
+
+
+-- ara2_bnk
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (11,'CTR','Y',1,'국민은행','1234567890123','타인');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (101,'STR','Y',1,'국민은행','1234567890001','타인101');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (102,'STR','Y',1,'국민은행','1234567890002','타인102');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (103,'STR','Y',1,'국민은행','1234567890003','타인103');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (104,'STR','Y',1,'국민은행','1234567890004','타인104');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (105,'STR','Y',1,'국민은행','1234567890005','타인105');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (106,'STR','Y',1,'국민은행','1234567890006','타인106');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1001,'USR','Y',1,'국민은행','12345678900001','타인1001');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1002,'USR','Y',1,'국민은행','12345678900002','타인1002');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1003,'USR','Y',1,'국민은행','12345678900003','타인1003');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1004,'USR','Y',1,'국민은행','12345678900004','타인1004');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1005,'USR','Y',1,'국민은행','12345678900005','타인1005');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1006,'USR','Y',1,'국민은행','12345678900006','타인1006');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1007,'USR','Y',1,'국민은행','12345678900007','타인1007');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1008,'USR','Y',1,'국민은행','12345678900008','타인1008');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1009,'USR','Y',1,'국민은행','12345678900009','타인1009');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1010,'USR','Y',1,'국민은행','12345678900010','타인1010');
+Insert into ARA2_BNK (ITM_NO,ITM_TYP,USE_YN,BNK_SEQ,BNK_NM,BNK_ACNT,ACNT_NM) values (1011,'USR','Y',1,'국민은행','12345678900011','타인1011');
+
+
+-- ara2_mrrg
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (11,'CTR','Y',to_date('19/12/25','RR/MM/DD'),'서울');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1001,'USR','Y',to_date('19/01/25','RR/MM/DD'),'서울');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1002,'USR','Y',to_date('19/02/25','RR/MM/DD'),'부산');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1003,'USR','Y',to_date('19/03/25','RR/MM/DD'),'광주');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1004,'USR','Y',to_date('19/04/25','RR/MM/DD'),'대구');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1005,'USR','Y',to_date('19/05/25','RR/MM/DD'),'대전');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1006,'USR','Y',to_date('19/06/25','RR/MM/DD'),'전안');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1007,'USR','Y',to_date('19/02/25','RR/MM/DD'),'부산');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1008,'USR','Y',to_date('19/03/25','RR/MM/DD'),'광주');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1009,'USR','Y',to_date('19/04/25','RR/MM/DD'),'대구');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1010,'USR','Y',to_date('19/05/25','RR/MM/DD'),'대전');
+Insert into ARA2_MRRG (ITM_NO,ITM_TYP,USE_YN,MRRG_DT,MRRG_LOC) values (1011,'USR','Y',to_date('19/06/25','RR/MM/DD'),'전안');
+
+
+-- ara2_ibfile
+Insert into ARA2_IBFILE (FILE_NO,FILE_NM) values (101,'테스트 file');
+
+
+-- ara2_ibmsg
+Insert into ARA2_IBMSG (MSG_NO,MSG_CD,MSG_NM,MSG_CNTNT,CRE_DTTM) values (102,'IBMSG000','테스트문자','이문자는 테스트 발송입니다.',to_date('19/07/15','RR/MM/DD'));
+Insert into ARA2_IBMSG (MSG_NO,MSG_CD,MSG_NM,MSG_CNTNT,CRE_DTTM) values (103,'IBMSG001','아라키알림','아라키는 [%CHANGEWORD1%]입니다. %CHANGEWORD2%인증에 사용하세요.',to_date('19/07/15','RR/MM/DD'));
+
+
+-- ara2_ibsms
+Insert into ARA2_IBSMS (SMS_NO,SMS_NM) values (102,'테스트 sms');
+
+
+-- ara2_ibtkn
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (112,'to update token at 2019-07-18 15:32:28',to_date('19/07/18','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzNTE3OTQ4LCJyZXAiOiJOIn0.H7q_CWaiBGMkIyKrFj6-O74eljHTY24chdrSXHaz12A','Basic','20190719153228',to_date('19/07/19','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (113,'to update token at 2019-07-18 19:19:10',to_date('19/07/18','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzNTMxNTUwLCJyZXAiOiJOIn0.KTGnMakihf4uvY1cCnV1GIf9jN5Y02H0tjWCQp2eyeU','Basic','20190719191910',to_date('19/07/19','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (117,'to update token at 2019-07-21 17:18:37',to_date('19/07/21','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzNzgzNTE3LCJyZXAiOiJOIn0.lSNT0ieQyZkQ8vzN_iFIqdFcOxGcTrBHWkLQ78gH3JM','Basic','20190722171837',to_date('19/07/22','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (109,'to update token at 2019-07-15 20:57:46',to_date('19/07/15','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzMjc4MjY2LCJyZXAiOiJOIn0.VfOKKhqloJ7ijToPZlxIC-EXHyKxNZWjWiYeD1n1chg','Basic','20190716205746',to_date('19/07/16','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (114,'to update token at 2019-07-18 21:41:23',to_date('19/07/18','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzNTQwMDgzLCJyZXAiOiJOIn0.srt0x5ySVa_n5sEVv0vmFSO6DRcjwDpQwU9XC5tZYsQ','Basic','20190719214123',to_date('19/07/19','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (115,'to update token at 2019-07-18 23:59:23',to_date('19/07/18','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzNTQ4MzYzLCJyZXAiOiJOIn0.rXDi_mdjN_wD6Q4XbPnT8QswXj9du0ueTgIoyypH-oo','Basic','20190719235923',to_date('19/07/19','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (107,'to update token at 2019-07-15 15:25:37',to_date('19/07/15','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzMjU4MzM3LCJyZXAiOiJOIn0.HxELIaON4S1zq28IxPumLyUyzRFWKB9nVPy7WBgfVjU','Basic','20190716152537',to_date('19/07/16','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (108,'to update token at 2019-07-15 18:19:53',to_date('19/07/15','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzMjY4NzkzLCJyZXAiOiJOIn0.Th0JdYnuo_wxXshokATbyuUFSI-nmfZC01kq-5eAVOs','Basic','20190716181953',to_date('19/07/16','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (111,'to update token at 2019-07-17 20:30:07',to_date('19/07/17','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzNDQ5NDA3LCJyZXAiOiJOIn0.-P7rnG06tm24gNWbOnvQ3Wpwpvyk9jB-HKmq6cYFiz0','Basic','20190718203007',to_date('19/07/18','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (106,'to update token at 2019-07-14 21:55:42',to_date('19/07/14','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzMTk1MzQyLCJyZXAiOiJOIn0.fWMWLNn6-1GqsxR2Gra0uYKO8gbLC9jYzyo8PmvQrAA','Basic','20190715215542',to_date('19/07/15','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (110,'to update token at 2019-07-16 12:49:56',to_date('19/07/16','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzMzM1Mzk2LCJyZXAiOiJOIn0.blvBv4NfBBVEEuwvNf8R5gPGC-51vYDawuXJZgF_hlg','Basic','20190717124956',to_date('19/07/17','RR/MM/DD'));
+Insert into ARA2_IBTKN (TKN_NO,TKN_NM,CNNT_DTTM,ACCS_TKN,SCHM,EXPD,EXPD_DTTM) values (116,'to update token at 2019-07-19 15:07:48',to_date('19/07/19','RR/MM/DD'),'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzbXMiOiJZIiwiYXVkIjoidGFpbl9tc2ciLCJtbXMiOiJZIiwiZXhwIjoxNTYzNjAyODY4LCJyZXAiOiJOIn0.fWRIXolVPFpbNfY1Xn3R9coPMS5PlRT1p6OjgD4XKwI','Basic','20190720150748',to_date('19/07/20','RR/MM/DD'));
+
+
+-- 
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+delete from ara2_meta;
+delete from ara2_cdgrp;
+delete from ara2_code;
+
+delete from ara2_ara;
+delete from ara2_ctr;
+delete from ara2_str;
+delete from ara2_usr;
+
+delete from ara2_tel;
+delete from ara2_mbl;
+delete from ara2_eml;
+delete from ara2_bnk;
+delete from ara2_mrrg;
+
+delete from ara2_ibfile;
+delete from ara2_ibmsg;
+delete from ara2_ibsms;
+delete from ara2_ibtkn;
+
+
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+delete from ara2_acnt;
+delete from ara2_acnthist;
+
+delete from ara2_camp;
+delete from ara2_cpn;
+
+delete from ara2_cnnt;
+delete from ara2_login;
+
+
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+-- sequence
+
+drop sequence SEQ_ACNT    ;
+drop sequence SEQ_ACNTHIST;
+drop sequence SEQ_CAMP    ;
+drop sequence SEQ_CNNT    ;
+drop sequence SEQ_FILE    ;
+drop sequence SEQ_MSG     ;
+drop sequence SEQ_SMS     ;
+drop sequence SEQ_TKN     ;
+
+CREATE SEQUENCE  SEQ_ACNT      MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  SEQ_ACNTHIST  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  SEQ_CAMP      MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  SEQ_CNNT      MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  SEQ_FILE      MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  SEQ_MSG       MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  SEQ_SMS       MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE;
+CREATE SEQUENCE  SEQ_TKN       MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

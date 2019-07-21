@@ -10,6 +10,7 @@ public interface Ara2StrDAO {
 	
 	// /coupon/buyCpnListPage.do
 	public List<Map<String,Object>> selectCampList2(Map<String, Object> param) throws Exception;
+	public Map<String,Object> selectStrAcntInfo(Map<String, Object> param) throws Exception;
 	public int updateBuyCpnSht(Map<String, Object> param) throws Exception;
 
 	// /coupon/stateCpnListPage.do

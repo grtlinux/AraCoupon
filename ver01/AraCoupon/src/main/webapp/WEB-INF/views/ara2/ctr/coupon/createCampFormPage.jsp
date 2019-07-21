@@ -247,8 +247,8 @@
 				$('#campCpnCnt').focus();
 				return false;
 			}
-			if ($('#campCpnCnt').val() > 100) {
-				alert("쿠폰갯수가 100장을 넘을 수 없습니다.");
+			if ($('#campCpnCnt').val() > 1000) {
+				alert("쿠폰갯수가 1000장을 넘을 수 없습니다.");
 				$('#campCpnCnt').focus();
 				return false;
 			}
@@ -269,7 +269,7 @@
 			var typ = typ.substring(0, 3);
 			var cnt = $("#campCpnCnt").val();
 			var sum = cnt * mny;
-			if (sum > 1000000) {
+			if (sum > 10000000) {
 				alert("쿠폰발행금액이 10,000,000원을 넘을 수 없습니다.");
 				$('#campCpnCnt').focus();
 				return false;

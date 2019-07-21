@@ -29,6 +29,11 @@ public class Ara2StrServiceImpl implements Ara2StrService {
 	}
 
 	@Override
+	public Map<String, Object> selectStrAcntInfo(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.selectStrAcntInfo(param);
+	}
+
+	@Override
 	public int updateBuyCpnSht(Map<String, Object> param) throws Exception {
 		return this.ara2StrDAO.updateBuyCpnSht(param);
 	}

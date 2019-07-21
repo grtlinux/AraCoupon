@@ -112,26 +112,37 @@ public class Ara2StrController {
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
 		if (Flag.flag) {
+			// 소유하고 있는 계좌금액을 얻는다.
+			modelMap.putAll(this.ara2StrService.selectStrAcntInfo(modelMap));
+		}
+		if (Flag.flag) {
 			//
 			// 구매하려는 쿠폰금액이 계좌에 충분한지 확인한다.
+			//
+			long acntBlnc = ((BigDecimal) modelMap.get("ACNT_BLNC")).longValue();
 			//
 			int cpnSiz = Integer.parseInt(String.valueOf(modelMap.get("cpnSiz")));
 			long cpnMny = Long.parseLong(String.valueOf(modelMap.get("cpnMny")));
 			long cpnSum = cpnMny * cpnSiz;  // 계좌에 이 금액 이상이 있는지 확인한다.
-			// 쿠폰을 원하는 갯수 만큼 구매한다.
-			int updCnt = 0;
-			for (int i=0; i < cpnSiz; i++) {
-				int ret = this.ara2StrService.updateBuyCpnSht(modelMap);
-				if (Flag.flag) log.debug(">>>>> ret of this.ara2StrService.updateBuyCpnSht is " + ret);
-				updCnt += ret;
+			if (cpnSum <= acntBlnc) {
+				// 쿠폰을 원하는 갯수 만큼 구매한다.
+				int updCnt = 0;
+				for (int i=0; i < cpnSiz; i++) {
+					int ret = this.ara2StrService.updateBuyCpnSht(modelMap);
+					if (Flag.flag) log.debug(">>>>> ret of this.ara2StrService.updateBuyCpnSht is " + ret);
+					updCnt += ret;
+				}
+				cpnSum = cpnMny * updCnt;  // 실재 쿠폰구매에 사용한 금액
+				//
+				// 구매한 쿠폰금액은 계좌에서 차감한다.
+				//
+				modelMap.addAttribute("updCnt", updCnt);
+				modelMap.addAttribute("retCode", "0000");
+				modelMap.addAttribute("retMsg", String.format("액면가[%,d] 쿠폰 [%,d]장을 금액[%,d]에 구매하였습니다.", cpnMny, updCnt, cpnSum));
+			} else {
+				modelMap.addAttribute("retCode", "9999");
+				modelMap.addAttribute("retMsg", String.format("쿠폰구매금액이 부족합니다. (잔액: %,d)", acntBlnc));
 			}
-			cpnSum = cpnMny * updCnt;  // 실재 쿠폰구매에 사용한 금액
-			//
-			// 구매한 쿠폰금액은 계좌에서 차감한다.
-			//
-			modelMap.addAttribute("updCnt", updCnt);
-			modelMap.addAttribute("retCode", "0000");
-			modelMap.addAttribute("retMsg", String.format("액면가[%,d] 쿠폰 [%,d]장을 금액[%,d]에 구매하였습니다.", cpnMny, updCnt, cpnSum));
 		}
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		jsonView.render(modelMap, request, response);
