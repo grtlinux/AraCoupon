@@ -16,7 +16,7 @@
 	<!-- container for table panel -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="container-fluid">
-		<div class="panel panel-info">
+		<div class="panel panel-success">
 			<div class="panel-heading">
 				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;가게에서 갖고있는 고객이 결제에 사용한 쿠폰목록. 나중에 이 쿠폰으로 정산을 요청할 수 있다.</h3>
 			</div>
