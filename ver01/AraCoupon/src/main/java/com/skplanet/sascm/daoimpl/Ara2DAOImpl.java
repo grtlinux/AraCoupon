@@ -11,11 +11,13 @@ import com.skplanet.sascm.dao.Ara2DAO;
 @Repository("ara2DAO")
 public class Ara2DAOImpl extends AbstractDAO implements Ara2DAO {
 
+	// /index.do
 	@Override
 	public Map<String, Object> selectItemInfo(Map<String, Object> param) throws Exception {
 		return (Map<String,Object>) selectOne("Ara2.selectItemInfo", param);
 	}
 
+	// /registArakey.do
 	@Override
 	public int insertCnntAraKey(Map<String, Object> param) throws Exception {
 		return (int) insert("Ara2.insertCnntAraKey", param);
@@ -34,5 +36,31 @@ public class Ara2DAOImpl extends AbstractDAO implements Ara2DAO {
 	@Override
 	public Map<String, Object> selectCnntArakeyInfo(Map<String, Object> param) throws Exception {
 		return (Map<String,Object>) selectOne("Ara2.selectCnntArakeyInfo", param);
+	}
+
+	// /register/registerUsrFormPage.do
+	@Override
+	public Map<String, Object> selectChkNmMblEml(Map<String, Object> param) throws Exception {
+		return (Map<String,Object>) selectOne("Ara2.selectChkNmMblEml", param);
+	}
+
+	@Override
+	public Map<String, Object> selectUsrNo(Map<String, Object> param) throws Exception {
+		return (Map<String,Object>) selectOne("Ara2.selectUsrNo", param);
+	}
+
+	@Override
+	public int insertAra2Usr(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2.insertAra2Usr", param);
+	}
+
+	@Override
+	public int insertAra2Mbl(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2.insertAra2Mbl", param);
+	}
+
+	@Override
+	public int insertAra2Eml(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2.insertAra2Eml", param);
 	}
 }

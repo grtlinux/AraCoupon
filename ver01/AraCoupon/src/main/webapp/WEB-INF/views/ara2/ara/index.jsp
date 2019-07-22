@@ -8,6 +8,13 @@
 	<title>Ara Main</title>
 </head>
 <%@ include file="/WEB-INF/views/ara2/common/cssAra.jsp"%>
+<script type="text/javascript">
+	// no backward on history
+	history.pushState(null, null, document.URL);
+	window.addEventListener('popstate', function () {
+		history.pushState(null, null, document.URL);
+	});
+</script>
 <body>
 <%@ include file="/WEB-INF/views/ara2/common/navbarAra.jsp"%>
 <%@ include file="/WEB-INF/views/ara2/common/jumbotron.jsp"%>
@@ -103,7 +110,10 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<td>고객ID</td>
+									<td>
+										<button id='btnRegisterUsr' type="button" class="btn btn-danger btn-sm" onclick="fn_registerUsr();"> 고객등록 </button>&nbsp;&nbsp;
+										고객ID
+									</td>
 									<td class="text-left">
 										<input id="usrid" type="text" value=''>
 										<button id='btnRequestAraKey' type="button" class="btn btn-info btn-sm" onclick="fn_requestAraKey('USR');"> 아라키(AraKey) 요청 </button>
@@ -514,6 +524,10 @@
 				}
 			});
 		}
+	}
+	function fn_registerUsr() {
+		if (true) console.log(">>>>> ", arguments.callee.caller);
+		fn_loadPostPage("#tempForm", "${staticPATH}/ara2/register/registerUsrFormPage.do");		
 	}
 </script>
 </html>

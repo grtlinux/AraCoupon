@@ -72,6 +72,49 @@ public class Ara2Controller {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(value = "/register/registerUsrFormPage.do", method = RequestMethod.POST)
+	public String registerUsrFormPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		return PATH + "/register/registerUsrFormPage";
+	}
+
+	@RequestMapping(value = "/register/createUsrInfo.do", method = RequestMethod.POST)
+	public void createUsrInfo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			modelMap.putAll(this.ara2Service.selectChkNmMblEml(modelMap));
+			if (modelMap.get("USR_NM") != null) {
+				modelMap.addAttribute("retCode", "9999");
+				modelMap.addAttribute("retMsg", String.format("이미 등록된 고객명 입니다."));
+			} else if (modelMap.get("MBL_NUM") != null) {
+				modelMap.addAttribute("retCode", "9999");
+				modelMap.addAttribute("retMsg", String.format("이미 등록된 모바일번호 입니다."));
+			} else if (modelMap.get("EML_ADDR") != null) {
+				modelMap.addAttribute("retCode", "9999");
+				modelMap.addAttribute("retMsg", String.format("이미 등록된 이메일 입니다."));
+			} else {
+				modelMap.putAll(this.ara2Service.selectUsrNo(modelMap));
+				this.ara2Service.insertAra2Usr(modelMap);
+				this.ara2Service.insertAra2Mbl(modelMap);
+				this.ara2Service.insertAra2Eml(modelMap);
+				
+				modelMap.addAttribute("retCode", "0000");
+				modelMap.addAttribute("retMsg", String.format("고객이 정상적으로 등록되었습니다."));
+			}
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	// Ara
 	
 	@RequestMapping(value = "/requestAraKey.do", method = RequestMethod.POST)

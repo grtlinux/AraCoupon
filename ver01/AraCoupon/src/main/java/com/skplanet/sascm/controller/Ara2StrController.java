@@ -423,7 +423,8 @@ public class Ara2StrController {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
-		if (Flag.flag) {
+		if (!Flag.flag) {
+			// use the arakey
 			Map<String,Object> map = this.ara2StrService.selectCnntArakeyInfoOnCtr(modelMap);
 			if (map == null) {
 				// (userid, arakey) 존재하지 않으면 인증 실패
@@ -446,6 +447,20 @@ public class Ara2StrController {
 				}
 				modelMap.addAttribute("map", map);
 				this.ara2StrService.updateCnntByCnntidOnCtr(modelMap);
+			}
+		}
+		if (Flag.flag) {
+			// not use the arakey
+			if (Flag.flag) {
+				// 쿠폰번호를 정리한다.
+				String[] arrCpnNo = String.valueOf(modelMap.get("cpnNoList")).split(",");
+				modelMap.addAttribute("arrCpnNo", arrCpnNo);
+			}
+			// (userid, arakey) 존재하면 정보를 리턴하고 자료를 update 한다.
+			this.ara2StrService.updateCpnNoListOnCtr(modelMap);
+			if (Flag.flag) {
+				modelMap.addAttribute("retCode", "0000");
+				modelMap.addAttribute("retMsg", String.format("정상적으로 처리되었습니다."));
 			}
 		}
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));

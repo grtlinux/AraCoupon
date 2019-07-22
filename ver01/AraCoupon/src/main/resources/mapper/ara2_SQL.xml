@@ -158,6 +158,65 @@
 	</select>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /register/registerUsrFormPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectChkNmMblEml" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2.selectChkNmMblEml */
+			A.ROWNO
+			, A.YYMMDD
+			, B.USR_NM
+			, C.MBL_NUM
+			, D.EML_ADDR
+		FROM
+			(
+				SELECT ROWNUM AS ROWNO, TO_CHAR(SYSDATE, 'YYMMDD') AS YYMMDD FROM DUAL
+			) A
+				LEFT JOIN (
+					SELECT ROWNUM AS ROWNO, USR_NM FROM ARA2_USR WHERE 1=1 AND USR_NM = #{usrName}
+				) B ON B.ROWNO = A.ROWNO
+				LEFT JOIN (
+					SELECT ROWNUM AS ROWNO, MBL_NUM FROM ARA2_MBL WHERE 1=1 AND MBL_NUM = #{usrMobile}
+				) C ON C.ROWNO = A.ROWNO
+				LEFT JOIN (
+					SELECT ROWNUM AS ROWNO, EML_ADDR FROM ARA2_EML WHERE 1=1 AND EML_ADDR = #{usrEmail}
+				) D ON D.ROWNO = A.ROWNO
+		WHERE 1=1
+	</select>
+
+	<!-- comment -->
+	<select id="selectUsrNo" parameterType="Map" resultType="Map">
+		SELECT SEQ_USR.NEXTVAL AS USR_NO FROM DUAL /* Ara2.selectSeqStrNextval */
+	</select>
+
+	<!-- comment -->
+	<insert id="insertAra2Usr" parameterType="Map">
+		INSERT INTO  /* Ara2.insertAra2Usr */
+			ARA2_USR
+		VALUES
+			( #{USR_NO}, #{USR_NO}, #{usrName}, null )
+	</insert>
+
+	<!-- comment -->
+	<insert id="insertAra2Mbl" parameterType="Map">
+		INSERT INTO  /* Ara2.insertAra2Mbl */
+			ARA2_MBL
+		VALUES
+			( #{USR_NO}, 'USR', 'Y', 1, 'mbl-1', #{usrMobile} )
+	</insert>
+
+	<!-- comment -->
+	<insert id="insertAra2Eml" parameterType="Map">
+		INSERT INTO  /* Ara2.insertAra2Eml */
+			ARA2_EML
+		VALUES
+			( #{USR_NO}, 'USR', 'Y', 1, 'eml-1', #{usrEmail} )
+	</insert>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->

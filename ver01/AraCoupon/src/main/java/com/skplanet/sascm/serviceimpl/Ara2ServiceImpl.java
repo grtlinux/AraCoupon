@@ -15,11 +15,13 @@ public class Ara2ServiceImpl implements Ara2Service {
 	@Resource(name = "ara2DAO")
 	private Ara2DAO ara2DAO;
 
+	// /index.do
 	@Override
 	public Map<String, Object> selectItemInfo(Map<String, Object> param) throws Exception {
 		return this.ara2DAO.selectItemInfo(param);
 	}
 
+	// /registArakey.do
 	@Override
 	public int insertCnntAraKey(Map<String, Object> param) throws Exception {
 		return this.ara2DAO.insertCnntAraKey(param);
@@ -38,5 +40,31 @@ public class Ara2ServiceImpl implements Ara2Service {
 	@Override
 	public Map<String, Object> selectCnntArakeyInfo(Map<String, Object> param) throws Exception {
 		return this.ara2DAO.selectCnntArakeyInfo(param);
+	}
+
+	// /register/registerUsrFormPage.do
+	@Override
+	public Map<String, Object> selectChkNmMblEml(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.selectChkNmMblEml(param);
+	}
+
+	@Override
+	public Map<String, Object> selectUsrNo(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.selectUsrNo(param);
+	}
+
+	@Override
+	public int insertAra2Usr(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.insertAra2Usr(param);
+	}
+
+	@Override
+	public int insertAra2Mbl(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.insertAra2Mbl(param);
+	}
+
+	@Override
+	public int insertAra2Eml(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.insertAra2Eml(param);
 	}
 }

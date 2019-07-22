@@ -151,11 +151,11 @@
 								<td>
 									<div>
 										<input id="ctrid" type="text" value='11' readonly>
-										<button id='btnSendAraKeyToCtr' type="button" class="btn btn-danger btn-sm" onclick="fn_sendAraKeyToCtr();"> 센터에게 아라키 전송 </button>
+										<button id='btnSendAraKeyToCtr' type="button" class="btn btn-danger btn-sm hide" onclick="fn_sendAraKeyToCtr();"> 센터에게 아라키 전송 </button>
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr class="hide">
 								<td>센터의 아라키 입력</td>
 								<td>
 									<div>
