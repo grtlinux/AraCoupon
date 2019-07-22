@@ -136,6 +136,10 @@ public class Ara2StrController {
 				//
 				// 구매한 쿠폰금액은 계좌에서 차감한다.
 				//
+				modelMap.addAttribute("cpnSum", cpnSum);
+				int ret = this.ara2StrService.insertBuyCpnSum(modelMap);
+				if (Flag.flag) log.debug(">>>>> ret of this.ara2StrService.insertBuyCpnSum is " + ret);
+				//
 				modelMap.addAttribute("updCnt", updCnt);
 				modelMap.addAttribute("retCode", "0000");
 				modelMap.addAttribute("retMsg", String.format("액면가[%,d] 쿠폰 [%,d]장을 금액[%,d]에 구매하였습니다.", cpnMny, updCnt, cpnSum));
@@ -443,6 +447,43 @@ public class Ara2StrController {
 				modelMap.addAttribute("map", map);
 				this.ara2StrService.updateCnntByCnntidOnCtr(modelMap);
 			}
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping(value = "/account/selectAcntInOutListPage.do", method = RequestMethod.POST)
+	public String selectAcntInOutListPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			Map<String,Object> map = this.ara2StrService.selectItemInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+		return PATH + "/account/selectAcntInOutListPage";
+	}
+	
+	@RequestMapping(value = "/account/selectAcntInOutList.do", method = RequestMethod.POST)
+	public void selectInOutAcntList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2StrService.selectAcntInOutList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
 		}
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		jsonView.render(modelMap, request, response);

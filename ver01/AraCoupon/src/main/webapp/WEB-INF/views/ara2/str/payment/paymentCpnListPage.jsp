@@ -150,7 +150,7 @@
 								<td>센터ID</td>
 								<td>
 									<div>
-										<input id="ctrid" type="text" value=''>
+										<input id="ctrid" type="text" value='11' readonly>
 										<button id='btnSendAraKeyToCtr' type="button" class="btn btn-danger btn-sm" onclick="fn_sendAraKeyToCtr();"> 센터에게 아라키 전송 </button>
 									</div>
 								</td>

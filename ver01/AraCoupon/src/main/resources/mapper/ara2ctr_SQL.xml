@@ -247,6 +247,113 @@
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /payment/paymentCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectPaymentCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectPaymentCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_TYP = 'STR'
+			AND A.CPN_PHS = '5'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateCpnNosPhs" parameterType="Map">
+		UPDATE  /* Ara2Ctr.updateCpnNosPhs */
+			ARA2_CPN
+		SET
+			CPN_PHS = #{phsTo}
+			<if test="phsTo == 0">
+				, CPN_CNTNT = '정산중'
+			</if>
+			<if test="phsTo == 6">
+				, CPN_CNTNT = '정산요청 완료'
+			</if>
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CPN_PHS = #{phsFrm}
+			AND CPN_NO IN ( ''
+			<if test="arrCpnNo != ''">
+				,<foreach collection="arrCpnNo" separator="," index="index" >'${arrCpnNo[index]}'</foreach>
+			</if>
+			)
+	</update>
+
+
+	<!-- comment -->
+	<insert id="insertAcntDpst" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertAcntDpst */
+			ARA2_ACNTHIST
+		SELECT
+			SEQ_ACNTHIST.NEXTVAL
+			, A.ITM_ID
+			, A.ITM_TYP
+			, C.SUM_MNY
+			, 0
+			, A.ACNT_BLNC + C.SUM_MNY
+			, '005'
+			, '쿠폰정산과 입금함'
+			, SYSDATE
+			, SYSDATE
+		FROM
+			ARA2_ACNTHIST A
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+				GROUP BY
+					ITM_ID
+			) B
+			, (
+				SELECT
+					C.ITM_NO
+					, SUM(C.CPN_MNY)  AS SUM_MNY
+				FROM
+					ARA2_CPN C
+				WHERE 1=1
+					AND C.CPN_PHS = '0'
+				GROUP BY
+					C.ITM_NO
+			) C
+		WHERE 1=1
+			AND C.ITM_NO = B.ITM_ID
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+	</insert>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- /account/createAcntListPage.do -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
@@ -289,16 +396,16 @@
 	<!-- comment -->
 	<insert id="insertStrAcnt" parameterType="Map">
 		INSERT INTO  /* Ara2Ctr.insertStrAcnt */
-			ARA2_ACNTHIST 
-		VALUES ( 
-			SEQ_ACNTHIST.NEXTVAL 
-			, #{strid} 
-			, 'STR' 
-			, 0 , 0 , 0 
-			, '001' 
-			, '계좌를 생성함' 
-			, SYSDATE 
-			, SYSDATE 
+			ARA2_ACNTHIST
+		VALUES (
+			SEQ_ACNTHIST.NEXTVAL
+			, #{strid}
+			, 'STR'
+			, 0 , 0 , 0
+			, '001'
+			, '계좌를 생성함'
+			, SYSDATE
+			, SYSDATE
 		)
 	</insert>
 

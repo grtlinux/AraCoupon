@@ -61,7 +61,7 @@
 				</div>
 				<div id="sysbtn" class="col-md-12" style="text-align:right;margin-bottom:10px;">
 					<input id="sumMsg" type="text" size="40" value="선택된 쿠폰금액: 0 원 (0 장)">
-					<button type="button" class="btn btn-info btn-sm" onclick="fn_modalToggle('#modelReqCalcCpnList');"> 쿠폰정산요청 </button>
+					<button type="button" class="btn btn-info btn-sm" onclick="fn_modalToggle('#modelCalcCpnList');"> 쿠폰정산처리 </button>
 					<button type="button" class="btn btn-info btn-sm" onclick="fn_refresh();"> 새로고침 </button>
 					<button type="button" class="btn btn-success btn-sm" onclick="fn_index();"><i class="fa fa-times" aria-hidden="true"></i> 닫기</button>
 				</div>
@@ -130,7 +130,7 @@
 		</div>
 	</div>	
 	<div class="row">
-		<div class="modal" id="modelReqCalcCpnList" tabindex="-1">
+		<div class="modal" id="modelCalcCpnList" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header alert alert-success">
@@ -145,23 +145,6 @@
 							<tr>
 								<td>정산할 쿠폰 갯수</td>
 								<td><span id="modalSumCnt">0</span> 장</td>
-							</tr>
-							<tr>
-								<td>센터ID</td>
-								<td>
-									<div>
-										<input id="ctrid" type="text" value=''>
-										<button id='btnSendAraKeyToCtr' type="button" class="btn btn-danger btn-sm" onclick="fn_sendAraKeyToCtr();"> 센터에게 아라키 전송 </button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>센터의 아라키 입력</td>
-								<td>
-									<div>
-										<input id="arakey" type="text" value=''>
-									</div>
-								</td>
 							</tr>
 						</table>
 						<br>
@@ -179,12 +162,11 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
-		<input type="hidden" id="_strid" name="strid" value='${info.STR_ID}' />
-		<input type='hidden' id='_ctrid' name='ctrid' value='' />
+		<input type='hidden' id='_ctrid' name='ctrid' value='${info.CTR_ID}' />
+		<input type="hidden" id="_strid" name="strid" value='' />
 		<input type='hidden' id='_sumMny' name='sumMny' value='' />
 		<input type='hidden' id='_sumCnt' name='sumCnt' value='' />
 		<input type='hidden' id='_cpnNoList' name='cpnNoList' value='' />
-		<input type='hidden' id='_arakey' name='arakey' value='' />
 	</form>
 
 
@@ -234,8 +216,8 @@
 					$('#tempForm > #_sumMny').val(sumMny);
 					$('#tempForm > #_sumCnt').val(sumCnt);
 					$('#tempForm > #_cpnNoList').val(cpnNoArr.join(','));
-					$('#modelReqCalcCpnList #modalSumMny').text(fn_comma(sumMny));
-					$('#modelReqCalcCpnList #modalSumCnt').text(fn_comma(sumCnt));
+					$('#modelCalcCpnList #modalSumMny').text(fn_comma(sumMny));
+					$('#modelCalcCpnList #modalSumCnt').text(fn_comma(sumCnt));
 				}
 			});
 		}
@@ -243,7 +225,7 @@
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		jQuery.ajax({
-			url           : "${staticPATH}/str2/payment/selectPaymentCpnList.do",
+			url           : "${staticPATH}/ctr2/payment/selectPaymentCpnList.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",
@@ -395,8 +377,8 @@
 							$('#tempForm > #_sumMny').val(sumMny);
 							$('#tempForm > #_sumCnt').val(sumCnt);
 							$('#tempForm > #_cpnNoList').val(cpnNoArr.join(','));
-							$('#modelReqCalcCpnList #modalSumMny').text(fn_comma(sumMny));
-							$('#modelReqCalcCpnList #modalSumCnt').text(fn_comma(sumCnt));
+							$('#modelCalcCpnList #modalSumMny').text(fn_comma(sumMny));
+							$('#modelCalcCpnList #modalSumCnt').text(fn_comma(sumCnt));
 						});
 					}
 					if (true) {
@@ -420,51 +402,18 @@
 	function fn_refresh() {
 		selectList();
 	}
-	function fn_sendAraKeyToCtr() {
-		if (true) console.log(">>>>> ", arguments.callee.caller);
-		if (true) {
-			// validation
-		}
-		if (true) {
-			// transfer
-			$('#tempForm #_ctrid').val($('#modelReqCalcCpnList #ctrid').val());
-		}
-		if (true) {
-			// ajax call
-			jQuery.ajax({
-				url           : "${staticPATH}/str2/payment/sendAraKeyToCtr.do",
-				dataType      : "JSON",
-				scriptCharset : "UTF-8",
-				type          : "POST",
-				data          : $('#tempForm').serialize(),
-				success: function(result, option) {
-					if (option == "success"){
-						alert("메시지: " + result.retMsg);
-						//fn_modalToggle('#modelReqCalcCpnList');
-						//fn_refresh();
-					} else {
-						alert("에러가 발생하였습니다.");
-					}
-				},
-				error: function(result, option) {
-					alert("에러가 발생하였습니다.");
-				}
-			});
-		}
-	}
 	function fn_calculateCpnNoList() {
-		if (true) console.log(">>>>> ", arguments.callee.caller);
+		if (true) console.log(">>>>> ", arguments.callee.caller, $('#tempForm').serialize());
 		if (true) {
 			// validation
 		}
 		if (true) {
 			// transfer
-			$('#tempForm #_arakey').val($('#modelReqCalcCpnList #arakey').val());
 		}
 		if (true) {
 			// ajax call
 			jQuery.ajax({
-				url           : "${staticPATH}/str2/payment/calculateCpnNoList.do",
+				url           : "${staticPATH}/ctr2/payment/calculateCpnNoList.do",
 				dataType      : "JSON",
 				scriptCharset : "UTF-8",
 				type          : "POST",
@@ -472,7 +421,7 @@
 				success: function(result, option) {
 					if (option == "success"){
 						alert("메시지: " + result.retMsg);
-						fn_modalToggle('#modelReqCalcCpnList');
+						fn_modalToggle('#modelCalcCpnList');
 						fn_refresh();
 					} else {
 						alert("에러가 발생하였습니다.");

@@ -77,6 +77,21 @@ public class Ara2CtrServiceImpl implements Ara2CtrService {
 
 
 	// /payment/paymentCpnListPage.do
+	@Override
+	public List<Map<String, Object>> selectPaymentCpnList(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.selectPaymentCpnList(param);
+	}
+
+	@Override
+	public int updateCpnNosPhs(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.updateCpnNosPhs(param);
+	}
+
+	@Override
+	public int insertAcntDpst(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.insertAcntDpst(param);
+	}
+
 
 
 	// /account/createAcntListPage.do
@@ -118,6 +133,4 @@ public class Ara2CtrServiceImpl implements Ara2CtrService {
 	public int insertStrWthdProc(Map<String, Object> param) throws Exception {
 		return this.ara2CtrDAO.insertStrWthdProc(param);
 	}
-
-
 }

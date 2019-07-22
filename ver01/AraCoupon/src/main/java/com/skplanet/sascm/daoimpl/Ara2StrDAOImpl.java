@@ -34,6 +34,11 @@ public class Ara2StrDAOImpl extends AbstractDAO implements Ara2StrDAO {
 		return (int) update("Ara2Str.updateBuyCpnSht", param);
 	}
 
+	@Override
+	public int insertBuyCpnSum(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2Str.insertBuyCpnSum", param);
+	}
+
 	// /coupon/stateCpnListPage.do
 	@Override
 	public List<Map<String, Object>> selectStateCpnList(Map<String, Object> param) throws Exception {
@@ -110,5 +115,11 @@ public class Ara2StrDAOImpl extends AbstractDAO implements Ara2StrDAO {
 	@Override
 	public int updateCnntByCnntidOnCtr(Map<String, Object> param) throws Exception {
 		return (int) update("Ara2Str.updateCnntByCnntidOnCtr", param);
+	}
+
+	// /account/selectAcntInOutListPage.do
+	@Override
+	public List<Map<String, Object>> selectAcntInOutList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Str.selectAcntInOutList", param);
 	}
 }

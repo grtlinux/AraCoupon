@@ -248,6 +248,57 @@ public class Ara2CtrController {
 		return PATH + "/payment/paymentCpnListPage";
 	}
 	
+	@RequestMapping(value = "/payment/selectPaymentCpnList.do", method = RequestMethod.POST)
+	public void selectPaymentCpnList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2CtrService.selectPaymentCpnList(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	@RequestMapping(value = "/payment/calculateCpnNoList.do", method = RequestMethod.POST)
+	public void calculateCpnNoList(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			String[] arrCpnNo = String.valueOf(modelMap.get("cpnNoList")).split(",");
+			modelMap.addAttribute("arrCpnNo", arrCpnNo);
+		}
+		if (Flag.flag) {
+			int ret = 0;
+			// ara2_cpn.cpn_phs: 5 -> 0
+			modelMap.addAttribute("phsFrm", "5");
+			modelMap.addAttribute("phsTo", "0");
+			ret = this.ara2CtrService.updateCpnNosPhs(modelMap);
+			if (Flag.flag) log.debug(">>>>> ret of this.ara2CtrService.updateCpnNosPhs is " + ret);
+			
+			// group by str -> sum, insert into ara2_acnthist
+			ret = this.ara2CtrService.insertAcntDpst(modelMap);
+			if (Flag.flag) log.debug(">>>>> ret of this.ara2CtrService.insertAcntDpst is " + ret);
+			
+			// ara2_cpn.cpn_phs: P -> 6
+			modelMap.addAttribute("phsFrm", "0");
+			modelMap.addAttribute("phsTo", "6");
+			ret = this.ara2CtrService.updateCpnNosPhs(modelMap);
+			if (Flag.flag) log.debug(">>>>> ret of this.ara2CtrService.updateCpnNosPhs is " + ret);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "[성공] 성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

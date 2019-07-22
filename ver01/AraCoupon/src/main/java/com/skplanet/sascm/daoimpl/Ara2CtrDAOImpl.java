@@ -72,6 +72,20 @@ public class Ara2CtrDAOImpl extends AbstractDAO implements Ara2CtrDAO {
 	}
 
 	// /payment/paymentCpnListPage.do
+	@Override
+	public List<Map<String, Object>> selectPaymentCpnList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectPaymentCpnList", param);
+	}
+
+	@Override
+	public int updateCpnNosPhs(Map<String, Object> param) throws Exception {
+		return (int) update("Ara2Ctr.updateCpnNosPhs", param);
+	}
+
+	@Override
+	public int insertAcntDpst(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2Ctr.insertAcntDpst", param);
+	}
 
 
 	// /account/createAcntListPage.do
@@ -113,5 +127,4 @@ public class Ara2CtrDAOImpl extends AbstractDAO implements Ara2CtrDAO {
 	public int insertStrWthdProc(Map<String, Object> param) throws Exception {
 		return (int) insert("Ara2Ctr.insertStrWthdProc", param);
 	}
-
 }

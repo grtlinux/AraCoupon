@@ -38,6 +38,11 @@ public class Ara2StrServiceImpl implements Ara2StrService {
 		return this.ara2StrDAO.updateBuyCpnSht(param);
 	}
 
+	@Override
+	public int insertBuyCpnSum(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.insertBuyCpnSum(param);
+	}
+
 	// /coupon/stateCpnListPage.do
 	@Override
 	public List<Map<String, Object>> selectStateCpnList(Map<String, Object> param) throws Exception {
@@ -114,5 +119,11 @@ public class Ara2StrServiceImpl implements Ara2StrService {
 	@Override
 	public int updateCnntByCnntidOnCtr(Map<String, Object> param) throws Exception {
 		return this.ara2StrDAO.updateCnntByCnntidOnCtr(param);
+	}
+
+	// /account/selectAcntInOutListPage.do
+	@Override
+	public List<Map<String, Object>> selectAcntInOutList(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.selectAcntInOutList(param);
 	}
 }

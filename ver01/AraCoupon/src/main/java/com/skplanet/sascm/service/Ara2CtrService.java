@@ -29,6 +29,9 @@ public interface Ara2CtrService {
 
 
 	// /payment/paymentCpnListPage.do
+	public List<Map<String,Object>> selectPaymentCpnList(Map<String, Object> param) throws Exception;
+	public int updateCpnNosPhs(Map<String, Object> param) throws Exception;
+	public int insertAcntDpst(Map<String, Object> param) throws Exception;
 
 
 	// /account/createAcntListPage.do

@@ -12,6 +12,7 @@ public interface Ara2StrService {
 	public List<Map<String,Object>> selectCampList2(Map<String, Object> param) throws Exception;
 	public Map<String,Object> selectStrAcntInfo(Map<String, Object> param) throws Exception;
 	public int updateBuyCpnSht(Map<String, Object> param) throws Exception;
+	public int insertBuyCpnSum(Map<String, Object> param) throws Exception;
 
 	// /coupon/stateCpnListPage.do
 	public List<Map<String,Object>> selectStateCpnList(Map<String, Object> param) throws Exception;
@@ -33,4 +34,7 @@ public interface Ara2StrService {
 	public Map<String,Object> selectCnntArakeyInfoOnCtr(Map<String, Object> param) throws Exception;
 	public int updateCpnNoListOnCtr(Map<String, Object> param) throws Exception;
 	public int updateCnntByCnntidOnCtr(Map<String, Object> param) throws Exception;
+
+	// /account/selectAcntInOutListPage.do
+	public List<Map<String,Object>> selectAcntInOutList(Map<String, Object> param) throws Exception;
 }

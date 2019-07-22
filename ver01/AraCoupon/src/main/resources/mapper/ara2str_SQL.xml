@@ -152,6 +152,40 @@
 	</update>
 
 
+	<!-- comment -->
+	<insert id="insertBuyCpnSum" parameterType="Map">
+		INSERT INTO  /* Ara2Str.updateBuyCpnSht */
+			ARA2_ACNTHIST
+		SELECT
+			SEQ_ACNTHIST.NEXTVAL
+			, A.ITM_ID
+			, A.ITM_TYP
+			, 0
+			, #{cpnSum}
+			, A.ACNT_BLNC - #{cpnSum}
+			, '004'
+			, '쿠폰구매용 출금함'
+			, SYSDATE
+			, SYSDATE
+		FROM
+			ARA2_ACNTHIST A
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+					AND ITM_ID = #{strid}
+				GROUP BY
+					ITM_ID
+			) B
+		WHERE 1=1
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+	</insert>
+
+
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- /coupon/stateCpnListPage.do -->
@@ -357,7 +391,7 @@
 
 	<!-- comment -->
 	<select id="selectPaymentCpnList" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Usr.selectUseCpnList */
+		SELECT  /* Ara2Str.selectPaymentCpnList */
 			A.CAMP_NO
 			, A.ITM_NO
 			, A.ITM_TYP
@@ -493,6 +527,33 @@
 			</if>
 			)
 	</update>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /account/selectAcntInOutListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectAcntInOutList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectAcntInOutList */
+			A.ACNTHIST_NO
+			, A.ITM_ID
+			, A.ITM_TYP
+			, A1.STR_NM
+			, A.ACNT_DPST
+			, A.ACNT_WTHD
+			, A.ACNT_BLNC
+			, A.ETC_CD
+			, A.ETC_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')  AS CRE_DTTM
+		FROM
+			ARA2_ACNTHIST A
+				LEFT JOIN ARA2_STR A1 ON A1.STR_ID = A.ITM_ID
+		WHERE 1=1
+			AND A.ITM_ID = #{strid}
+		ORDER BY
+			A.ACNTHIST_NO DESC
+	</select>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
