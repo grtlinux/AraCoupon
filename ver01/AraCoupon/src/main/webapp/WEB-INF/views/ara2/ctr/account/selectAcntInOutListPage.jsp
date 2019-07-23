@@ -28,7 +28,7 @@
 							<option value="${str.STR_ID}" <c:if test="${str.STR_ID == '101'}">selected</c:if> >${str.STR_ID}:${str.STR_NM}</option>
 						</c:forEach>
 					</select>
-					<button type="button" class="btn btn-info btn-sm" onclick="fn_selectAcntInOutList();"> 정보검색 </button>
+					<button type="button" class="btn btn-info btn-sm hide" onclick="fn_selectAcntInOutList();"> 정보검색 </button>
 				</div>
 				<br>
 				<div class="table-responsive">
@@ -269,6 +269,12 @@
 		if (true) {
 			$('#btnDpst').attr('disabled', true);
 			$('#btnWthd').attr('disabled', true);
+		}
+		if (true) {
+			$('#selectStrid').on('change', function() {
+				fn_selectAcntInOutList();
+			});
+			$('#selectStrid').trigger('change');
 		}
 	}
 	function selectList() {

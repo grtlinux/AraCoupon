@@ -5,12 +5,21 @@
 ------------------------------------------------------------------------------------
 -- sequence
 
+drop sequence seq_usr;
+drop sequence seq_str;
+drop sequence seq_ctr;
 drop sequence seq_acnt;
 drop sequence seq_acnthist;
 
+CREATE SEQUENCE seq_usr INCREMENT BY 1 START WITH 1000;
+CREATE SEQUENCE seq_str INCREMENT BY 1 START WITH 100;
+CREATE SEQUENCE seq_ctr INCREMENT BY 1 START WITH 10;
 CREATE SEQUENCE seq_acnt INCREMENT BY 1 START WITH 100;
 CREATE SEQUENCE seq_acnthist INCREMENT BY 1 START WITH 100;
 
+select seq_usr.nextval from dual;
+select seq_str.nextval from dual;
+select seq_ctr.nextval from dual;
 select seq_acnt.nextval from dual;
 select seq_acnthist.nextval from dual;
 
@@ -86,10 +95,12 @@ select
 	a.acnthist_no
 	, a.itm_id
 	, a.itm_typ
+	, a1.str_nm
 	, a.acnt_blnc
 	, a.cre_dttm
 from
 	ara2_acnthist a
+		left join ara2_str a1 on A1.STR_ID = a.itm_id
 	, (
 		select
 			itm_id
@@ -104,6 +115,8 @@ from
 where 1=1
 	and a.itm_id = b.itm_id
 	and a.acnthist_no = b.max_acnthist_no
+order by
+	a.itm_id
 ;
 
 ------------------------------------------------------------------------------------
@@ -178,19 +191,258 @@ select * from ara2_acnthist where itm_id = 101 order by acnthist_no desc;
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
+-- selectStrList
+
+select
+	a.str_id
+	, a.str_nm
+from
+	ara2_str a
+where 1=1
+order by
+	a.str_id
+;
+
+------------------------------------------------------------------------------------
+-- selectAcntInOutList
+
+select * from ara2_acnthist;
+
+select
+	a.acnthist_no
+	, a.itm_id
+	, a.itm_typ
+	, a1.str_nm
+	, A.ACNT_DPST
+	, a.acnt_wthd
+	, a.acnt_blnc
+	, a.etc_cd
+	, a.etc_cntnt
+	, to_char(a.cre_dttm, 'YY-MM-DD HH24:MI')  as cre_dttm
+from
+	ara2_acnthist a
+		left join ara2_str a1 on a1.str_id = a.itm_id
+where 1=1
+	and a.itm_id = 101
+order by
+	a.acnthist_no desc
+;
+
+------------------------------------------------------------------------------------
+-- selectStrAcntList
+select
+	a.str_id
+	, a.str_nm
+	, a1.acnt_blnc
+from
+	ara2_str a
+		left join (
+			select
+				b.acnthist_no
+				, b.itm_id
+				, b.itm_typ
+				, b.acnt_blnc
+			from
+				ara2_acnthist b
+				, (
+					select
+						itm_id
+						, max(acnthist_no)  as max_acnthist_no
+					from
+						ara2_acnthist
+					where 1=1
+					group by
+						itm_id
+				) c
+			where 1=1
+				and b.itm_id = c.itm_id
+				and b.acnthist_no = c.max_acnthist_no
+		) a1 on a1.itm_id = a.str_id
+where 1=1
+order by
+	a.str_id
+;
+
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
+SELECT  /* Ara2Ctr.selectStrAcntInfo */
+			A.STR_ID
+			, A.STR_NM
+			, NVL(A1.ACNT_BLNC, 0)   AS ACNT_BLNC
+		FROM
+			ARA2_STR A
+				LEFT JOIN (
+					SELECT
+						B.ACNTHIST_NO
+						, B.ITM_ID
+						, B.ITM_TYP
+						, B.ACNT_BLNC
+					FROM
+						ARA2_ACNTHIST B
+						, (
+							SELECT
+								ITM_ID
+								, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+							FROM
+								ARA2_ACNTHIST
+							WHERE 1=1
+								AND ITM_ID = '101'
+							GROUP BY
+								ITM_ID
+						) C
+					WHERE 1=1
+						AND B.ITM_ID = C.ITM_ID
+						AND B.ACNTHIST_NO = C.MAX_ACNTHIST_NO
+				) A1 ON A1.ITM_ID = A.STR_ID
+		WHERE 1=1
+			and a.str_id = 101
+		ORDER BY
+			A.STR_ID
+;
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
+
+UPDATE  /* Ara2Usr.updateCpnNoList */
+			ARA2_CPN
+		SET
+			CPN_PHS = '4'
+			, ITM_NO = '101'
+			, ITM_TYP = 'STR'
+			, CPN_CNTNT = '가게에서 고객이 쿠폰사용함(결제)'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CPN_NO IN ( ''
+			 
+				,  '190722050115000116' , '190722050115000219' , '190722050115000322' , '190722050115000425' , '190722050115000528' , '190722050115000631' , '190722050115000734' , '190722050115000837' , '190722050115000940' , '190722050115001015' , '190722050115001118' , '190722050115001221' , '190722050115001324' , '190722050115001427' , '190722050115001530' , '190722050115001633' , '190722050115001736' , '190722050115001839' , '190722050115001942' , '190722050115002017' , '190722010000000158' , '190722010000000261' , '190722010000000364' , '190722010000000467' , '190722010000000570' , '190722010000000673' , '190722010000000776' , '190722010000000879' , '190722010000000982' , '190722010000001057' , '190722010000001160' , '190722010000001263' , '190722010000001366' , '190722010000001469' , '190722010000001572' , '190722010000001675' , '190722010000001778' , '190722010000001881' , '190722010000001984' , '190722010000002059' 
+			 
+			)
+;
+
+select
+	*
+from
+	ara2_cpn
+where 1=1
+	and cpn_no like '190722050115%'
+;
+
+
+
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
+
+SELECT  /* Ara2Usr.selectUseCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			--AND A.ITM_NO = '101'
+			AND A.ITM_TYP = 'STR'
+			AND A.CPN_PHS = '5'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+;
+
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------
+-- 입금
+insert into
+	ara2_acnthist
+select
+	seq_acnthist.nextval
+	, a.itm_id
+	, a.itm_typ
+	, c.sum_mny
+	, 0
+	, a.acnt_blnc + c.sum_mny
+	, '005'
+	, '쿠폰정산과 입금함'
+	, SYSDATE
+	, SYSDATE
+from
+	ara2_acnthist a
+	, (
+		select
+			itm_id
+			, max(acnthist_no)  as max_acnthist_no
+		from
+			ara2_acnthist
+		where 1=1
+			--and itm_id = 101
+		group by
+			itm_id
+	) b
+	, (
+		select
+			c.itm_no
+			, sum(c.cpn_mny)  as sum_mny
+		from
+			ara2_cpn c
+		where 1=1
+			and c.cpn_phs = '5'
+		group by
+			c.itm_no
+	) c
+where 1=1
+	and c.itm_no = b.itm_id
+	and a.itm_id = b.itm_id
+	and a.acnthist_no = b.max_acnthist_no
+;
+
+select * from ara2_acnthist where itm_id = 101 order by acnthist_no desc;
+
+
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------
+-- check whether there are id, email, mobile.
+
+select
+	a.rowno
+	, a.yymmdd
+	, b.str_nm
+	, c.mbl_num
+	, d.eml_addr
+from
+	(
+		select rownum as rowno, to_char(SYSDATE, 'YYMMDD') as yymmdd from dual
+	) a
+		left join (
+			select rownum as rowno, str_nm from ara2_str where 1=1 and str_nm = 'rstone'
+		) b on b.rowno = a.rowno
+		left join (
+			select rownum as rowno, mbl_num from ara2_mbl where 1=1 and mbl_num = '01042582025'
+		) c on c.rowno = a.rowno
+		left join (
+			select rownum as rowno, eml_addr from ara2_eml where 1=1 and eml_addr = 'rstone@gmail.com'
+		) d on d.rowno = a.rowno
+where 1=1
+;
+
+
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------

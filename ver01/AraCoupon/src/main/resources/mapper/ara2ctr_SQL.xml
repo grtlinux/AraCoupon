@@ -37,7 +37,7 @@
 				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.CTR_NO AND A4.ITM_TYP = 'CTR'
 				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.CTR_NO AND A5.ITM_TYP = 'CTR'
 		WHERE 1=1
-			AND A.CTR_NO = #{ctrid}
+			AND A.CTR_NO = TO_NUMBER(#{ctrid})
 	</select>
 
 
@@ -105,12 +105,12 @@
 			, #{campNm}
 			, #{campDesc}
 			, '1'
-			, #{campBgnDt}
-			, #{campEndDt}
+			, TO_DATE(#{campBgnDt}, 'YYYY-MM-DD')
+			, TO_DATE(#{campEndDt}, 'YYYY-MM-DD')
 			, #{campCpnTyp}
-			, #{campCpnMny}
-			, #{campCpnCnt}
-			, #{campCpnSum}
+			, TO_NUMBER(#{campCpnMny})
+			, TO_NUMBER(#{campCpnCnt})
+			, TO_NUMBER(#{campCpnSum})
 			, #{cpnMst}
 			, #{campCpnCntnt}
 			, SYSDATE
@@ -158,7 +158,7 @@
 		DELETE  /* Ara2Ctr.deleteCampCpnSht */
 			ARA2_CPN
 		WHERE 1=1
-			AND CAMP_NO = #{campNo}
+			AND CAMP_NO = TO_NUMBER(#{campNo})
 	</update>
 
 
@@ -185,7 +185,7 @@
 				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C012' AND A1.CODE = A.CAMP_PHS
 		WHERE 1=1
 			AND A.CAMP_PHS = '1'
-			AND A.camp_no = #{campNo}
+			AND A.CAMP_NO = TO_NUMBER(#{campNo})
 		ORDER BY
 			A.CAMP_NO DESC
 	</select>
@@ -195,7 +195,7 @@
 	<insert id="insertCampCpnSht" parameterType="Map">
 		INSERT INTO  /* Ara2Ctr.insertCampCpnSht */
 			ARA2_CPN
-		VALUES ( #{CAMP_NO}, #{ctrid}, 'CTR', '1', #{CPN_MST}, #{CPN_TYP}, #{CPN_MNY}, #{cpnNo}, '쿠폰을 발행합니다', SYSDATE, NULL )
+		VALUES ( #{CAMP_NO}, TO_NUMBER(#{ctrid}), 'CTR', '1', #{CPN_MST}, #{CPN_TYP}, TO_NUMBER(#{CPN_MNY}), #{cpnNo}, '쿠폰을 발행합니다', SYSDATE, NULL )
 	</insert>
 
 
@@ -492,9 +492,9 @@
 			SEQ_ACNTHIST.NEXTVAL
 			, A.ITM_ID
 			, A.ITM_TYP
-			, #{dpst}
+			, TO_NUMBER(#{dpst})
 			, 0
-			, A.ACNT_BLNC + #{dpst}
+			, A.ACNT_BLNC + TO_NUMBER(#{dpst})
 			, '002'
 			, '센터입금함'
 			, SYSDATE
@@ -527,10 +527,10 @@
 			, A.ITM_ID
 			, A.ITM_TYP
 			, 0
-			, #{wthd}
-			, A.ACNT_BLNC - #{wthd}
+			, TO_NUMBER(#{wthd})
+			, A.ACNT_BLNC - TO_NUMBER(#{wthd})
 			, '002'
-			, '센터입금함'
+			, '센터출금함'
 			, SYSDATE
 			, SYSDATE
 		FROM

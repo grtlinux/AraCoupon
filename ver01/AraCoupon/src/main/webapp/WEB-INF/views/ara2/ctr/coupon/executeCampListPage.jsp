@@ -355,6 +355,12 @@
 			// console.log(">>>>> " + index + ", " + campNo);
 			campNos.push(campNo.trim());
 		});
+		if (true) {
+			if (campNos.length < 1) {
+				alert('[주의] ' + "쿠폰을 생성할 캠페인을 선택해주세요.");
+				return;
+			}
+		}
 		if (true) console.log(">>>>> campNos = " + campNos.join(','));
 		$('#tempForm #_campNos').val(campNos.join(','));
 		jQuery.ajax({

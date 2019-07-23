@@ -39,7 +39,7 @@
 				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
 				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
 		WHERE 1=1
-			AND A.USR_NO = #{usrid}
+			AND A.USR_NO = TO_NUMBER(#{usrid})
 	</select>
 
 
@@ -75,7 +75,7 @@
 				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
 		WHERE 1=1
 			AND B.CAMP_NO = A.CAMP_NO
-			AND A.ITM_NO = #{usrid}
+			AND A.ITM_NO = TO_NUMBER(#{usrid})
 			AND A.ITM_TYP = 'USR'
 		ORDER BY
 			A.CPN_MNY DESC
@@ -114,7 +114,7 @@
 				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
 		WHERE 1=1
 			AND B.CAMP_NO = A.CAMP_NO
-			AND A.ITM_NO = #{usrid}
+			AND A.ITM_NO = TO_NUMBER(#{usrid})
 			AND A.ITM_TYP = 'USR'
 		ORDER BY
 			A.CPN_MNY DESC
@@ -148,7 +148,7 @@
 				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
 				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
 		WHERE 1=1
-			AND A.STR_NO = #{strid}
+			AND A.STR_NO = TO_NUMBER(#{strid})
 	</select>
 
 
@@ -217,7 +217,7 @@
 			ARA2_CPN
 		SET
 			CPN_PHS = '4'
-			, ITM_NO = #{strid}
+			, ITM_NO = TO_NUMBER(#{strid})
 			, ITM_TYP = 'STR'
 			, CPN_CNTNT = '가게에서 고객이 쿠폰사용함(결제)'
 			, UPD_DTTM = SYSDATE

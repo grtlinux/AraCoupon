@@ -115,11 +115,12 @@ insert into ara2_meta values ('DPST', 'DEPOSIT', 'deposit', '입금');
 insert into ara2_meta values ('WTHD', 'WITHDRAWAL', 'withdrawal', '출금');
 insert into ara2_meta values ('BLNC', 'BALANCE', 'balance', '잔금');
 insert into ara2_meta values ('ETC', 'ETC', 'etc', '비고');
-
 insert into ara2_meta values ('RMN', 'REMAIN', 'remain', '여분.나머지');
 insert into ara2_meta values ('SIZ', 'SIZE', 'size', '크기.갯수');
 insert into ara2_meta values ('OCC', 'OCCUPY', 'occupy', '소유하다.점령하다');
 insert into ara2_meta values ('STT', 'STATE', 'state', '상태.상황');
+
+insert into ara2_meta values ('PROC', 'PROCESS', 'process', '처리.진행');
 
 /*
 insert into ara2_meta values ('TB', 'TABLE', 'table', '');
@@ -177,6 +178,7 @@ insert into ara2_code values ('C002', '2', '구매', '가게 쿠폰구매', 'Y',
 insert into ara2_code values ('C002', '3', '제공', '고객에게 쿠폰제공', 'Y', 3);
 insert into ara2_code values ('C002', '4', '사용', '고객 쿠폰사용', 'Y', 4);
 insert into ara2_code values ('C002', '5', '정산요청', '가게 정산요청', 'Y', 5);
+insert into ara2_code values ('C002', '0', '정산중', '센터 정산처리중', 'Y', 6);
 insert into ara2_code values ('C002', '6', '정산완료', '센터 정산완료', 'Y', 6);
 insert into ara2_code values ('C002', '7', '미사용정산', '고객 미사용정산', 'Y', 7);
 insert into ara2_code values ('C002', '8', '결산', '가게/센터 결산', 'Y', 8);
@@ -257,6 +259,7 @@ insert into ara2_code values ('C013', '003', '센터출금', '센터에서 출�
 insert into ara2_code values ('C013', '004', '쿠폰구매', '센터에서 쿠폰을 구매함', 'Y', 4);
 insert into ara2_code values ('C013', '005', '쿠폰정산', '고객에게 받은 쿠폰들을 정산함', 'Y', 5);
 
+commit;
 
 --------------------------------------------------------------------------------
 

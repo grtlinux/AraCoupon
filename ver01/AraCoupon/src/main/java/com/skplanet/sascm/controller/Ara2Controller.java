@@ -106,7 +106,7 @@ public class Ara2Controller {
 				this.ara2Service.insertAra2Eml(modelMap);
 				
 				modelMap.addAttribute("retCode", "0000");
-				modelMap.addAttribute("retMsg", String.format("고객이 정상적으로 등록되었습니다."));
+				modelMap.addAttribute("retMsg", String.format("고객이 정상적으로 등록되었습니다.\n고객번호는 [%s] 입니다.", String.valueOf(modelMap.get("USR_NO"))));
 			}
 		}
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
@@ -207,6 +207,19 @@ public class Ara2Controller {
 		jsonView.render(modelMap, request, response);
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(value = "/underConstruct/underConstructPage.do", method = RequestMethod.POST)
+	public String underConstructPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		return PATH + "/underConstruct/underConstructPage";
+	}
+
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

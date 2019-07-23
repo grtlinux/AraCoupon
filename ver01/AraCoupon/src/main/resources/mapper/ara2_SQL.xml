@@ -87,13 +87,13 @@
 			</if>
 		WHERE 1=1
 			<if test="conntyp == 'CTR'">
-				AND A.CTR_NO = #{ctrid}
+				AND A.CTR_NO = TO_NUMBER(#{ctrid})
 			</if>
 			<if test="conntyp == 'STR'">
-				AND A.STR_NO = #{strid}
+				AND A.STR_NO = TO_NUMBER(#{strid})
 			</if>
 			<if test="conntyp == 'USR'">
-				AND A.USR_NO = #{usrid}
+				AND A.USR_NO = TO_NUMBER(#{usrid})
 			</if>
 	</select>
 
@@ -195,7 +195,7 @@
 		INSERT INTO  /* Ara2.insertAra2Usr */
 			ARA2_USR
 		VALUES
-			( #{USR_NO}, #{USR_NO}, #{usrName}, null )
+			( #{USR_NO}, '#{USR_NO}', #{usrName}, null )
 	</insert>
 
 	<!-- comment -->
