@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;고객의 갖고 있는 쿠폰을 보여준다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;<b>[${menuName}]</b> 고객의 갖고 있는 쿠폰을 보여준다.</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -176,7 +176,8 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
-		<input type='hidden' id='usrid' name='usrid' value='${info.USR_ID}' />
+		<input type='hidden' id='_menuName' name='menuName' value='' />
+		<input type='hidden' id='_usrid' name='usrid' value='${info.USR_ID}' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
 	</form>
 

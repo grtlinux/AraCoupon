@@ -21,21 +21,21 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰창고<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/buyCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰구매</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/stateCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰상황</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/giveCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/buyCpnListPage.do', '쿠폰구매');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰구매</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/stateCpnListPage.do', '쿠폰상황');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰상황</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/coupon/giveCpnListPage.do', '쿠폰제공');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰제공</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">결제쿠폰창고<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/payment/paymentCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제쿠폰목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/payment/paymentCpnListPage.do', '결제쿠폰목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;결제쿠폰목록</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">가게계좌<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/account/selectAcntInOutListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 입출금내역</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/str2/account/selectAcntInOutListPage.do', '가게계좌 입출금내역');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 입출금내역</a></li>
 						</ul>
 					</li>
 

@@ -66,6 +66,10 @@ function fn_console(msg) {
 function fn_loadPostPage(id, url) {
 	$(id).attr('method', 'POST').attr('action', url).submit();
 }
+function fn_loadPostPage(id, url, menuName) {
+	$(id + " #_menuName").val(menuName);
+	$(id).attr('method', 'POST').attr('action', url).submit();
+}
 function fn_modalToggle(id) {
 	$(id).modal("toggle");
 }

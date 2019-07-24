@@ -22,34 +22,34 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/coupon/createCampFormPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;캠페인 생성</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/coupon/executeCampListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;캠페인 실행</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/coupon/resultCampListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;캠페인 결과</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/coupon/createCampFormPage.do','캠페인 생성');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;캠페인 생성</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/coupon/executeCampListPage.do','캠페인 실행');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;캠페인 실행</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/coupon/resultCampListPage.do','캠페인 결과');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;캠페인 결과</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰정산<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/payment/paymentCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산요청처리</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산완료목록</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;고객미사용정산목록</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰결산과 폐기</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/payment/paymentCpnListPage.do','정산요청처리');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산요청처리</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do','정산완료목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;정산완료목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do','고객미사용정산목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;고객미사용정산목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do','쿠폰결산과 폐기');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰결산과 폐기</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">가게계좌<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/createAcntListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 생성</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/selectAcntListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 목록</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/selectAcntInOutListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 입출금내역</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/createAcntListPage.do','가게계좌 생성');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 생성</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/selectAcntListPage.do','가게계좌 목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/account/selectAcntInOutListPage.do','가게계좌 입출금내역');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게계좌 입출금내역</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">센터관리<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/manage/manageForTestPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;테스트 관리</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게목록 관리</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;고객목록 관리</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/manage/manageForTestPage.do','테스트 관리');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;테스트 관리</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do','가게목록 관리');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게목록 관리</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do','고객목록 관리');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;고객목록 관리</a></li>
 						</ul>
 					</li>
 					<li class="hide"><a href="/sample05/">통계</a></li>

@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;가게에서 수거한 쿠폰에 대해 정산을 요청한다. 여기서는 쿠폰갯수와 금액을 확인하고 정산처리를 한다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;<b>[${menuName}]</b> 가게에서 수거한 쿠폰에 대해 정산을 요청한다. 여기서는 쿠폰갯수와 금액을 확인하고 정산처리를 한다.</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -118,6 +118,7 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
+		<input type='hidden' id='_menuName' name='menuName' value='' />
 		<input type='hidden' id='_ctrid' name='ctrid' value='${info.CTR_ID}' />
 		<input type="hidden" id="_strid" name="strid" value='' />
 		<input type='hidden' id='_sumMny' name='sumMny' value='' />

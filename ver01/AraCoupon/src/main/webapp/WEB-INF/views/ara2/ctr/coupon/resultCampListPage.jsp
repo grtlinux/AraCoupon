@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;쿠폰을 발행한 캠페인 목록. 아래 캠페인은 쿠폰갯수 만큼 쿠폰을 발행했다. 다음으로 가게에서는 아래 쿠폰들을 구매할 수 있다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;<b>[${menuName}]</b> 쿠폰을 발행한 캠페인 목록. 아래 캠페인은 쿠폰갯수 만큼 쿠폰을 발행했다. 다음으로 가게에서는 아래 쿠폰들을 구매할 수 있다.</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -158,6 +158,7 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
+		<input type='hidden' id='_menuName' name='menuName' value='' />
 		<input type='hidden' id='_ctrid' name='ctrid' value='${info.CTR_ID}' />
 		<input type='hidden' id='_campNos' name='campNos' value='' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />

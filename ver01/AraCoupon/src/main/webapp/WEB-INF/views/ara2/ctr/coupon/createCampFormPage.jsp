@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;캠페인을 만든다. 캠페인은 쿠폰페키지를 만드는 행사이다. 쿠폰페키지는 같은 액면가의 쿠폰뭉치이다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;<b>[${menuName}]</b> 캠페인을 만든다. 캠페인은 쿠폰페키지를 만드는 행사이다. 쿠폰페키지는 같은 액면가의 쿠폰뭉치이다.</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -107,6 +107,7 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
+		<input type='hidden' id='_menuName' name='menuName' value='' />
 		<input type='hidden' id='_ctrid'  name='ctrid'  value='${info.CTR_ID}' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
 	</form>

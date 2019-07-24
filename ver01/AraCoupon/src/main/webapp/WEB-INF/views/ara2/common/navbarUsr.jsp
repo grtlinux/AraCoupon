@@ -22,17 +22,17 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰창고<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/stateCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;갖고있는 쿠폰목록</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/useCpnListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰사용</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/stateCpnListPage.do', '갖고있는 쿠폰목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;갖고있는 쿠폰목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/useCpnListPage.do', '쿠폰사용');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰사용</a></li>
 						</ul>
 					</li>
 					<li class="dropdown hide">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰패키지발행<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/createCampFormPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 생성</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/createCampFormPage.do', '쿠폰패키지 생성');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 생성</a></li>
 							<li class="divider hide"></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/apprReqListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/apprResListPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰펰키지 승인목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/apprReqListPage.do', '쿠폰패키지 신청목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰패키지 신청목록</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/apprResListPage.do', '쿠폰펰키지 승인목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰펰키지 승인목록</a></li>
 						</ul>
 					</li>
 				</ul>

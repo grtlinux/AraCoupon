@@ -204,6 +204,7 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
+		<input type='hidden' id='_menuName' name='menuName' value='' />
 		<input type='hidden' id='_conntyp'  name='conntyp'  value='' />
 		<input type='hidden' id='_connid'  name='connid'  value='' />
 		<input type='hidden' id='_araid'  name='araid'  value='' />

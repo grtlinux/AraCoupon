@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;각 가게의 계정내역을 보여준다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;<b>[${menuName}]</b> 각 가게의 계정내역을 보여준다.</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -114,6 +114,7 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
+		<input type='hidden' id='_menuName' name='menuName' value='' />
 		<input type='hidden' id='_ctrid' name='ctrid' value='${info.CTR_ID}' />
 		<input type='hidden' id='_strid' name='strid' value='' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />

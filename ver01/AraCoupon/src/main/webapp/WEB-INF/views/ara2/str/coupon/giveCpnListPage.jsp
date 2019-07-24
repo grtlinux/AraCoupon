@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-success">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;쿠폰패키지목록에서 원하는 쿠폰패키지를 선택하여 원하는 고객에게 쿠폰을 제공한다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;<b>[${menuName}]</b> 쿠폰패키지목록에서 원하는 쿠폰패키지를 선택하여 원하는 고객에게 쿠폰을 제공한다.</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -203,6 +203,7 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
+		<input type='hidden' id='_menuName' name='menuName' value='' />
 		<input type='hidden' id='_strid' name='strid' value='${info.STR_ID}' />
 		<input type='hidden' id='_campNo' name='campNo' value='' />
 		<input type='hidden' id='_cpnSiz' name='cpnSiz' value='' />

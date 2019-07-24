@@ -33,6 +33,7 @@
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
+		<input type='hidden' id='_menuName' name='menuName' value='' />
 		<input type='hidden' id='_strid'  name='strid'  value='${info.STR_ID}' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
 	</form>
