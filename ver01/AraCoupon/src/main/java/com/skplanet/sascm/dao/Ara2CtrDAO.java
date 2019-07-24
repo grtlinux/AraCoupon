@@ -50,4 +50,11 @@ public interface Ara2CtrDAO {
 	public int insertStrWthdProc(Map<String, Object> param) throws Exception;
 
 
+	// /manage/manageForTestPage.do
+	public int deleteTableAcnt(Map<String, Object> param) throws Exception;
+	public int deleteTableAcnthist(Map<String, Object> param) throws Exception;
+	public int deleteTableCamp(Map<String, Object> param) throws Exception;
+	public int deleteTableCpn(Map<String, Object> param) throws Exception;
+	public int deleteTableCnnt(Map<String, Object> param) throws Exception;
+	public int deleteTableLogin(Map<String, Object> param) throws Exception;
 }

@@ -133,4 +133,35 @@ public class Ara2CtrServiceImpl implements Ara2CtrService {
 	public int insertStrWthdProc(Map<String, Object> param) throws Exception {
 		return this.ara2CtrDAO.insertStrWthdProc(param);
 	}
+
+	// /manage/manageForTestPage.do
+	@Override
+	public int deleteTableAcnt(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.deleteTableAcnt(param);
+	}
+
+	@Override
+	public int deleteTableAcnthist(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.deleteTableAcnthist(param);
+	}
+
+	@Override
+	public int deleteTableCamp(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.deleteTableCamp(param);
+	}
+
+	@Override
+	public int deleteTableCpn(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.deleteTableCpn(param);
+	}
+
+	@Override
+	public int deleteTableCnnt(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.deleteTableCnnt(param);
+	}
+
+	@Override
+	public int deleteTableLogin(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.deleteTableLogin(param);
+	}
 }

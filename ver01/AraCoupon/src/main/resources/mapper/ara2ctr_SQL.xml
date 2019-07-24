@@ -552,6 +552,41 @@
 	</insert>
 
 
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /index.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- comment -->
+	<delete id="deleteTableAcnt" parameterType="Map">
+		DELETE FROM ARA2_ACNT WHERE 1=1  /* Ara2Ctr.deleteTableAcnt */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableAcnthist" parameterType="Map">
+		DELETE FROM ARA2_ACNTHIST WHERE 1=1  /* Ara2Ctr.deleteTableAcnthist */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableCamp" parameterType="Map">
+		DELETE FROM ARA2_CAMP WHERE 1=1  /* Ara2Ctr.deleteTableCamp */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableCpn" parameterType="Map">
+		DELETE FROM ARA2_CPN WHERE 1=1  /* Ara2Ctr.deleteTableCpn */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableCnnt" parameterType="Map">
+		DELETE FROM ARA2_CNNT WHERE 1=1  /* Ara2Ctr.deleteTableCnnt */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableLogin" parameterType="Map">
+		DELETE FROM ARA2_LOGIN WHERE 1=1  /* Ara2Ctr.deleteTableLogin */
+	</delete>
+
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->

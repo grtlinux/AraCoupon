@@ -127,4 +127,35 @@ public class Ara2CtrDAOImpl extends AbstractDAO implements Ara2CtrDAO {
 	public int insertStrWthdProc(Map<String, Object> param) throws Exception {
 		return (int) insert("Ara2Ctr.insertStrWthdProc", param);
 	}
+
+	// /manage/manageForTestPage.do
+	@Override
+	public int deleteTableAcnt(Map<String, Object> param) throws Exception {
+		return (int) delete("Ara2Ctr.deleteTableAcnt", param);
+	}
+
+	@Override
+	public int deleteTableAcnthist(Map<String, Object> param) throws Exception {
+		return (int) delete("Ara2Ctr.deleteTableAcnthist", param);
+	}
+
+	@Override
+	public int deleteTableCamp(Map<String, Object> param) throws Exception {
+		return (int) delete("Ara2Ctr.deleteTableCamp", param);
+	}
+
+	@Override
+	public int deleteTableCpn(Map<String, Object> param) throws Exception {
+		return (int) delete("Ara2Ctr.deleteTableCpn", param);
+	}
+
+	@Override
+	public int deleteTableCnnt(Map<String, Object> param) throws Exception {
+		return (int) delete("Ara2Ctr.deleteTableCnnt", param);
+	}
+
+	@Override
+	public int deleteTableLogin(Map<String, Object> param) throws Exception {
+		return (int) delete("Ara2Ctr.deleteTableLogin", param);
+	}
 }

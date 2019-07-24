@@ -21,7 +21,7 @@
 					<li><a data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객</a></li>
 					<li><a data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게</a></li>
 					<li><a data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센타</a></li>
-					<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;공사중</a></li>
+					<li class="hide"><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;공사중</a></li>
 				</ul>
 			</div>
 		</div>

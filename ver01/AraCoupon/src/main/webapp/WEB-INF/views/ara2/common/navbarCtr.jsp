@@ -47,7 +47,9 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">센터관리<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;테스트 관리</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/manage/manageForTestPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;테스트 관리</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게목록 관리</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ara2/underConstruct/underConstructPage.do');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;고객목록 관리</a></li>
 						</ul>
 					</li>
 					<li class="hide"><a href="/sample05/">통계</a></li>

@@ -138,7 +138,7 @@
 			AND A.ARA_KEY = #{arakey}
 			AND A.CNNT_YN = 'Y'
 	</update>
-	
+
 	<!-- comment -->
 	<select id="selectCnntArakeyInfo" parameterType="Map" resultType="Map">
 		SELECT  /* Ara2.selectCnntArakeyInfo */
@@ -195,7 +195,7 @@
 		INSERT INTO  /* Ara2.insertAra2Usr */
 			ARA2_USR
 		VALUES
-			( #{USR_NO}, '#{USR_NO}', #{usrName}, null )
+			( #{USR_NO}, TO_CHAR(#{USR_NO}), #{usrName}, null )
 	</insert>
 
 	<!-- comment -->
@@ -238,6 +238,7 @@
 
 
 </mapper>
+
 
 
 

@@ -487,6 +487,71 @@ public class Ara2CtrController {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * index.jsp POST
+	 */
+	@RequestMapping(value = "/manage/manageForTestPage.do", method = RequestMethod.POST)
+	public String manageForTestPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			Map<String,Object> map = this.ara2CtrService.selectItemInfo(modelMap);
+			log.debug("map: " + map);
+			modelMap.addAttribute("info", map);
+		}
+		return PATH + "/manage/manageForTestPage";
+	}
+
+	@RequestMapping(value = "/manage/deleteTablesForOpen.do", method = RequestMethod.POST)
+	public void deleteTablesForOpen(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.deleteTableAcnt(modelMap);
+			log.debug("deleteTableAcnt.ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.deleteTableAcnthist(modelMap);
+			log.debug("deleteTableAcnthist.ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.deleteTableCamp(modelMap);
+			log.debug("deleteTableCamp.ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.deleteTableCpn(modelMap);
+			log.debug("deleteTableCpn.ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.deleteTableCnnt(modelMap);
+			log.debug("deleteTableCnnt.ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.deleteTableLogin(modelMap);
+			log.debug("deleteTableLogin.ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
