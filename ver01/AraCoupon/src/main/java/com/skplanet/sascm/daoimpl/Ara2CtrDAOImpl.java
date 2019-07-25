@@ -87,6 +87,24 @@ public class Ara2CtrDAOImpl extends AbstractDAO implements Ara2CtrDAO {
 		return (int) insert("Ara2Ctr.insertAcntDpst", param);
 	}
 
+	// /payment/completeCalcListPage.do
+	@Override
+	public List<Map<String, Object>> selectCompleteCalcList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectCompleteCalcList", param);
+	}
+
+	// /payment/notUsedCpnListPage.do
+	@Override
+	public List<Map<String, Object>> selectNotUsedCpnList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectNotUsedCpnList", param);
+	}
+
+	// /payment/settlementDiscardListPage.do
+	@Override
+	public List<Map<String, Object>> selectSettlementDiscardList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectSettlementDiscardList", param);
+	}
+
 
 	// /account/createAcntListPage.do
 	@Override
@@ -157,5 +175,17 @@ public class Ara2CtrDAOImpl extends AbstractDAO implements Ara2CtrDAO {
 	@Override
 	public int deleteTableLogin(Map<String, Object> param) throws Exception {
 		return (int) delete("Ara2Ctr.deleteTableLogin", param);
+	}
+
+	// /manage/selectStrListPage.do
+	@Override
+	public List<Map<String, Object>> selectStrInfoList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectStrInfoList", param);
+	}
+
+	// /manage/selectUsrListPage.do
+	@Override
+	public List<Map<String, Object>> selectUsrInfoList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectUsrInfoList", param);
 	}
 }

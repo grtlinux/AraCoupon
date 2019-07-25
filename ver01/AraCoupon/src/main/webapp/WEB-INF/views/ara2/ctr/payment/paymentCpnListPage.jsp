@@ -273,8 +273,8 @@
 						rowHtml += "  <td>";
 						rowHtml += "    " + value.CAMP_END_DT;
 						rowHtml += "  </td>";
-						rowHtml += "</tr>";
 						*/
+						rowHtml += "</tr>";
 						$("#campTable > tbody:last").append(rowHtml);
 					});
 					if (true) $('#campTable > tbody tr td').on('click', function() {

@@ -235,7 +235,7 @@
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		if (true) {
 			$('.numberWithCommas').each(function() {
-				$(this).text(numberWithCommas2($(this).text()));
+				$(this).text(numberWithCommas($(this).text()));
 			});
 			$('.onlyNumber').each(function() {
 				$(this).text(onlyNumber($(this).text()));

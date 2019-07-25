@@ -13,8 +13,22 @@ $(function() {
 });
 $(document).ready(function(){
 	if (true) console.log(">>>>> ara.common.v01.js > step-2: $(document).ready(function(){})");
-	classPhoneFormatter();
-	classMoneyFormatter();
+	//classPhoneFormatter();
+	//classMoneyFormatter();
+	if (true) {
+		$('.numberWithCommas').each(function() {
+			$(this).text(numberWithCommas($(this).text()));
+		});
+		$('.numberToMoney').each(function() {
+			$(this).text(numberToMoney($(this).text()));
+		});
+		$('.onlyNumber').each(function() {
+			$(this).text(onlyNumber($(this).text()));
+		});
+		$('.phoneWithDashes').each(function() {
+			$(this).text(phoneWithDashes($(this).text()));
+		});
+	}
 });
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -52,10 +66,28 @@ function classMoneyFormatter() {
 function onlyNumber(str) {
 	return str.replace(/[^\d]/g, '');
 }
-function numberWithCommas2(number) {
+function numberWithCommas(number) {
 	var parts = number.toString().split('.');
 	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	return parts.join('.');
+}
+function numberToMoney(number) {
+	var parts = number.toString().split('.');
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return parts.join('.') + "원";
+}
+function phoneWithDashes(phone) {
+	var phone = phone.replace(/[^\d]/g, '');
+	if (phone.length == 10) {
+		phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+	} else if (phone.length == 11) {
+		phone = phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+	} else if (phone.length == 8) {
+		phone = phone.replace(/(\d{4})(\d{4})/, "$1-$2");
+	} else if (phone.length == 7) {
+		phone = phone.replace(/(\d{3})(\d{4})/, "$1-$2");
+	}
+	return phone;
 }
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////

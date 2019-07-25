@@ -34,6 +34,18 @@ public interface Ara2CtrService {
 	public int insertAcntDpst(Map<String, Object> param) throws Exception;
 
 
+	// /payment/completeCalcListPage.do
+	public List<Map<String,Object>> selectCompleteCalcList(Map<String, Object> param) throws Exception;
+
+
+	// /payment/notUsedCpnListPage.do
+	public List<Map<String,Object>> selectNotUsedCpnList(Map<String, Object> param) throws Exception;
+
+
+	// /payment/settlementDiscardListPage.do
+	public List<Map<String,Object>> selectSettlementDiscardList(Map<String, Object> param) throws Exception;
+
+
 	// /account/createAcntListPage.do
 	public List<Map<String,Object>> selectStrAcntList(Map<String, Object> param) throws Exception;
 	public int insertStrAcnt(Map<String, Object> param) throws Exception;
@@ -58,4 +70,13 @@ public interface Ara2CtrService {
 	public int deleteTableCnnt(Map<String, Object> param) throws Exception;
 	public int deleteTableLogin(Map<String, Object> param) throws Exception;
 
+	// /manage/selectStrListPage.do
+	public List<Map<String,Object>> selectStrInfoList(Map<String, Object> param) throws Exception;
+
+	// /manage/selectUsrrListPage.do
+	public List<Map<String,Object>> selectUsrInfoList(Map<String, Object> param) throws Exception;
 }
+
+
+
+

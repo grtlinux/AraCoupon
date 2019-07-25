@@ -219,6 +219,7 @@
 					ARA2_CPN A
 				WHERE 1=1
 					AND A.ITM_NO = TO_NUMBER(#{strid})
+					AND A.CPN_PHS = '2'
 				GROUP BY
 					A.CAMP_NO
 			) AA

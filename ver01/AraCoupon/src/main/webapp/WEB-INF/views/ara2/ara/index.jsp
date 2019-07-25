@@ -33,7 +33,10 @@
 			<div class="col-sm-4">
 				<h4>고객</h4>
 				<p>가게로부터 제공받은 쿠폰을 갖고있다가 쿠폰가게에서 제공쿠폰을 사용한다. 즉, 쿠폰시스템 서비스 해택을 누리는 주체이다.<p>
-				<div class="numberWithCommas">123456789 원</div>
+				<div class="phoneWithDashes">01033882025</div>
+				<div class="phoneWithDashes">0103882025</div>
+				<div class="numberToMoney">123456789</div>
+				<div class="numberWithCommas">123456789</div>
 				<div class="onlyNumber">123,456,789 원</div>
 				<p class="text-center"><a class="btn btn-default" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
 			</div>
@@ -250,14 +253,6 @@
 	});
 	function processEvent() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
-		if (true) {
-			$('.numberWithCommas').each(function() {
-				$(this).text(numberWithCommas2($(this).text()));
-			});
-			$('.onlyNumber').each(function() {
-				$(this).text(onlyNumber($(this).text()));
-			});
-		}
 	}
 	function selectUseCpnList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
