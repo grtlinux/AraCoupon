@@ -13,22 +13,6 @@ $(function() {
 });
 $(document).ready(function(){
 	if (true) console.log(">>>>> ara.common.v01.js > step-2: $(document).ready(function(){})");
-	//classPhoneFormatter();
-	//classMoneyFormatter();
-	if (true) {
-		$('.numberWithCommas').each(function() {
-			$(this).text(numberWithCommas($(this).text()));
-		});
-		$('.numberToMoney').each(function() {
-			$(this).text(numberToMoney($(this).text()));
-		});
-		$('.onlyNumber').each(function() {
-			$(this).text(onlyNumber($(this).text()));
-		});
-		$('.phoneWithDashes').each(function() {
-			$(this).text(phoneWithDashes($(this).text()));
-		});
-	}
 });
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -40,6 +24,20 @@ function isEmpty(value) {
 	} else {
 		return false;
 	}
+}
+function classFormatter() {
+	if (true) $('.numberWithCommas').each(function() {
+			$(this).text(numberWithCommas($(this).text()));
+		});
+	if (true) $('.numberToMoney').each(function() {
+			$(this).text(numberToMoney($(this).text()));
+		});
+	if (true) $('.onlyNumber').each(function() {
+			$(this).text(onlyNumber($(this).text()));
+		});
+	if (true) $('.phoneWithDashes').each(function() {
+			$(this).text(phoneWithDashes($(this).text()));
+		});
 }
 // Used to format phone number
 function classPhoneFormatter() {

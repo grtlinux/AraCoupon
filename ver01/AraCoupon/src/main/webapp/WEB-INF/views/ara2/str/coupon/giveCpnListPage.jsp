@@ -36,7 +36,7 @@
 								<td>종료일</td>
 								<td>쿠폰타입</td>
 								-->
-								<td>액면가</td>
+								<td>액면가(원)</td>
 								<!--
 								<td class='text-danger'>갯수</td>
 								<td class='text-danger'>사용/남음/전체</td>
@@ -126,7 +126,7 @@
 							</tr>
 							<tr>
 								<td>쿠폰 액면가</td>
-								<td><div id="modalCpnMny"></div></td>
+								<td><div id="modalCpnMny" class='numberToMoney'></div></td>
 							</tr>
 							<tr class="hide">
 								<td>쿠폰 갯수</td>
@@ -149,8 +149,12 @@
 								<td><div id="modalCpnSum"></div></td>
 							</tr>
 							<tr>
-								<td>소유 쿠폰갯수</td>
-								<td><span id="modalOccCnt"></span>&nbsp;&nbsp;<input id="cpnSiz" class="text-success" type="number"></td>
+								<td>소유 쿠폰수</td>
+								<td>
+									<span id="modalOccCnt"></span>
+									&nbsp;&nbsp;&nbsp;&nbsp; -> &nbsp;&nbsp; 
+									제공 쿠폰수: <input id="cpnSiz" size="3" type="number">
+								</td>
 							</tr>
 							<tr class="hide">
 								<td>쿠폰 마스터키</td>
@@ -170,7 +174,15 @@
 							</tr>
 							
 							<tr>
-								<td>고객ID</td>
+								<td>아라키 사용여부</td>
+								<td>
+									<input id='arakeyYes' type='radio' name='arakeyYn' value='Y' checked> 사용
+									&nbsp;&nbsp;
+									<input id='arakeyNo' type='radio' name='arakeyYn' value='N'> 미사용
+								</td>
+							</tr>
+							<tr>
+								<td>쿠폰제공할 고객ID</td>
 								<td>
 									<div>
 										<input id="usrid" type="text" value=''>
@@ -178,7 +190,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr id='trInputArakey'>
 								<td>고객의 아라키 입력</td>
 								<td>
 									<div>
@@ -210,6 +222,7 @@
 		<input type='hidden' id='_cpnMny' name='cpnMny' value='' />
 		<input type='hidden' id='_usrid' name='usrid' value='' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
+		<input type='hidden' id='_arakeyYn' name='arakeyYn' value='' />
 	</form>
 
 
@@ -237,6 +250,24 @@
 			if (!true) console.log('>>>>> #allCheckbox change is ' + flgAllCheckbox);
 			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
 		});
+		if (true) {
+			// $('').addClass('').removeClass('').hasClass('');
+			$('#modalCampNoInfo #arakeyYes').on('click', function() {
+				if (true) console.log(">>>>> #arakeyYes.onclick();");
+				if ($('#btnSendAraKeyToUsr').hasClass('hide')) $('#btnSendAraKeyToUsr').removeClass('hide');
+				if ($('#trInputArakey').hasClass('hide')) $('#trInputArakey').removeClass('hide');
+				$('#tempForm #_arakeyYn').val("Y");
+			});
+			$('#modalCampNoInfo #arakeyNo').on('click', function() {
+				if (true) console.log(">>>>> #arakeyNo.onclick();");
+				if (!$('#btnSendAraKeyToUsr').hasClass('hide')) $('#btnSendAraKeyToUsr').addClass('hide');
+				if (!$('#trInputArakey').hasClass('hide')) $('#trInputArakey').addClass('hide');
+				$('#tempForm #_arakeyYn').val("N");
+			});
+		}
+		if (true) {
+			$('#modalCampNoInfo #arakeyNo').trigger('click');
+		}
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
@@ -280,8 +311,8 @@
 						//rowHtml += "  <td class='text-center'>";
 						//rowHtml += "    " + value.CPN_TYP;
 						//rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + fn_comma(value.CPN_MNY);
+						rowHtml += "  <td class='text-center numberWithCommas'>";
+						rowHtml += "    " + value.CPN_MNY;
 						rowHtml += "  </td>";
 						//rowHtml += "  <td class='text-center text-danger'>";
 						//rowHtml += "    " + fn_comma(value.CPN_CNT);
@@ -310,6 +341,9 @@
 						rowHtml += "</tr>";
 						$("#campTable > tbody:last").append(rowHtml);
 					});
+					//
+					classFormatter();
+					//
 					if (true) $('#campTable > tbody tr td').on('click', function() {
 						var td = $(this);
 						if (td.index() == 0)
@@ -344,6 +378,8 @@
 						$('#tempForm #_campNo').val(info.CAMP_NO);
 						$('#tempForm #_cpnMny').val(info.CPN_MNY);
 						//
+						classFormatter();
+						//
 						fn_modalToggle('#modalCampNoInfo');
 					});
 					if (true) {
@@ -371,6 +407,23 @@
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		if (true) {
 			// validation
+			if (isEmpty($('#modalCampNoInfo #cpnSiz').val())) {
+				$('#modalCampNoInfo #cpnSiz').focus();
+				return false;
+			}
+			if (isEmpty($('#modalCampNoInfo #usrid').val())) {
+				$('#modalCampNoInfo #usrid').focus();
+				return false;
+			}
+		}
+		if (true) {
+			// bound check
+			var maxCpnSiz = Number($('#modalCampNoInfo #cpnSiz').val());
+			var cpnSiz = Number($('#modalCampNoInfo #cpnSiz').val());
+			if (cpnSiz < 1 || maxCpnSiz < cpnSiz) {
+				alert("[주의] 제공쿠폰수는 1과 " + maxCpnSiz + " 사이 입니다.");
+				return;
+			}
 		}
 		if (true) {
 			// transfer
@@ -387,8 +440,7 @@
 				success: function(result, option) {
 					if (option == "success"){
 						alert("메시지: " + result.retMsg);
-						//fn_modalToggle('#modalCampNoInfo');
-						//fn_refresh();
+						$('#modalCampNoInfo #arakey').focus();
 					} else {
 						alert("에러가 발생하였습니다.");
 					}
@@ -403,6 +455,29 @@
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		if (true) {
 			// validation
+			if (isEmpty($('#modalCampNoInfo #cpnSiz').val())) {
+				$('#modalCampNoInfo #cpnSiz').focus();
+				return false;
+			}
+			if (isEmpty($('#modalCampNoInfo #usrid').val())) {
+				$('#modalCampNoInfo #usrid').focus();
+				return false;
+			}
+			if ($('#modalCampNoInfo #arakeyYes').is(':checked')) {
+				if (isEmpty($('#modalCampNoInfo #arakey').val())) {
+					$('#modalCampNoInfo #arakey').focus();
+					return false;
+				}
+			}
+		}
+		if (true) {
+			// bound check
+			var maxCpnSiz = Number($('#modalCampNoInfo #cpnSiz').val());
+			var cpnSiz = Number($('#modalCampNoInfo #cpnSiz').val());
+			if (cpnSiz < 1 || maxCpnSiz < cpnSiz) {
+				alert("[주의] 제공쿠폰수는 1과 " + maxCpnSiz + " 사이 입니다.");
+				return;
+			}
 		}
 		if (true) {
 			// transfer

@@ -189,8 +189,17 @@
 								<td>사용할 쿠폰 갯수</td>
 								<td><span id="modalSumCnt">0</span> 장</td>
 							</tr>
+							
 							<tr>
-								<td>가게ID</td>
+								<td>아라키 사용여부</td>
+								<td>
+									<input id='arakeyYes' type='radio' name='arakeyYn' value='Y' checked> 사용
+									&nbsp;&nbsp;
+									<input id='arakeyNo' type='radio' name='arakeyYn' value='N'> 미사용
+								</td>
+							</tr>
+							<tr>
+								<td>쿠폰사용할 가게ID</td>
 								<td>
 									<div>
 										<input id="strid" type="text" value=''>
@@ -198,7 +207,7 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
+							<tr id='trInputArakey'>
 								<td>가게의 아라키 입력</td>
 								<td>
 									<div>
@@ -229,6 +238,7 @@
 		<input type='hidden' id='_sumCnt' name='sumCnt' value='' />
 		<input type='hidden' id='_cpnNoList' name='cpnNoList' value='' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
+		<input type='hidden' id='_arakeyYn' name='arakeyYn' value='' />
 	</form>
 
 
@@ -283,6 +293,24 @@
 				}
 			});
 		}
+		if (true) {
+			// $('').addClass('').removeClass('').hasClass('');
+			$('#modalBuyCpnList #arakeyYes').on('click', function() {
+				if (true) console.log(">>>>> #arakeyYes.onclick();");
+				if ($('#btnSendAraKeyToStr').hasClass('hide')) $('#btnSendAraKeyToStr').removeClass('hide');
+				if ($('#trInputArakey').hasClass('hide')) $('#trInputArakey').removeClass('hide');
+				$('#tempForm #_arakeyYn').val("Y");
+			});
+			$('#modalBuyCpnList #arakeyNo').on('click', function() {
+				if (true) console.log(">>>>> #arakeyNo.onclick();");
+				if (!$('#btnSendAraKeyToStr').hasClass('hide')) $('#btnSendAraKeyToStr').addClass('hide');
+				if (!$('#trInputArakey').hasClass('hide')) $('#trInputArakey').addClass('hide');
+				$('#tempForm #_arakeyYn').val("N");
+			});
+		}
+		if (true) {
+			$('#modalBuyCpnList #arakeyNo').trigger('click');
+		}
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
@@ -305,8 +333,8 @@
 						rowHtml += "  <td class='text-center hide'>";
 						rowHtml += "    " + value.CPN_MNY;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + fn_comma(value.CPN_MNY) + "원";
+						rowHtml += "  <td class='text-center numberToMoney'>";
+						rowHtml += "    " + value.CPN_MNY;
 						rowHtml += "  </td>";
 						rowHtml += "  <td class='text-center'>";
 						rowHtml += "    " + value.CPN_NO;
@@ -382,6 +410,9 @@
 						*/
 						$("#campTable > tbody:last").append(rowHtml);
 					});
+					//
+					classFormatter();
+					//
 					if (true) $('#campTable > tbody tr td').on('click', function() {
 						// not use
 						var td = $(this);
@@ -408,6 +439,9 @@
 						$('#modalCampCdDesc').text(info.CAMP_CD_DESC);
 						$('#modalCampBgnDt').text(info.CAMP_BGN_DT);
 						$('#modalCampEndDt').text(info.CAMP_END_DT);
+						//
+						classFormatter();
+						//
 						fn_modalToggle('#modalCampNoInfo');
 					});
 					if (!true) {
@@ -468,6 +502,10 @@
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		if (true) {
 			// validation
+			if (isEmpty($('#modalBuyCpnList #strid').val())) {
+				$('#modalBuyCpnList #strid').focus();
+				return false;
+			}
 		}
 		if (true) {
 			// transfer
@@ -484,8 +522,7 @@
 				success: function(result, option) {
 					if (option == "success"){
 						alert("메시지: " + result.retMsg);
-						//fn_modalToggle('#modalBuyCpnList');
-						//fn_refresh();
+						$('#modalBuyCpnList #arakey').focus();
 					} else {
 						alert("에러가 발생하였습니다.");
 					}
@@ -500,9 +537,23 @@
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		if (true) {
 			// validation
+			if (isEmpty($('#modalBuyCpnList #strid').val())) {
+				$('#modalBuyCpnList #strid').focus();
+				return false;
+			}
+			if ($('#modalBuyCpnList #arakeyYes').is(':checked')) {
+				if (isEmpty($('#modalBuyCpnList #arakey').val())) {
+					$('#modalBuyCpnList #arakey').focus();
+					return false;
+				}
+			}
+		}
+		if (true) {
+			// bound check
 		}
 		if (true) {
 			// transfer
+			$('#tempForm #_strid').val($('#modalBuyCpnList #strid').val());
 			$('#tempForm #_arakey').val($('#modalBuyCpnList #arakey').val());
 		}
 		if (true) {

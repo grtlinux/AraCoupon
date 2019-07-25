@@ -22,7 +22,7 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">쿠폰창고<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/stateCpnListPage.do', '갖고있는 쿠폰목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;갖고있는 쿠폰목록</a></li>
+							<li class='hide'><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/stateCpnListPage.do', '갖고있는 쿠폰목록');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;갖고있는 쿠폰목록</a></li>
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/usr2/coupon/useCpnListPage.do', '쿠폰사용');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;쿠폰사용</a></li>
 						</ul>
 					</li>

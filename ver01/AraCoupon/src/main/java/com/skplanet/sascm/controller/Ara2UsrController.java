@@ -211,7 +211,7 @@ public class Ara2UsrController {
 		}
 		if (Flag.flag) {
 			Map<String,Object> map = this.ara2UsrService.selectCnntArakeyInfo(modelMap);
-			if (map == null) {
+			if (map == null && String.valueOf(modelMap.get("arakeyYn")) == "Y") {
 				// (userid, arakey) 존재하지 않으면 인증 실패
 				if (Flag.flag) {
 					modelMap.addAttribute("retCode", "9999");
