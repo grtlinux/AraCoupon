@@ -18,6 +18,7 @@ public interface Ara2StrService {
 	public List<Map<String,Object>> selectStateCpnList(Map<String, Object> param) throws Exception;
 
 	// /coupon/giveCpnListPage.do
+	public List<Map<String,Object>> selectTrmList(Map<String, Object> param) throws Exception;
 	public List<Map<String,Object>> selectGiveCpnList(Map<String, Object> param) throws Exception;
 	public Map<String,Object> selectUsrInfo(Map<String, Object> param) throws Exception;
 	public int updateAllCnntByCnntid(Map<String, Object> param) throws Exception;

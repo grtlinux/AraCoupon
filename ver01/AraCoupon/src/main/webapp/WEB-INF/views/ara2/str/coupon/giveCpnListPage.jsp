@@ -24,7 +24,7 @@
 				<div class="table-responsive">
 					<table id="campTable" class="table table-hover table-condensed">
 						<thead>
-							<tr class="info text-center">
+							<tr class="success text-center">
 								<td class="show"><input id='allCheckbox' type='checkbox'></td>
 								<td>캠페인#</td>
 								<td>캠페인명</td>
@@ -174,6 +174,20 @@
 							</tr>
 							
 							<tr>
+								<td>쿠폰사용가능 시작일</td>
+								<td><input id='trmBgnDt' type="date" placeholder="date" value='${info.TODAY}'></td>
+							</tr>
+							<tr>
+								<td>쿠폰사용가능 기간</td>
+								<td>
+									<select id="trmTypInfo">
+										<c:forEach var="typ" items="${lstTrmTyp}">
+											<option value="${typ.CODE}:${typ.SORT_NO}" <c:if test="${typ.CODE == '180'}">selected</c:if> >${typ.CD_DESC}</option>
+										</c:forEach>
+									</select>
+								</td>
+							</tr>
+							<tr>
 								<td>아라키 사용여부</td>
 								<td>
 									<input id='arakeyYes' type='radio' name='arakeyYn' value='Y' checked> 사용
@@ -223,6 +237,8 @@
 		<input type='hidden' id='_usrid' name='usrid' value='' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
 		<input type='hidden' id='_arakeyYn' name='arakeyYn' value='' />
+		<input type='hidden' id='_trmBgnDt' name='trmBgnDt' value='' />
+		<input type='hidden' id='_trmTypInfo' name='trmTypInfo' value='' />
 	</form>
 
 
@@ -484,6 +500,8 @@
 			$('#tempForm #_usrid').val($('#modalCampNoInfo #usrid').val());
 			$('#tempForm #_arakey').val($('#modalCampNoInfo #arakey').val());
 			$('#tempForm #_cpnSiz').val($('#modalCampNoInfo #cpnSiz').val());
+			$('#tempForm #_trmBgnDt').val($('#modalCampNoInfo #trmBgnDt').val());
+			$('#tempForm #_trmTypInfo').val($('#modalCampNoInfo #trmTypInfo').find('option:selected').val());
 		}
 		if (true) {
 			// ajax call

@@ -31,6 +31,7 @@
 			, A4.ACNT_NM
 			, A5.MRRG_DT
 			, A5.MRRG_LOC
+			, TO_CHAR(SYSDATE, 'YYYY-MM-DD')   AS TODAY
 		FROM
 			ARA2_STR A
 				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
@@ -235,6 +236,28 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- comment -->
+	<select id="selectTrmList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Str.selectTrmList */
+			A.GRP_CD
+			, A.GRP_NM
+			, A1.CODE
+			, A1.CD_NM
+			, A1.CD_DESC
+			, A1.SORT_NO
+			, A1.USE_YN
+		FROM
+			ARA2_CDGRP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = A.GRP_CD
+		WHERE 1=1
+			AND A.GRP_CD = 'C014'
+			AND A.USE_YN = 'Y'
+		ORDER BY
+			A.GRP_CD
+			, A1.SORT_NO
+	</select>
+
+
+	<!-- comment -->
 	<select id="selectGiveCpnList" parameterType="Map" resultType="Map">
 		SELECT  /* Ara2Str.selectGiveCpnList */
 			AA.CAMP_NO
@@ -370,6 +393,9 @@
 			CPN_PHS = '3'
 			, ITM_NO = TO_NUMBER(#{usrid})
 			, ITM_TYP = 'USR'
+			, TRM_TYP = #{trmTyp}
+			, TRM_BGN_DT = TO_DATE(#{trmBgnDt}, 'YYYY-MM-DD')
+			, TRM_END_DT = TO_DATE(#{trmBgnDt}, 'YYYY-MM-DD') + TO_NUMBER(#{trmDays})
 			, CPN_CNTNT = '쿠폰을 고객에게 제공함'
 			, UPD_DTTM = SYSDATE
 		WHERE 1=1
@@ -411,6 +437,8 @@
 			, B1.CD_DESC                       AS CAMP_CD_DESC
 			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
 			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
 		FROM
 			ARA2_CPN A
 				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS

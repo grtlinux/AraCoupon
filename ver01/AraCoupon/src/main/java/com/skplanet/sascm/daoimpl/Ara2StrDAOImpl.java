@@ -47,6 +47,11 @@ public class Ara2StrDAOImpl extends AbstractDAO implements Ara2StrDAO {
 
 	// /coupon/giveCpnListPage.do
 	@Override
+	public List<Map<String, Object>> selectTrmList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Str.selectTrmList", param);
+	}
+
+	@Override
 	public List<Map<String, Object>> selectGiveCpnList(Map<String, Object> param) throws Exception {
 		return (List<Map<String,Object>>) selectList("Ara2Str.selectGiveCpnList", param);
 	}

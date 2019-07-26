@@ -202,6 +202,11 @@ public class Ara2StrController {
 			log.debug("map: " + map);
 			modelMap.addAttribute("info", map);
 		}
+		if (Flag.flag) {
+			List<Map<String,Object>> lst = this.ara2StrService.selectTrmList(modelMap);
+			log.debug("lst: " + lst);
+			modelMap.addAttribute("lstTrmTyp", lst);
+		}
 		return PATH + "/coupon/giveCpnListPage";
 	}
 	
@@ -298,6 +303,12 @@ public class Ara2StrController {
 				}
 				this.ara2StrService.updateAllCnntByCnntid(modelMap);
 			} else {
+				if (Flag.flag) {
+					// 쿠폰사용기간 자료 추가
+					String[] item = String.valueOf(modelMap.get("trmTypInfo")).split(":");
+					modelMap.addAttribute("trmTyp", item[0]);
+					modelMap.addAttribute("trmDays", item[1]);
+				}
 				// (userid, arakey) 존재하면 정보를 리턴하고 자료를 update 한다.
 				int cpnSiz = Integer.parseInt(String.valueOf(modelMap.get("cpnSiz")));
 				long cpnMny = Long.parseLong(String.valueOf(modelMap.get("cpnMny")));

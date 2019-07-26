@@ -36,8 +36,8 @@
 								<td>쿠폰금액</td>
 								<td>쿠폰번호</td>
 								<td>쿠폰내용</td>
-								<td>캠페인시작일</td>
-								<td>캠페인종료일</td>
+								<td>캠페인기간</td>
+								<td>쿠폰사용기간</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -156,11 +156,11 @@
 						rowHtml += "  <td>";
 						rowHtml += "    " + value.CPN_CNTNT;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
-						rowHtml += "    " + value.CAMP_BGN_DT;
+						rowHtml += "  <td class='text-center'>";
+						rowHtml += "    " + value.CAMP_BGN_DT + " ~ " + value.CAMP_END_DT;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
-						rowHtml += "    " + value.CAMP_END_DT;
+						rowHtml += "  <td class='text-center'>";
+						rowHtml += "    " + value.TRM_BGN_DT + " ~ " + value.TRM_END_DT;
 						rowHtml += "  </td>";
 						rowHtml += "</tr>";
 						$("#campTable > tbody:last").append(rowHtml);

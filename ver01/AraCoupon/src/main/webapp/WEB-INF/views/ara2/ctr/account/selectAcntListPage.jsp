@@ -24,7 +24,7 @@
 				<div class="table-responsive">
 					<table id="campTable" class="table table-hover table-condensed">
 						<thead>
-							<tr class="info text-center">
+							<tr class="danger text-center">
 								<td class="show"><input id='allCheckbox' type='checkbox'></td>
 								<td>계정내역#</td>
 								<td>아이템ID</td>

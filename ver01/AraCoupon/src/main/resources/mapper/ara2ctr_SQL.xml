@@ -195,7 +195,7 @@
 	<insert id="insertCampCpnSht" parameterType="Map">
 		INSERT INTO  /* Ara2Ctr.insertCampCpnSht */
 			ARA2_CPN
-		VALUES ( #{CAMP_NO}, TO_NUMBER(#{ctrid}), 'CTR', '1', #{CPN_MST}, #{CPN_TYP}, TO_NUMBER(#{CPN_MNY}), #{cpnNo}, '쿠폰을 발행합니다', SYSDATE, NULL )
+		VALUES ( #{CAMP_NO}, TO_NUMBER(#{ctrid}), 'CTR', '1', #{CPN_MST}, #{CPN_TYP}, TO_NUMBER(#{CPN_MNY}), #{cpnNo}, 'Y', NULL, NULL, NULL, '쿠폰을 발행합니다', SYSDATE, NULL )
 	</insert>
 
 
@@ -270,6 +270,8 @@
 			, B1.CD_DESC                       AS CAMP_CD_DESC
 			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
 			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
 		FROM
 			ARA2_CPN A
 				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
@@ -377,6 +379,8 @@
 			, B1.CD_DESC                       AS CAMP_CD_DESC
 			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
 			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
 		FROM
 			ARA2_CPN A
 				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
@@ -415,6 +419,8 @@
 			, B1.CD_DESC                       AS CAMP_CD_DESC
 			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
 			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
 		FROM
 			ARA2_CPN A
 				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
@@ -453,6 +459,8 @@
 			, B1.CD_DESC                       AS CAMP_CD_DESC
 			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
 			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
 		FROM
 			ARA2_CPN A
 				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS

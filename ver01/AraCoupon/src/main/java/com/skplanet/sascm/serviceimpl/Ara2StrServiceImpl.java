@@ -51,6 +51,11 @@ public class Ara2StrServiceImpl implements Ara2StrService {
 
 	// /coupon/giveCpnListPage.do
 	@Override
+	public List<Map<String, Object>> selectTrmList(Map<String, Object> param) throws Exception {
+		return this.ara2StrDAO.selectTrmList(param);
+	}
+
+	@Override
 	public List<Map<String, Object>> selectGiveCpnList(Map<String, Object> param) throws Exception {
 		return this.ara2StrDAO.selectGiveCpnList(param);
 	}

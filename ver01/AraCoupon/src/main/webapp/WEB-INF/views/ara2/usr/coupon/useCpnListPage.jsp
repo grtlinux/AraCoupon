@@ -32,8 +32,8 @@
 								<td>캠페인#</td>
 								<td>고객#</td>
 								<td>쿠폰마스터</td>
-								<td>캠페인시작일</td>
-								<td>캠페인종료일</td>
+								<td>캠페인기간</td>
+								<td>쿠폰사용기간</td>
 								<!--
 								<td>캠페인#</td>
 								<td>고객#</td>
@@ -162,6 +162,14 @@
 							<tr>
 								<td>캠페인 종료일</td>
 								<td><div id="modalCampEndDt"></div></td>
+							</tr>
+							<tr>
+								<td>쿠폰사용 시작일</td>
+								<td><div id="modalTrmBgnDt"></div></td>
+							</tr>
+							<tr>
+								<td>쿠폰사용 종료일</td>
+								<td><div id="modalTrmEndDt"></div></td>
 							</tr>
 						</table>
 						<img class="hide" src="${staticPATH}/bootstrap3/images/LEGO_Logo.jpg" style="width:50px;">
@@ -349,10 +357,10 @@
 						rowHtml += "    " + value.CPN_MST;
 						rowHtml += "  </td>";
 						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.CAMP_BGN_DT;
+						rowHtml += "    " + value.CAMP_BGN_DT + " ~ " + value.CAMP_END_DT;
 						rowHtml += "  </td>";
 						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.CAMP_END_DT;
+						rowHtml += "    " + value.TRM_BGN_DT + " ~ " + value.TRM_END_DT;
 						rowHtml += "  </td>";
 						/*
 						rowHtml += "  <td class='text-center'>";
@@ -439,6 +447,8 @@
 						$('#modalCampCdDesc').text(info.CAMP_CD_DESC);
 						$('#modalCampBgnDt').text(info.CAMP_BGN_DT);
 						$('#modalCampEndDt').text(info.CAMP_END_DT);
+						$('#modalTrmBgnDt').text(info.TRM_BGN_DT);
+						$('#modalTrmEndDt').text(info.TRM_END_DT);
 						//
 						classFormatter();
 						//
