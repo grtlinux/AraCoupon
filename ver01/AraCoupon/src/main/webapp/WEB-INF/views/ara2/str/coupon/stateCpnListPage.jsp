@@ -218,6 +218,8 @@
 			if (!true) console.log('>>>>> #allCheckbox change is ' + flgAllCheckbox);
 			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
 		});
+		//
+		classFormatter();
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);

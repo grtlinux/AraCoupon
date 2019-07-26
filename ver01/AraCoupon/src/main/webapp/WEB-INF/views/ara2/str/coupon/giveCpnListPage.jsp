@@ -284,6 +284,8 @@
 		if (true) {
 			$('#modalCampNoInfo #arakeyNo').trigger('click');
 		}
+		//
+		classFormatter();
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);

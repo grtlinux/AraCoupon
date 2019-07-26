@@ -29,11 +29,11 @@
 									</tr>
 									<tr>
 										<td>전화번호</td>
-										<td>${info.TEL_NUM}</td>
+										<td class="phoneWithDashes">${info.TEL_NUM}</td>
 									</tr>
 									<tr>
 										<td>핸드폰번호</td>
-										<td>${info.MBL_NUM}</td>
+										<td class="phoneWithDashes">${info.MBL_NUM}</td>
 									</tr>
 									<tr>
 										<td>이메일</td>

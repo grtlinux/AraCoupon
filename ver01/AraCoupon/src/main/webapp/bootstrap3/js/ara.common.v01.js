@@ -76,14 +76,19 @@ function numberToMoney(number) {
 }
 function phoneWithDashes(phone) {
 	var phone = phone.replace(/[^\d]/g, '');
-	if (phone.length == 10) {
-		phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-	} else if (phone.length == 11) {
-		phone = phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-	} else if (phone.length == 8) {
-		phone = phone.replace(/(\d{4})(\d{4})/, "$1-$2");
-	} else if (phone.length == 7) {
-		phone = phone.replace(/(\d{3})(\d{4})/, "$1-$2");
+	if (phone.charAt(1) == '1') {
+		// mobile
+		if (phone.length == 10) {
+			phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+		} else if (phone.length == 11) {
+			phone = phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+		}
+	} else {
+		if (phone.length == 10) {
+			phone = phone.replace(/(\d{2})(\d{4})(\d{4})/, "$1-$2-$3");
+		} else if (phone.length == 11) {
+			phone = phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+		}
 	}
 	return phone;
 }

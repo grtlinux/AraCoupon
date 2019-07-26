@@ -48,6 +48,7 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">센터관리<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/manage/manageForTestPage.do','테스트 관리');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;테스트 관리</a></li>
+							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/manage/manageForTestPage.do','아라쿠폰 운영관리');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;아라쿠폰 운영관리</a></li>
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/manage/selectStrListPage.do','가게목록 관리');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;가게목록 관리</a></li>
 							<li><a href="javascript:fn_loadPostPage('#tempForm', '${staticPATH}/ctr2/manage/selectUsrListPage.do','고객목록 관리');"><span class="glyphicon glyphicon-list-all"></span>&nbsp;고객목록 관리</a></li>
 						</ul>

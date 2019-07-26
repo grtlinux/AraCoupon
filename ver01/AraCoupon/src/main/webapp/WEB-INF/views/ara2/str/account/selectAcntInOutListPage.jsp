@@ -26,13 +26,10 @@
 						<thead>
 							<tr class="success text-center">
 								<td class="show"><input id='allCheckbox' type='checkbox'></td>
-								<td>계정내역#</td>
-								<td>아이템ID</td>
-								<td>아이템타입</td>
 								<td>가게명</td>
-								<td>입금</td>
-								<td>출금</td>
-								<td>잔액</td>
+								<td class="text-right text-info">입금</td>
+								<td class="text-right text-danger">출금</td>
+								<td class="text-right">잔액</td>
 								<td>적요</td>
 								<td>입출금일시</td>
 							</tr>
@@ -69,7 +66,7 @@
 		<div class="modal" id="modalAcntInfo" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<div class="modal-header alert alert-danger">
+					<div class="modal-header alert alert-success">
 						가게 계좌 정보<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
@@ -91,16 +88,16 @@
 								<td><div id="modalStrNm"></div></td>
 							</tr>
 							<tr>
-								<td>입금</td>
-								<td><div id="modalAcntDpst"></div></td>
+								<td class="text-info">입금</td>
+								<td><div id="modalAcntDpst" class="numberToMoney text-info"></div></td>
 							</tr>
 							<tr>
-								<td>출금</td>
-								<td><div id="modalAcntWthd"></div></td>
+								<td class="text-danger">출금</td>
+								<td><div id="modalAcntWthd" class="numberToMoney text-danger"></div></td>
 							</tr>
 							<tr>
 								<td>잔액</td>
-								<td><div id="modalAcntBlnc"></div></td>
+								<td><div id="modalAcntBlnc" class="numberToMoney"></div></td>
 							</tr>
 							<tr>
 								<td>적요</td>
@@ -155,6 +152,8 @@
 			if (!true) console.log('>>>>> #allCheckbox change is ' + flgAllCheckbox);
 			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
 		});
+		//
+		classFormatter();
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
@@ -170,40 +169,34 @@
 					$("#campTable > tbody").empty();
 					list.forEach(function(value, index, array) {
 						var rowHtml = "";
-						rowHtml += "<tr>";
+						rowHtml += "<tr class='text-center'>";
 						rowHtml += "  <td>";
 						rowHtml += "    <input type='checkbox' name='rowCheckbox'>";
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.ACNTHIST_NO;
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.ITM_ID;
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.ITM_TYP;
 						rowHtml += "  </td>";
 						rowHtml += "  <td>";
 						rowHtml += "    " + value.STR_NM;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-right'>";
-						rowHtml += "    " + fn_comma(value.ACNT_DPST);
+						rowHtml += "  <td class='text-right text-info numberWithCommas'>";
+						rowHtml += "    " + value.ACNT_DPST;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-right'>";
-						rowHtml += "    " + fn_comma(value.ACNT_WTHD);
+						rowHtml += "  <td class='text-right text-danger numberWithCommas'>";
+						rowHtml += "    " + value.ACNT_WTHD;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-right'>";
-						rowHtml += "    " + fn_comma(value.ACNT_BLNC);
+						rowHtml += "  <td class='text-right numberWithCommas'>";
+						rowHtml += "    " + value.ACNT_BLNC;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td>";
 						rowHtml += "    " + value.ETC_CNTNT;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td>";
 						rowHtml += "    " + value.CRE_DTTM;
 						rowHtml += "  </td>";
 						rowHtml += "</tr>";
 						$("#campTable > tbody:last").append(rowHtml);
 					});
+					//
+					classFormatter();
+					//
 					if (true) $('#campTable > tbody tr td').on('click', function() {
 						var td = $(this);
 						if (td.index() == 0)
@@ -216,11 +209,14 @@
 						$('#modalItmId').text(info.ITM_ID);
 						$('#modalItmTyp').text(info.ITM_TYP);
 						$('#modalStrNm').text(info.STR_NM);
-						$('#modalAcntDpst').text(fn_comma(info.ACNT_DPST) + " 원");
-						$('#modalAcntWthd').text(fn_comma(info.ACNT_WTHD) + " 원");
-						$('#modalAcntBlnc').text(fn_comma(info.ACNT_BLNC) + " 원");
+						$('#modalAcntDpst').text(info.ACNT_DPST);
+						$('#modalAcntWthd').text(info.ACNT_WTHD);
+						$('#modalAcntBlnc').text(info.ACNT_BLNC);
 						$('#modalEtc').text(info.ETC_CNTNT);
 						$('#modalCreDttm').text(info.CRE_DTTM);
+						//
+						classFormatter();
+						//
 						fn_modalToggle('#modalAcntInfo');
 					});
 					if (true) {

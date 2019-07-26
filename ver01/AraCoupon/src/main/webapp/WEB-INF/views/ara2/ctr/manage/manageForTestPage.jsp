@@ -44,12 +44,10 @@
 								<td class="text-center"><button type="button" class="btn btn-danger btn-sm" onclick="fn_deleteTablesForOpen();"> 쿠폰정보 변경취소 </button></td>
 								<td class="text-left">쿠폰에 대한 정보를 개별적으로 변경하거나 취소할 수 있다. 쿠폰이력을 활용.</td>
 							</tr>
-							<!--
 							<tr>
-								<td><button type="button" class="btn btn-info btn-sm hide" onclick="fn_deleteTablesForOpen();"> 오픈시점 자료삭제 </button></td>
-								<td class="text-left">오픈 시점으로 자료를 삭제한다.</td>
+								<td class="text-center"><button type="button" class="btn btn-danger btn-sm" onclick="fn_deleteTablesForOpen();"> 아라쿠폰 관리세팅 </button></td>
+								<td class="text-left">아라쿠폰서비스시스템 환경정보 세팅 화면.</td>
 							</tr>
-							-->
 						</thead>
 						<tbody>
 						</tbody>

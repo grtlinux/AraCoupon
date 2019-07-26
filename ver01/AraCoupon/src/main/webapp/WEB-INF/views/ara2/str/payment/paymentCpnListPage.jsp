@@ -196,6 +196,8 @@
 				}
 			});
 		}
+		//
+		classFormatter();
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);

@@ -57,6 +57,8 @@
 	});
 	function processEvent() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
+		//
+		classFormatter();
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);

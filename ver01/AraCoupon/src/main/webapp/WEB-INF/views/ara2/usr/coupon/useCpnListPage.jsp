@@ -28,12 +28,8 @@
 								<td class="show"><input id='allCheckbox' type='checkbox'></td>
 								<td class='hide'>쿠폰액면가0</td>
 								<td>쿠폰액면가</td>
-								<td>쿠폰번호</td>
-								<td>캠페인#</td>
-								<td>고객#</td>
-								<td>쿠폰마스터</td>
-								<td>캠페인기간</td>
 								<td>쿠폰사용기간</td>
+								<td>쿠폰번호</td>
 								<!--
 								<td>캠페인#</td>
 								<td>고객#</td>
@@ -125,7 +121,7 @@
 							</tr>
 							<tr>
 								<td>쿠폰 액면가</td>
-								<td><div id="modalCpnMny"></div></td>
+								<td><div id="modalCpnMny" class="numberToMoney"></div></td>
 							</tr>
 							<tr>
 								<td>쿠폰 번호</td>
@@ -345,24 +341,15 @@
 						rowHtml += "    " + value.CPN_MNY;
 						rowHtml += "  </td>";
 						rowHtml += "  <td class='text-center'>";
+						rowHtml += "    " + value.TRM_BGN_DT + " ~ " + value.TRM_END_DT;
+						rowHtml += "  </td>";
+						rowHtml += "  <td class='text-center'>";
 						rowHtml += "    " + value.CPN_NO;
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.CAMP_NO;
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.ITM_NO;
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.CPN_MST;
+						/*
 						rowHtml += "  </td>";
 						rowHtml += "  <td class='text-center'>";
 						rowHtml += "    " + value.CAMP_BGN_DT + " ~ " + value.CAMP_END_DT;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.TRM_BGN_DT + " ~ " + value.TRM_END_DT;
-						rowHtml += "  </td>";
-						/*
 						rowHtml += "  <td class='text-center'>";
 						rowHtml += "    " + value.CAMP_NO;
 						rowHtml += "  </td>";
@@ -418,9 +405,6 @@
 						*/
 						$("#campTable > tbody:last").append(rowHtml);
 					});
-					//
-					classFormatter();
-					//
 					if (true) $('#campTable > tbody tr td').on('click', function() {
 						// not use
 						var td = $(this);
@@ -449,11 +433,11 @@
 						$('#modalCampEndDt').text(info.CAMP_END_DT);
 						$('#modalTrmBgnDt').text(info.TRM_BGN_DT);
 						$('#modalTrmEndDt').text(info.TRM_END_DT);
-						//
-						classFormatter();
-						//
 						fn_modalToggle('#modalCampNoInfo');
 					});
+					//
+					classFormatter();
+					//
 					if (!true) {
 						// row를 선택하면 checkbox click 이벤트 발생
 						$('#campTable > tbody tr').on('click', function(event) {
@@ -472,7 +456,7 @@
 								var tr = $(this).parent().parent();
 								var td = tr.children();
 								var cpnMny = td.eq(1).text();
-								var cpnNo = td.eq(3).text();
+								var cpnNo = td.eq(4).text();
 								if (!true) console.log(">>>>> row: ", idx, cpnMny, cpnNo);
 								cpnNoArr.push(cpnNo.trim());
 								sumMny += Number(cpnMny);
