@@ -93,7 +93,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			} else if (url.indexOf("/callCopyCoupon.do") > -1) {
 				return true;
-			} else if (url.indexOf("/Kang/") > -1) {
+			} else if (url.indexOf("/kang/") > -1) {
 				return true;
 			} else if (url.indexOf("/ara2/") > -1) {
 				return true;
