@@ -278,7 +278,7 @@
 						var tr = $(this).parent().parent();
 						var td = tr.children();
 						var cpnMny = td.eq(1).text();
-						var cpnNo = td.eq(3).text();
+						var cpnNo = td.eq(4).text();
 						if (!true) console.log(">>>>> row: ", idx, cpnMny, cpnNo);
 						cpnNoArr.push(cpnNo.trim());
 						sumMny += Number(cpnMny);
@@ -345,8 +345,8 @@
 						rowHtml += "  </td>";
 						rowHtml += "  <td class='text-center'>";
 						rowHtml += "    " + value.CPN_NO;
-						/*
 						rowHtml += "  </td>";
+						/*
 						rowHtml += "  <td class='text-center'>";
 						rowHtml += "    " + value.CAMP_BGN_DT + " ~ " + value.CAMP_END_DT;
 						rowHtml += "  </td>";
