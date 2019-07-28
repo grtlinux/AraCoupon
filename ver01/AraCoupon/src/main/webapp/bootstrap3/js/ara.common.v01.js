@@ -127,6 +127,62 @@ function fn_returnAlert(result) {
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
+//
+// URL Parameter의 키(name)에 해당하는 값을 얻는다.
+function fn_getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	results = regex.exec(location.search);
+	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+// 쿠키 생성
+function fn_setCookie(cookieName, cookieValue, cookieDay){
+	var expire = new Date();
+	expire.setDate(expire.getDate() + cookieDay);
+	cookies = cookieName + '=' + escape(cookieValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cookieValue)를 합니다.
+	if(typeof cookieDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
+	document.cookie = cookies;
+}
+/*
+// 쿠키 가져오기. the same of the below
+function fn_getCookie(cName) {
+	cName = cName + '=';
+	var cookieData = document.cookie;
+	var start = cookieData.indexOf(cName);
+	var cValue = '';
+	if (start != -1) {
+		start += cName.length;
+		var end = cookieData.indexOf(';', start);
+		if(end == -1)end = cookieData.length;
+		cValue = cookieData.substring(start, end);
+	}
+	return unescape(cValue);
+}
+*/
+// 쿠키 값을 얻는다.
+function fn_getCookie(cookieName) {
+	cookieName = cookieName + '=';
+	var cookieData = document.cookie;
+	var start = cookieData.indexOf(cookieName);
+	var cookieValue = '';
+	if (start != -1) {
+		start += cookieName.length;
+		var end = cookieData.indexOf(';', start);
+		if(end == -1)end = cookieData.length;
+		cookieValue = cookieData.substring(start, end);
+	}
+	return unescape(cookieValue);
+}
+// 쿠키 값을 삭제한다.
+function fn_deleteCookie(cookieName){
+	var expireDate = new Date();
+	expireDate.setDate(expireDate.getDate() - 1);
+	document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+}
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
 /*
 <html>
 <head>
@@ -142,25 +198,25 @@ function fn_returnAlert(result) {
             func.name = RegExp.$1;
             return func;
         }
- 
+
         function foo() {
             var name = $F().name;   // 함수 자신의 이름 가져오기
             console.log(name);      // 또는 alert($F().name);
         }
- 
+
         function testArguments() {
             console.log(arguments);
         }
- 
+
         function testCallee() {
             console.log(arguments.callee);
         }
- 
+
         function testCaller() {
             console.log(arguments.callee.toString());
             console.log(arguments.callee.caller.toString());
         }
- 
+
         function testCaller2() {
             testCaller();
         }
