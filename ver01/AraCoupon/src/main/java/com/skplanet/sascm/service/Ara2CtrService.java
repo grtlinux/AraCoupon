@@ -70,6 +70,10 @@ public interface Ara2CtrService {
 	public int deleteTableCnnt(Map<String, Object> param) throws Exception;
 	public int deleteTableLogin(Map<String, Object> param) throws Exception;
 
+	public List<Map<String,Object>> selectAllLoginInfo(Map<String, Object> param) throws Exception;
+	public int insertLoginInfo(Map<String, Object> param) throws Exception;
+	public List<Map<String,Object>> selectLikeLoginSrch(Map<String, Object> param) throws Exception;
+
 	// /manage/selectStrListPage.do
 	public List<Map<String,Object>> selectStrInfoList(Map<String, Object> param) throws Exception;
 

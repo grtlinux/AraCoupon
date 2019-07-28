@@ -1,12 +1,15 @@
 package com.skplanet.sascm.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +82,11 @@ public class Ara2Controller {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2Service.selectLocInfoList(modelMap);
+			log.debug("listLoc: " + list);
+			modelMap.addAttribute("listLoc", list);
+		}
 		return PATH + "/register/registerUsrFormPage";
 	}
 
@@ -104,7 +112,23 @@ public class Ara2Controller {
 				this.ara2Service.insertAra2Usr(modelMap);
 				this.ara2Service.insertAra2Mbl(modelMap);
 				this.ara2Service.insertAra2Eml(modelMap);
-				
+				this.ara2Service.insertAra2Mrrg(modelMap);
+				//
+				modelMap.putAll(this.ara2Service.selectLoginInfo(modelMap));
+				List<String> loginSrch = new ArrayList<>();
+				loginSrch.add(String.valueOf(modelMap.get("ITM_NM")));
+				loginSrch.add(String.valueOf(modelMap.get("MBL_NUM")));
+				loginSrch.add(String.valueOf(modelMap.get("EML_ADDR")));
+				loginSrch.add(String.valueOf(modelMap.get("MRRG_DT")));
+				modelMap.put("loginSrch", StringUtils.join(loginSrch.toArray(new String[loginSrch.size()]), ":"));
+				List<String> loginList = new ArrayList<>();
+				loginList.add(String.valueOf(modelMap.get("ITM_NM")));
+				loginList.add(Flag.getPhoneNumberWithMask(String.valueOf(modelMap.get("MBL_NUM"))));
+				loginList.add(Flag.getEmailWithMask(String.valueOf(modelMap.get("EML_ADDR"))));
+				loginList.add(String.valueOf(modelMap.get("MRRG_DT")));
+				modelMap.put("loginList", StringUtils.join(loginList.toArray(new String[loginList.size()]), ":"));
+				this.ara2Service.insertLoginInfo(modelMap);
+				//
 				modelMap.addAttribute("retCode", "0000");
 				modelMap.addAttribute("retMsg", String.format("고객이 정상적으로 등록되었습니다.\n고객번호는 [%s] 입니다.", String.valueOf(modelMap.get("USR_NO"))));
 			}

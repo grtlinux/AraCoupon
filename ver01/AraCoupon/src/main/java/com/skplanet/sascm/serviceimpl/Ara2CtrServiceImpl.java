@@ -183,6 +183,21 @@ public class Ara2CtrServiceImpl implements Ara2CtrService {
 		return this.ara2CtrDAO.deleteTableLogin(param);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectAllLoginInfo(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.selectAllLoginInfo(param);
+	}
+
+	@Override
+	public int insertLoginInfo(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.insertLoginInfo(param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectLikeLoginSrch(Map<String, Object> param) throws Exception {
+		return this.ara2CtrDAO.selectLikeLoginSrch(param);
+	}
+
 	// /manage/selectStrListPage.do
 	@Override
 	public List<Map<String, Object>> selectStrInfoList(Map<String, Object> param) throws Exception {

@@ -26,11 +26,11 @@
 						<thead>
 							<tr class="success text-center">
 								<td class="show"><input id='allCheckbox' type='checkbox'></td>
-								<td>캠페인#</td>
-								<td>캠페인명</td>
-								<td>캠페인설명</td>
-								<td>캠페인단계</td>
-								<td>캠페인기간</td>
+								<td class="hide">캠페인#</td>
+								<td class="hide">캠페인명</td>
+								<td class="hide">캠페인설명</td>
+								<td class="hide">캠페인단계</td>
+								<td class="hide">캠페인기간</td>
 								<!--
 								<td>시작일</td>
 								<td>종료일</td>
@@ -45,6 +45,7 @@
 								<!--
 								<td>쿠폰합계</td>
 								-->
+								<td>캠페인기간</td>
 								<td>쿠폰마스터</td>
 								<!--
 								<td>캠페인내</td>
@@ -55,7 +56,7 @@
 								-->
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="text-center">
 						</tbody>
 					</table>
 				</div>
@@ -218,8 +219,6 @@
 			if (!true) console.log('>>>>> #allCheckbox change is ' + flgAllCheckbox);
 			$('input:checkbox[name="rowCheckbox"]').prop('checked', flgAllCheckbox);
 		});
-		//
-		classFormatter();
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
@@ -239,19 +238,19 @@
 						rowHtml += "  <td>";
 						rowHtml += "    <input type='checkbox' name='rowCheckbox'>";
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td class='text-center hide'>";
 						rowHtml += "    " + value.CAMP_NO;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CAMP_NM;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CAMP_DESC;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    (" + value.CAMP_PHS + ")" + value.CD_NM;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.BGN_DT + " ~ " + value.END_DT;
 						rowHtml += "  </td>";
 						//rowHtml += "  <td>";
@@ -263,8 +262,8 @@
 						//rowHtml += "  <td class='text-center'>";
 						//rowHtml += "    " + value.CPN_TYP;
 						//rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + fn_comma(value.CPN_MNY);
+						rowHtml += "  <td class='text-center numberToMoney'>";
+						rowHtml += "    " + value.CPN_MNY;
 						rowHtml += "  </td>";
 						//rowHtml += "  <td class='text-center text-danger'>";
 						//rowHtml += "    " + fn_comma(value.CPN_CNT);
@@ -278,6 +277,9 @@
 						//rowHtml += "  <td class='text-center'>";
 						//rowHtml += "    " + fn_comma(value.CPN_SUM);
 						//rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.BGN_DT + " ~ " + value.END_DT;
+						rowHtml += "  </td>";
 						rowHtml += "  <td>";
 						rowHtml += "    " + value.CPN_MST;
 						rowHtml += "  </td>";
@@ -293,6 +295,9 @@
 						rowHtml += "</tr>";
 						$("#campTable > tbody:last").append(rowHtml);
 					});
+					//
+					classFormatter();
+					//
 					if (true) $('#campTable > tbody tr td').on('click', function() {
 						var td = $(this);
 						if (td.index() == 0)

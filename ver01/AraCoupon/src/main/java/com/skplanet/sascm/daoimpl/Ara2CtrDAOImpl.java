@@ -177,6 +177,21 @@ public class Ara2CtrDAOImpl extends AbstractDAO implements Ara2CtrDAO {
 		return (int) delete("Ara2Ctr.deleteTableLogin", param);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectAllLoginInfo(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectAllLoginInfo", param);
+	}
+
+	@Override
+	public int insertLoginInfo(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2Ctr.insertLoginInfo", param);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectLikeLoginSrch(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2Ctr.selectLikeLoginSrch", param);
+	}
+
 	// /manage/selectStrListPage.do
 	@Override
 	public List<Map<String, Object>> selectStrInfoList(Map<String, Object> param) throws Exception {

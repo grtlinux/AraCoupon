@@ -28,9 +28,15 @@
 								<td class="text-center" style="width:20%;">버 튼</td>
 								<td class="text-center">내 용</td>
 							</tr>
+						</thead>
+						<tbody>
 							<tr>
 								<td class="text-center"><button type="button" class="btn btn-danger btn-sm" onclick="fn_deleteTablesForOpen();"> 오픈시점 자료삭제 </button></td>
 								<td class="text-left">오픈 시점으로 자료를 삭제한다.</td>
+							</tr>
+							<tr>
+								<td class="text-center"><button type="button" class="btn btn-danger btn-sm" onclick="fn_createAllLoginInfo();"> 로그인 자료 생성 </button></td>
+								<td class="text-left">아라쿠폰서비스시스템의 로그인 자료를 일괄 생성한다. 기존 자료는 삭제된다.</td>
 							</tr>
 							<tr>
 								<td class="text-center"><button type="button" class="btn btn-danger btn-sm" onclick="fn_deleteTablesForOpen();"> 금액일괄 가게지급 </button></td>
@@ -48,8 +54,6 @@
 								<td class="text-center"><button type="button" class="btn btn-danger btn-sm" onclick="fn_deleteTablesForOpen();"> 아라쿠폰 관리세팅 </button></td>
 								<td class="text-left">아라쿠폰서비스시스템 환경정보 세팅 화면.</td>
 							</tr>
-						</thead>
-						<tbody>
 						</tbody>
 					</table>
 				</div>
@@ -128,6 +132,29 @@
 		}
 		jQuery.ajax({
 			url           : "${staticPATH}/ctr2/manage/deleteTablesForOpen.do",
+			dataType      : "JSON",
+			scriptCharset : "UTF-8",
+			type          : "POST",
+			data          : $('#tempForm').serialize(),
+			success: function(result, option) {
+				if (option == "success"){
+					fn_returnAlert(result);
+				} else {
+					alert("에러가 발생하였습니다.");
+				}
+			},
+			error: function(result, option) {
+				alert("에러가 발생하였습니다.");
+			}
+		});
+	}
+	function fn_createAllLoginInfo() {
+		if (true) console.log(">>>>> ", arguments.callee.caller);
+		if (!confirm("진심으로 로그인 모든정보를 삭제하고 새로 생성 하시겠습니까?")){
+			return;
+		}
+		jQuery.ajax({
+			url           : "${staticPATH}/ctr2/manage/createAllLoginInfo.do",
 			dataType      : "JSON",
 			scriptCharset : "UTF-8",
 			type          : "POST",

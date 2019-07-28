@@ -23,17 +23,18 @@
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table id="campTable" class="table table-hover table-condensed">
-						<thead>
-							<tr class="success text-center">
+						<thead class="text-center">
+							<tr class="success">
 								<td class="show"><input id='allCheckbox' type='checkbox'></td>
 								<td class='hide'>쿠폰액면가0</td>
+								<td class='hide'>쿠폰번호0</td>
 								<td>쿠폰액면가</td>
-								<td>쿠폰번호</td>
-								<td>캠페인#</td>
-								<td>고객#</td>
-								<td>쿠폰마스터</td>
-								<td>캠페인기간</td>
 								<td>쿠폰사용기간</td>
+								<td>쿠폰번호</td>
+								<td class="hide">캠페인#</td>
+								<td class='hide'>고객#</td>
+								<td class='hide'>쿠폰마스터</td>
+								<td>캠페인기간</td>
 								<!--
 								<td>캠페인#</td>
 								<td>고객#</td>
@@ -55,7 +56,7 @@
 								-->
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="text-center">
 						</tbody>
 					</table>
 				</div>
@@ -102,7 +103,7 @@
 								<td>정산할 쿠폰 갯수</td>
 								<td><span id="modalSumCnt">0</span> 장</td>
 							</tr>
-							<tr>
+							<tr class="hide">
 								<td>센터ID</td>
 								<td>
 									<div>
@@ -177,7 +178,7 @@
 						var tr = $(this).parent().parent();
 						var td = tr.children();
 						var cpnMny = td.eq(1).text();
-						var cpnNo = td.eq(3).text();
+						var cpnNo = td.eq(2).text();
 						if (!true) console.log(">>>>> row: ", idx, cpnMny, cpnNo);
 						cpnNoArr.push(cpnNo.trim());
 						sumMny += Number(cpnMny);
@@ -196,8 +197,6 @@
 				}
 			});
 		}
-		//
-		classFormatter();
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
@@ -217,29 +216,32 @@
 						rowHtml += "  <td>";
 						rowHtml += "    <input type='checkbox' name='rowCheckbox'>";
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center hide'>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CPN_MNY;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + fn_comma(value.CPN_MNY) + "원";
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CPN_NO;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td class='numberToMoney'>";
+						rowHtml += "    " + value.CPN_MNY;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.TRM_BGN_DT + " ~ " + value.TRM_END_DT;
+						rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.CPN_NO;
+						rowHtml += "  </td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CAMP_NO;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.ITM_NO;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CPN_MST;
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td>";
 						rowHtml += "    " + value.CAMP_BGN_DT + " ~ " + value.CAMP_END_DT;
-						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
-						rowHtml += "    " + value.TRM_BGN_DT + " ~ " + value.TRM_END_DT;
 						rowHtml += "  </td>";
 						/*
 						rowHtml += "  <td class='text-center'>";
@@ -297,6 +299,9 @@
 						*/
 						$("#campTable > tbody:last").append(rowHtml);
 					});
+					//
+					classFormatter();
+					//
 					if (true) $('#campTable > tbody tr td').on('click', function() {
 						// not use
 						var td = $(this);
@@ -345,7 +350,7 @@
 								var tr = $(this).parent().parent();
 								var td = tr.children();
 								var cpnMny = td.eq(1).text();
-								var cpnNo = td.eq(3).text();
+								var cpnNo = td.eq(2).text();
 								if (!true) console.log(">>>>> row: ", idx, cpnMny, cpnNo);
 								cpnNoArr.push(cpnNo.trim());
 								sumMny += Number(cpnMny);

@@ -1,6 +1,7 @@
 package com.skplanet.sascm.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -657,6 +659,65 @@ public class Ara2CtrController {
 		jsonView.render(modelMap, request, response);
 	}
 
+	@RequestMapping(value = "/manage/createAllLoginInfo.do", method = RequestMethod.POST)
+	public void createAllLoginInfo(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			int ret = this.ara2CtrService.deleteTableLogin(modelMap);
+			log.debug("deleteTableLogin.ret: " + ret);
+			modelMap.addAttribute("ret", ret);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2CtrService.selectAllLoginInfo(modelMap);
+			List<String> loginSrch = new ArrayList<>();
+			List<String> loginList = new ArrayList<>();
+			for (Map<String,Object> map : list) {
+				loginSrch.clear();
+				loginSrch.add(String.valueOf(map.get("ITM_NM")));
+				loginSrch.add(String.valueOf(map.get("MBL_NUM")));
+				loginSrch.add(String.valueOf(map.get("EML_ADDR")));
+				loginSrch.add(String.valueOf(map.get("MRRG_DT")));
+				map.put("loginSrch", StringUtils.join(loginSrch.toArray(new String[loginSrch.size()]), ":"));
+				loginList.clear();
+				loginList.add(String.valueOf(map.get("ITM_NM")));
+				loginList.add(Flag.getPhoneNumberWithMask(String.valueOf(map.get("MBL_NUM"))));
+				loginList.add(Flag.getEmailWithMask(String.valueOf(map.get("EML_ADDR"))));
+				loginList.add(String.valueOf(map.get("MRRG_DT")));
+				map.put("loginList", StringUtils.join(loginList.toArray(new String[loginList.size()]), ":"));
+				int ret = this.ara2CtrService.insertLoginInfo(map);
+				log.debug("deleteTableLogin.ret: " + ret);
+			}
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+
+	@RequestMapping(value = "/manage/selectLikeLoginSrch.do", method = RequestMethod.POST)
+	public void selectLikeLoginSrch(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			List<Map<String,Object>> list = this.ara2CtrService.selectLikeLoginSrch(modelMap);
+			log.debug("list: " + list);
+			modelMap.addAttribute("list", list);
+		}
+		if (Flag.flag) {
+			modelMap.addAttribute("retCode", "0000");
+			modelMap.addAttribute("retMsg", "성공적으로 처리 되었습니다.");
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		jsonView.render(modelMap, request, response);
+	}
+	
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

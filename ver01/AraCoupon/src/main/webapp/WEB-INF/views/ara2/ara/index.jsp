@@ -33,17 +33,17 @@
 			<div class="col-sm-4">
 				<h4>고객</h4>
 				<p>가게로부터 제공받은 쿠폰을 갖고있다가 쿠폰가게에서 제공쿠폰을 사용한다. 즉, 쿠폰시스템 서비스 해택을 누리는 주체이다.<p>
-				<p class="text-center"><a class="btn btn-default" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
+				<p class="text-center"><a class="btn btn-info" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>가게</h4>
 				<p>센터에서 발행한 쿠폰을 구매하고 고객에게 서비스로 제공한다. 고객은 갖고 있는 쿠폰을 사용하면 받아서 일정시간이 흐르면 정산을 실행한다. 정산을 처리하고 나면 가게 통장으로 입금이 이뤄진다.<p>
-				<p class="text-center"><a class="btn btn-default" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
+				<p class="text-center"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>센터</h4>
 				<p>쿠폰시스템 전체를 관리하는 곳이다. 쿠폰을 생성하고 가게로 분배하고 마지막으로 쿠폰을 정산한다. 매월 정산에 대한 결산을 진행한다.<p>
-				<p class="text-center"><a class="btn btn-default" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
+				<p class="text-center"><a class="btn btn-danger" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
 			</div>
 		</div>
 	</div>
@@ -115,7 +115,10 @@
 										고객ID
 									</td>
 									<td class="text-left">
-										<input id="usrid" type="text" value=''>
+										<input id="usrid" list="loginList">
+										<datalist id="loginList">
+										</datalist>
+										
 										<button id='btnRequestAraKey' type="button" class="btn btn-info btn-sm" onclick="fn_requestAraKey('USR');"> 아라키(AraKey) 요청 </button>
 									</td>
 								</tr>
@@ -227,6 +230,7 @@
 		<input type='hidden' id='_strid'  name='strid'  value='' />
 		<input type='hidden' id='_usrid'  name='usrid'  value='' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
+		<input type='hidden' id='_srchWord' name='srchWord' value='20' />
 	</form>
 
 
@@ -238,6 +242,7 @@
 <script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script src="${staticPATH}/bootstrap3/js/ara.common.v01.js"></script>
 <script type="text/javascript">
+	var timeoutId = null;
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		processEvent();
@@ -248,6 +253,47 @@
 	});
 	function processEvent() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
+		if (true) $('#modalUsr #usrid').on('keyup', function() {
+			var value = $(this).val();
+			if (!true) console.log(">>>>> length=" + value.length + ", value=" + value);
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(function() {
+				if (value.length < 2) {
+					$('#loginList').empty();
+					return;
+				}
+				$('#tempForm #_srchWord').val($('#modalUsr #usrid').val());
+				jQuery.ajax({
+					url           : "${staticPATH}/ctr2/manage/selectLikeLoginSrch.do",
+					dataType      : "JSON",
+					scriptCharset : "UTF-8",
+					type          : "POST",
+					data          : $("#tempForm").serialize(),
+					success: function(result, option) {
+						if (option == "success") {
+							if (result.retCode == "0000") {
+								if (!true) alert("[알림] " + result.retMsg);
+								console.log(">>>>> result=", result);
+								var list = result.list;
+								$('#loginList').empty();
+								list.forEach(function(value, index, array) {
+									var rowOption = "";
+									rowOption += "<option value='" + value.ITM_NO + "'>" + value.LOGIN_LIST + "</option>";
+									$('#loginList').append(rowOption);
+								});
+							} else {
+								alert("에러메시지: " + result.retMsg);
+							}
+						} else {
+							alert("에러가 발생하였습니다.(1)");
+						}
+					},
+					error: function(result, option) {
+						alert("에러가 발생하였습니다.(9)");
+					}
+				});
+			}, 2000);
+		});
 	}
 	function selectUseCpnList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
@@ -528,7 +574,7 @@
 	}
 	function fn_registerUsr() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
-		fn_loadPostPage("#tempForm", "${staticPATH}/ara2/register/registerUsrFormPage.do");		
+		fn_loadPostPage("#tempForm", "${staticPATH}/ara2/register/registerUsrFormPage.do", "고객등록");
 	}
 </script>
 </html>

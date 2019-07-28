@@ -162,6 +162,22 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- comment -->
+	<select id="selectLocInfoList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2.selectLocInfoList */
+			A.CODE
+			, A.CD_NM
+			, A.CD_DESC
+			, A.SORT_NO
+		FROM
+			ARA2_CODE A
+		WHERE 1=1
+			AND A.GRP_CD = 'C015'
+			AND A.USE_YN = 'Y'
+		ORDER BY
+			A.SORT_NO
+	</select>
+	
+	<!-- comment -->
 	<select id="selectChkNmMblEml" parameterType="Map" resultType="Map">
 		SELECT  /* Ara2.selectChkNmMblEml */
 			A.ROWNO
@@ -177,10 +193,10 @@
 					SELECT ROWNUM AS ROWNO, USR_NM FROM ARA2_USR WHERE 1=1 AND USR_NM = #{usrName}
 				) B ON B.ROWNO = A.ROWNO
 				LEFT JOIN (
-					SELECT ROWNUM AS ROWNO, MBL_NUM FROM ARA2_MBL WHERE 1=1 AND MBL_NUM = #{usrMobile}
+					SELECT ROWNUM AS ROWNO, MBL_NUM FROM ARA2_MBL WHERE 1=1 AND ITM_TYP = 'USR' AND MBL_NUM = #{usrMobile}
 				) C ON C.ROWNO = A.ROWNO
 				LEFT JOIN (
-					SELECT ROWNUM AS ROWNO, EML_ADDR FROM ARA2_EML WHERE 1=1 AND EML_ADDR = #{usrEmail}
+					SELECT ROWNUM AS ROWNO, EML_ADDR FROM ARA2_EML WHERE 1=1 AND ITM_TYP = 'USR' AND EML_ADDR = #{usrEmail}
 				) D ON D.ROWNO = A.ROWNO
 		WHERE 1=1
 	</select>
@@ -214,6 +230,62 @@
 			( #{USR_NO}, 'USR', 'Y', 1, 'eml-1', #{usrEmail} )
 	</insert>
 
+	<!-- comment -->
+	<insert id="insertAra2Mrrg" parameterType="Map">
+		INSERT INTO  /* Ara2.insertAra2Mrrg */
+			ARA2_MRRG
+		VALUES
+			( #{USR_NO}, 'USR', 'Y', TO_DATE(#{usrMrrgDt}, 'YYYY-MM-DD'), #{usrMrrgLoc} )
+	</insert>
+
+
+	<!-- comment -->
+	<select id="selectLoginInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectLoginInfo */
+			B.ITM_NO
+			, B.ITM_ID
+			, B.ITM_NM
+			, B.ITM_TYP
+			, NVL(B.MBL_NUM, '-')    AS MBL_NUM
+			, NVL(B.EML_ADDR, '-')   AS EML_ADDR
+			, NVL(B.MRRG_DT, '-')    AS MRRG_DT
+		FROM
+			(
+				SELECT
+					A.USR_NO       AS ITM_NO
+					, A.USR_ID     AS ITM_ID
+					, A.USR_NM     AS ITM_NM
+					, 'USR'        AS ITM_TYP
+					, A.REL_STR_NO
+					, A1.TEL_NM
+					, A1.TEL_NUM
+					, A2.MBL_NM
+					, A2.MBL_NUM
+					, A3.EML_NM
+					, A3.EML_ADDR
+					, A4.BNK_NM
+					, A4.BNK_ACNT
+					, A4.ACNT_NM
+					, TO_CHAR(A5.MRRG_DT, 'YYMMDD')   AS MRRG_DT
+					, A5.MRRG_LOC
+				FROM
+					ARA2_USR A
+						LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+				WHERE 1=1
+					AND A.USR_ID = TO_CHAR(#{USR_NO})
+			) B
+		WHERE 1=1
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertLoginInfo" parameterType="Map">
+		INSERT INTO ARA2_LOGIN VALUES ( SEQ_LOGIN.NEXTVAL, #{loginSrch}, #{loginList}, #{ITM_NO}, #{ITM_ID}, #{ITM_NM}, #{ITM_TYP}, SYSDATE )  /* Ara2Ctr.insertLoginInfo */
+	</insert>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->

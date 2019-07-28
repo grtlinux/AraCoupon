@@ -1,5 +1,6 @@
 package com.skplanet.sascm.serviceimpl;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -44,6 +45,11 @@ public class Ara2ServiceImpl implements Ara2Service {
 
 	// /register/registerUsrFormPage.do
 	@Override
+	public List<Map<String, Object>> selectLocInfoList(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.selectLocInfoList(param);
+	}
+
+	@Override
 	public Map<String, Object> selectChkNmMblEml(Map<String, Object> param) throws Exception {
 		return this.ara2DAO.selectChkNmMblEml(param);
 	}
@@ -66,5 +72,20 @@ public class Ara2ServiceImpl implements Ara2Service {
 	@Override
 	public int insertAra2Eml(Map<String, Object> param) throws Exception {
 		return this.ara2DAO.insertAra2Eml(param);
+	}
+
+	@Override
+	public int insertAra2Mrrg(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.insertAra2Mrrg(param);
+	}
+
+	@Override
+	public Map<String, Object> selectLoginInfo(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.selectLoginInfo(param);
+	}
+
+	@Override
+	public int insertLoginInfo(Map<String, Object> param) throws Exception {
+		return this.ara2DAO.insertLoginInfo(param);
 	}
 }

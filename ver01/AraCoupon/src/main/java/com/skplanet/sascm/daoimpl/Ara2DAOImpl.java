@@ -1,5 +1,6 @@
 package com.skplanet.sascm.daoimpl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,11 @@ public class Ara2DAOImpl extends AbstractDAO implements Ara2DAO {
 
 	// /register/registerUsrFormPage.do
 	@Override
+	public List<Map<String, Object>> selectLocInfoList(Map<String, Object> param) throws Exception {
+		return (List<Map<String,Object>>) selectList("Ara2.selectLocInfoList", param);
+	}
+
+	@Override
 	public Map<String, Object> selectChkNmMblEml(Map<String, Object> param) throws Exception {
 		return (Map<String,Object>) selectOne("Ara2.selectChkNmMblEml", param);
 	}
@@ -62,5 +68,20 @@ public class Ara2DAOImpl extends AbstractDAO implements Ara2DAO {
 	@Override
 	public int insertAra2Eml(Map<String, Object> param) throws Exception {
 		return (int) insert("Ara2.insertAra2Eml", param);
+	}
+
+	@Override
+	public int insertAra2Mrrg(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2.insertAra2Mrrg", param);
+	}
+
+	@Override
+	public Map<String, Object> selectLoginInfo(Map<String, Object> param) throws Exception {
+		return (Map<String,Object>) selectOne("Ara2.selectLoginInfo", param);
+	}
+
+	@Override
+	public int insertLoginInfo(Map<String, Object> param) throws Exception {
+		return (int) insert("Ara2.insertLoginInfo", param);
 	}
 }

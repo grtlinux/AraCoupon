@@ -25,15 +25,15 @@
 					<table id="codeTable" class="table">
 						<tbody>
 							<tr>
-								<td class="text-danger" style="width:20%;"> 고객이름 또는 별명(*) </td>
-								<td><input id='usrName' class='form-control' type='text' value='' placeholder='이름 또는 별명'></td>
+								<td class="text-danger" style="width:20%;"> 이름 또는 별명(*) </td>
+								<td><input id='usrName' type='text' size='50' value='' placeholder='이름 또는 별명'></td>
 							</tr>
 							<tr>
-								<td class="text-danger" >고객 이메일 주소(*)</td>
-								<td><input id='usrEmail' class='form-control' type='text' value='' placeholder='Email 주소'></td>
+								<td class="text-danger" >이메일 주소(*)</td>
+								<td><input id='usrEmail' type='text' size='50' value='' placeholder='Email 주소'></td>
 							</tr>
 							<tr>
-								<td class="text-danger" >고객 모바일 번호(*)</td>
+								<td class="text-danger" >모바일 번호(*)</td>
 								<td>
 									<input id='usrMobile' class='bg-danger' type='text' size='25' value='' placeholder='모바일번호를 입력'>&nbsp;('-'를 빼고 입력)&nbsp;&nbsp;
 									<!--
@@ -41,6 +41,20 @@
 									&nbsp;&nbsp; -> &nbsp;&nbsp;
 									<input id='arakey' class='bg-danger' type='text' size='20' value='' placeholder='아라키(AraKey)를 입력' disabled>
 									-->
+								</td>
+							</tr>
+							<tr>
+								<td class="text-danger" >결혼 예정일(*)</td>
+								<td><input id='usrMrrgDt' type='date' value='' placeholder='결혼 예정일'></td>
+							</tr>
+							<tr>
+								<td class="text-danger" >결혼 장소(*)</td>
+								<td>
+									<select id="usrMrrgLoc">
+										<c:forEach var="loc" items="${listLoc}">
+											<option value="${loc.CD_NM}" <c:if test="${loc.CODE == '001'}">selected</c:if> >${loc.CD_NM}</option>
+										</c:forEach>
+									</select>
 								</td>
 							</tr>
 						</tbody>
@@ -67,59 +81,6 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- modal dialog -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<div class="row">
-		<!-- user information -->
-		<div class="modal" id="modalSelfInfo" tabindex="-1">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header alert alert-danger">
-						내 정보(센터)<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body text-center">
-						<div class="panel panel-primary">
-							<table class="table text-left">
-								<tbody>
-									<tr>
-										<td>센터ID</td>
-										<td class="align-left">${info.CTR_ID}</td>
-									</tr>
-									<tr>
-										<td>센터명</td>
-										<td>${info.CTR_NM}</td>
-									</tr>
-									<tr>
-										<td>전화번호</td>
-										<td>${info.TEL_NUM}</td>
-									</tr>
-									<tr>
-										<td>핸드폰번호</td>
-										<td>${info.MBL_NUM}</td>
-									</tr>
-									<tr>
-										<td>이메일</td>
-										<td>${info.EML_ADDR}</td>
-									</tr>
-									<tr class="hide">
-										<td>전화번호</td>
-										<td>${info.TEL_NO}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<img class="hide" src="${staticPATH}/bootstrap3/images/steve-jobs.png" style="width:250px;">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- all of forms -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<form id='tempForm'>
@@ -128,6 +89,8 @@
 		<input type='hidden' id='_usrEmail' name='usrEmail' value='' />
 		<input type='hidden' id='_usrMobile' name='usrMobile' value='' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
+		<input type='hidden' id='_usrMrrgDt' name='usrMrrgDt' value='' />
+		<input type='hidden' id='_usrMrrgLoc' name='usrMrrgLoc' value='' />
 	</form>
 
 
@@ -175,12 +138,18 @@
 				$('#usrMobile').focus();
 				return false;
 			}
+			if (isEmpty($('#usrMrrgDt').val())) {
+				$('#usrMrrgDt').focus();
+				return false;
+			}
 		}
 		if (true) {
 			// transfer data
 			$("#_usrName").val($("#usrName").val());
 			$("#_usrEmail").val($("#usrEmail").val());
 			$("#_usrMobile").val($("#usrMobile").val());
+			$("#_usrMrrgDt").val($("#usrMrrgDt").val());
+			$("#_usrMrrgLoc").val($("#usrMrrgLoc option:selected").val());
 			$("#_arakey").val($("#arakey").val());
 		}
 		if (true) {
@@ -209,3 +178,4 @@
 	}
 </script>
 </html>
+

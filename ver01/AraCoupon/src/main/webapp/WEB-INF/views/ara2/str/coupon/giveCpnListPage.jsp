@@ -26,25 +26,26 @@
 						<thead>
 							<tr class="success text-center">
 								<td class="show"><input id='allCheckbox' type='checkbox'></td>
-								<td>캠페인#</td>
-								<td>캠페인명</td>
-								<td>캠페인설명</td>
-								<td>캠페인단계</td>
-								<td>캠페인기간</td>
+								<td class="hide">캠페인#</td>
+								<td class="hide">캠페인명</td>
+								<td class="hide">캠페인설명</td>
+								<td class="hide">캠페인단계</td>
+								<td class="hide">캠페인기간</td>
 								<!--
 								<td>시작일</td>
 								<td>종료일</td>
 								<td>쿠폰타입</td>
 								-->
-								<td>액면가(원)</td>
+								<td class='text-danger'>소유갯수</td>
+								<td>액면가</td>
 								<!--
 								<td class='text-danger'>갯수</td>
 								<td class='text-danger'>사용/남음/전체</td>
 								-->
-								<td class='text-danger'>소유갯수</td>
 								<!--
 								<td>쿠폰합계</td>
 								-->
+								<td>캠페인기간</td>
 								<td>쿠폰마스터</td>
 								<!--
 								<td>캠페인내</td>
@@ -55,7 +56,7 @@
 								-->
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="text-center">
 						</tbody>
 					</table>
 				</div>
@@ -284,8 +285,6 @@
 		if (true) {
 			$('#modalCampNoInfo #arakeyNo').trigger('click');
 		}
-		//
-		classFormatter();
 	}
 	function selectList() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
@@ -305,19 +304,19 @@
 						rowHtml += "  <td>";
 						rowHtml += "    <input type='checkbox' name='rowCheckbox'>";
 						rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center'>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CAMP_NO;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CAMP_NM;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.CAMP_DESC;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    (" + value.CAMP_PHS + ")" + value.CD_NM;
 						rowHtml += "  </td>";
-						rowHtml += "  <td>";
+						rowHtml += "  <td class='hide'>";
 						rowHtml += "    " + value.BGN_DT + " ~ " + value.END_DT;
 						rowHtml += "  </td>";
 						//rowHtml += "  <td>";
@@ -329,7 +328,10 @@
 						//rowHtml += "  <td class='text-center'>";
 						//rowHtml += "    " + value.CPN_TYP;
 						//rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center numberWithCommas'>";
+						rowHtml += "  <td class='text-danger'>";
+						rowHtml += "    " + value.OCC_CNT;
+						rowHtml += "  </td>";
+						rowHtml += "  <td class='numberToMoney'>";
 						rowHtml += "    " + value.CPN_MNY;
 						rowHtml += "  </td>";
 						//rowHtml += "  <td class='text-center text-danger'>";
@@ -338,12 +340,12 @@
 						//rowHtml += "  <td class='text-center text-danger'>";
 						//rowHtml += "    " + value.BUY_CNT + "/" + value.RMN_CNT + "/" + value.TTL_CNT;
 						//rowHtml += "  </td>";
-						rowHtml += "  <td class='text-center text-danger'>";
-						rowHtml += "    " + value.OCC_CNT;
-						rowHtml += "  </td>";
 						//rowHtml += "  <td class='text-center'>";
 						//rowHtml += "    " + fn_comma(value.CPN_SUM);
 						//rowHtml += "  </td>";
+						rowHtml += "  <td>";
+						rowHtml += "    " + value.BGN_DT + " ~ " + value.END_DT;
+						rowHtml += "  </td>";
 						rowHtml += "  <td>";
 						rowHtml += "    " + value.CPN_MST;
 						rowHtml += "  </td>";
