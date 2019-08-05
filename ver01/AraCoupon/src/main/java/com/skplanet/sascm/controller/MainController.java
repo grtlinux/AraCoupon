@@ -41,7 +41,7 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/")
 	public String home(HttpServletRequest request, Model model) {
-		return "redirect:/main.do";
+		return "redirect:/ara2/index.do";
 	}
 
 	/**

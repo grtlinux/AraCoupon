@@ -140,7 +140,8 @@ function fn_setCookie(cookieName, cookieValue, cookieDay){
 	var expire = new Date();
 	expire.setDate(expire.getDate() + cookieDay);
 	cookies = cookieName + '=' + escape(cookieValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cookieValue)를 합니다.
-	if(typeof cookieDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
+	if (typeof cookieDay != 'undefined')
+		cookies += ';expires=' + expire.toGMTString() + ';';
 	document.cookie = cookies;
 }
 /*
@@ -168,16 +169,18 @@ function fn_getCookie(cookieName) {
 	if (start != -1) {
 		start += cookieName.length;
 		var end = cookieData.indexOf(';', start);
-		if(end == -1)end = cookieData.length;
+		if (end == -1)
+			end = cookieData.length;
 		cookieValue = cookieData.substring(start, end);
 	}
 	return unescape(cookieValue);
 }
 // 쿠키 값을 삭제한다.
 function fn_deleteCookie(cookieName){
-	var expireDate = new Date();
-	expireDate.setDate(expireDate.getDate() - 1);
-	document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+	//var expireDate = new Date();
+	//expireDate.setDate(expireDate.getDate() - 1);
+	// document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+	document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 }
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////

@@ -64,6 +64,12 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 
 		//String userId = null;
 		String url = request.getRequestURI();
+		log.debug("KANG-20190729 Request url = " + url);
+		//if (url.equals("/")) {
+		//	log.debug("KANG-20190308 Redirect to /ara2/index.do");
+		//	new ModelAndView("redirect:/ara2/index.do");
+		//	return super.preHandle(request, response, handler);
+		//}
 
 		SessionVO sessionVo = this.sessionService.getSession(request);
 

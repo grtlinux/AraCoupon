@@ -115,11 +115,14 @@
 										고객ID
 									</td>
 									<td class="text-left">
-										<input id="usrid" list="loginList">
+										<input id="usrid" list="loginList" type="text" value=''>
 										<datalist id="loginList">
 										</datalist>
 										
 										<button id='btnRequestAraKey' type="button" class="btn btn-info btn-sm" onclick="fn_requestAraKey('USR');"> 아라키(AraKey) 요청 </button>
+										<div class='hide'>
+											<input id="usridSaveYn" type="checkbox"> 고객ID 저장
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -158,6 +161,9 @@
 									<td class="text-left">
 										<input id="strid" type="text" value=''>
 										<button id='btnRequestAraKey' type="button" class="btn btn-success btn-sm" onclick="fn_requestAraKey('STR');"> 아라키(AraKey) 요청 </button>
+										<div class='hide'>
+											<input id="stridSaveYn" type="checkbox"> 가게ID 저장
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -196,6 +202,9 @@
 									<td class="text-left">
 										<input id="ctrid" type="text" value=''>
 										<button id='btnRequestAraKey' type="button" class="btn btn-danger btn-sm" onclick="fn_requestAraKey('CTR');"> 아라키(AraKey) 요청 </button>
+										<div class='hide'>
+											<input id="ctridSaveYn" type="checkbox"> 센터ID 저장
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -250,6 +259,33 @@
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
+		if (true) {
+			if (fn_getCookie("ckSaveYn") == 'false') {
+				fn_setCookie("ckId", "");
+			}
+			if (true) {
+				var ckId = fn_getCookie("ckId");
+				var ckTyp = fn_getCookie("ckTyp");
+				var ckSaveYn = fn_getCookie("ckSaveYn");
+				if (true) console.log(">>>>> (" + ckId + ", " + ckTyp + ", " + ckSaveYn + ")");
+			}
+			switch (fn_getCookie("ckTyp")) {
+			case "ARA":
+				break;
+			case "USR":
+				$('#modalUsr #usrid').val(fn_getCookie("ckId"));
+				$('#modalUsr #usridSaveYn').prop('checked', fn_getCookie("ckSaveYn") == 'true' ? true : false);
+				break;
+			case "STR":
+				$('#modalStr #strid').val(fn_getCookie("ckId"));
+				$('#modalStr #stridSaveYn').prop('checked', fn_getCookie("ckSaveYn") == 'true' ? true : false);
+				break;
+			case "CTR":
+				$('#modalCtr #ctrid').val(fn_getCookie("ckId"));
+				$('#modalCtr #ctridSaveYn').prop('checked', fn_getCookie("ckSaveYn") == 'true' ? true : false);
+				break;
+			}
+		}
 	});
 	function processEvent() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
@@ -299,7 +335,7 @@
 		if (true) console.log(">>>>> ", arguments.callee.caller);
 		if (!true) {
 			if (true) console.log(">>>>> call ajax:", arguments.callee.caller);
-			// call ajax
+			// call ajax for TEST
 			jQuery.ajax({
 				url           : "${staticPATH}/ara2/ib/selectLastIbTkn.do",
 				dataType      : "JSON",
@@ -337,19 +373,19 @@
 			$('#modalAra #btnConnect').attr('disabled', true);
 			break;
 		case "USR":
-			$('#modalUsr #usrid').val('').attr('disabled', false);
+			//$('#modalUsr #usrid').val('').attr('disabled', false);
 			$('#modalUsr #btnRequestAraKey').attr('disabled', false);
 			$('#modalUsr #arakey').val('').attr('disabled', true);
 			$('#modalUsr #btnConnect').attr('disabled', true);
 			break;
 		case "STR":
-			$('#modalStr #strid').val('').attr('disabled', false);
+			//$('#modalStr #strid').val('').attr('disabled', false);
 			$('#modalStr #btnRequestAraKey').attr('disabled', false);
 			$('#modalStr #arakey').val('').attr('disabled', true);
 			$('#modalStr #btnConnect').attr('disabled', true);
 			break;
 		case "CTR":
-			$('#modalCtr #ctrid').val('').attr('disabled', false);
+			//$('#modalCtr #ctrid').val('').attr('disabled', false);
 			$('#modalCtr #btnRequestAraKey').attr('disabled', false);
 			$('#modalCtr #arakey').val('').attr('disabled', true);
 			$('#modalCtr #btnConnect').attr('disabled', true);
@@ -539,6 +575,9 @@
 							break;
 						case "USR":
 							if (result.retCode == "0000") {
+								//fn_setCookie("ckId", result.usrid, 1);
+								//fn_setCookie("ckTyp", connTyp, 1);
+								//fn_setCookie("ckSaveYn", $('#usridSaveYn').is(':checked'), 1);
 								fn_loadPostPage("#tempForm", "${staticPATH}/usr2/index.do");
 							} else {
 								alert("에러메시지: " + result.retMsg);
@@ -547,6 +586,9 @@
 							break;
 						case "STR":
 							if (result.retCode == "0000") {
+								//fn_setCookie("ckId", result.strid, 1);
+								//fn_setCookie("ckTyp", connTyp, 1);
+								//fn_setCookie("ckSaveYn", $('#stridSaveYn').is(':checked'), 1);
 								fn_loadPostPage("#tempForm", "${staticPATH}/str2/index.do");
 							} else {
 								alert("에러메시지: " + result.retMsg);
@@ -555,6 +597,9 @@
 							break;
 						case "CTR":
 							if (result.retCode == "0000") {
+								//fn_setCookie("ckId", result.ctrid, 1);
+								//fn_setCookie("ckTyp", connTyp, 1);
+								//fn_setCookie("ckSaveYn", $('#ctridSaveYn').is(':checked'), 1);
 								fn_loadPostPage("#tempForm", "${staticPATH}/ctr2/index.do");
 							} else {
 								alert("에러메시지: " + result.retMsg);
