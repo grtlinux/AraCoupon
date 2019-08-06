@@ -17,43 +17,45 @@
 		http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		">
 
-	<context:component-scan base-package="com.skplanet.sascm" use-default-filters="false">
+	<context:component-scan base-package="kr.co.arajeju.aracoupon3" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
-			<bean class="com.skplanet.sascm.common.resolver.CustomMapArgumentResolver"></bean>
+			<bean class="kr.co.arajeju.aracoupon3.common.resolver.CustomMapArgumentResolver"></bean>
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
-<!--
+	<!--
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean id="loggerInterceptor" class="com.skplanet.sascm.common.logger.LoggerInterceptor"></bean>
+			<bean id="loggerInterceptor" class="kr.co.arajeju.aracoupon3.common.logger.LoggerInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
--->
+	-->
 
 	<!-- Actionu URL -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean id="ActionInterceptor" class="com.skplanet.sascm.common.interceptor.ActionInterceptor"></bean>
+			<bean id="ActionInterceptor" class="kr.co.arajeju.aracoupon3.common.interceptor.ActionInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
 
 	<aop:aspectj-autoproxy />
 
-	<bean id="loggerAspect" class="com.skplanet.sascm.common.logger.LoggerAspect" />
+	<bean id="loggerAspect" class="kr.co.arajeju.aracoupon3.common.logger.LoggerAspect" />
 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
 
-	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<!-- property name="contentType" value="text/html;charset=UTF-8"/ -->
+	</bean>
 
 	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
 		p:order="1"

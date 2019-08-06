@@ -9,24 +9,29 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		">
 
-<!--
+	<!--
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<property name="url" value="#{contextProperties['dbconn.url']}"/>
 		<property name="username" value="#{contextProperties['dbconn.user']}"/>
 		<property name="password" value="#{contextProperties['dbconn.pass']}"/>
-    </bean>
- -->
+	</bean>
+	-->
 
-<!-- !!!!!!!!!
+	<!-- !!!!!!!!!
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<property name="url" value="jdbc:mysql://goldmiru.iptime.org/muzclub"/>
 		<property name="url" value="jdbc:mysql://kimsiljang.cafe24.com/kimsiljang"/>
 		<property name="username" value="kimsiljang"/>
 		<property name="password" value="Game!224"/>
-  </bean>
-  -->
+	</bean>
+	-->
+
+
+
+
+
 
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied" />
@@ -60,6 +65,11 @@
 		<property name="testOnReturn" value="true" />
 		<property name="validationQuery" value="SELECT 1 FROM DUAL"></property>
 	</bean>
+
+
+
+
+
 
 	<!-- BO sql -->
 	<bean id="dataSource2" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">

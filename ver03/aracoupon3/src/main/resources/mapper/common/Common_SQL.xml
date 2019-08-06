@@ -4,14 +4,14 @@
 <mapper namespace="common">
 
 	<select id="selectFileInfo" parameterType="hashmap" resultType="hashmap">
-    <![CDATA[
-        SELECT
-            STORED_FILE_NAME,
-            ORIGINAL_FILE_NAME
-        FROM
-            TB_FILE
-        WHERE
-            IDX = #{IDX}
-    ]]>
+	<![CDATA[
+		SELECT
+			STORED_FILE_NAME,
+			ORIGINAL_FILE_NAME
+		FROM
+			TB_FILE
+		WHERE
+			IDX = #{IDX}
+	]]>
 	</select>
 </mapper>
