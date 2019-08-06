@@ -17,10 +17,12 @@
 		http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		">
 
+	<!-- component scan -->
 	<context:component-scan base-package="kr.co.arajeju.aracoupon3" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
+	<!-- resolver -->
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
 			<bean class="kr.co.arajeju.aracoupon3.common.resolver.CustomMapArgumentResolver"></bean>
@@ -36,7 +38,7 @@
 	</mvc:interceptors>
 	-->
 
-	<!-- Actionu URL -->
+	<!-- action interceptor -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
@@ -47,16 +49,21 @@
 
 	<aop:aspectj-autoproxy />
 
+	<!-- logger -->
 	<bean id="loggerAspect" class="kr.co.arajeju.aracoupon3.common.logger.LoggerAspect" />
 
+	<!-- default annotation handler mapping -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
+	<!-- bean name view resolver -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
 
+	<!-- mapping jackson 2 JsonView -->
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<!-- property name="contentType" value="text/html;charset=UTF-8"/ -->
 	</bean>
 
+	<!-- url based view resolver -->
 	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
 		p:order="1"
 		p:viewClass="org.springframework.web.servlet.view.JstlView"

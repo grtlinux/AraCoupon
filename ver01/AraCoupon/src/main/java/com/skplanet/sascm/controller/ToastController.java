@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.skplanet.sascm.object.ToastMsgMstrSrcBO;
 import com.skplanet.sascm.object.UaextCodeDtlBO;
@@ -44,7 +44,7 @@ public class ToastController {
 
 	//AJAX
 	@Autowired
-	private MappingJacksonJsonView jsonView;
+	private MappingJackson2JsonView jsonView;
 
 	/**
 	 * 토스트배너 관리 목록 페이지 호출

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.skplanet.sascm.object.CampaignChannelBO;
 import com.skplanet.sascm.object.CampaignInfoBO;
@@ -69,7 +69,7 @@ public class CampaignController {
 
 	//AJAX
 	@Autowired
-	private MappingJacksonJsonView jsonView;
+	private MappingJackson2JsonView jsonView;
 
 
 	/**

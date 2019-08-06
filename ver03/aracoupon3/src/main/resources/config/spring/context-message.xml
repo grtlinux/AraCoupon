@@ -10,10 +10,10 @@
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<value>classpath:message/message-login</value>
-				<value>classpath:message/message-member</value>
-				<value>classpath:message/message-cmmcode</value>
-				<value>classpath:message/message-board</value>
+				<value>classpath*:/message/message-login</value>
+				<value>classpath*:/message/message-member</value>
+				<value>classpath*:/message/message-cmmcode</value>
+				<value>classpath*:/message/message-board</value>
 				<!--Add new configuration here-->
 			</list>
 		</property>

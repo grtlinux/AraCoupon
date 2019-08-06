@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.skplanet.sascm.service.Ara2IbService;
 import com.skplanet.sascm.util.Flag;
@@ -33,7 +33,7 @@ public class Ara2IbController {
 
 	//AJAX
 	@Autowired
-	private MappingJacksonJsonView jsonView;
+	private MappingJackson2JsonView jsonView;
 
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////

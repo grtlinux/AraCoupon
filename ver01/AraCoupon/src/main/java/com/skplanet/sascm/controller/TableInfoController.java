@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.skplanet.sascm.object.UaextCodeMstBO;
 import com.skplanet.sascm.object.UaextTableInfoDtlBO;
@@ -42,7 +42,7 @@ public class TableInfoController {
 
 	//AJAX
 	@Autowired
-	private MappingJacksonJsonView jsonView;
+	private MappingJackson2JsonView jsonView;
 
 	/**
 	 * 테이블 정보 페이지 호출
