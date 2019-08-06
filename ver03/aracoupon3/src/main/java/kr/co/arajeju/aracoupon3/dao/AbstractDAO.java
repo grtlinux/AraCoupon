@@ -1,4 +1,4 @@
-package kr.co.arajeju.aracoupon3.common.dao;
+package kr.co.arajeju.aracoupon3.dao;
 
 import java.util.List;
 

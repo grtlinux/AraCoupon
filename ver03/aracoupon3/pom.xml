@@ -480,7 +480,8 @@
 	<build>
 		<finalName>aracoupon3</finalName>
 		<defaultGoal>install</defaultGoal>
-		<directory>${basedir}/target</directory>
+		<!-- directory>${basedir}/target</directory -->
+		<directory>target</directory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
