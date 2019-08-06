@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Ara2Usr">
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /index.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment. -->
+	<select id="selectItemInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectItemInfo */
+			A.USR_NO
+			, A.USR_ID
+			, A.USR_NM
+			, A.REL_STR_NO
+			, A1.TEL_NM
+			, A1.TEL_NUM
+			, A2.MBL_NM
+			, A2.MBL_NUM
+			, A3.EML_NM
+			, A3.EML_ADDR
+			, A4.BNK_NM
+			, A4.BNK_ACNT
+			, A4.ACNT_NM
+			, A5.MRRG_DT
+			, A5.MRRG_LOC
+		FROM
+			ARA2_USR A
+				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+		WHERE 1=1
+			AND A.USR_NO = TO_NUMBER(#{usrid})
+	</select>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/stateCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment. -->
+	<select id="selectStateCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectStateCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_NO = TO_NUMBER(#{usrid})
+			AND A.ITM_TYP = 'USR'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/useCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment. -->
+	<select id="selectUseCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectUseCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                         AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')      AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')      AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_NO = TO_NUMBER(#{usrid})
+			AND A.ITM_TYP = 'USR'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- comment -->
+	<select id="selectStrInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectStrInfo */
+			A.STR_NO
+			, A.STR_ID
+			, A.STR_NM
+			, A.REL_CTR_NO
+			, A1.TEL_NM
+			, A1.TEL_NUM
+			, A2.MBL_NM
+			, A2.MBL_NUM
+			, A3.EML_NM
+			, A3.EML_ADDR
+			, A4.BNK_NM
+			, A4.BNK_ACNT
+			, A4.ACNT_NM
+			, A5.MRRG_DT
+			, A5.MRRG_LOC
+		FROM
+			ARA2_STR A
+				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.STR_NO AND A2.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.STR_NO AND A3.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
+		WHERE 1=1
+			AND A.STR_NO = TO_NUMBER(#{strid})
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateAllCnntByCnntid" parameterType="Map">
+		UPDATE  /* Ara2Usr.updateAllCnntByCnntid */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'FAIL'
+		WHERE 1=1
+			AND A.CNNT_ID = #{strid}
+			AND A.CNNT_TYP = 'STR'
+			AND A.CNNT_YN = 'Y'
+	</update>
+
+
+	<!-- comment -->
+	<insert id="insertCnntAraKey" parameterType="Map">
+		INSERT INTO  /* Ara2Usr.insertCnntAraKey */
+			ARA2_CNNT
+		VALUES
+			( SEQ_CNNT.NEXTVAL, #{strid}, 'STR', #{arakey}, 'Y', SYSDATE, null, null )
+	</insert>
+
+
+	<!-- comment -->
+	<select id="selectCnntArakeyInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Usr.selectCnntArakeyInfo */
+			A.CNNT_NO
+			, A.CNNT_ID
+			, A.CNNT_TYP
+			, A.ARA_KEY
+			, A.CNNT_YN
+			, A.CNNT_DTTM
+		FROM
+			ARA2_CNNT A
+		WHERE 1=1
+			AND A.CNNT_ID = #{strid}
+			AND A.CNNT_TYP = 'STR'
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateCnntByCnntid" parameterType="Map">
+		UPDATE  /* Ara2Usr.updateCnntByCnntid */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'SUCCESS'
+		WHERE 1=1
+			AND A.CNNT_ID = #{strid}
+			AND A.CNNT_TYP = 'STR'
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</update>
+
+
+	<!-- comment -->
+	<update id="updateCpnNoList" parameterType="Map">
+		UPDATE  /* Ara2Usr.updateCpnNoList */
+			ARA2_CPN
+		SET
+			CPN_PHS = '4'
+			, ITM_NO = TO_NUMBER(#{strid})
+			, ITM_TYP = 'STR'
+			, CPN_CNTNT = '가게에서 고객이 쿠폰사용함(결제)'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CPN_NO IN ( ''
+			<if test="arrCpnNo != ''">
+				,<foreach collection="arrCpnNo" separator="," index="index" >'${arrCpnNo[index]}'</foreach>
+			</if>
+			)
+	</update>
+
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+</mapper>
+
+
+
