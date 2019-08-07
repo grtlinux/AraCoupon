@@ -209,7 +209,7 @@
 								<tr>
 									<td>센터ID</td>
 									<td class="text-left">
-										<input id="ctrid" type="text" value=''>
+										<input id="ctrid" type="text" value='11' readOnly>
 										<button id='btnRequestAraKey' type="button" class="btn btn-danger btn-sm" onclick="fn_requestAraKey('CTR');"> 아라키(AraKey) 요청 </button>
 										<div class='hide'>
 											<input id="ctridSaveYn" type="checkbox"> 센터ID 저장
@@ -306,14 +306,13 @@
 <script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script src="${staticPATH}/bootstrap3/js/ara.common.v01.js"></script>
 <script type="text/javascript">
-	var timeoutId = null;
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
 		processEvent();
 		selectUseCpnList();
 		processSalesTime();
-		processSetInterval();
-		processSetTimeout();
+		//processSetInterval();
+		//processSetTimeout();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -347,16 +346,21 @@
 	});
 	function processEvent() {
 		if (true) console.log(">>>>> 1. ", arguments.callee.caller);
+		var timeoutId = null;
+		//if (true) $('#modalUsr #usrid').on('keydown', function(key) {
+		//	if (key.keyCode != 13) return;
 		if (true) $('#modalUsr #usrid').on('keyup', function() {
-			var value = $(this).val();
+			var value = $(this).val().trim();
 			if (!true) console.log(">>>>> length=" + value.length + ", value=" + value);
-			clearTimeout(timeoutId);
+			if (timeoutId != null) clearTimeout(timeoutId);
 			timeoutId = setTimeout(function() {
 				if (value.length < 2) {
 					$('#loginList').empty();
+					clearTimeout(timeoutId);
+					timeoutId = null;
 					return;
 				}
-				$('#tempForm #_srchWord').val($('#modalUsr #usrid').val());
+				$('#tempForm #_srchWord').val(value);
 				jQuery.ajax({
 					url           : "${staticPATH}/ctr2/manage/selectLikeLoginSrch.do",
 					dataType      : "JSON",
@@ -433,7 +437,7 @@
 		var repeat = setInterval(function() {
 			idx ++;
 			if (true) console.log("process setInterval....idx = " + idx);
-			if (idx > 10)
+			if (idx >= 2)
 				clearInterval(repeat);
 		}, 2000);
 	}

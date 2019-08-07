@@ -680,6 +680,7 @@ public class Ara2CtrController {
 				map.put("loginSrch", StringUtils.join(loginSrch.toArray(new String[loginSrch.size()]), ":"));
 				loginList.clear();
 				loginList.add(String.valueOf(map.get("ITM_NM")));
+				//loginList.add(Flag.getNameWithMask(String.valueOf(map.get("ITM_NM"))));
 				loginList.add(Flag.getPhoneNumberWithMask(String.valueOf(map.get("MBL_NUM"))));
 				loginList.add(Flag.getEmailWithMask(String.valueOf(map.get("EML_ADDR"))));
 				loginList.add(String.valueOf(map.get("MRRG_DT")));

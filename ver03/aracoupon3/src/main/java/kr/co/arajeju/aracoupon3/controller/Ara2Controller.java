@@ -126,6 +126,7 @@ public class Ara2Controller {
 				modelMap.put("loginSrch", StringUtils.join(loginSrch.toArray(new String[loginSrch.size()]), ":"));
 				List<String> loginList = new ArrayList<>();
 				loginList.add(String.valueOf(modelMap.get("ITM_NM")));
+				//loginList.add(Flag.getNameWithMask(String.valueOf(modelMap.get("ITM_NM"))));
 				loginList.add(Flag.getPhoneNumberWithMask(String.valueOf(modelMap.get("MBL_NUM"))));
 				loginList.add(Flag.getEmailWithMask(String.valueOf(modelMap.get("EML_ADDR"))));
 				loginList.add(String.valueOf(modelMap.get("MRRG_DT")));

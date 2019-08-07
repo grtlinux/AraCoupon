@@ -195,6 +195,9 @@ public class Flag {
 	
 	public static String getEmailWithMask(String str) throws Exception {
 		int idx = str.indexOf('@');
+		if (idx < 0)
+			return str;
+		//
 		StringBuffer sb = new StringBuffer();
 		sb.append(str.substring(0, 3));
 		sb.append("*****");
@@ -202,6 +205,16 @@ public class Flag {
 		return sb.toString();
 	}
 	
+	public static String getNameWithMask(String str) throws Exception {
+		String ret = str;
+		int len = str.length();
+		if (len == 2) {
+			ret = str.substring(0, 1) + "****";
+		} else if (len > 2) {
+			ret = str.substring(0, 2) + "****";
+		}
+		return ret;
+	}
 	/*
 	public static void main(String[] args) throws Exception {
 		System.out.println(">>>>> " + getPhoneNumber("01012341234"));
