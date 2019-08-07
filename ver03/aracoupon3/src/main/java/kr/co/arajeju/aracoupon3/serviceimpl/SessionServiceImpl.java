@@ -11,8 +11,10 @@ import kr.co.arajeju.aracoupon3.vo.SessionVO;
 @Service
 public class SessionServiceImpl implements SessionService {
 
+	// session object key name
 	private static final String SESSION = "sessionVo";
 
+	//////////////////////////////////////////////////////////////
 	public SessionVO getSession(HttpServletRequest request) throws Exception {
 		return (SessionVO) getMuzSession(request, SESSION);
 	}
@@ -21,6 +23,7 @@ public class SessionServiceImpl implements SessionService {
 		setMuzSession(request, SESSION, obj);
 	}
 
+	//////////////////////////////////////////////////////////////
 	public Object getMuzSession(HttpServletRequest request, String str) throws Exception {
 		return request.getSession().getAttribute(str);
 	}
@@ -29,6 +32,7 @@ public class SessionServiceImpl implements SessionService {
 		request.getSession().setAttribute(str, obj);
 	}
 
+	//////////////////////////////////////////////////////////////
 	public void removeMuzSession(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		if (session != null) {

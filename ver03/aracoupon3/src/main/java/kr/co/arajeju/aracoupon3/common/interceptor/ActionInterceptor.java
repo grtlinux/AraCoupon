@@ -43,6 +43,19 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 	@Value("#{contextProperties['server.type.aprvid']}")
 	private String staticServerTypeAprvid;
 
+	// ara.sales.type       = HH:mm
+	@Value("#{contextProperties['ara.sales.type']}")
+	private String araSalesType;
+
+	// ara.sales.open.time  = 04:00
+	@Value("#{contextProperties['ara.sales.open.time']}")
+	private String araSalesOpenTime;
+
+	// ara.sales.close.time = 23:00
+	@Value("#{contextProperties['ara.sales.close.time']}")
+	private String araSalesCloseTime;
+
+
 	@Inject
 	private SessionService sessionService;
 
@@ -50,9 +63,10 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		String url = request.getRequestURI();
 		if (log.isDebugEnabled()) {
 			log.debug("KANG-20190308 ====================================== ActionInterceptor START  ======================================");
-			log.debug("KANG-20190308 Request URI \t:  " + request.getRequestURI());
+			log.debug("KANG-20190308 Request URI \t:  " + url);
 		}
 
 		request.setAttribute("staticURL", staticURL);
@@ -61,23 +75,20 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute("staticPATHSvaurl", staticPATHSvaurl);
 		request.setAttribute("staticServerType", staticServerType);
 		request.setAttribute("staticServerTypeAprvid", staticServerTypeAprvid);
+		request.setAttribute("araSalesType", araSalesType);
+		request.setAttribute("araSalesOpenTime", araSalesOpenTime);
+		request.setAttribute("araSalesCloseTime", araSalesCloseTime);
 
-		//String userId = null;
-		String url = request.getRequestURI();
-		log.debug("KANG-20190729 Request url = " + url);
-		//if (url.equals("/")) {
-		//	log.debug("KANG-20190308 Redirect to /ara2/index.do");
-		//	new ModelAndView("redirect:/ara2/index.do");
-		//	return super.preHandle(request, response, handler);
-		//}
-
+		// 저장된 sessionVo
 		SessionVO sessionVo = this.sessionService.getSession(request);
 
+		// session
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			if (Flag.flag) System.out.println("KANG-20190308: >>>>> session is null!!!");
 		} else if (session.getAttribute("ACCOUNT") != null) {
-			//userId = sessionVo.getUserId();
+			String account = (String) session.getAttribute("ACCOUNT");
+			log.debug("KANG-20190308 session.ACCOUNT \t:  " + account);
 			if (sessionVo.getUserType().indexOf(CMM_CODE) == -1) {
 				this.sessionService.removeMuzSession(request);
 				throw new ModelAndViewDefiningException(new ModelAndView("redirect:/autherror.do"));
@@ -87,27 +98,27 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			}
 		} else {
 			// no authentication
-			if (url.indexOf("/login.do") > -1) {
+			if (url.indexOf("/login.do") > -1) {                    // controller.LoginController
 				return true;
-			} else if (url.indexOf("/ajax_login_proc.do") > -1) {   // controller.LoginController.loginProc()
+			} else if (url.indexOf("/ajax_login_proc.do") > -1) {   // controller.LoginController
 				return true;
-			} else if (url.indexOf("/loginReload.do") > -1) {
+			} else if (url.indexOf("/loginReload.do") > -1) {       // controller.LoginController
 				return true;
-			} else if (url.indexOf("/autherror.do") > -1) {
+			} else if (url.indexOf("/autherror.do") > -1) {         // controller.LoginController
 				return true;
-			} else if (url.indexOf("/notice/getNoticeList.do") > -1) {
+			//} else if (url.indexOf("/notice/getNoticeList.do") > -1) {
+			//	return true;
+			//} else if (url.indexOf("/callCopyCoupon.do") > -1) {
+			//	return true;
+			} else if (url.indexOf("/kang/") > -1) {                // controller.KangController
 				return true;
-			} else if (url.indexOf("/callCopyCoupon.do") > -1) {
+			} else if (url.indexOf("/ara2/") > -1) {                // controller.Ara2Controller
 				return true;
-			} else if (url.indexOf("/kang/") > -1) {
+			} else if (url.indexOf("/ctr2/") > -1) {                // controller.Ctr2Controller
 				return true;
-			} else if (url.indexOf("/ara2/") > -1) {
+			} else if (url.indexOf("/str2/") > -1) {                // controller.Str2Controller
 				return true;
-			} else if (url.indexOf("/ctr2/") > -1) {
-				return true;
-			} else if (url.indexOf("/str2/") > -1) {
-				return true;
-			} else if (url.indexOf("/usr2/") > -1) {
+			} else if (url.indexOf("/usr2/") > -1) {                // controller.Usr2Controller
 				return true;
 			} else {
 				//throw new ModelAndViewDefiningException(new ModelAndView("redirect:/login.do?url="+url));

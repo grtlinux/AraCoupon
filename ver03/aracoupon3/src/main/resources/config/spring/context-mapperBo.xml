@@ -15,12 +15,12 @@
 		<property name="mapperLocations" value="classpath:/mapper/**/*_SQL2.xml" />
 	</bean>
 
-	<bean id="transactionManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource2"/>
-	</bean>
-
 	<bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSession2"/>
+	</bean>
+
+	<bean id="transactionManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource2"/>
 	</bean>
 
 </beans>

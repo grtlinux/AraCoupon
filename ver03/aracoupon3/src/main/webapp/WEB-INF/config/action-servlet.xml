@@ -17,7 +17,7 @@
 		http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		">
 
-	<!-- component scan -->
+	<!-- component scan for controller -->
 	<context:component-scan base-package="kr.co.arajeju.aracoupon3" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
