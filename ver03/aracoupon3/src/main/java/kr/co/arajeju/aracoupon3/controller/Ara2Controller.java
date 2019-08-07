@@ -58,6 +58,7 @@ public class Ara2Controller {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		return PATH + "/index";
 	}
 
@@ -70,6 +71,7 @@ public class Ara2Controller {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		return PATH + "/index";
 	}
 

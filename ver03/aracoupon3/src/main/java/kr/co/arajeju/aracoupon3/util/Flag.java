@@ -77,6 +77,9 @@ public class Flag {
 				case "araSalesType":
 				case "araSalesOpenTime":
 				case "araSalesCloseTime":
+				case "araDbBackupTime":
+				case "araNowTime":
+				case "araSalesOk":
 					val = (String) request.getAttribute(key);
 					System.out.printf("KANG-request.Attribute [%s] = [%s]\n", key, val);
 					break;

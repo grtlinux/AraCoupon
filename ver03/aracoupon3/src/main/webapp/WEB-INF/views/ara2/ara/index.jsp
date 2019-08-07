@@ -27,23 +27,23 @@
 		<div class="row">
 			<div class="col-sm-4 hide">
 				<h4>아라</h4>
-				<p>쿠폰시스템 서비스를 만들고 유지하고 운영하는 주체이다. 유지보수를 한다.<p>
-				<p class="text-center"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
+				<p>아라 개발 그룹.<p>
+				<p id="btnConnect" class="text-center"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>고객</h4>
-				<p>가게로부터 제공받은 쿠폰을 갖고있다가 쿠폰가게에서 제공쿠폰을 사용한다. 즉, 쿠폰시스템 서비스 해택을 누리는 주체이다.<p>
-				<p class="text-center"><a class="btn btn-info" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
+				<p>고객 관심.<p>
+				<p id="btnConnect" class="text-center"><a class="btn btn-info" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>가게</h4>
-				<p>센터에서 발행한 쿠폰을 구매하고 고객에게 서비스로 제공한다. 고객은 갖고 있는 쿠폰을 사용하면 받아서 일정시간이 흐르면 정산을 실행한다. 정산을 처리하고 나면 가게 통장으로 입금이 이뤄진다.<p>
-				<p class="text-center"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
+				<p>가게 이윤.<p>
+				<p id="btnConnect" class="text-center"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>센터</h4>
-				<p>쿠폰시스템 전체를 관리하는 곳이다. 쿠폰을 생성하고 가게로 분배하고 마지막으로 쿠폰을 정산한다. 매월 정산에 대한 결산을 진행한다.<p>
-				<p class="text-center"><a class="btn btn-danger" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
+				<p>센터 운영 관리.<p>
+				<p id="btnConnect" class="text-center"><a class="btn btn-danger" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
 			</div>
 		</div>
 	</div>
@@ -56,7 +56,7 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- modal dialog -->
+	<!-- ARA modal dialog -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="row">
 		<!-- user information -->
@@ -94,6 +94,9 @@
 			</div>
 		</div>
 	</div>
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- USR modal dialog -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="row">
 		<!-- user information -->
 		<div class="modal" id="modalUsr" tabindex="-1">
@@ -140,6 +143,9 @@
 			</div>
 		</div>
 	</div>
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- STR modal dialog -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="row">
 		<!-- store information -->
 		<div class="modal" id="modalStr" tabindex="-1">
@@ -181,6 +187,9 @@
 			</div>
 		</div>
 	</div>
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- CTR modal dialog -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="row">
 		<!-- center information -->
 		<div class="modal" id="modalCtr" tabindex="-1">
@@ -222,6 +231,52 @@
 			</div>
 		</div>
 	</div>
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- NotSales modal dialog -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<div class="row">
+		<!-- center information -->
+		<div class="modal" id="modalNotSales" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header alert alert-danger">
+						업무시간 안내<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body text-center">
+						아라쿠폰서비스시스템의 업무시간을 알려드립니다.<br><br>
+						<div class="alert alert-danger"><h2>매일: ${araSalesOpenTime} ~ ${araSalesCloseTime}</h2></div>
+						<br><br>
+						<img src="${staticPATH}/bootstrap3/images/system_02.png" style="width:150px;">
+						<!--
+						<br><br>
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>센터ID</td>
+									<td class="text-left">
+										<input id="ctrid" type="text" value=''>
+										<button id='btnRequestAraKey' type="button" class="btn btn-danger btn-sm" onclick="fn_requestAraKey('CTR');"> 아라키(AraKey) 요청 </button>
+										<div class='hide'>
+											<input id="ctridSaveYn" type="checkbox"> 센터ID 저장
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>아라키(Ara Key)</td>
+									<td class="text-left">
+										<input id="arakey" type="text" value=''>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<button id='btnConnect' type="button" class="btn btn-danger btn-sm" onclick="fn_connect('CTR');"> 접속 </button>
+						-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -256,6 +311,9 @@
 		if (true) console.log("step-1: $(function() {});");
 		processEvent();
 		selectUseCpnList();
+		processSalesTime();
+		processSetInterval();
+		processSetTimeout();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -288,7 +346,7 @@
 		}
 	});
 	function processEvent() {
-		if (true) console.log(">>>>> ", arguments.callee.caller);
+		if (true) console.log(">>>>> 1. ", arguments.callee.caller);
 		if (true) $('#modalUsr #usrid').on('keyup', function() {
 			var value = $(this).val();
 			if (!true) console.log(">>>>> length=" + value.length + ", value=" + value);
@@ -332,7 +390,7 @@
 		});
 	}
 	function selectUseCpnList() {
-		if (true) console.log(">>>>> ", arguments.callee.caller);
+		if (true) console.log(">>>>> 2. ", arguments.callee.caller);
 		if (!true) {
 			if (true) console.log(">>>>> call ajax:", arguments.callee.caller);
 			// call ajax for TEST
@@ -358,6 +416,32 @@
 				}
 			});
 		}
+	}
+	function processSalesTime() {
+		if (true) console.log(">>>>> 3. ", arguments.callee.caller);
+		if (!true) alert("업무시간: ${araSalesOpenTime} ~ ${araSalesCloseTime}");
+		if ("no" == "${araSalesOk}") {
+			fn_modalToggle('#modalNotSales');
+			$('.container #btnConnect').addClass('hide');
+			$('.navbar-nav #btnConnect').addClass('hide');
+		}
+	}
+	function processSetInterval() {
+		if (true) console.log(">>>>> 4. ", arguments.callee.caller);
+		
+		var idx = 0;
+		var repeat = setInterval(function() {
+			idx ++;
+			if (true) console.log("process setInterval....idx = " + idx);
+			if (idx > 10)
+				clearInterval(repeat);
+		}, 2000);
+	}
+	function processSetTimeout() {
+		if (true) console.log(">>>>> 5. ", arguments.callee.caller);
+		setTimeout(function() {
+			if (true) console.log("process setTimeout....");
+		}, 3000);
 	}
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////

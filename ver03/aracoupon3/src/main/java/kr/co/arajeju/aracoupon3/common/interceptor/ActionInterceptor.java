@@ -55,7 +55,11 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 	@Value("#{contextProperties['ara.sales.close.time']}")
 	private String araSalesCloseTime;
 
+	// ara.db.backup.time = 23:30
+	@Value("#{contextProperties['ara.db.backup.time']}")
+	private String araDbBackupTime;
 
+	
 	@Inject
 	private SessionService sessionService;
 
@@ -78,7 +82,23 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute("araSalesType", araSalesType);
 		request.setAttribute("araSalesOpenTime", araSalesOpenTime);
 		request.setAttribute("araSalesCloseTime", araSalesCloseTime);
+		request.setAttribute("araDbBackupTime", araDbBackupTime);
+		request.setAttribute("araSalesOk", "yes");
 
+		if (Flag.flag) {
+			// 업무시간에 대한 처리를 한다.
+			String araNowTime = Flag.getDateTime(araSalesType);
+			request.setAttribute("araNowTime", araNowTime);
+			
+			if (araNowTime.compareTo(araSalesOpenTime) < 0 || araSalesCloseTime.compareTo(araNowTime) < 0) {
+				// 업무시간이 아니면 접속페이지로 이동한다.
+				if (Flag.flag) log.debug(String.format("KANG-20190807 redirect:/ara2/index.do   because of not sales time: %s (%s~%s)", araNowTime, araSalesOpenTime, araSalesCloseTime));
+				request.setAttribute("araSalesOk", "no");
+				new ModelAndView("redirect:/ara2/index.do");
+				return super.preHandle(request, response, handler);
+			}
+		}
+		
 		// 저장된 sessionVo
 		SessionVO sessionVo = this.sessionService.getSession(request);
 
@@ -110,6 +130,9 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			//	return true;
 			//} else if (url.indexOf("/callCopyCoupon.do") > -1) {
 			//	return true;
+			//} else if (url.equals("/index.do")) {
+			//	if (Flag.flag) log.debug("KANG-20190807 redirect:/ara2/index.do");
+			//	new ModelAndView("redirect:/ara2/index.do");
 			} else if (url.indexOf("/kang/") > -1) {                // controller.KangController
 				return true;
 			} else if (url.indexOf("/ara2/") > -1) {                // controller.Ara2Controller
@@ -121,8 +144,10 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			} else if (url.indexOf("/usr2/") > -1) {                // controller.Usr2Controller
 				return true;
 			} else {
+				if (Flag.flag) log.debug("KANG-20190807 redirect:/ara2/index.do   <- url:" + url);
 				//throw new ModelAndViewDefiningException(new ModelAndView("redirect:/login.do?url="+url));
-				throw new ModelAndViewDefiningException(new ModelAndView("redirect:/ara2/index.do"));
+				//throw new ModelAndViewDefiningException(new ModelAndView("redirect:/ara2/index.do"));
+				new ModelAndView("redirect:/ara2/index.do");
 			}
 		}
 
