@@ -74,6 +74,9 @@ public class Flag {
 				case "staticPATHSasurl":
 				case "staticURL":
 				case "staticPATH":
+				case "araSalesType":
+				case "araSalesOpenTime":
+				case "araSalesCloseTime":
 					val = (String) request.getAttribute(key);
 					System.out.printf("KANG-request.Attribute [%s] = [%s]\n", key, val);
 					break;
