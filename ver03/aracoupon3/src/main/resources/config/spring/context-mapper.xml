@@ -10,15 +10,18 @@
 		http://www.springframework.org/schema/context/spring-context.xsd
 		">
 
+	<!-- mapperLocation -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath*:/mapper/**/*_SQL.xml" />
 	</bean>
 
+	<!-- sqlSessionTemplate -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSession"/>
 	</bean>
 
+	<!-- transactionManager -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>

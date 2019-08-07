@@ -9,46 +9,46 @@ public class CommandMap {
 	Map<String,Object> map = new HashMap<String,Object>();
 
 	public Object get(String key){
-		return map.get(key);
+		return this.map.get(key);
 	}
 
 	public void put(String key, Object value){
-		map.put(key, value);
+		this.map.put(key, value);
 	}
 
 	public Object remove(String key){
-		return map.remove(key);
+		return this.map.remove(key);
 	}
 
 	public boolean containsKey(String key){
-		return map.containsKey(key);
+		return this.map.containsKey(key);
 	}
 
 	public boolean containsValue(Object value){
-		return map.containsValue(value);
+		return this.map.containsValue(value);
 	}
 
 	public void clear(){
-		map.clear();
+		this.map.clear();
 	}
 
 	public Set<Entry<String, Object>> entrySet(){
-		return map.entrySet();
+		return this.map.entrySet();
 	}
 
 	public Set<String> keySet(){
-		return map.keySet();
+		return this.map.keySet();
 	}
 
 	public boolean isEmpty(){
-		return map.isEmpty();
+		return this.map.isEmpty();
 	}
 
 	public void putAll(Map<? extends String, ? extends Object> m){
-		map.putAll(m);
+		this.map.putAll(m);
 	}
 
 	public Map<String,Object> getMap(){
-		return map;
+		return this.map;
 	}
 }

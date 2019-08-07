@@ -4,7 +4,7 @@ import java.sql.Date;
 
 /**
  * <pre>
- * com.skplanet.sascm.vo
+ * kr.co.arajeju.aracoupon3.vo
  * MemberVO.java
  * </pre>
  *

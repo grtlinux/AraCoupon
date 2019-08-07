@@ -7,6 +7,7 @@
 		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		">
 
+	<!-- message source -->
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
@@ -22,6 +23,7 @@
 		</property>
 	</bean>
 
+	<!-- message source accessor -->
 	<bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
 		<constructor-arg>
 			<ref local="messageSource" />

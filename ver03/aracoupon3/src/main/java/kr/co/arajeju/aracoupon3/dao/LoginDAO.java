@@ -9,7 +9,7 @@ import kr.co.arajeju.aracoupon3.vo.SessionVO;
 
 /**
  * <pre>
- * com.skplanet.sascm.dao
+ * kr.co.arajeju.aracoupon3.dao
  * LoginDAO.java
  * </pre>
  *

@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		">
 
-	<!-- base datasource !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- datasource !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied" />
 		<property name="logFormatter">
@@ -31,7 +31,7 @@
 	</bean>
 
 
-	<!-- BO base datasource !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<!-- BO datasource2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 	<bean id="dataSource2" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied2" />
 		<property name="logFormatter">

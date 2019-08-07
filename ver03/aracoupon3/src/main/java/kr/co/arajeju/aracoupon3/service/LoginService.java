@@ -7,7 +7,7 @@ import kr.co.arajeju.aracoupon3.vo.SessionVO;
 
 /**
  * <pre>
- * com.skplanet.sascm.login.service
+ * kr.co.arajeju.aracoupon3.login.service
  * LoginService.java
  * </pre>
  *

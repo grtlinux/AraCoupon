@@ -22,7 +22,7 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<!-- resolver -->
+	<!-- argument resolver -->
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
 			<bean class="kr.co.arajeju.aracoupon3.common.resolver.CustomMapArgumentResolver"></bean>
