@@ -246,7 +246,7 @@
 						아라쿠폰서비스시스템의 업무시간을 알려드립니다.<br><br>
 						<div class="alert alert-danger"><h2>매일: ${araSalesOpenTime} ~ ${araSalesCloseTime}</h2></div>
 						<br><br>
-						<img src="${staticPATH}/bootstrap3/images/system_02.png" style="width:150px;">
+						<img src="${staticPATH}/bootstrap3/images/system_02.png" style="width:150px;"><br>
 						<!--
 						<br><br>
 						<table class="table">
@@ -272,6 +272,13 @@
 						<br>
 						<button id='btnConnect' type="button" class="btn btn-danger btn-sm" onclick="fn_connect('CTR');"> 접속 </button>
 						-->
+						<div class="hide text-center">
+							<div id="barCodeTgt1"></div>
+							<div id="barCodeTgt2"></div>
+							<div id="barCodeTgt3"></div>
+							<div id="barCodeTgt4"></div>
+							<div id="barCodeTgt5"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -305,6 +312,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="${staticPATH}/bootstrap3/js/bootstrap.js"></script>
 <script src="${staticPATH}/bootstrap3/js/ara.common.v01.js"></script>
+<script src="${staticPATH}/bootstrap3/js/ara.jquery-barcode.js"></script>
 <script type="text/javascript">
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
@@ -313,6 +321,7 @@
 		processSalesTime();
 		//processSetInterval();
 		//processSetTimeout();
+		processBarCode();
 	});
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
@@ -446,6 +455,16 @@
 		setTimeout(function() {
 			if (true) console.log("process setTimeout....");
 		}, 3000);
+	}
+	function processBarCode() {
+		// ref: https://doolyit.tistory.com/89
+		// title: jquery barcode 출력(바코드출력)하기, jquery 공개소스
+		//
+		$('#barCodeTgt1').barcode('1234567890123', 'code128');
+		$("#barCodeTgt2").barcode("1234567890128", "ean13",{barWidth:2, barHeight:30});
+		$("#barCodeTgt3").barcode("1234567", "int25",{barWidth:2, barHeight:30});	
+		$("#barCodeTgt4").barcode("1234567890128", "code128",{barWidth:1, barHeight:70,showHRI:true,bgColor:"red"});
+		$("#barCodeTgt5").barcode("1234567890128", "datamatrix",{showHRI:false,bgColor:"yellow"});
 	}
 	//////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////
