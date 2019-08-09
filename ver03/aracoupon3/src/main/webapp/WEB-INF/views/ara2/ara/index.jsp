@@ -25,7 +25,7 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4 hide">
+			<div class="hide col-sm-4">
 				<h4>아라</h4>
 				<p>아라 개발 그룹.<p>
 				<p id="btnConnect" class="text-center"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
@@ -118,13 +118,13 @@
 										고객ID
 									</td>
 									<td class="text-left">
-										<input id="usrid" list="loginList" type="text" value=''>
+										<input id="usrid" list="loginList" type="text" value='${usrid}'>
 										<datalist id="loginList">
 										</datalist>
 										
 										<button id='btnRequestAraKey' type="button" class="btn btn-info btn-sm" onclick="fn_requestAraKey('USR');"> 아라키(AraKey) 요청 </button>
-										<div class='hide'>
-											<input id="usridSaveYn" type="checkbox"> 고객ID 저장
+										<div class='show'>
+											<input id="usridSaveYn" type="checkbox" <c:if test="${usridSaveYn eq 'Y'}">checked="checked"</c:if>/> 고객ID 저장
 										</div>
 									</td>
 								</tr>
@@ -300,6 +300,9 @@
 		<input type='hidden' id='_ctrid'  name='ctrid'  value='' />
 		<input type='hidden' id='_strid'  name='strid'  value='' />
 		<input type='hidden' id='_usrid'  name='usrid'  value='' />
+		<input type='hidden' id='_ctridSaveYn'  name='ctridSaveYn'  value='' />
+		<input type='hidden' id='_stridSaveYn'  name='stridSaveYn'  value='' />
+		<input type='hidden' id='_usridSaveYn'  name='usridSaveYn'  value='' />
 		<input type='hidden' id='_arakey' name='arakey' value='' />
 		<input type='hidden' id='_srchWord' name='srchWord' value='20' />
 	</form>
@@ -326,6 +329,7 @@
 	$(document).ready(function(){
 		if (true) console.log("step-2: $(document).ready(function(){})");
 		if (true) {
+			// cookie 이용
 			if (fn_getCookie("ckSaveYn") == 'false') {
 				fn_setCookie("ckId", "");
 			}
@@ -351,6 +355,9 @@
 				$('#modalCtr #ctridSaveYn').prop('checked', fn_getCookie("ckSaveYn") == 'true' ? true : false);
 				break;
 			}
+		}
+		if (true) {
+			// session 이용
 		}
 	});
 	function processEvent() {
@@ -652,6 +659,7 @@
 				break;
 			case "USR":
 				$("#tempForm > #_arakey").val($("#modalUsr #arakey").val());
+				$("#tempForm > #_usridSaveYn").val($("#modalUsr #usridSaveYn").is(":checked") ? 'Y' : 'N');
 				break;
 			case "STR":
 				$("#tempForm > #_arakey").val($("#modalStr #arakey").val());

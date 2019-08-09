@@ -22,6 +22,9 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
+
+
+
 	<!-- argument resolver -->
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>

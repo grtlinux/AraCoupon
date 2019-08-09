@@ -11,6 +11,19 @@ import kr.co.arajeju.aracoupon3.vo.SessionVO;
 @Service
 public class SessionServiceImpl implements SessionService {
 
+	//////////////////////////////////////////////////////////////
+	public Object getSession(HttpServletRequest request, String key) throws Exception {
+		return request.getSession().getAttribute(key);
+	}
+
+	public void setSession(HttpServletRequest request, String key, Object obj) throws Exception {
+		request.getSession().setAttribute(key, obj);
+	}
+
+	//////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////
+
 	// session object key name
 	private static final String SESSION = "sessionVo";
 

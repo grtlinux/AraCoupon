@@ -59,7 +59,6 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 	@Value("#{contextProperties['ara.db.backup.time']}")
 	private String araDbBackupTime;
 
-	
 	@Inject
 	private SessionService sessionService;
 
@@ -117,6 +116,17 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				new ModelAndView("redirect:/main.do");
 			}
 		} else {
+			if (Flag.flag) {
+				Integer count = (Integer) this.sessionService.getSession(request, "count");
+				if (count == null) {
+					count = 100;
+					this.sessionService.setSession(request, "count", count);
+				} else {
+					count ++;
+					this.sessionService.setSession(request, "count", count);
+				}
+				log.debug("KANG-20190808 session.count \t:  " + count);
+			}
 			// no authentication
 			if (url.indexOf("/login.do") > -1) {                    // controller.LoginController
 				return true;

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +24,7 @@ import com.google.gson.GsonBuilder;
 
 import kr.co.arajeju.aracoupon3.service.Ara2IbService;
 import kr.co.arajeju.aracoupon3.service.Ara2Service;
+import kr.co.arajeju.aracoupon3.service.SessionService;
 import kr.co.arajeju.aracoupon3.util.Flag;
 import kr.co.arajeju.aracoupon3.util.GenerateAraKey;
 import kr.co.arajeju.aracoupon3.util.IbMsg;
@@ -41,6 +43,9 @@ public class Ara2Controller {
 	@Resource(name = "ara2IbService")
 	private Ara2IbService ara2IbService;
 
+	@Inject
+	private SessionService sessionService;
+
 	//AJAX
 	@Autowired
 	private MappingJackson2JsonView jsonView;
@@ -50,26 +55,26 @@ public class Ara2Controller {
 	/////////////////////////////////////////////////////////////////////////////////
 	
 	/*
-	 * index.jsp GET
+	 * index.jsp GET, POST
 	 */
-	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/index.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String indexGet(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
-		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
-		return PATH + "/index";
-	}
-
-	/*
-	 * index.jsp POST
-	 */
-	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
-	public String indexPost(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (Flag.flag) {
-			Flag.printRequest(request);
-			modelMap = Flag.setModelMap(modelMap, request);
+			String usridSaveYn = (String) this.sessionService.getSession(request, "usridSaveYn");
+			if (usridSaveYn != null && "Y".equals(usridSaveYn)) {
+				// session.usrid 저장됨
+				String usrid = (String) this.sessionService.getSession(request, "usrid");
+				modelMap.put("usrid", usrid);
+				modelMap.put("usridSaveYn", usridSaveYn);
+			} else {
+				// session.usrid 미저장
+				modelMap.put("usrid", "");
+				modelMap.put("usridSaveYn", "N");
+			}
 		}
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		return PATH + "/index";

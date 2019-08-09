@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,7 @@ import com.google.gson.GsonBuilder;
 
 import kr.co.arajeju.aracoupon3.service.Ara2IbService;
 import kr.co.arajeju.aracoupon3.service.Ara2UsrService;
+import kr.co.arajeju.aracoupon3.service.SessionService;
 import kr.co.arajeju.aracoupon3.util.Flag;
 import kr.co.arajeju.aracoupon3.util.GenerateAraKey;
 import kr.co.arajeju.aracoupon3.util.IbMsg;
@@ -39,6 +41,9 @@ public class Ara2UsrController {
 	@Resource(name = "ara2IbService")
 	private Ara2IbService ara2IbService;
 
+	@Inject
+	private SessionService sessionService;
+
 	//AJAX
 	@Autowired
 	private MappingJackson2JsonView jsonView;
@@ -52,12 +57,25 @@ public class Ara2UsrController {
 	 */
 	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
 	public String indexPost(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
-
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
-
+		if (Flag.flag) {
+			if ("Y".equals(modelMap.get("usridSaveYn"))) {
+				// usrid 저장
+				String usrid = String.valueOf(modelMap.get("usrid"));
+				String usridSaveYn = String.valueOf(modelMap.get("usridSaveYn"));
+				this.sessionService.setSession(request, "usrid", usrid);
+				this.sessionService.setSession(request, "usridSaveYn", usridSaveYn);
+				log.debug("KANG-20190808 session.usrid \t:  " + usrid);
+			} else {
+				// usrid 제거
+				this.sessionService.setSession(request, "usrid", null);
+				this.sessionService.setSession(request, "usridSaveYn", "N");
+				log.debug("KANG-20190808 session.usrid \t:  (remove session.usrid)");
+			}
+		}
 		if (Flag.flag) {
 			Map<String,Object> map = this.ara2UsrService.selectItemInfo(modelMap);
 			log.debug("map: " + map);

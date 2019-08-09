@@ -1,5 +1,6 @@
 package kr.co.arajeju.aracoupon3.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.GsonBuilder;
 
+import kr.co.arajeju.aracoupon3.service.SessionService;
 import kr.co.arajeju.aracoupon3.util.Flag;
 
 @Controller
 public class IndexController {
 
 	private final Log log = LogFactory.getLog(getClass());
+
+	@Inject
+	private SessionService sessionService;
 
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +36,19 @@ public class IndexController {
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			String usridSaveYn = (String) this.sessionService.getSession(request, "usridSaveYn");
+			if (usridSaveYn != null && "Y".equals(usridSaveYn)) {
+				// session.usrid 저장됨
+				String usrid = (String) this.sessionService.getSession(request, "usrid");
+				modelMap.put("usrid", usrid);
+				modelMap.put("usridSaveYn", usridSaveYn);
+			} else {
+				// session.usrid 미저장
+				modelMap.put("usrid", "");
+				modelMap.put("usridSaveYn", "N");
+			}
 		}
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		return "/ara2/ara/index";
