@@ -29,11 +29,12 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<!-- MultipartResolver 설정: size = 100 MB -->
+	<!-- MultipartResolver 설정: size = 200 MB
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="100000000" />
-		<property name="maxInMemorySize" value="100000000" />
+		<property name="maxUploadSize"   value="200000000" />
+		<property name="maxInMemorySize" value="200000000" />
 	</bean>
+	-->
 
 
 </beans>

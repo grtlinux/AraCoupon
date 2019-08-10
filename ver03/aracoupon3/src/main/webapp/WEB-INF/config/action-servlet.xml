@@ -64,9 +64,11 @@
 	<!-- bean name view resolver -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
 
-	<!-- mapping jackson 2 JsonView -->
+	<!-- mapping jackson 2 JsonView: select the property be fixed... -->
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<!-- property name="contentType" value="application/json;charset=UTF-8"/ -->
 		<!-- property name="contentType" value="text/html;charset=UTF-8"/ -->
+		<!-- property name="contentType" value="text/plain;charset=UTF-8"/ -->
 	</bean>
 
 	<!-- url based view resolver -->

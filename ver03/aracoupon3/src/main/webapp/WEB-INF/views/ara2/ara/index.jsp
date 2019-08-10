@@ -359,7 +359,7 @@
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-	<div class="hide">
+	<div class="show">
 		<div class='bigPictureWrapper'>
 			<div class='bigPicture'></div>
 		</div>
@@ -375,12 +375,12 @@
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 		
-		<div class="hide">
-			<form action="/file/uploadFormAction.do" method="POST" enctype="multipart/form-data">
-				<input type="file" name="uploadFile" multiple>
-				<input type="submit" value="SUBMIT">
-			</form>
-		</div>
+	<div class="hide">
+		<form action="/file/uploadFormAction.do" method="POST" enctype="multipart/form-data">
+			<input type="file" name="uploadFile" multiple>
+			<input type="submit" value="SUBMIT">
+		</form>
+	</div>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->

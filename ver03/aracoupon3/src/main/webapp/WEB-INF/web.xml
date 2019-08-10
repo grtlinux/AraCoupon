@@ -49,11 +49,16 @@
 			<param-value>/WEB-INF/config/*-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- multipart config
+			max-file-size       = 20,971,528 = 1MB * 20
+			max-request-size    = 41,943,040 = 40 MB
+			file-size-threshold = 20,971,520 = 20 MB
+		-->
 		<multipart-config>
 			<location>/Users/kangmac</location>
-			<max-file-size>20971528</max-file-size><!-- 1MB * 20 -->
-			<max-request-size>41943040</max-request-size><!-- 40MB -->
-			<file-size-threshold>20971520</file-size-threshold><!-- 20MB -->
+			<max-file-size>20971528</max-file-size>
+			<max-request-size>41943040</max-request-size>
+			<file-size-threshold>20971520</file-size-threshold>
 		</multipart-config>
 	</servlet>
 	<servlet-mapping>
