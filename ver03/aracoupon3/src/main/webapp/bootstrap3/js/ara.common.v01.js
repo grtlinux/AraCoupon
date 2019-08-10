@@ -124,6 +124,15 @@ function fn_comma(num){
 function fn_returnAlert(result) {
 	if (true) alert("[알림] " + result.retMsg + " (" + result.retCode + ")");
 }
+function $F(caller) {
+	var f = arguments.callee.caller;
+	if(caller) f = f.caller;
+	var pat = /^function\s+([a-zA-Z0-9_]+)\s*\(/i;
+	pat.exec(f);
+	var func = new Object();
+	func.name = "function " + RegExp.$1 + "(..)";
+	return func;
+}
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////

@@ -143,6 +143,8 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			//} else if (url.equals("/index.do")) {
 			//	if (Flag.flag) log.debug("KANG-20190807 redirect:/ara2/index.do");
 			//	new ModelAndView("redirect:/ara2/index.do");
+			} else if (url.indexOf("/file/") > -1) {                // controller.UploadController
+				return true;
 			} else if (url.indexOf("/kang/") > -1) {                // controller.KangController
 				return true;
 			} else if (url.indexOf("/ara2/") > -1) {                // controller.Ara2Controller

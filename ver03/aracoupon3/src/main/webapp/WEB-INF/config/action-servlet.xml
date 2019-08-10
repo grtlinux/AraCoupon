@@ -52,6 +52,9 @@
 
 	<aop:aspectj-autoproxy />
 
+	<!-- multipart -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+	
 	<!-- logger -->
 	<bean id="loggerAspect" class="kr.co.arajeju.aracoupon3.common.logger.LoggerAspect" />
 
