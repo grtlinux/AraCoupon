@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Ara2Ctr">
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /index.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- comment -->
+	<select id="selectItemInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectItemInfo */
+			A.CTR_NO
+			, A.CTR_ID
+			, A.CTR_NM
+			, A1.TEL_NM
+			, A1.TEL_NUM
+			, A2.MBL_NM
+			, A2.MBL_NUM
+			, A3.EML_NM
+			, A3.EML_ADDR
+			, A4.BNK_NM
+			, A4.BNK_ACNT
+			, A4.ACNT_NM
+			, A5.MRRG_DT
+			, A5.MRRG_LOC
+		FROM
+			ARA2_CTR A
+				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.CTR_NO AND A1.ITM_TYP = 'CTR'
+				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.CTR_NO AND A2.ITM_TYP = 'CTR'
+				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.CTR_NO AND A3.ITM_TYP = 'CTR'
+				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.CTR_NO AND A4.ITM_TYP = 'CTR'
+				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.CTR_NO AND A5.ITM_TYP = 'CTR'
+		WHERE 1=1
+			AND A.CTR_NO = TO_NUMBER(#{ctrid})
+	</select>
+
+
+	<!-- comment -->
+	<select id="selectCampPeriod" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCampPeriod */
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD')   AS BGN_DT
+			, TO_CHAR(SYSDATE + 30, 'YYYY-MM-DD') AS END_DT
+		FROM
+			DUAL
+	</select>
+
+
+	<!-- comment -->
+	<select id="selectAraCpnTyp" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectAraCpnTyp */
+			A.GRP_CD
+			, A.GRP_NM
+			, A1.CODE
+			, A1.CD_NM
+			, A1.CD_DESC
+			, A1.SORT_NO
+			, A1.USE_YN
+		FROM
+			ARA2_CDGRP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = A.GRP_CD AND A1.USE_YN = 'Y'
+		WHERE 1=1
+			AND A.USE_YN = 'Y'
+			AND A.GRP_CD = 'C009'
+		ORDER BY
+			A.GRP_CD
+			, A1.SORT_NO
+	</select>
+
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/createCampFormPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectSeqCampKey" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectSeqCampKey */
+			NVL(MOD(MAX(CAMP_NO), 1000), 0)   AS KEY_SEQ_CAMP
+		FROM
+			ARA2_CAMP
+	</select>
+	<select id="NOTUSE_selectSeqCampKey" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectSeqCampKey */
+			SEQ_CAMP.CURRVAL               AS CURR_SEQ_CAMP
+			, MOD(SEQ_CAMP.CURRVAL, 1000)  AS KEY_SEQ_CAMP
+			, MOD(1923, 1000)              AS TEST_MOD
+		FROM
+			DUAL
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertCampInfo" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertCampInfo */
+			ARA2_CAMP
+		VALUES (
+			SEQ_CAMP.NEXTVAL
+			, #{campNm}
+			, #{campDesc}
+			, '1'
+			, TO_DATE(#{campBgnDt}, 'YYYY-MM-DD')
+			, TO_DATE(#{campEndDt}, 'YYYY-MM-DD')
+			, #{campCpnTyp}
+			, TO_NUMBER(#{campCpnMny})
+			, TO_NUMBER(#{campCpnCnt})
+			, TO_NUMBER(#{campCpnSum})
+			, #{cpnMst}
+			, #{campCpnCntnt}
+			, SYSDATE
+			, NULL
+		)
+	</insert>
+
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/executeCampListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectCampList1" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCampList1 */
+			A.CAMP_NO
+			, A.CAMP_NM
+			, A.CAMP_DESC
+			, A.CAMP_PHS
+			, TO_CHAR(A.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(A.END_DT, 'YY-MM-DD')   AS END_DT
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_CNT
+			, A.CPN_SUM
+			, A.CPN_MST
+			, A.CAMP_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, A.UPD_DTTM
+			, A1.CD_NM
+		FROM
+			ARA2_CAMP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C012' AND A1.CODE = A.CAMP_PHS
+		WHERE 1=1
+			AND A.CAMP_PHS = '1'
+		ORDER BY
+			A.CAMP_NO DESC
+	</select>
+
+
+	<!-- comment -->
+	<update id="deleteCampCpnSht" parameterType="Map">
+		DELETE  /* Ara2Ctr.deleteCampCpnSht */
+			ARA2_CPN
+		WHERE 1=1
+			AND CAMP_NO = TO_NUMBER(#{campNo})
+	</update>
+
+
+	<!-- comment -->
+	<select id="selectCampNoInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCampNoInfo */
+			A.CAMP_NO
+			, A.CAMP_NM
+			, A.CAMP_DESC
+			, A.CAMP_PHS
+			, TO_CHAR(A.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(A.END_DT, 'YY-MM-DD')   AS END_DT
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_CNT
+			, A.CPN_SUM
+			, A.CPN_MST
+			, A.CAMP_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, A.UPD_DTTM
+			, A1.CD_NM
+		FROM
+			ARA2_CAMP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C012' AND A1.CODE = A.CAMP_PHS
+		WHERE 1=1
+			AND A.CAMP_PHS = '1'
+			AND A.CAMP_NO = TO_NUMBER(#{campNo})
+		ORDER BY
+			A.CAMP_NO DESC
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertCampCpnSht" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertCampCpnSht */
+			ARA2_CPN
+		VALUES ( #{CAMP_NO}, TO_NUMBER(#{ctrid}), 'CTR', '1', #{CPN_MST}, #{CPN_TYP}, TO_NUMBER(#{CPN_MNY}), #{cpnNo}, 'Y', NULL, NULL, NULL, '쿠폰을 발행합니다', SYSDATE, NULL )
+	</insert>
+
+
+	<!-- comment -->
+	<update id="updateCampNoInfo" parameterType="Map">
+		UPDATE  /* Ara2Ctr.updateCampNoInfo */
+			ARA2_CAMP
+		SET
+			CAMP_PHS = '2'
+			, CAMP_CNTNT = '쿠폰패키지를 발행'
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CAMP_PHS = '1'
+			AND CAMP_NO = #{CAMP_NO}
+	</update>
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /coupon/resultCampListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectCampList2" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCampList2 */
+			A.CAMP_NO
+			, A.CAMP_NM
+			, A.CAMP_DESC
+			, A.CAMP_PHS
+			, TO_CHAR(A.BGN_DT, 'YY-MM-DD')   AS BGN_DT
+			, TO_CHAR(A.END_DT, 'YY-MM-DD')   AS END_DT
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_CNT
+			, A.CPN_SUM
+			, A.CPN_MST
+			, A.CAMP_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'MM-DD HH24:MI')  AS CRE_DTTM
+			, A.UPD_DTTM
+			, A1.CD_NM
+		FROM
+			ARA2_CAMP A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C012' AND A1.CODE = A.CAMP_PHS
+		WHERE 1=1
+			AND A.CAMP_PHS = '2'
+		ORDER BY
+			A.CAMP_NO DESC
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /payment/paymentCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectPaymentCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectPaymentCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_TYP = 'STR'
+			AND A.CPN_PHS = '5'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+
+	<!-- comment -->
+	<update id="updateCpnNosPhs" parameterType="Map">
+		UPDATE  /* Ara2Ctr.updateCpnNosPhs */
+			ARA2_CPN
+		SET
+			CPN_PHS = #{phsTo}
+			<if test="phsTo == 0">
+				, CPN_CNTNT = '정산중'
+			</if>
+			<if test="phsTo == 6">
+				, CPN_CNTNT = '정산요청 완료'
+			</if>
+			, UPD_DTTM = SYSDATE
+		WHERE 1=1
+			AND CPN_PHS = #{phsFrm}
+			AND CPN_NO IN ( ''
+			<if test="arrCpnNo != ''">
+				,<foreach collection="arrCpnNo" separator="," index="index" >'${arrCpnNo[index]}'</foreach>
+			</if>
+			)
+	</update>
+
+
+	<!-- comment -->
+	<insert id="insertAcntDpst" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertAcntDpst */
+			ARA2_ACNTHIST
+		SELECT
+			SEQ_ACNTHIST.NEXTVAL
+			, A.ITM_ID
+			, A.ITM_TYP
+			, C.SUM_MNY
+			, 0
+			, A.ACNT_BLNC + C.SUM_MNY
+			, '005'
+			, '쿠폰정산과 입금함'
+			, SYSDATE
+			, SYSDATE
+		FROM
+			ARA2_ACNTHIST A
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+				GROUP BY
+					ITM_ID
+			) B
+			, (
+				SELECT
+					C.ITM_NO
+					, SUM(C.CPN_MNY)  AS SUM_MNY
+				FROM
+					ARA2_CPN C
+				WHERE 1=1
+					AND C.CPN_PHS = '0'
+				GROUP BY
+					C.ITM_NO
+			) C
+		WHERE 1=1
+			AND C.ITM_NO = B.ITM_ID
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+	</insert>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /payment/completeCalcListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectCompleteCalcList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectCompleteCalcList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_TYP = 'STR'
+			AND A.CPN_PHS = '6'
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /payment/notUsedCpnListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectNotUsedCpnList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectNotUsedCpnList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_TYP = 'STR'
+			AND A.CPN_PHS = '7'  /* from 3 to 7 */
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /payment/settlementDiscardListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectSettlementDiscardList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectSettlementDiscardList */
+			A.CAMP_NO
+			, A.ITM_NO
+			, A.ITM_TYP
+			, A.CPN_PHS
+			, A1.CD_DESC
+			, A.CPN_MST
+			, A.CPN_TYP
+			, A.CPN_MNY
+			, A.CPN_NO
+			, A.CPN_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+			, TO_CHAR(A.UPD_DTTM, 'YY-MM-DD HH24:MI')   AS UPD_DTTM
+			, B.CAMP_NM
+			, B.CAMP_PHS
+			, B1.CD_DESC                       AS CAMP_CD_DESC
+			, TO_CHAR(B.BGN_DT, 'YY-MM-DD')    AS CAMP_BGN_DT
+			, TO_CHAR(B.END_DT, 'YY-MM-DD')    AS CAMP_END_DT
+			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
+			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
+		FROM
+			ARA2_CPN A
+				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA2_CAMP B
+				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+		WHERE 1=1
+			AND B.CAMP_NO = A.CAMP_NO
+			AND A.ITM_TYP = 'STR'
+			AND A.CPN_PHS in ('8', '9')
+		ORDER BY
+			A.CPN_MNY DESC
+			, A.CPN_NO ASC
+	</select>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /account/createAcntListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectStrAcntList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectStrAcntList */
+			A.STR_ID
+			, A.STR_NM
+			, A1.ACNT_BLNC
+		FROM
+			ARA2_STR A
+				LEFT JOIN (
+					SELECT
+						B.ACNTHIST_NO
+						, B.ITM_ID
+						, B.ITM_TYP
+						, B.ACNT_BLNC
+					FROM
+						ARA2_ACNTHIST B
+						, (
+							SELECT
+								ITM_ID
+								, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+							FROM
+								ARA2_ACNTHIST
+							WHERE 1=1
+							GROUP BY
+								ITM_ID
+						) C
+					WHERE 1=1
+						AND B.ITM_ID = C.ITM_ID
+						AND B.ACNTHIST_NO = C.MAX_ACNTHIST_NO
+				) A1 ON A1.ITM_ID = A.STR_ID
+		WHERE 1=1
+		ORDER BY
+			A.STR_ID
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertStrAcnt" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertStrAcnt */
+			ARA2_ACNTHIST
+		VALUES (
+			SEQ_ACNTHIST.NEXTVAL
+			, #{strid}
+			, 'STR'
+			, 0 , 0 , 0
+			, '001'
+			, '계좌를 생성함'
+			, SYSDATE
+			, SYSDATE
+		)
+	</insert>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /account/selectAcntListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectAcntList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectAcntList */
+			A.ACNTHIST_NO
+			, A.ITM_ID
+			, A.ITM_TYP
+			, A1.STR_NM
+			, A.ACNT_BLNC
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')   AS CRE_DTTM
+		FROM
+			ARA2_ACNTHIST A
+				LEFT JOIN ARA2_STR A1 ON A1.STR_ID = A.ITM_ID
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+					/* AND ITM_ID = 101 */
+				GROUP BY
+					ITM_ID
+			) B
+		WHERE 1=1
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+		ORDER BY
+			A.ITM_ID
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /account/selectAcntInOutListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectStrList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectStrList */
+			A.STR_ID
+			, A.STR_NM
+		FROM
+			ARA2_STR A
+		WHERE 1=1
+		ORDER BY
+			A.STR_ID
+	</select>
+
+
+	<!-- comment -->
+	<select id="selectAcntInOutList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectAcntInOutList */
+			A.ACNTHIST_NO
+			, A.ITM_ID
+			, A.ITM_TYP
+			, A1.STR_NM
+			, A.ACNT_DPST
+			, A.ACNT_WTHD
+			, A.ACNT_BLNC
+			, A.ETC_CD
+			, A.ETC_CNTNT
+			, TO_CHAR(A.CRE_DTTM, 'YY-MM-DD HH24:MI')  AS CRE_DTTM
+		FROM
+			ARA2_ACNTHIST A
+				LEFT JOIN ARA2_STR A1 ON A1.STR_ID = A.ITM_ID
+		WHERE 1=1
+			AND A.ITM_ID = #{strid}
+		ORDER BY
+			A.ACNTHIST_NO DESC
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertStrDpstProc" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertStrDpstProc */
+			ARA2_ACNTHIST
+		SELECT
+			SEQ_ACNTHIST.NEXTVAL
+			, A.ITM_ID
+			, A.ITM_TYP
+			, TO_NUMBER(#{dpst})
+			, 0
+			, A.ACNT_BLNC + TO_NUMBER(#{dpst})
+			, '002'
+			, '센터입금함'
+			, SYSDATE
+			, SYSDATE
+		FROM
+			ARA2_ACNTHIST A
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+					AND ITM_ID = #{strid}
+				GROUP BY
+					ITM_ID
+			) B
+		WHERE 1=1
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+	</insert>
+
+
+	<!-- comment -->
+	<insert id="insertStrWthdProc" parameterType="Map">
+		INSERT INTO  /* Ara2Ctr.insertStrWthdProc */
+			ARA2_ACNTHIST
+		SELECT
+			SEQ_ACNTHIST.NEXTVAL
+			, A.ITM_ID
+			, A.ITM_TYP
+			, 0
+			, TO_NUMBER(#{wthd})
+			, A.ACNT_BLNC - TO_NUMBER(#{wthd})
+			, '002'
+			, '센터출금함'
+			, SYSDATE
+			, SYSDATE
+		FROM
+			ARA2_ACNTHIST A
+			, (
+				SELECT
+					ITM_ID
+					, MAX(ACNTHIST_NO)  AS MAX_ACNTHIST_NO
+				FROM
+					ARA2_ACNTHIST
+				WHERE 1=1
+					AND ITM_ID = #{strid}
+				GROUP BY
+					ITM_ID
+			) B
+		WHERE 1=1
+			AND A.ITM_ID = B.ITM_ID
+			AND A.ACNTHIST_NO = B.MAX_ACNTHIST_NO
+	</insert>
+
+
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /manage/manageForTestPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- comment -->
+	<delete id="deleteTableAcnt" parameterType="Map">
+		DELETE FROM ARA2_ACNT WHERE 1=1  /* Ara2Ctr.deleteTableAcnt */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableAcnthist" parameterType="Map">
+		DELETE FROM ARA2_ACNTHIST WHERE 1=1  /* Ara2Ctr.deleteTableAcnthist */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableCamp" parameterType="Map">
+		DELETE FROM ARA2_CAMP WHERE 1=1  /* Ara2Ctr.deleteTableCamp */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableCpn" parameterType="Map">
+		DELETE FROM ARA2_CPN WHERE 1=1  /* Ara2Ctr.deleteTableCpn */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableCnnt" parameterType="Map">
+		DELETE FROM ARA2_CNNT WHERE 1=1  /* Ara2Ctr.deleteTableCnnt */
+	</delete>
+
+	<!-- comment -->
+	<delete id="deleteTableLogin" parameterType="Map">
+		DELETE FROM ARA2_LOGIN WHERE 1=1  /* Ara2Ctr.deleteTableLogin */
+	</delete>
+
+	<!-- comment -->
+	<select id="selectAllLoginInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectAllLoginInfo */
+			B.ITM_NO
+			, B.ITM_ID
+			, B.ITM_NM
+			, B.ITM_TYP
+			, NVL(B.MBL_NUM, '-')    AS MBL_NUM
+			, NVL(B.EML_ADDR, '-')   AS EML_ADDR
+			, NVL(B.MRRG_DT, '-')    AS MRRG_DT
+		FROM
+			(
+				SELECT
+					A.USR_NO       AS ITM_NO
+					, A.USR_ID     AS ITM_ID
+					, A.USR_NM     AS ITM_NM
+					, 'USR'        AS ITM_TYP
+					, A.REL_STR_NO
+					, A1.TEL_NM
+					, A1.TEL_NUM
+					, A2.MBL_NM
+					, A2.MBL_NUM
+					, A3.EML_NM
+					, A3.EML_ADDR
+					, A4.BNK_NM
+					, A4.BNK_ACNT
+					, A4.ACNT_NM
+					, TO_CHAR(A5.MRRG_DT, 'YYMMDD')   AS MRRG_DT
+					, A5.MRRG_LOC
+				FROM
+					ARA2_USR A
+						LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+				WHERE 1=1
+					/* AND A.USR_ID = '1001' */
+			) B
+		WHERE 1=1
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertLoginInfo" parameterType="Map">
+		INSERT INTO ARA2_LOGIN VALUES ( SEQ_LOGIN.NEXTVAL, #{loginSrch}, #{loginList}, #{ITM_NO}, #{ITM_ID}, #{ITM_NM}, #{ITM_TYP}, SYSDATE )  /* Ara2Ctr.insertLoginInfo */
+	</insert>
+
+
+	<!-- comment -->
+	<select id="selectLikeLoginSrch" parameterType="Map" resultType="Map">
+		SELECT    /* Ara2Ctr.selectLikeLoginSrch */
+			A.LOGIN_NO
+			, A.LOGIN_LIST
+			, A.ITM_NO
+			, A.ITM_ID
+		FROM
+			ARA2_LOGIN A
+		WHERE 1=1
+			AND A.ITM_TYP = 'USR'
+			AND A.LOGIN_SRCH LIKE '%' || #{srchWord} || '%'
+	</select>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /manage/selectStrListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- comment -->
+	<select id="selectStrInfoList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectStrInfoList */
+			A.STR_NO
+			, A.STR_ID
+			, A.STR_NM
+			, A.REL_CTR_NO
+			, NVL(A1.TEL_NM  , '-')   AS TEL_NM
+			, NVL(A1.TEL_NUM , '-')   AS TEL_NUM
+			, NVL(A2.MBL_NM  , '-')   AS MBL_NM
+			, NVL(A2.MBL_NUM , '-')   AS MBL_NUM
+			, NVL(A3.EML_NM  , '-')   AS EML_NM
+			, NVL(A3.EML_ADDR, '-')   AS EML_ADDR
+			, NVL(A4.BNK_NM  , '-')   AS BNK_NM
+			, NVL(A4.BNK_ACNT, '-')   AS BNK_ACNT
+			, NVL(A4.ACNT_NM , '-')   AS ACNT_NM
+			, A5.MRRG_DT
+			, NVL(A5.MRRG_LOC, '-')   AS MRRG_LOC
+		FROM
+			ARA2_STR A
+				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.STR_NO AND A2.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.STR_NO AND A3.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
+				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
+		WHERE 1=1
+		ORDER BY
+			A.STR_NO
+	</select>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /manage/selectUsrrListPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- comment. -->
+	<select id="selectUsrInfoList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectUsrInfoList */
+			A.USR_NO
+			, A.USR_ID
+			, A.USR_NM
+			, A.REL_STR_NO
+			, NVL(A1.TEL_NM  , '-')   AS TEL_NM
+			, NVL(A1.TEL_NUM , '-')   AS TEL_NUM
+			, NVL(A2.MBL_NM  , '-')   AS MBL_NM
+			, NVL(A2.MBL_NUM , '-')   AS MBL_NUM
+			, NVL(A3.EML_NM  , '-')   AS EML_NM
+			, NVL(A3.EML_ADDR, '-')   AS EML_ADDR
+			, NVL(A4.BNK_NM  , '-')   AS BNK_NM
+			, NVL(A4.BNK_ACNT, '-')   AS BNK_ACNT
+			, NVL(A4.ACNT_NM , '-')   AS ACNT_NM
+			, A5.MRRG_DT
+			, NVL(A5.MRRG_LOC, '-')   AS MRRG_LOC
+		FROM
+			ARA2_USR A
+				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+		WHERE 1=1
+		ORDER BY
+			A.USR_NO
+	</select>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+</mapper>
+
+
+

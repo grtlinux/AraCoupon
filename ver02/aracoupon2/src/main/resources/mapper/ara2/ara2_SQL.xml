@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Ara2">
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- USR -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectItemInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2.selectItemInfo */
+			<if test="conntyp == 'CTR'">
+				A.CTR_NO
+				, A.CTR_ID
+				, A.CTR_NM
+			</if>
+			<if test="conntyp == 'STR'">
+				A.STR_NO
+				, A.STR_ID
+				, A.STR_NM
+				, A.REL_CTR_NO
+			</if>
+			<if test="conntyp == 'USR'">
+				A.USR_NO
+				, A.USR_ID
+				, A.USR_NM
+				, A.REL_STR_NO
+			</if>
+			, A1.TEL_NM
+			, A1.TEL_NUM
+			, A2.MBL_NM
+			, A2.MBL_NUM
+			, A3.EML_NM
+			, A3.EML_ADDR
+			, A4.BNK_NM
+			, A4.BNK_ACNT
+			, A4.ACNT_NM
+			, A5.MRRG_DT
+			, A5.MRRG_LOC
+		FROM
+			<if test="conntyp == 'CTR'">
+				ARA2_CTR A
+					LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.CTR_NO AND A1.ITM_TYP = 'CTR'
+					LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.CTR_NO AND A2.ITM_TYP = 'CTR'
+					LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.CTR_NO AND A3.ITM_TYP = 'CTR'
+					LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.CTR_NO AND A4.ITM_TYP = 'CTR'
+					LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.CTR_NO AND A5.ITM_TYP = 'CTR'
+			</if>
+			<if test="conntyp == 'STR'">
+				ARA2_STR A
+					LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
+					LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.STR_NO AND A2.ITM_TYP = 'STR'
+					LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.STR_NO AND A3.ITM_TYP = 'STR'
+					LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
+					LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
+			</if>
+			<if test="conntyp == 'USR'">
+				ARA2_USR A
+					LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+					LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+					LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+					LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+					LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+			</if>
+		WHERE 1=1
+			<if test="conntyp == 'CTR'">
+				AND A.CTR_NO = TO_NUMBER(#{ctrid})
+			</if>
+			<if test="conntyp == 'STR'">
+				AND A.STR_NO = TO_NUMBER(#{strid})
+			</if>
+			<if test="conntyp == 'USR'">
+				AND A.USR_NO = TO_NUMBER(#{usrid})
+			</if>
+	</select>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ARA@_CNNT -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<insert id="insertCnntAraKey" parameterType="Map">
+		INSERT INTO  /* Ara2.insertCnntAraKey */
+			ARA2_CNNT
+		VALUES
+			( SEQ_CNNT.NEXTVAL, #{connid}, #{conntyp}, #{arakey}, 'Y', SYSDATE, null, null )
+	</insert>
+
+	<!-- comment -->
+	<update id="updateAllCnntByCnntid" parameterType="Map">
+		UPDATE  /* Ara2.updateAllCnntByCnntid */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'FAIL'
+		WHERE 1=1
+			AND A.CNNT_ID = #{connid}
+			AND A.CNNT_TYP = #{conntyp}
+			AND A.CNNT_YN = 'Y'
+	</update>
+
+	<!-- comment -->
+	<update id="updateCnntByCnntid" parameterType="Map">
+		UPDATE  /* Ara2.updateCnntByCnntid */
+			ARA2_CNNT A
+		SET
+			A.CNNT_YN = 'N'
+			, A.DCNT_DTTM = SYSDATE
+			, A.CNNT_MSG = 'SUCCESS'
+		WHERE 1=1
+			AND A.CNNT_ID = #{connid}
+			AND A.CNNT_TYP = #{conntyp}
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</update>
+
+	<!-- comment -->
+	<select id="selectCnntArakeyInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2.selectCnntArakeyInfo */
+			A.CNNT_NO
+			, A.CNNT_ID
+			, A.CNNT_TYP
+			, A.ARA_KEY
+			, A.CNNT_YN
+			, A.CNNT_DTTM
+		FROM
+			ARA2_CNNT A
+		WHERE 1=1
+			AND A.CNNT_ID = #{connid}
+			AND A.CNNT_TYP = #{conntyp}
+			AND A.ARA_KEY = #{arakey}
+			AND A.CNNT_YN = 'Y'
+	</select>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- /register/registerUsrFormPage.do -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+	<!-- comment -->
+	<select id="selectLocInfoList" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2.selectLocInfoList */
+			A.CODE
+			, A.CD_NM
+			, A.CD_DESC
+			, A.SORT_NO
+		FROM
+			ARA2_CODE A
+		WHERE 1=1
+			AND A.GRP_CD = 'C015'
+			AND A.USE_YN = 'Y'
+		ORDER BY
+			A.SORT_NO
+	</select>
+	
+	<!-- comment -->
+	<select id="selectChkNmMblEml" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2.selectChkNmMblEml */
+			A.ROWNO
+			, A.YYMMDD
+			, B.USR_NM
+			, C.MBL_NUM
+			, D.EML_ADDR
+		FROM
+			(
+				SELECT ROWNUM AS ROWNO, TO_CHAR(SYSDATE, 'YYMMDD') AS YYMMDD FROM DUAL
+			) A
+				LEFT JOIN (
+					SELECT ROWNUM AS ROWNO, USR_NM FROM ARA2_USR WHERE 1=1 AND USR_NM = #{usrName}
+				) B ON B.ROWNO = A.ROWNO
+				LEFT JOIN (
+					SELECT ROWNUM AS ROWNO, MBL_NUM FROM ARA2_MBL WHERE 1=1 AND ITM_TYP = 'USR' AND MBL_NUM = #{usrMobile}
+				) C ON C.ROWNO = A.ROWNO
+				LEFT JOIN (
+					SELECT ROWNUM AS ROWNO, EML_ADDR FROM ARA2_EML WHERE 1=1 AND ITM_TYP = 'USR' AND EML_ADDR = #{usrEmail}
+				) D ON D.ROWNO = A.ROWNO
+		WHERE 1=1
+	</select>
+
+	<!-- comment -->
+	<select id="selectUsrNo" parameterType="Map" resultType="Map">
+		SELECT SEQ_USR.NEXTVAL AS USR_NO FROM DUAL /* Ara2.selectSeqStrNextval */
+	</select>
+
+	<!-- comment -->
+	<insert id="insertAra2Usr" parameterType="Map">
+		INSERT INTO  /* Ara2.insertAra2Usr */
+			ARA2_USR
+		VALUES
+			( #{USR_NO}, TO_CHAR(#{USR_NO}), #{usrName}, null )
+	</insert>
+
+	<!-- comment -->
+	<insert id="insertAra2Mbl" parameterType="Map">
+		INSERT INTO  /* Ara2.insertAra2Mbl */
+			ARA2_MBL
+		VALUES
+			( #{USR_NO}, 'USR', 'Y', 1, 'mbl-1', #{usrMobile} )
+	</insert>
+
+	<!-- comment -->
+	<insert id="insertAra2Eml" parameterType="Map">
+		INSERT INTO  /* Ara2.insertAra2Eml */
+			ARA2_EML
+		VALUES
+			( #{USR_NO}, 'USR', 'Y', 1, 'eml-1', #{usrEmail} )
+	</insert>
+
+	<!-- comment -->
+	<insert id="insertAra2Mrrg" parameterType="Map">
+		INSERT INTO  /* Ara2.insertAra2Mrrg */
+			ARA2_MRRG
+		VALUES
+			( #{USR_NO}, 'USR', 'Y', TO_DATE(#{usrMrrgDt}, 'YYYY-MM-DD'), #{usrMrrgLoc} )
+	</insert>
+
+
+	<!-- comment -->
+	<select id="selectLoginInfo" parameterType="Map" resultType="Map">
+		SELECT  /* Ara2Ctr.selectLoginInfo */
+			B.ITM_NO
+			, B.ITM_ID
+			, B.ITM_NM
+			, B.ITM_TYP
+			, NVL(B.MBL_NUM, '-')    AS MBL_NUM
+			, NVL(B.EML_ADDR, '-')   AS EML_ADDR
+			, NVL(B.MRRG_DT, '-')    AS MRRG_DT
+		FROM
+			(
+				SELECT
+					A.USR_NO       AS ITM_NO
+					, A.USR_ID     AS ITM_ID
+					, A.USR_NM     AS ITM_NM
+					, 'USR'        AS ITM_TYP
+					, A.REL_STR_NO
+					, A1.TEL_NM
+					, A1.TEL_NUM
+					, A2.MBL_NM
+					, A2.MBL_NUM
+					, A3.EML_NM
+					, A3.EML_ADDR
+					, A4.BNK_NM
+					, A4.BNK_ACNT
+					, A4.ACNT_NM
+					, TO_CHAR(A5.MRRG_DT, 'YYMMDD')   AS MRRG_DT
+					, A5.MRRG_LOC
+				FROM
+					ARA2_USR A
+						LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+						LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+				WHERE 1=1
+					AND A.USR_ID = TO_CHAR(#{USR_NO})
+			) B
+		WHERE 1=1
+	</select>
+
+
+	<!-- comment -->
+	<insert id="insertLoginInfo" parameterType="Map">
+		INSERT INTO ARA2_LOGIN VALUES ( SEQ_LOGIN.NEXTVAL, #{loginSrch}, #{loginList}, #{ITM_NO}, #{ITM_ID}, #{ITM_NM}, #{ITM_TYP}, SYSDATE )  /* Ara2Ctr.insertLoginInfo */
+	</insert>
+
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
+
+
+</mapper>
+
+
+
+

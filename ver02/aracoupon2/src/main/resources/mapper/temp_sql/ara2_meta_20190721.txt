@@ -1,0 +1,298 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+DROP TABLE ara2_meta CASCADE CONSTRAINTS;
+
+CREATE TABLE ara2_meta (
+    meta_cd     VARCHAR2(10),
+    meta_nm     VARCHAR2(50),
+    meta_desc   VARCHAR2(128),
+    meta_cmnt   VARCHAR2(128)
+);
+
+--------------------------------------------------------------------------------
+
+select * from ara2_meta order by meta_cd;
+select * from ara2_meta order by meta_desc;
+
+delete from ara2_meta;
+insert into ara2_meta values ('ARA', 'ARA', 'ara', '아라');
+insert into ara2_meta values ('TB', 'TABLE', 'table', '테이블');
+insert into ara2_meta values ('CTR', 'CENTER', 'center', '센터');
+insert into ara2_meta values ('STR', 'STORE', 'store', '가게,거래처');
+insert into ara2_meta values ('USR', 'USER', 'user', '고객,사용자');
+insert into ara2_meta values ('MGM', 'MANAGEMENT', 'management', '관리');
+insert into ara2_meta values ('CMP', 'CAMPAIGN', 'campaign', '캠페인');
+insert into ara2_meta values ('MST', 'MASTER', 'master', '마스터,주된');
+insert into ara2_meta values ('DTL', 'DETAIL', 'detail', '상세,부');
+insert into ara2_meta values ('CD', 'CODE', 'code', '코드');
+insert into ara2_meta values ('CODE', 'CODE2', 'code2', '코드2');
+insert into ara2_meta values ('NM', 'MAME', 'name', '이름,명칭');
+insert into ara2_meta values ('ID', 'IDENTIFICATION', 'identification', '아이디');
+insert into ara2_meta values ('OFF', 'OFFER', 'offer', '제공');
+insert into ara2_meta values ('CHL', 'CHANNEL', 'channel', '채널');
+insert into ara2_meta values ('CPN', 'COUPON', 'coupon', '쿠폰');
+insert into ara2_meta values ('GFT', 'GIFT', 'gift', '선물');
+insert into ara2_meta values ('SMS', 'SMS', 'sms', '문자메시지');
+insert into ara2_meta values ('EML', 'EMAIL', 'email', '이메일');
+insert into ara2_meta values ('SEQ', 'SEQUENCE', 'sequence', '연속순번');
+insert into ara2_meta values ('TYP', 'TYPE', 'type', '타입,구분');
+insert into ara2_meta values ('NUM', 'NUMBER', 'number', '숫자');
+insert into ara2_meta values ('FRM', 'FROM', 'from', '부터');
+insert into ara2_meta values ('TO', 'TO', 'to', '까지');
+insert into ara2_meta values ('DRCT', 'DIRECT', 'direct', '직접');
+insert into ara2_meta values ('USE', 'USE', 'use', '사용');
+insert into ara2_meta values ('USD', 'USED', 'used', '사용된');
+insert into ara2_meta values ('GRP', 'GROUP', 'group', '그룹');
+insert into ara2_meta values ('MET', 'META', 'meta', '메타');
+insert into ara2_meta values ('DPT', 'DEPARTMENT', 'department', '부서');
+insert into ara2_meta values ('EMP', 'EMPLOYEE', 'employee', '고용인');
+insert into ara2_meta values ('EMPY', 'EMPLOY', 'employ', '고용자');
+insert into ara2_meta values ('TEL', 'TELEPHONE', 'telephone', '전화');
+insert into ara2_meta values ('MBL', 'MOBILE', 'mobile', '핸드폰');
+insert into ara2_meta values ('LST', 'LIST', 'list', '목록');
+insert into ara2_meta values ('INF', 'INFORMATION', 'information', '정보');
+insert into ara2_meta values ('KEY', 'KEY', 'key', '키.열쇠');
+insert into ara2_meta values ('PNT', 'POINT', 'point', '포인트');
+insert into ara2_meta values ('BGN', 'BEGIN', 'begin', '시작');
+insert into ara2_meta values ('END', 'END', 'end', '끝');
+insert into ara2_meta values ('PRSD', 'PRESIDENT', 'president', '사장,대표');
+insert into ara2_meta values ('APPR', 'APPROVAL', 'approval', '승인');
+insert into ara2_meta values ('REQ', 'REQUEST', 'request', '요구');
+insert into ara2_meta values ('RES', 'RESPOND', 'respond', '응답');
+insert into ara2_meta values ('PHS', 'PHASE', 'phase', '단계');
+insert into ara2_meta values ('CNT', 'COUNT', 'count', '갯수');
+insert into ara2_meta values ('NO', 'SEQ_NUMBER', 'sequence number', '번호.sequence');
+insert into ara2_meta values ('IDX', 'INDEX', 'index', '인덱스');
+insert into ara2_meta values ('CMNT', 'COMMENT', 'comment', '코멘트.설명');
+insert into ara2_meta values ('DT', 'DATE', 'date', '날짜');
+insert into ara2_meta values ('TM', 'TIME', 'time', '시간');
+insert into ara2_meta values ('DTTM', 'DATETIME', 'datetime', '날짜시간');
+insert into ara2_meta values ('CNNT', 'CONNECT', 'connect', '접속');
+insert into ara2_meta values ('DCNT', 'DISCONNECT', 'disconnect', '미접속');
+insert into ara2_meta values ('MNY', 'MONEY', 'money', '금액,돈');
+insert into ara2_meta values ('SUM', 'SUM', 'sum', '합계');
+insert into ara2_meta values ('TTL', 'TOTAL', 'total', '합계2');
+insert into ara2_meta values ('CRE', 'CREATE', 'create', '생성');
+insert into ara2_meta values ('DRP', 'DROP', 'drop', '제거');
+insert into ara2_meta values ('SEL', 'SELECT', 'select', '검색');
+insert into ara2_meta values ('INS', 'INSERT', 'insert', '삽입');
+insert into ara2_meta values ('UPD', 'UPDATE', 'update', '갱신');
+insert into ara2_meta values ('DEL', 'DELETE', 'delete', '삭제');
+insert into ara2_meta values ('CALC', 'CALCULATE', 'calculate', '정산');
+insert into ara2_meta values ('PKG', 'PACKAGE', 'package', '페키지');
+insert into ara2_meta values ('PRVD', 'PROVIDE', 'provide', '제공하다');
+insert into ara2_meta values ('PAY', 'PAY', 'pay', '지불하다.결제하다.');
+insert into ara2_meta values ('PMNT', 'PAYMENT', 'payment', '지불.결제');
+insert into ara2_meta values ('TEMP', 'TEMPORARY', 'temporary', '임시');
+insert into ara2_meta values ('TMPL', 'TEMPLATE', 'template', '견본.샘플');
+insert into ara2_meta values ('ITM', 'ITEM', 'item', '아이템');
+insert into ara2_meta values ('LGI', 'LOGIN', 'login', '로그인');
+insert into ara2_meta values ('LGO', 'LOGOUT', 'logout', '로그아웃');
+insert into ara2_meta values ('ADDR', 'ADDRESS', 'address', '주소');
+insert into ara2_meta values ('CNTNT', 'CONTENT', 'content', '컨텐트');
+insert into ara2_meta values ('CNTNS', 'CONTENTS', 'contents', '컨텐츠');
+insert into ara2_meta values ('HIST', 'HISTORY', 'history', '내역.기록');
+insert into ara2_meta values ('LOG', 'LOG', 'log', '로그.내역');
+insert into ara2_meta values ('SRT', 'SORT', 'sort', '소트.정렬');
+insert into ara2_meta values ('SORT', 'SORT2', 'sort2', '소트.정렬2');
+insert into ara2_meta values ('BNK', 'BANK', 'bank', '은행');
+insert into ara2_meta values ('ACNT', 'ACCOUNT', 'account', '통장');
+insert into ara2_meta values ('MRRG', 'MARRIAGE', 'marriage', '결혼');
+insert into ara2_meta values ('WEDD', 'WEDDING', 'wedding', '결혼하다');
+insert into ara2_meta values ('LOC', 'LOCATION', 'location', '지역');
+insert into ara2_meta values ('TKN', 'TOKEN', 'token', '인증토큰');
+insert into ara2_meta values ('FILE', 'FILE', 'file', '파일');
+insert into ara2_meta values ('MSG', 'MESSAGE', 'message', '메시지');
+insert into ara2_meta values ('ENC', 'ENCODING', 'encoding', '인코딩');
+insert into ara2_meta values ('ACCS', 'ACCESS', 'access', '접근.접촉');
+insert into ara2_meta values ('SCHM', 'SCHEMA', 'schema', '스키마');
+insert into ara2_meta values ('EXPD', 'EXPIRED', 'expired', '종료일시');
+insert into ara2_meta values ('TTL', 'TIME TO LIVE', 'time to live', '생존시간');
+insert into ara2_meta values ('SHT', 'SHEET', 'sheet', '한장');
+insert into ara2_meta values ('PPR', 'PAPER', 'paper', '종이한장');
+insert into ara2_meta values ('DPST', 'DEPOSIT', 'deposit', '입금');
+insert into ara2_meta values ('WTHD', 'WITHDRAWAL', 'withdrawal', '출금');
+insert into ara2_meta values ('BLNC', 'BALANCE', 'balance', '잔금');
+insert into ara2_meta values ('ETC', 'ETC', 'etc', '비고');
+insert into ara2_meta values ('RMN', 'REMAIN', 'remain', '여분.나머지');
+insert into ara2_meta values ('SIZ', 'SIZE', 'size', '크기.갯수');
+insert into ara2_meta values ('OCC', 'OCCUPY', 'occupy', '소유하다.점령하다');
+insert into ara2_meta values ('STT', 'STATE', 'state', '상태.상황');
+
+insert into ara2_meta values ('PROC', 'PROCESS', 'process', '처리.진행');
+
+/*
+insert into ara2_meta values ('TB', 'TABLE', 'table', '');
+insert into ara2_meta values ('TB', 'TABLE', 'table', '');
+*/
+
+select * from ara2_meta order by meta_desc;
+
+select * from ara2_meta order by meta_cd;
+
+select * from ara2_meta order by meta_cmnt;
+
+select * from ara2_meta where meta_desc like '%mm%';
+
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+DROP TABLE ara2_cdgrp CASCADE CONSTRAINTS;
+
+DROP TABLE ara2_code CASCADE CONSTRAINTS;
+
+CREATE TABLE ara2_cdgrp (
+    grp_cd     VARCHAR2(10),
+    grp_nm     VARCHAR2(50),
+    grp_desc   VARCHAR2(128),
+    use_yn     VARCHAR2(5)
+);
+
+CREATE TABLE ara2_code (
+    grp_cd    VARCHAR2(10),
+    code      VARCHAR2(10),
+    cd_nm     VARCHAR2(50),
+    cd_desc   VARCHAR2(128),
+    use_yn    VARCHAR2(5),
+    sort_no   NUMBER
+);
+
+--------------------------------------------------------------------------------
+
+
+delete from ara2_code;
+delete from ara2_cdgrp;
+
+insert into ara2_cdgrp values ('C001', '사용유무', '사용유무', 'Y');
+insert into ara2_code values ('C001', 'Y', 'use', '사용', 'Y', 1);
+insert into ara2_code values ('C001', 'N', 'not use', '미사용', 'Y', 2);
+
+insert into ara2_cdgrp values ('C002', '쿠폰단계', '쿠폰단계', 'Y');     -- coupon phase
+insert into ara2_code values ('C002', '1', '발행', '센터 쿠폰발행', 'Y', 1);
+insert into ara2_code values ('C002', '2', '구매', '가게 쿠폰구매', 'Y', 2);
+insert into ara2_code values ('C002', '3', '제공', '고객에게 쿠폰제공', 'Y', 3);
+insert into ara2_code values ('C002', '4', '사용', '고객 쿠폰사용', 'Y', 4);
+insert into ara2_code values ('C002', '5', '정산요청', '가게 정산요청', 'Y', 5);
+insert into ara2_code values ('C002', '0', '정산중', '센터 정산처리중', 'Y', 6);
+insert into ara2_code values ('C002', '6', '정산완료', '센터 정산완료', 'Y', 6);
+insert into ara2_code values ('C002', '7', '미사용정산', '고객 미사용정산', 'Y', 7);
+insert into ara2_code values ('C002', '8', '결산', '가게/센터 결산', 'Y', 8);
+insert into ara2_code values ('C002', '9', '페기', '센터 쿠폰폐기', 'Y', 9);
+
+insert into ara2_cdgrp values ('C003', '승인단계', '승인단계', 'Y');
+insert into ara2_code values ('C003', '1', '승인요청', '승인요청', 'Y', 1);
+insert into ara2_code values ('C003', '2', '승인재요청', '승인재요청', 'Y', 2);
+insert into ara2_code values ('C003', '4', '승인반려', '승인요청', 'Y', 3);
+insert into ara2_code values ('C003', '9', '승인완료', '승인완료', 'Y', 4);
+
+insert into ara2_cdgrp values ('C004', '오퍼구분', '오퍼구분', 'Y');
+insert into ara2_code values ('C004', 'CPN', 'coupon', '쿠폰', 'Y', 1);
+insert into ara2_code values ('C004', 'GFT', 'gift', '선물', 'Y', 2);
+
+insert into ara2_cdgrp values ('C005', '채널구분', '채널구분', 'Y');
+insert into ara2_code values ('C005', 'SMS', 'SMS', 'SMS', 'Y', 1);
+insert into ara2_code values ('C005', 'EML', 'Email', 'Email', 'Y', 2);
+
+insert into ara2_cdgrp values ('C006', '남여구분', '남여구분', 'Y');
+insert into ara2_code values ('C006', 'M', 'male', '남', 'Y', 1);
+insert into ara2_code values ('C006', 'F', 'female', '여', 'Y', 2);
+
+insert into ara2_cdgrp values ('C007', '쿠폰종류', '쿠폰종류', 'Y');
+insert into ara2_code values ('C007', '01',  '10000',  '10,000원', 'Y', 1);
+insert into ara2_code values ('C007', '02',  '20000',  '20,000원', 'Y', 2);
+insert into ara2_code values ('C007', '03',  '50000',  '50,000원', 'Y', 3);
+insert into ara2_code values ('C007', '04', '100000', '100,000원', 'Y', 4);
+insert into ara2_code values ('C007', '05', '150000', '150,000원', 'Y', 5);
+insert into ara2_code values ('C007', '06', '200000', '200,000원', 'Y', 6);
+insert into ara2_code values ('C007', '07', '300000', '300,000원', 'Y', 7);
+insert into ara2_code values ('C007', '08', '500000', '500,000원', 'Y', 8);
+
+insert into ara2_cdgrp values ('C008', '접속구분', '접속구분', 'Y');
+insert into ara2_code values ('C008', 'ARA', 'ara', '아라', 'Y', 1);
+insert into ara2_code values ('C008', 'USR', 'user', '고객', 'Y', 2);
+insert into ara2_code values ('C008', 'STR', 'store', '가게', 'Y', 3);
+insert into ara2_code values ('C008', 'CTR', 'center', '센터', 'Y', 4);
+
+insert into ara2_cdgrp values ('C009', '아라쿠폰종류', '아라쿠폰종류', 'Y');
+insert into ara2_code values ('C009', '001',    '1000',    '1,000원', 'Y',   1);
+insert into ara2_code values ('C009', '002',    '2000',    '2,000원', 'N',   2);
+insert into ara2_code values ('C009', '003',    '3000',    '3,000원', 'N',   3);
+insert into ara2_code values ('C009', '004',    '4000',    '4,000원', 'N',   4);
+insert into ara2_code values ('C009', '005',    '5000',    '5,000원', 'Y',   5);
+insert into ara2_code values ('C009', '010',   '10000',   '10,000원', 'Y',  10);
+insert into ara2_code values ('C009', '050',   '50000',   '50,000원', 'Y',  50);
+insert into ara2_code values ('C009', '100',  '100000',  '100,000원', 'Y', 100);
+
+insert into ara2_cdgrp values ('C010', '아이템구분', '아이템구분', 'Y');
+insert into ara2_code values ('C010', 'ARA', 'ara', '아라', 'Y', 1);
+insert into ara2_code values ('C010', 'USR', 'user', '고객', 'Y', 2);
+insert into ara2_code values ('C010', 'STR', 'store', '가게', 'Y', 3);
+insert into ara2_code values ('C010', 'CTR', 'center', '센터', 'Y', 4);
+
+insert into ara2_cdgrp values ('C011', '쿠폰그룹', '쿠폰그룹구분', 'Y');
+insert into ara2_code values ('C011', '001', '웨딥샾', '웨딥샾그룹', 'Y', 1);
+insert into ara2_code values ('C011', '002', '수트', '수트그룹', 'Y', 2);
+insert into ara2_code values ('C011', '003', '한복', '한복그룹', 'Y', 3);
+insert into ara2_code values ('C011', '004', '여행사', '여행사그룹', 'Y', 4);
+insert into ara2_code values ('C011', '005', '전자', '전자그룹', 'Y', 5);
+insert into ara2_code values ('C011', '006', '도자기', '도자기그룹', 'Y', 6);
+insert into ara2_code values ('C011', '007', '미용', '미용그룹', 'Y', 7);
+insert into ara2_code values ('C011', '008', '보험', '보험그룹', 'Y', 8);
+insert into ara2_code values ('C011', '009', '예식장', '예식장그룹', 'Y', 9);
+insert into ara2_code values ('C011', '010', '보석', '보석그룹', 'Y', 10);
+
+insert into ara2_cdgrp values ('C012', '캠페인단계', '캠페인단계', 'Y');
+insert into ara2_code values ('C012', '1', '캠페인생성', '캠페인생성', 'Y', 1);
+insert into ara2_code values ('C012', '2', '쿠폰패키지발행', '쿠폰패키지발행', 'Y', 2);
+insert into ara2_code values ('C012', '8', '캠페인종료', '캠페인종료', 'Y', 8);
+insert into ara2_code values ('C012', '9', '캠페인폐기', '캠페인폐기', 'Y', 9);
+
+insert into ara2_cdgrp values ('C013', '계좌적요', '계좌적요', 'Y');
+insert into ara2_code values ('C013', '001', '계좌생성', '신규계좌 생성함', 'Y', 1);
+insert into ara2_code values ('C013', '002', '센터입금', '센터에서 입금함', 'Y', 2);
+insert into ara2_code values ('C013', '003', '센터출금', '센터에서 출금함', 'Y', 3);
+insert into ara2_code values ('C013', '004', '쿠폰구매', '센터에서 쿠폰을 구매함', 'Y', 4);
+insert into ara2_code values ('C013', '005', '쿠폰정산', '고객에게 받은 쿠폰들을 정산함', 'Y', 5);
+
+commit;
+
+--------------------------------------------------------------------------------
+
+select
+    a.grp_cd
+    , a.grp_nm
+    , a1.code
+    , a1.cd_nm
+    , a1.cd_desc
+    , a1.sort_no
+	, a1.use_yn
+from
+    ara2_cdgrp a
+		left join ara2_code a1 on a1.grp_cd = a.grp_cd
+where 1=1
+    and a.use_yn = 'Y'
+	--and a1.use_yn = 'Y'
+order by
+    a.grp_cd
+    , a1.sort_no
+;
+
+--------------------------------------------------------------------------------
+
+select * from ara2_meta order by meta_desc;
+
+select * from ara2_meta order by meta_cd;
+
+select * from ara2_meta order by meta_cmnt;
+
+select * from ara2_meta where meta_desc like '%mm%';
+
+select * from ara2_meta where meta_cmnt like '%정산%';
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------

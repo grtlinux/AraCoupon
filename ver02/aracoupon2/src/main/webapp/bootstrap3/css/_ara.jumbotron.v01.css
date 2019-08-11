@@ -1,0 +1,16 @@
+/*
+	css: ara.jumbotron.v01.css
+*/
+@charset "UTF-8";
+
+.jumbotron {
+	background-image: url('/AraCoupon/bootstrap3/images/jumbotronBackground.jpg');
+	background-size: cover;
+	text-shadow: black 0.4em 0.4em 0.4em;
+	color: white;
+}
+
+
+
+
+
