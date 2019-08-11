@@ -359,7 +359,7 @@
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-	<div class="show">
+	<div class="hide">
 		<div class='bigPictureWrapper'>
 			<div class='bigPicture'></div>
 		</div>
