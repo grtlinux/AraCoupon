@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;<b>[${menuName}]</b> 고객의 갖고 있는 쿠폰을 사용할 수 있다. 즉, 결제할 수 있다.</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;<b>[${menuName}]</b> 올띠 고객님이 사용가능한 쿠폰</h3>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">

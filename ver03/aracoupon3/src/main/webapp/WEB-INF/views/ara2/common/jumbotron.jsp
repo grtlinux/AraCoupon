@@ -7,8 +7,7 @@
 	<div class="container">
 		<!-- jumbotron -->
 		<div class="jumbotron text-center">
-			<h1>아라쿠폰서비스시스템(ACSS)을 소개합니다.</h1>
-			<p>아라쿠폰 서비스 시스템 이용 ...</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="javascript:fn_console('아라쿠폰서비스시스템 가기');">아라쿠폰서비스시스템 가기</a></p>
+			<h2>올띠 쿠폰 서비스 시스템을<br>소개합니다.</h2>
+			<p><a class="btn btn-primary btn-lg" role="button" href="javascript:fn_console('아라쿠폰서비스시스템 가기');">올띠 쿠폰 서비스 시스템</a></p>
 		</div>
 	</div>

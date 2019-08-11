@@ -27,22 +27,18 @@
 		<div class="row">
 			<div class="hide col-sm-4">
 				<h4>아라</h4>
-				<p>아라 개발 그룹.<p>
 				<p id="btnConnect" class="text-center"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>고객</h4>
-				<p>고객 관심.<p>
 				<p id="btnConnect" class="text-center"><a class="btn btn-info" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
 			</div>
 			<div class="col-sm-4">
-				<h4>가게</h4>
-				<p>가게 이윤.<p>
+				<h4>올띠 패밀리 업체</h4>
 				<p id="btnConnect" class="text-center"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
 			</div>
 			<div class="col-sm-4">
 				<h4>센터</h4>
-				<p>센터 운영 관리.<p>
 				<p id="btnConnect" class="text-center"><a class="btn btn-danger" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
 			</div>
 		</div>

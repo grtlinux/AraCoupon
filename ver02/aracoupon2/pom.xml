@@ -8,11 +8,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>kr.co.arajeju</groupId>
-	<artifactId>aracoupon3</artifactId>
+	<artifactId>aracoupon2</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>aracoupon3 Maven Webapp</name>
+	<name>aracoupon2 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 
@@ -469,7 +469,7 @@
 
 
 	<build>
-		<finalName>aracoupon3</finalName>
+		<finalName>aracoupon2</finalName>
 		<defaultGoal>install</defaultGoal>
 		<!-- directory>${basedir}/target</directory -->
 		<directory>target</directory>

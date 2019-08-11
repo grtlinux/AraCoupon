@@ -34,7 +34,7 @@
 	<!-- Context -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:/config/ara2/context-*.xml</param-value>
+		<param-value>classpath*:/config/ara3/context-*.xml</param-value>
 	</context-param>
 
 
@@ -46,7 +46,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/ara2/*-servlet.xml</param-value>
+			<param-value>/WEB-INF/config/ara3/*-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<!-- multipart config
@@ -87,7 +87,7 @@
 	<!-- Filter: CORS -->
 	<filter>
 		<filter-name>CORS</filter-name>
-		<filter-class>kr.co.arajeju.aracoupon2.common.filter.SimpleCORSFilter</filter-class>
+		<filter-class>kr.co.arajeju.aracoupon3.common.filter.SimpleCORSFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>CORS</filter-name>

@@ -25,24 +25,25 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<div class="container">
 		<div class="row">
-			<div class="hide col-sm-4 text-center">
+			<div class="hide col-sm-4">
 				<h4>아라</h4>
-				<p id="btnConnect"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
+				<p>아라 개발 그룹.<p>
+				<p id="btnConnect" class="text-center"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
 			</div>
-			<div class="col-sm-4 text-center">
-				<img src="${staticPATH}/bootstrap3/images/attach_02.png" style="width:45px;height:45px;">
+			<div class="col-sm-4">
 				<h4>고객</h4>
-				<p id="btnConnect"><a class="btn btn-info" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
+				<p>고객 관심.<p>
+				<p id="btnConnect" class="text-center"><a class="btn btn-info" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
 			</div>
-			<div class="col-sm-4 text-center">
-				<img src="${staticPATH}/bootstrap3/images/attach_03.png" style="width:70px;height:70px;">
-				<h4>올띠 패밀리 업체</h4>
-				<p id="btnConnect"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
+			<div class="col-sm-4">
+				<h4>가게</h4>
+				<p>가게 이윤.<p>
+				<p id="btnConnect" class="text-center"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
 			</div>
-			<div class="col-sm-4 text-center">
-				<img src="${staticPATH}/bootstrap3/images/attach_04.png" style="width:45px;height:45px;">
+			<div class="col-sm-4">
 				<h4>센터</h4>
-				<p id="btnConnect"><a class="btn btn-danger" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
+				<p>센터 운영 관리.<p>
+				<p id="btnConnect" class="text-center"><a class="btn btn-danger" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
 			</div>
 		</div>
 	</div>
@@ -105,13 +106,17 @@
 						고객 접속<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body text-center">
-						올띠 회원님! 로그인 하세요.<br><br>
+						가게로부터 제공받은 쿠폰을 갖고있다가 쿠폰가게에서 제공쿠폰을 사용한다.<br>
+						즉, 쿠폰시스템 서비스 해택을 누리는 주체이다.<br><br>
 						<img src="${staticPATH}/bootstrap3/images/user_03.png" style="width:150px;">
 						<br><br>
 						<table class="table">
 							<tbody>
 								<tr>
-									<td> 고객ID </td>
+									<td>
+										<button id='btnRegisterUsr' type="button" class="btn btn-danger btn-sm" onclick="fn_registerUsr();"> 고객등록 </button>&nbsp;&nbsp;
+										고객ID
+									</td>
 									<td class="text-left">
 										<input id="usrid" list="loginList" type="text" value='${usrid}'>
 										<datalist id="loginList">
@@ -127,12 +132,6 @@
 									<td>아라키(Ara Key)</td>
 									<td class="text-left">
 										<input id="arakey" type="text" value=''>
-									</td>
-								</tr>
-								<tr>
-									<td>올띠 회원이 아닌가요?</td>
-									<td class="text-left">
-										<button id='btnRegisterUsr' type="button" class="btn btn-danger btn-sm" onclick="fn_registerUsr();"> 올띠회원등록 </button> 버튼을 눌러주세요.
 									</td>
 								</tr>
 							</tbody>
