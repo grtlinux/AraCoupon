@@ -35,7 +35,7 @@
 				<p id="btnConnect"><a class="btn btn-info" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
 			</div>
 			<div class="col-sm-4 text-center">
-				<img src="${staticPATH}/bootstrap3/images/attach_03.png" style="width:70px;height:70px;">
+				<img src="${staticPATH}/bootstrap3/images/attach_03.png" style="width:45px;height:45px;">
 				<h4>올띠 패밀리 업체</h4>
 				<p id="btnConnect"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
 			</div>
