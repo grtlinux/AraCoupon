@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
@@ -86,11 +87,11 @@ public class Flag {
 				case "remoteAddr":
 				case "remoteHost":
 					val = (String) request.getAttribute(key);
-					System.out.printf("KANG-request.Attribute [%s] = [%s]\n", key, val);
+					if (flag) System.out.printf("\tKANG-request.Attribute [%s] = [%s]\n", key, val);
 					break;
 				default:
 					val = ""; //(String) request.getAttribute(key);
-					if (!flag) System.out.printf("KANG-request.Attribute [%s] = [%s]\n", key, val);
+					if (!flag) System.out.printf("\tKANG-request.Attribute [%s] = [%s]\n", key, val);
 					break;
 				}
 			}
@@ -102,6 +103,17 @@ public class Flag {
 		if (flag) printRequestAttributes(request);
 	}
 
+	public static void printSession(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		Enumeration<String> keys = session.getAttributeNames();
+		if (flag) System.out.println("\t--------- Session print start ---------");
+		while (keys.hasMoreElements()) {
+			String key = keys.nextElement();
+			if (flag) System.out.printf("\tSession: [%s:%s]%n", key, String.valueOf(session.getAttribute(key)));
+		}
+		if (flag) System.out.println("\t--------- Session print end ---------");
+	}
+	
 	public static ModelMap setModelMap(ModelMap modelMap, HttpServletRequest request) throws Exception {
 		//copy request.Parameters to modelMap
 		//modelMap.putAll(request.getParameterMap());

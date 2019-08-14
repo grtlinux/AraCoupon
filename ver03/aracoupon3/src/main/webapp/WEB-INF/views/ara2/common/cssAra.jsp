@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara2.ara.codingBooster5.v01.css">
 <style type="text/css">
 	.jumbotron {
-		background-image: url('${staticPATH}/bootstrap3/images/customer_05.jpg');
+		background-image: url('${staticPATH}/bootstrap3/images/main_01.jpg');
 		background-size: cover;
 		text-shadow: black 0.4em 0.4em 0.4em;
 		color: white;

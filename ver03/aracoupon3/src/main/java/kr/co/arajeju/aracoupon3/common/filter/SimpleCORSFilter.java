@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
+import kr.co.arajeju.aracoupon3.util.Flag;
+
 @Component
 public class SimpleCORSFilter implements Filter {
 
@@ -22,7 +24,7 @@ public class SimpleCORSFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println(">>>>> KANG-20190622: SimpleCORSFilter....");
+		if (Flag.flag) System.out.println("\t>>>>> KANG-20190622: SimpleCORSFilter....");
 		HttpServletResponse res = (HttpServletResponse) response;
 		res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 		res.setHeader("Access-Control-Max-Age", "3600");
