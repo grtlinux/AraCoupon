@@ -29,24 +29,30 @@
 				<h4>아라</h4>
 				<p id="btnConnect"><a class="btn btn-default" data-target="#modalAra" data-toggle="modal" href="#" onclick="fn_clearModalAra('ARA');">아라 접속</a></p>
 			</div>
-			<div class="col-sm-4 text-center">
-				<img src="${staticPATH}/bootstrap3/images/attach_02.png" style="width:45px;height:45px;">
-				<h4>고객</h4>
+			<div class="col-sm-3 text-center" ks_style="margin:10px; padding:10px; box-shadow:gray 3px 3px 3px 3px;">
+				<img src="${staticPATH}/bootstrap3/images/attach_02.png" style="width:45px;height:45px;margin:10px;">
+				<h4 class="hide">고객</h4>
 				<p id="btnConnect"><a class="btn btn-info" data-target="#modalUsr" data-toggle="modal" href="#" onclick="fn_clearModalAra('USR');">고객 접속</a></p>
 			</div>
-			<div class="col-sm-4 text-center">
-				<img src="${staticPATH}/bootstrap3/images/attach_03.png" style="width:45px;height:45px;">
-				<h4>올띠 패밀리 업체</h4>
-				<p id="btnConnect"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">가게 접속</a></p>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-3 text-center" ks_style="margin:10px; padding:10px; box-shadow:gray 3px 3px 3px 3px;">
+				<img src="${staticPATH}/bootstrap3/images/attach_03.png" style="width:45px;height:45px;margin:10px;">
+				<br>
+				<h4 class="hide">올띠 패밀리 업체</h4>
+				<p id="btnConnect"><a class="btn btn-success" data-target="#modalStr" data-toggle="modal" href="#" onclick="fn_clearModalAra('STR');">올띠 패밀리 가게 접속</a></p>
 			</div>
-			<div class="col-sm-4 text-center">
-				<img src="${staticPATH}/bootstrap3/images/attach_04.png" style="width:45px;height:45px;">
-				<h4>센터</h4>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-3 text-center" ks_style="margin:10px; padding:10px; box-shadow:gray 3px 3px 3px 3px;">
+				<img src="${staticPATH}/bootstrap3/images/attach_04.png" style="width:45px;height:45px;margin:10px;">
+				<br>
+				<h4 class="hide">센터</h4>
 				<p id="btnConnect"><a class="btn btn-danger" data-target="#modalCtr" data-toggle="modal" href="#" onclick="fn_clearModalAra('CTR');">센터 접속</a></p>
 			</div>
 		</div>
 	</div>
 
+	<!-- gap -->
+	<div style="height:70px;"></div>
 
 <%@ include file="/WEB-INF/views/ara2/common/footer.jsp"%>
 

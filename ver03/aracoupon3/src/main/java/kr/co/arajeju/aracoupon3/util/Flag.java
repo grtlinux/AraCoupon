@@ -41,30 +41,24 @@ public class Flag {
 	/////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////
 	/*
-	 * request
+	 * request sessions attributes parameters
 	 */
-	public static void printRequestParameters(HttpServletRequest request) throws Exception {
-		if (!flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				System.out.printf("KANG-request.Parameter [%s] = %s\n", key, Arrays.asList(vals));
-			}
+
+	public static void printRequestSessions(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		Enumeration<String> keys = session.getAttributeNames();
+		if (flag) System.out.println(">>>>>>>>>>>> Session start ---------");
+		while (keys.hasMoreElements()) {
+			String key = keys.nextElement();
+			if (flag) System.out.printf("\tSession: %-20s = '%s'%n", key, String.valueOf(session.getAttribute(key)));
 		}
-		if (flag) {
-			Enumeration<String> enums = request.getParameterNames();
-			while (enums.hasMoreElements()) {
-				String key = enums.nextElement();
-				String[] vals = request.getParameterValues(key);
-				System.out.printf("KANG-request.Parameter [%s] = [%s]\n", key, StringUtils.join(Arrays.asList(vals), ", "));
-			}
-		}
+		if (flag) System.out.println("\t--------- Session end ---------");
 	}
 
 	public static void printRequestAttributes(HttpServletRequest request) throws Exception {
 		if (flag) {
 			Enumeration<String> enums = request.getAttributeNames();
+			if (flag) System.out.println(">>>>>>>>>>> request.Attribute start ---------");
 			while (enums.hasMoreElements()) {
 				String key = enums.nextElement();
 				String val;
@@ -87,33 +81,46 @@ public class Flag {
 				case "remoteAddr":
 				case "remoteHost":
 					val = (String) request.getAttribute(key);
-					if (flag) System.out.printf("\tKANG-request.Attribute [%s] = [%s]\n", key, val);
+					if (flag) System.out.printf("\trequest.Attribute: %-20s = '%s'%n", key, val);
 					break;
 				default:
 					val = ""; //(String) request.getAttribute(key);
-					if (!flag) System.out.printf("\tKANG-request.Attribute [%s] = [%s]\n", key, val);
+					if (!flag) System.out.printf("\trequest.Attribute: %-20s = '%s'%n", key, val);
 					break;
 				}
 			}
+			if (flag) System.out.println("\t--------- request.Attribute end ---------");
 		}
 	}
 
-	public static void printRequest(HttpServletRequest request) throws Exception {
-		if (flag) printRequestParameters(request);
-		if (flag) printRequestAttributes(request);
-	}
-
-	public static void printSession(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		Enumeration<String> keys = session.getAttributeNames();
-		if (flag) System.out.println("\t--------- Session print start ---------");
-		while (keys.hasMoreElements()) {
-			String key = keys.nextElement();
-			if (flag) System.out.printf("\tSession: [%s:%s]%n", key, String.valueOf(session.getAttribute(key)));
+	public static void printRequestParameters(HttpServletRequest request) throws Exception {
+		if (!flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				System.out.printf("KANG-request.Parameter: %-20s = '%s'%n", key, Arrays.asList(vals));
+			}
 		}
-		if (flag) System.out.println("\t--------- Session print end ---------");
+		if (flag) {
+			Enumeration<String> enums = request.getParameterNames();
+			if (flag) System.out.println(">>>>>>>>>>> request.Parameter start ---------");
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String[] vals = request.getParameterValues(key);
+				System.out.printf("\trequest.Parameter %-20s = '%s'%n", key, StringUtils.join(Arrays.asList(vals), ", "));
+			}
+			if (flag) System.out.println("\t--------- request.Parameter end ---------");
+		}
 	}
 	
+	public static void printRequest(HttpServletRequest request) throws Exception {
+		if (flag) printRequestSessions(request);
+		if (flag) printRequestAttributes(request);
+		if (flag) printRequestParameters(request);
+	}
+
+	// request parameters to modelMap
 	public static ModelMap setModelMap(ModelMap modelMap, HttpServletRequest request) throws Exception {
 		//copy request.Parameters to modelMap
 		//modelMap.putAll(request.getParameterMap());

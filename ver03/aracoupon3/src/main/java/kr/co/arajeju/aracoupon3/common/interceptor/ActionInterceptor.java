@@ -66,7 +66,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		// session process
 		if (Flag.flag) {
 			// session에 대한 처리
-			if (Flag.flag) Flag.printSession(request);
+			//if (Flag.flag) Flag.printRequestSession(request);
 
 			SessionVO sessionVo = this.sessionService.getSessionVo(request);
 			String itmNo = this.sessionService.getItmNo(request);

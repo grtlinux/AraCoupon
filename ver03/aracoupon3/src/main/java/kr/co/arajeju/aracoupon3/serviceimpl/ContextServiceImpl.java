@@ -123,7 +123,7 @@ public class ContextServiceImpl implements ContextService {
 	}
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(String.format("------------ ContextService start ---------------%n"));
+		sb.append(String.format(" >>>>>>>>>>> ContextService start ---------------%n"));
 		sb.append(String.format("\tContextService.getStaticURL             () = %s%n", this.getStaticURL             ()));
 		sb.append(String.format("\tContextService.getStaticPATH            () = %s%n", this.getStaticPATH            ()));
 		sb.append(String.format("\tContextService.getStaticPATHSasurl      () = %s%n", this.getStaticPATHSasurl      ()));
