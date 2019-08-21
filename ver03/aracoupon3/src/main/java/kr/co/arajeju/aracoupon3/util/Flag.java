@@ -74,7 +74,7 @@ public class Flag {
 				case "araSalesCloseTime":
 				case "araDbBackupTime":
 				case "araNowTime":
-				case "araSalesOk":
+				case "araOpenOk":
 				case "araFileBasePath1":
 				case "araFileBasePath2":
 				case "xForwardedFor":

@@ -53,4 +53,64 @@ public class IndexController {
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		return "/ara3/ara/index";
 	}
+	
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * index.jsp GET
+	 */
+	@RequestMapping(value = "/barcodePage.do", method = {RequestMethod.GET})
+	public String barcodePage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			String usridSaveYn = (String) this.sessionService.getSession(request, "usridSaveYn");
+			if (usridSaveYn != null && "Y".equals(usridSaveYn)) {
+				// session.usrid 저장됨
+				String usrid = (String) this.sessionService.getSession(request, "usrid");
+				modelMap.put("usrid", usrid);
+				modelMap.put("usridSaveYn", usridSaveYn);
+			} else {
+				// session.usrid 미저장
+				modelMap.put("usrid", "");
+				modelMap.put("usridSaveYn", "N");
+			}
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		return "/kang/barcodePage";
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * index.jsp GET
+	 */
+	@RequestMapping(value = "/fileuploadPage.do", method = {RequestMethod.GET})
+	public String fileuploadPagefileuploadPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) {
+			String usridSaveYn = (String) this.sessionService.getSession(request, "usridSaveYn");
+			if (usridSaveYn != null && "Y".equals(usridSaveYn)) {
+				// session.usrid 저장됨
+				String usrid = (String) this.sessionService.getSession(request, "usrid");
+				modelMap.put("usrid", usrid);
+				modelMap.put("usridSaveYn", usridSaveYn);
+			} else {
+				// session.usrid 미저장
+				modelMap.put("usrid", "");
+				modelMap.put("usridSaveYn", "N");
+			}
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		return "/kang/fileuploadPage";
+	}
 }

@@ -525,7 +525,7 @@
 	function processSalesTime() {
 		if (true) console.log(">>>>> 3. ", $F().name);
 		if (!true) alert("업무시간: ${araSalesOpenTime} ~ ${araSalesCloseTime}");
-		if ("no" == "${araSalesOk}") {
+		if ("no" == "${araOpenOk}") {
 			fn_modalToggle('#modalNotSales');
 			$('.container #btnConnect').addClass('hide');
 			$('.navbar-nav #btnConnect').addClass('hide');

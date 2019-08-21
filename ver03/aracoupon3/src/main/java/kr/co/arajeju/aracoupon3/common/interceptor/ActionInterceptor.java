@@ -35,7 +35,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			log.debug("KANG-20190308 Request URI \t:  " + url);
 			log.debug("KANG-20190811" + this.contextService);
 		}
-		request.setAttribute("araSalesOk", "yes");
+		request.setAttribute("araOpenOk", "yes");
 		request.setAttribute("xForwardedFor", request.getHeader("X-Forwarded-For"));
 		request.setAttribute("remoteAddr", request.getRemoteAddr());
 		request.setAttribute("remoteHost", request.getRemoteHost());
@@ -55,7 +55,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				// 업무시간이 아니면 접속페이지로 이동한다.
 				if (Flag.flag) log.debug(String.format("KANG-20190807 redirect:/index.do   because of not sales time: %s (%s~%s)"
 						, araNowTime , openTime , closeTime));
-				request.setAttribute("araSalesOk", "no");
+				request.setAttribute("araOpenOk", "no");
 				new ModelAndView("redirect:/index.do");
 				return super.preHandle(request, response, handler);
 			}
@@ -64,7 +64,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// session process
-		if (Flag.flag) {
+		if (!Flag.flag) {
 			// session에 대한 처리
 			//if (Flag.flag) Flag.printRequestSession(request);
 
@@ -95,6 +95,20 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
+		// mapping controller
+		if (Flag.flag) {
+			if (Flag.flag && url.indexOf("/barcodePage.do") > -1) {                    // controller.IndexController
+				return true;
+			} else if (Flag.flag && url.indexOf("/fileuploadPage.do") > -1) {          // controller.IndexController
+				return true;
+			} else if (Flag.flag && url.indexOf("/file/") > -1) {                // controller.UploadController
+				return true;
+			} else {
+				if (Flag.flag) log.debug("KANG-20190807 redirect:/index.do   <- url:" + url);
+				new ModelAndView("redirect:/index.do");
+			}
+		}
+		
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
