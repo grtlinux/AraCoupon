@@ -485,7 +485,7 @@
 						alert("에러가 발생하였습니다.(9)");
 					}
 				});
-			}, 2000);
+			}, 700);
 		});
 	}
 	function selectUseCpnList() {
