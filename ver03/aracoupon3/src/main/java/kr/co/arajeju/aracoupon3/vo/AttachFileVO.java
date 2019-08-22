@@ -1,11 +1,13 @@
-package kr.co.arajeju.aracoupon3.dao;
+package kr.co.arajeju.aracoupon3.vo;
 
-public class AttachFileDTO {
+public class AttachFileVO {
 
 	private String fileName;
 	private String uploadPath;
 	private String uuid;
 	private boolean image;
+
+	//////////////////////////////////////////////////
 
 	public String getFileName() {
 		return fileName;

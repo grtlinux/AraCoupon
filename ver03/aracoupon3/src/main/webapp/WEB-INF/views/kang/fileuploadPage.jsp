@@ -8,25 +8,25 @@
 	<h1>Hello world!</h1>
 	<P>The time on the server is ${serverTime}.</P>
 	<hr>
-	
+
 <style>
 	.uploadResult {
 		width: 100%;
 		background-color: #aaaaff;
 	}
-	
+
 	.uploadResult ul {
 		display: flex;
 		flex-flow: row;
 		justify-content: center;
 		align-items: center;
 	}
-	
+
 	.uploadResult ul li {
 		list-style: none;
 		padding: 10px;
 	}
-	
+
 	.uploadResult ul li img {
 		width: 100px;
 	}
@@ -41,10 +41,10 @@
 		top:0%;
 		width:100%;
 		height:100%;
-		background-color: gray; 
+		background-color: gray;
 		z-index: 100;
 	}
-	
+
 	.bigPicture {
 		position: relative;
 		display:flex;
@@ -69,15 +69,18 @@
 		</div>
 		<button id='uploadBtn'>Upload</button>
 	</div>
+	<hr>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-		
+
 	<div class="hide">
 		<form action="/file/uploadFormAction.do" method="POST" enctype="multipart/form-data">
 			<input type="file" name="uploadFile" multiple>
 			<input type="submit" value="SUBMIT">
 		</form>
 	</div>
+
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 </body>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -91,13 +94,31 @@
 <script type="text/javascript">
 	$(function() {
 		if (true) console.log("step-1: $(function() {});");
+		fn_test();
 	});
+	function fn_test() {
+		var str;
+		str = "_under construct 한_2019-08-22.jpg";
+		var check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+		if (check.test(str)) {
+			console.log(">>>>> str에 한글이 있습니다.");
+		} else {
+			console.log(">>>>> str에 한글이 NO.");
+		}
+		str = "_under construct 한_2019-08-22.jpg";
+		var check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+		if (check.test(str)) {
+			console.log(">>>>> str에 한글이 있습니다.");
+		} else {
+			console.log(">>>>> str에 한글이 NO.");
+		}
+	}
 </script>
 <script>
 	function showImage(fileCallPath){
 		//alert(fileCallPath);
 		$(".bigPictureWrapper").css("display","flex").show();
-		
+
 		$(".bigPicture")
 			.html("<img src='/file/display.do?fileName="+fileCallPath+"'>")
 			.animate({width:'100%', height: '100%'}, 1000);
@@ -119,26 +140,41 @@
 			type: 'POST',
 			success: function(result){
 				alert(result);
+				// KANG
+				showUploadedFile([]);
 			}
 		}); //$.ajax
 	});
-	
+
 	// string.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣|a-z|A-Z|0-9]+.*")
-	var regex1 = new RegExp("^[0-9a-zA-Z_.\-\w]+$");
+	//var regex1 = new RegExp("^[0-9a-zA-Z_.\-\w]+$");
+	//   /0-9a-zA-Z_/  = /\w/
+	//var regex1 = new RegExp("^[0-9a-zA-Z_\-\.\s]+$");
+	//var regex1 = new RegExp("^[\w\.\-\s]+$");
+	var regex1 = new RegExp("^[0-9a-zA-Z_\.\-]+$");
 	var regex2 = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	var maxSize = 5242880; //5MB
-	
+	var regex3 = new RegExp("[ㄱ-ㅎㅏ-ㅣ가-힣]+");   // 한글
+	var hanCheck1 = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	//var maxSize = 5242880; //5MB
+	var maxSize = 1024 * 1024 * 10;     // 10 MB
+
 	function checkExtension(fileName, fileSize) {
+		if (true) console.log(">>>>> " + fileName + ", " + fileSize);
+		
 		if (fileSize >= maxSize) {
-			alert("파일 사이즈 초과");
+			alert("[알림] 파일 사이즈 초과. (" + fileName + ":" + fileSize + ")");
 			return false;
 		}
-		if (regex1.test(fileName)) {
-			alert("[알림] 숫자, 알파뱃대-소문자, 공백, 특수(_.) 만 허용됩니다. (" + fileName+ ")");
-			return;
-		}
+		//if (!regex1.test(fileName)) {
+		//	alert("[알림] 영숫자, 공백, 특수(_.) 만 허용됩니다. (" + fileName+ ")");
+		//	return false;
+		//}
 		if (regex2.test(fileName)) {
-			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			alert("[알림] 해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		if (hanCheck1.test(fileName)) {
+			alert("[알림] 한글이 포함된 파일명은 업로드할 수 없습니다.");
 			return false;
 		}
 		return true;
@@ -176,6 +212,7 @@
 
 	function showUploadedFile(uploadResultArr) {
 		var str = "";
+		uploadResult.empty();
 		$(uploadResultArr).each(function(i, obj) {
 			if (!obj.image) {
 				var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);

@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import kr.co.arajeju.aracoupon3.dao.AttachFileDTO;
+import kr.co.arajeju.aracoupon3.vo.AttachFileVO;
 import net.coobird.thumbnailator.Thumbnailator;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicMatch;
@@ -90,7 +90,8 @@ public class UploadController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String str = sdf.format(date);
-		return str.replace("-", File.separator);
+		//return str.replace("-", File.separator);
+		return str;
 	}
 	
 	private boolean checkImageType(File file) {
@@ -116,8 +117,8 @@ public class UploadController {
 	
 	@PostMapping(value="/uploadAjaxAction.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
-		List<AttachFileDTO> list = new ArrayList<>();
+	public ResponseEntity<List<AttachFileVO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+		List<AttachFileVO> list = new ArrayList<>();
 		String uploadFolder = BASE_PATH;
 		
 		String uploadFolderPath = getFolder();
@@ -128,7 +129,7 @@ public class UploadController {
 		}
 		
 		for (MultipartFile multipartFile : uploadFile) {
-			AttachFileDTO attachDTO = new AttachFileDTO();
+			AttachFileVO attachDTO = new AttachFileVO();
 			
 			String uploadFileName = multipartFile.getOriginalFilename();
 			

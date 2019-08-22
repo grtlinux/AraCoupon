@@ -39,7 +39,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute("xForwardedFor", request.getHeader("X-Forwarded-For"));
 		request.setAttribute("remoteAddr", request.getRemoteAddr());
 		request.setAttribute("remoteHost", request.getRemoteHost());
-
+		//
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// sales time
@@ -60,7 +60,6 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				return super.preHandle(request, response, handler);
 			}
 		}
-		
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// session process
@@ -92,27 +91,27 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			}
 			new ModelAndView("redirect:/index.do");
 		}
-		
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// mapping controller
 		if (Flag.flag) {
-			if (Flag.flag && url.indexOf("/barcodePage.do") > -1) {                    // controller.IndexController
+			if (!Flag.flag) {
+				// dummy condition
+				return true;
+			} else if (Flag.flag && url.indexOf("/barcodePage.do") > -1) {             // controller.IndexController
 				return true;
 			} else if (Flag.flag && url.indexOf("/fileuploadPage.do") > -1) {          // controller.IndexController
 				return true;
-			} else if (Flag.flag && url.indexOf("/file/") > -1) {                // controller.UploadController
+			} else if (Flag.flag && url.indexOf("/file/") > -1) {                      // controller.UploadController
 				return true;
 			} else {
 				if (Flag.flag) log.debug("KANG-20190807 redirect:/index.do   <- url:" + url);
 				new ModelAndView("redirect:/index.do");
 			}
 		}
-		
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
-
 		/*
 		if (!Flag.flag) {
 			// 저장된 sessionVo
