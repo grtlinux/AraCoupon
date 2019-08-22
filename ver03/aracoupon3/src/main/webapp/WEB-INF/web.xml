@@ -24,14 +24,16 @@
 		<welcome-file>index.do</welcome-file>
 	</welcome-file-list>
 
-	<!-- Listener -->
+	<!-- Listener
+	-->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 
 
-	<!-- Context -->
+	<!-- Context
+	-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:/config/ara3/context-*.xml</param-value>
@@ -40,7 +42,8 @@
 
 
 
-	<!-- Servlet -->
+	<!-- Servlet
+	-->
 	<servlet>
 		<servlet-name>action</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -70,7 +73,8 @@
 
 
 
-	<!-- Filter: Encoding -->
+	<!-- Filter: Encoding
+	-->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -84,7 +88,8 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- Filter: CORS -->
+	<!-- Filter: CORS
+	-->
 	<filter>
 		<filter-name>CORS</filter-name>
 		<filter-class>kr.co.arajeju.aracoupon3.common.filter.SimpleCORSFilter</filter-class>
@@ -97,11 +102,13 @@
 
 
 
-	<!-- Session config -->
+	<!-- Session config
+	-->
 	<session-config>
 		<!-- default is 7 days = 60 x 24 x 7 = 10080 -->
+		<!-- default is 1 days = 60 x 24 = 1440 -->
 		<!-- session-timeout>10080</session-timeout -->
-		<session-timeout>10080</session-timeout>
+		<session-timeout>1440</session-timeout>
 		<!-- this deploys fine into TCServer -->
 		<!--
 		<cookie-config>

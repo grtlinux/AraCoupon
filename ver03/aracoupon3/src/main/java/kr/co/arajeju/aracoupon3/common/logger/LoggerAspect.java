@@ -21,13 +21,17 @@ public class LoggerAspect {
 		type = joinPoint.getSignature().getDeclaringTypeName();
 
 		if (type.indexOf("Controller") > -1) {
-			name = "Controller  \t:  ";
+			name = "Controller";
 		} else if (type.indexOf("Service") > -1) {
-			name = "ServiceImpl  \t:  ";
+			name = "Service";
 		} else if (type.indexOf("DAO") > -1) {
-			name = "DAO  \t\t:  ";
+			name = "DAO";
+		} else {
+			name = "???";
 		}
-		log.debug("KANG-20190312: LoggerAspect... " + name + type + "." + joinPoint.getSignature().getName() + "()");
+		if (log.isDebugEnabled()) {
+			log.debug("KANG-20190312: LoggerAspect... [" + name + "] -> " + type + ". " + joinPoint.getSignature().getName() + "(...);");
+		}
 		return joinPoint.proceed();
 	}
 }

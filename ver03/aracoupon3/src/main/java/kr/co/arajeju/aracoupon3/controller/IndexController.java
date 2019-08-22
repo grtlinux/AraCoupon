@@ -92,7 +92,7 @@ public class IndexController {
 	 * index.jsp GET
 	 */
 	@RequestMapping(value = "/fileuploadPage.do", method = {RequestMethod.GET})
-	public String fileuploadPagefileuploadPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+	public String fileuploadPage(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
 		if (Flag.flag) {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);

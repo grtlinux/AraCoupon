@@ -15,7 +15,9 @@
 
 	<aop:aspectj-autoproxy/>
 
+	<!-- logger aspect
 	<bean id="loggerAspect" class="kr.co.arajeju.aracoupon3.common.logger.LoggerAspect" />
+	-->
 
 </beans>
 

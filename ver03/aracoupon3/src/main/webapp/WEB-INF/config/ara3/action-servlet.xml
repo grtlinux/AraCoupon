@@ -17,7 +17,8 @@
 		http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		">
 
-	<!-- component scan for controller -->
+	<!-- component scan for controller
+	-->
 	<context:component-scan base-package="kr.co.arajeju.aracoupon3" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -25,14 +26,15 @@
 
 
 
-	<!-- argument resolver -->
+	<!-- argument resolver
+	-->
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
 			<bean class="kr.co.arajeju.aracoupon3.common.resolver.CustomMapArgumentResolver"></bean>
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
-	<!--
+	<!-- logger interceptor
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
@@ -41,7 +43,10 @@
 	</mvc:interceptors>
 	-->
 
-	<!-- action interceptor -->
+
+
+	<!-- action interceptor
+	-->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
@@ -52,16 +57,37 @@
 
 	<aop:aspectj-autoproxy />
 
-	<!-- multipart -->
+
+
+
+	<!-- multipart - 1
+		ref: web.xml > servlet > multipart-config
+	-->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
-	
-	<!-- logger -->
+
+	<!-- multipart - 2
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize"   value="200000000" />
+		<property name="maxInMemorySize" value="200000000" />
+	</bean>
+	-->
+
+
+
+
+	<!-- logger aspect
+	-->
 	<bean id="loggerAspect" class="kr.co.arajeju.aracoupon3.common.logger.LoggerAspect" />
 
-	<!-- default annotation handler mapping -->
+	<!-- default annotation handler mapping
+	-->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
-	<!-- bean name view resolver -->
+
+
+
+	<!-- bean name view resolver
+	-->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
 
 	<!-- mapping jackson 2 JsonView: select the property be fixed... -->

@@ -32,8 +32,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		String url = request.getRequestURI();
 		if (log.isDebugEnabled()) {
 			log.debug("KANG-20190308 ====================================== ActionInterceptor START  ======================================");
-			log.debug("KANG-20190308 Request URI \t:  " + url);
-			log.debug("KANG-20190811" + this.contextService);
+			log.debug("KANG-20190308 Request URI \t:  " + url + "\n" + this.contextService);
 		}
 		request.setAttribute("araOpenOk", "yes");
 		request.setAttribute("xForwardedFor", request.getHeader("X-Forwarded-For"));
