@@ -124,7 +124,56 @@ public class Flag {
 	public static ModelMap setModelMap(ModelMap modelMap, HttpServletRequest request) throws Exception {
 		//copy request.Parameters to modelMap
 		//modelMap.putAll(request.getParameterMap());
+		//modelMap.addAttribute("TODAY1", Flag.getDateTime("yyyy-MM-dd"));
+		//modelMap.addAttribute("TODAY2", Flag.getDateTime("yyyyMMdd"));
+		if (flag) {
+			// sessions
+			HttpSession session = request.getSession();
+			Enumeration<String> keys = session.getAttributeNames();
+			while (keys.hasMoreElements()) {
+				String key = keys.nextElement();
+				String val = String.valueOf(session.getAttribute(key));
+				if (!flag) System.out.printf("\tSession: %-20s = '%s'%n", key, val);
+				modelMap.addAttribute(key, val);
+			}
+		}
+		if (flag) {
+			// attributes
+			Enumeration<String> enums = request.getAttributeNames();
+			while (enums.hasMoreElements()) {
+				String key = enums.nextElement();
+				String val;
+				switch (key) {
+				//case "staticPATHSvaurl":
+				//case "staticServerType":
+				//case "staticServerTypeAprvid":
+				//case "staticPATHSasurl":
+				//case "staticURL":
+				//case "staticPATH":
+				//case "araSalesType":
+				//case "araSalesOpenTime":
+				//case "araSalesCloseTime":
+				//case "araDbBackupTime":
+				case "araNowTime":
+				case "araOpenOk":
+				//case "araFileBasePath1":
+				//case "araFileBasePath2":
+				case "xForwardedFor":
+				case "remoteAddr":
+				case "remoteHost":
+					val = (String) request.getAttribute(key);
+					if (!flag) System.out.printf("\trequest.Attribute: %-20s = '%s'%n", key, val);
+					modelMap.addAttribute(key, val);
+					break;
+				default:
+					val = ""; //(String) request.getAttribute(key);
+					if (!flag) System.out.printf("\trequest.Attribute: %-20s = '%s'%n", key, val);
+					break;
+				}
+			}
+		}
 		if (Flag.flag) {
+			// parameters
 			Enumeration<String> enums = request.getParameterNames();
 			while (enums.hasMoreElements()) {
 				String key = enums.nextElement();
@@ -132,8 +181,6 @@ public class Flag {
 				modelMap.addAttribute(key, StringUtils.join(Arrays.asList(vals), ","));
 			}
 		}
-		//modelMap.addAttribute("TODAY1", Flag.getDateTime("yyyy-MM-dd"));
-		//modelMap.addAttribute("TODAY2", Flag.getDateTime("yyyyMMdd"));
 		return modelMap;
 	}
 

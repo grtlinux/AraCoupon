@@ -26,19 +26,24 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		//
+		String url = request.getRequestURI();       // request url
+		//
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// request information
-		String url = request.getRequestURI();
-		if (log.isDebugEnabled()) {
-			log.debug("KANG-20190308 ====================================== ActionInterceptor START  ======================================");
-			log.debug("KANG-20190308 Request URI \t:  " + url + "\n" + this.contextService);
+		if (Flag.flag) {
+			if (log.isDebugEnabled()) {
+				log.debug("KANG-20190308 ====================================== ActionInterceptor START  ======================================");
+				log.debug("KANG-20190308 Request URI \t:  " + url
+						+ (!Flag.flag ? "\n" + this.contextService : ""));
+			}
+			request.setAttribute("araOpenOk", "yes");
+			request.setAttribute("xForwardedFor", request.getHeader("X-Forwarded-For"));
+			request.setAttribute("remoteAddr", request.getRemoteAddr());
+			request.setAttribute("remoteHost", request.getRemoteHost());
+			// this.sessionService.setSessionVo(request, new SessionVO());
 		}
-		request.setAttribute("araOpenOk", "yes");
-		request.setAttribute("xForwardedFor", request.getHeader("X-Forwarded-For"));
-		request.setAttribute("remoteAddr", request.getRemoteAddr());
-		request.setAttribute("remoteHost", request.getRemoteHost());
-		//
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// sales time
@@ -65,7 +70,6 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		if (!Flag.flag) {
 			// session에 대한 처리
 			//if (Flag.flag) Flag.printRequestSession(request);
-
 			SessionVO sessionVo = this.sessionService.getSessionVo(request);
 			String itmNo = this.sessionService.getItmNo(request);
 			if (itmNo != null) {
@@ -97,9 +101,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			if (!Flag.flag) {
 				// dummy condition
 				return true;
-			} else if (Flag.flag && url.indexOf("/barcodePage.do") > -1) {             // controller.IndexController
-				return true;
-			} else if (Flag.flag && url.indexOf("/fileuploadPage.do") > -1) {          // controller.IndexController
+			} else if (Flag.flag && url.indexOf("/kang/") > -1) {                       // controller.IndexController
 				return true;
 			} else if (Flag.flag && url.indexOf("/file/") > -1) {                      // controller.UploadController
 				return true;
