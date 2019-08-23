@@ -6,16 +6,21 @@
 	<title>bootstrap3-01 Page</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- latest compiled and minified CSS -->
+	<!-- latest compiled and minified CSS
+	-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<!-- JQuery library -->
+	<!-- JQuery library
+	-->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- JQuery compiled JavaScript -->
+	<!-- JQuery compiled JavaScript
+	-->
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+<!-- my css
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css">
 <link rel="stylesheet" href="/bootstrap3/css/ara2.ara.codingBooster5.v01.css">
+-->
 <body>
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->

@@ -105,4 +105,54 @@ public class KangController {
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		return "/kang/bootstrap4-01Page";
 	}
+	//
+	@RequestMapping(value = "/kang/bootstrap4-02Page.do", method = {RequestMethod.GET})
+	public String bootstrap4_02Page(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		return "/kang/bootstrap4-02Page";
+	}
+	//
+	@RequestMapping(value = "/kang/bootstrap4-03Page.do", method = {RequestMethod.GET})
+	public String bootstrap4_03Page(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		return "/kang/bootstrap4-03Page";
+	}
+	//
+	@RequestMapping(value = "/kang/bootstrap4-04Page.do", method = {RequestMethod.GET})
+	public String bootstrap4_04Page(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		return "/kang/bootstrap4-04Page";
+	}
+	//
+	@RequestMapping(value = "/kang/bootstrap4-05Page.do", method = {RequestMethod.GET})
+	public String bootstrap4_05Page(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		return "/kang/bootstrap4-05Page";
+	}
+	//
+	@RequestMapping(value = "/kang/bootstrap4-06Page.do", method = {RequestMethod.GET})
+	public String bootstrap4_06Page(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) throws Exception {
+		if (Flag.flag) {
+			Flag.printRequest(request);
+			modelMap = Flag.setModelMap(modelMap, request);
+		}
+		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
+		return "/kang/bootstrap4-06Page";
+	}
 }
