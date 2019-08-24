@@ -196,48 +196,72 @@
 		<li data-target="#myCarousel" data-slide-to="3"></li>
 		<li data-target="#myCarousel" data-slide-to="4"></li>
 		<li data-target="#myCarousel" data-slide-to="5"></li>
+		<li data-target="#myCarousel" data-slide-to="6"></li>
+		<li data-target="#myCarousel" data-slide-to="7"></li>
+		<li data-target="#myCarousel" data-slide-to="8"></li>
 	</ol>
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner" role="listbox">
 		<div class="item active">
-			<img src="/bootstrap3/images/ny.jpg" alt="New York" width="1200" height="400">
+			<img src="/bootstrap3/images/carousel/slide0.jpg" alt="Slide 8" width="1200" height="400">
 			<div class="carousel-caption">
-				<h3>New York</h3>
+				<h3>Slide 0</h3>
 				<p>The atmosphere in New York is lorem ipsum.</p>
 			</div>
 		</div>
 		<div class="item">
-			<img src="/bootstrap3/images/chicago.jpg" alt="Chicago" width="1200" height="400">
-			<div class="carousel-caption">
-				<h3>Chicago</h3>
-				<p>Thank you, Chicago - A night we won't forget.</p>
-			</div>
-		</div>
-		<div class="item">
-			<img src="/bootstrap3/images/la.jpg" alt="Los Angeles" width="1200" height="400">
-			<div class="carousel-caption">
-				<h3>LA</h3>
-				<p>Even though the traffic was a mess, we had the best time playing at Venice Beach!</p>
-			</div>
-		</div>
-		<div class="item">
-			<img src="/bootstrap3/images/slide1.jpg" alt="Slide 1" width="1200" height="400">
+			<img src="/bootstrap3/images/carousel/slide1.jpg" alt="Slide 1" width="1200" height="400">
 			<div class="carousel-caption">
 				<h3>Slide 1</h3>
 				<p>Thank you, Chicago - A night we won't forget.</p>
 			</div>
 		</div>
 		<div class="item">
-			<img src="/bootstrap3/images/slide2.jpg" alt="Slide 2" width="1200" height="400">
+			<img src="/bootstrap3/images/carousel/slide2.jpg" alt="Slide 2" width="1200" height="400">
 			<div class="carousel-caption">
 				<h3>Slide 2</h3>
+				<p>Even though the traffic was a mess, we had the best time playing at Venice Beach!</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="/bootstrap3/images/carousel/slide3.jpg" alt="Slide 3" width="1200" height="400">
+			<div class="carousel-caption">
+				<h3>Slide 3</h3>
 				<p>Thank you, Chicago - A night we won't forget.</p>
 			</div>
 		</div>
 		<div class="item">
-			<img src="/bootstrap3/images/slide3.jpg" alt="Slide 3" width="1200" height="400">
+			<img src="/bootstrap3/images/carousel/slide4.jpg" alt="Slide 4" width="1200" height="400">
 			<div class="carousel-caption">
-				<h3>Slide 3</h3>
+				<h3>Slide 4</h3>
+				<p>Thank you, Chicago - A night we won't forget.</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="/bootstrap3/images/carousel/slide5.jpg" alt="Slide 5" width="1200" height="400">
+			<div class="carousel-caption">
+				<h3>Slide 5</h3>
+				<p>Thank you, Chicago - A night we won't forget.</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="/bootstrap3/images/carousel/slide6.jpg" alt="Slide 6" width="1200" height="400">
+			<div class="carousel-caption">
+				<h3>Slide 6</h3>
+				<p>Thank you, Chicago - A night we won't forget.</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="/bootstrap3/images/carousel/slide7.jpg" alt="Slide 7" width="1200" height="400">
+			<div class="carousel-caption">
+				<h3>Slide 7</h3>
+				<p>Thank you, Chicago - A night we won't forget.</p>
+			</div>
+		</div>
+		<div class="item">
+			<img src="/bootstrap3/images/carousel/slide8.jpg" alt="Slide 8" width="1200" height="400">
+			<div class="carousel-caption">
+				<h3>Slide 8</h3>
 				<p>Thank you, Chicago - A night we won't forget.</p>
 			</div>
 		</div>
@@ -252,6 +276,10 @@
 		<span class="sr-only">Next</span>
 	</a>
 </div>
+<script type="text/javascript">
+	/* carousel interval control */
+	$('.carousel').carousel({interval:2000});
+</script>
 
 <!-- Container (The Band Section) -->
 <div id="band" class="container text-center">

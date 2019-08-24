@@ -11,13 +11,15 @@ import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URL;
+
 import javax.imageio.ImageIO;
+
+import org.beryx.awt.color.ColorFactory;
 
 /**
  * ref: https://wonsama.tistory.com/456
  * title: 텍스트 로고 이미지 자동 생성 JAVA 프로그램
- * 
+ *
  * 입력 텍스트를 이미지로 만들어 준다
  * @author parkwon
  * @since 2017.03.24
@@ -42,12 +44,78 @@ public class WsImageTextUtil {
 	 * @since 2017.03.24
 	 */
 	WsImageTextUtil() throws Exception {
-		drawText("어머니가 짜장면이 싫다고 하셨어", "/Users/kangmac/sample.png");
-		String[] texts = {"아이폰 7 붉은색 사주세요"};
-		drawTextWithImage(texts
-				, "/Users/kangmac/title.png"    // target image
-				, "http://imgnews.naver.com/image/5463/2017/03/21/0000000101_003_20170322105216516.png"  // source image
-				);
+		if (!Flag.flag) {
+			// test 1
+			this.drawText("어머니가 짜장면이 싫다고 하셨어", "/Users/kangmac/sample.png");
+			// test 2
+			//String[] texts = {"10,000", "아이폰 7 붉은색 사주세요"};
+			//this.drawTextWithImage(texts
+			//		, "/Users/kangmac/title.png"    // target image
+			//		, "http://imgnews.naver.com/image/5463/2017/03/21/0000000101_003_20170322105216516.png"  // source image
+			//		);
+			String[] texts = {"(주)올띠쿠폰센타"};
+			this.drawTextWithImage(texts
+					, "/Users/kangmac/title.png"    // target image
+					, "/Users/kangmac/title.png"    // target image
+					);
+		}
+
+		if (Flag.flag) {
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					//"/Users/kangmac/coupon_org_blue.png",  // inImgFileName
+					//"/Users/kangmac/coupon_org_brown.png",  // inImgFileName
+					//"/Users/kangmac/coupon_org_gold.png",  // inImgFileName
+					//"/Users/kangmac/coupon_org_green.png",  // inImgFileName
+					"/Users/kangmac/coupon_org_red.png",  // inImgFileName
+					"/Users/kangmac/title.png",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 14, "white", 480, 40, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 100, "white", 75, 220, true, "100,000원"),
+							new DrawTextInfo("나눔고딕", 18, "yellow", 120, 340, false, "(주)올띠까페"),
+							new DrawTextInfo("NanumGothic", 18, "yellow", 290, 340, false, "*사용기간: 2019.08.01 ~ 2019.12.31"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+	}
+
+	/**
+	 * 웹 이미지 내부에 텍스트를 포함하여 이미지로 만들어준다
+	 * @param texts 텍스트 문자열
+	 * @param fileLoc 파일위치
+	 * @param backgrondImageURL 웹이미지 주소
+	 * @throws Exception 오류
+	 * @since 2017.03.27
+	 */
+	public void drawTextWithImage(DrawImageInfo drawImageInfo) throws Exception {
+		BufferedImage img = ImageIO.read(new File(drawImageInfo.getInImgFileName()));
+
+		DrawTextInfo[] drawTextInfos = drawImageInfo.getDrawTextInfos();
+
+		Graphics g = img.getGraphics();
+		for (int i=0; i < drawTextInfos.length; i++) {
+			Graphics2D g2d = this.getG2D(img);
+			Font font = new Font(drawTextInfos[i].getFontName(), Font.PLAIN, drawTextInfos[i].getFontSize());
+			//Font font = new Font(drawTextInfos[i].getFontName(), Font.BOLD, drawTextInfos[i].getFontSize());
+			g2d.setFont(font);
+
+			int x = drawTextInfos[i].getPosX();
+			int y = drawTextInfos[i].getPosY();
+
+			if (drawTextInfos[i].isFlagShadow()) {
+				// 그림자 처리
+				g2d.setColor(new Color(20, 20, 20));  // shadow color
+				g2d.drawString(drawTextInfos[i].getText(), shiftEast(x, 4), shiftSouth(y, 4));
+			}
+
+			// text
+			g2d.setColor(ColorFactory.valueOf(drawTextInfos[i].getFontColor()));  // text color
+			g2d.drawString(drawTextInfos[i].getText(), x, y);
+		}
+		g.dispose();
+
+		// 이미지 파일을 생성한다
+		ImageIO.write(img, "png", new File(drawImageInfo.getOutImgFileName()));
 	}
 
 	/**
@@ -59,13 +127,12 @@ public class WsImageTextUtil {
 	 */
 	public void drawText(String text, String fileLoc) throws Exception {
 		Font font = new Font("나눔고딕", Font.PLAIN, 28);
-		Rectangle r = getFontrect(text, font);
-
+		Rectangle r = this.getFontrect(text, font);
 		int width = (int) r.getWidth();
 		int height = (int) r.getHeight();
 
 		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g2d = getG2D(img);
+		Graphics2D g2d = this.getG2D(img);
 		g2d.setFont(font);
 		FontMetrics fm = g2d.getFontMetrics();
 		g2d.setColor(Color.WHITE);
@@ -85,43 +152,56 @@ public class WsImageTextUtil {
 	 * @since 2017.03.27
 	 */
 	public void drawTextWithImage(String[] texts, String fileLoc, String backgrondImageURL) throws Exception {
-		final int FONT_SIZE = 18;
-		final int POS_X = 30;
-		final int POS_Y = 20;
-		BufferedImage img = ImageIO.read(new URL(backgrondImageURL));
+		//final int FONT_SIZE = 18;
+		//final int POS_X = 30;
+		//final int POS_Y = 20;
 
-		Graphics g = img.getGraphics();
+		//final int FONT_SIZE = 64;
+		//final int FONT_SIZE = 128;
+		//final int POS_X = 120;
+		//final int POS_Y = 230;
+
+		final int FONT_SIZE = 24;
+		final int POS_X = 120;
+		final int POS_Y = 340;
+
 		Font font = new Font("나눔고딕", Font.PLAIN, FONT_SIZE);
+		//Rectangle rect = this.getFontrect(texts[0], font);
 
-		// 우선은 첫 라인 정보만 가져온다. 일반적으로 가장 길게 설정하는 것이 맞다고 생각함.
-		Rectangle rect = getFontrect(texts[0], font);
-
+		//BufferedImage img = ImageIO.read(new URL(backgrondImageURL));
+		//BufferedImage img = ImageIO.read(new File("/Users/kangmac/coupon_org_red_10000.png"));
+		BufferedImage img = ImageIO.read(new File("/Users/kangmac/coupon_org_green.png"));
+		//BufferedImage img = ImageIO.read(new File("/Users/kangmac/title.png"));
+		Graphics g = img.getGraphics();
 		int oriWidth = img.getWidth();
 		int oriHeight = img.getHeight();
 
-		double ratio = (rect.getWidth() + POS_X*2) / oriWidth;
+		//double ratio = (rect.getWidth() + POS_X*2) / oriWidth;
 
-		int newWidth = (int) (rect.getWidth() + POS_X*2);
-		int newHeight = (int) (oriHeight * ratio);
+		//int newWidth = (int) (rect.getWidth() + POS_X*2);
+		//int newHeight = (int) (oriHeight * ratio);
 
 		// 배경 이미지 RESIZE 처리
-		img = resizeImage(img, newWidth, newHeight*texts.length);
+		//img = this.resizeImage(img, newWidth, newHeight*texts.length);
 
 		// 텍스트 처리
-		for(int i=0;i<texts.length;i++){
-			Graphics2D g2d = getG2D(img);
+		for (int i=0; i < texts.length; i++) {
+			Graphics2D g2d = this.getG2D(img);
 			g2d.setFont(font);
 
+			//int x = POS_X;
+			//int y = (FONT_SIZE + POS_Y)*(i + 1);
 			int x = POS_X;
-			int y = (FONT_SIZE + POS_Y)*(i + 1);
+			int y = POS_Y;
 
 			// 그림자 처리
-			drawStringDropshadow(g2d, texts[i], x, y);
+			this.drawStringDropshadow(g2d, texts[i], "yellow", x, y);
 		}
 		g.dispose();
 
 		// 배경 이미지 CROP 처리
-		img = cropImage(img, new Rectangle(0, 0, newWidth, (FONT_SIZE+POS_Y)*texts.length+POS_Y) );
+		//img = this.cropImage(img, new Rectangle(0, 0, newWidth, (FONT_SIZE+POS_Y)*texts.length+POS_Y) );
+		img = this.cropImage(img, new Rectangle(0, 0, oriWidth, oriHeight ));
 
 		// 이미지 파일을 생성한다
 		ImageIO.write(img, "png", new File(fileLoc));
@@ -159,10 +239,10 @@ public class WsImageTextUtil {
 	@SuppressWarnings("unused")
 	private void drawStringOutline(Graphics2D g2d, String text, int x, int y, Color cin, Color cout){
 		g2d.setColor(cout);
-		g2d.drawString(text, ShiftWest(x, 1), ShiftNorth(y, 1));
-		g2d.drawString(text, ShiftWest(x, 1), ShiftSouth(y, 1));
-		g2d.drawString(text, ShiftEast(x, 1), ShiftNorth(y, 1));
-		g2d.drawString(text, ShiftEast(x, 1), ShiftSouth(y, 1));
+		g2d.drawString(text, shiftWest(x, 1), this.shiftNorth(y, 1));
+		g2d.drawString(text, shiftWest(x, 1), this.shiftSouth(y, 1));
+		g2d.drawString(text, shiftEast(x, 1), this.shiftNorth(y, 1));
+		g2d.drawString(text, shiftEast(x, 1), this.shiftSouth(y, 1));
 
 		g2d.setColor(cin);
 		g2d.drawString(text, x, y);
@@ -176,10 +256,18 @@ public class WsImageTextUtil {
 	 * @param y Y좌표
 	 * @since 2017.03.27
 	 */
+	@SuppressWarnings("unused")
 	private void drawStringDropshadow(Graphics2D g2d, String text, int x, int y) {
-		g2d.setColor(new Color(20, 20, 20));
-		g2d.drawString(text, ShiftEast(x, 2), ShiftSouth(y, 2));
-		g2d.setColor(new Color(220, 220, 220));
+		g2d.setColor(new Color(20, 20, 20));  // shadow color
+		g2d.drawString(text, shiftEast(x, 4), shiftSouth(y, 4));
+		g2d.setColor(new Color(220, 220, 220));  // text color
+		g2d.drawString(text, x, y);
+	}
+
+	private void drawStringDropshadow(Graphics2D g2d, String text, String color, int x, int y) {
+		g2d.setColor(new Color(20, 20, 20));  // shadow color
+		g2d.drawString(text, shiftEast(x, 4), shiftSouth(y, 4));
+		g2d.setColor(ColorFactory.valueOf(color));  // text color
 		g2d.drawString(text, x, y);
 	}
 
@@ -218,6 +306,7 @@ public class WsImageTextUtil {
 	 * @return 신규 이미지
 	 * @since 2017.03.24
 	 */
+	@SuppressWarnings("unused")
 	private BufferedImage resizeImage(BufferedImage img, int newW, int newH) {
 		Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
 		BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
@@ -257,7 +346,7 @@ public class WsImageTextUtil {
 	 * @return 변경된 좌표
 	 * @since 2017.03.27
 	 */
-	int ShiftNorth(int p, int distance) {
+	int shiftNorth(int p, int distance) {
 		return (p - distance);
 	}
 
@@ -268,7 +357,7 @@ public class WsImageTextUtil {
 	 * @return 변경된 좌표
 	 * @since 2017.03.27
 	 */
-	int ShiftSouth(int p, int distance) {
+	int shiftSouth(int p, int distance) {
 		return (p + distance);
 	}
 
@@ -279,7 +368,7 @@ public class WsImageTextUtil {
 	 * @return 변경된 좌표
 	 * @since 2017.03.27
 	 */
-	int ShiftEast(int p, int distance) {
+	int shiftEast(int p, int distance) {
 		return (p + distance);
 	}
 
@@ -290,8 +379,81 @@ public class WsImageTextUtil {
 	 * @return 변경된 좌표
 	 * @since 2017.03.27
 	 */
-	int ShiftWest(int p, int distance) {
+	int shiftWest(int p, int distance) {
 		return (p - distance);
 	}
 }
 
+class DrawImageInfo {
+	private String inImgFileName;
+	private String outImgFileName;
+	private DrawTextInfo[] drawTextInfos;
+	////////////////////////////////////////////////////
+	public DrawImageInfo(
+			String inImgFileName,
+			String outImgFileName,
+			DrawTextInfo[] drawTextInfos) {
+		this.inImgFileName = inImgFileName;
+		this.outImgFileName = outImgFileName;
+		this.drawTextInfos = drawTextInfos;
+	}
+	////////////////////////////////////////////////////
+	public String getInImgFileName() {
+		return inImgFileName;
+	}
+	public String getOutImgFileName() {
+		return outImgFileName;
+	}
+	public DrawTextInfo[] getDrawTextInfos() {
+		return drawTextInfos;
+	}
+}
+
+class DrawTextInfo {
+	private String  fontName;
+	private int     fontSize;
+	private String  fontColor;
+	private int     posX;
+	private int     posY;
+	private boolean flagShadow;
+	private String  text;
+	////////////////////////////////////////////////////
+	public DrawTextInfo(
+			String fontName,
+			int fontSize,
+			String fontColor,
+			int posX,
+			int posY,
+			boolean flagShadow,
+			String text) {
+		this.fontName = fontName;
+		this.fontSize = fontSize;
+		this.fontColor = fontColor;
+		this.posX = posX;
+		this.posY = posY;
+		this.flagShadow = flagShadow;
+		this.text = text;
+	}
+	////////////////////////////////////////////////////
+	public String getFontName() {
+		return fontName;
+	}
+	public int getFontSize() {
+		return fontSize;
+	}
+	public String getFontColor() {
+		return fontColor;
+	}
+	public int getPosX() {
+		return posX;
+	}
+	public int getPosY() {
+		return posY;
+	}
+	public boolean isFlagShadow() {
+		return flagShadow;
+	}
+	public String getText() {
+		return text;
+	}
+}
