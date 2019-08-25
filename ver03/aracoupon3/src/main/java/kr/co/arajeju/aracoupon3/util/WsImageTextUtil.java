@@ -11,6 +11,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -60,12 +61,357 @@ public class WsImageTextUtil {
 					);
 		}
 
-		if (Flag.flag) {
+		if (!Flag.flag) {
+			// don't use, only for test
 			DrawImageInfo drawImageInfo = new DrawImageInfo(
 					//"/Users/kangmac/coupon_org_blue.png",  // inImgFileName
 					//"/Users/kangmac/coupon_org_brown.png",  // inImgFileName
 					//"/Users/kangmac/coupon_org_gold.png",  // inImgFileName
 					//"/Users/kangmac/coupon_org_green.png",  // inImgFileName
+					"/Users/kangmac/coupon_org_red.png",  // inImgFileName
+					"/Users/kangmac/title.png",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 14, "white", 480, 40, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 100, "white", 75, 220, true, "100,000원"),
+							new DrawTextInfo("나눔고딕", 18, "yellow", 120, 340, false, "(주)올띠까페"),
+							new DrawTextInfo("NanumGothic", 18, "yellow", 290, 340, false, "*사용기간: 2019.08.01 ~ 2019.12.31"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_00.jpg   <- slide0.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide0.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_00.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_01.jpg   <- slide1.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide1.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_01.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_02.jpg   <- slide2.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide2.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_02.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_03.jpg   <- slide3.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide3.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_03.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_04.jpg   <- slide4.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide4.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_04.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_05.jpg   <- slide5.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide5.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_05.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_06.jpg   <- slide6.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide6.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_06.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_07.jpg   <- slide7.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide7.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_07.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_08.jpg   <- slide8.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/slide8.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_08.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_09.jpg   <- coffee1.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/coffee1.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_09.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_10.jpg   <- coffee2.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/coffee2.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_10.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_11.jpg   <- coffee3.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/coffee3.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_11.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_12.jpg   <- computer01.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/computer01.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_12.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_13.jpg   <- computer02.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/computer02.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_13.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_14.jpg   <- jeju_01.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/jeju_01.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_14.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_15.jpg   <- jeju_02.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/jeju_02.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_15.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_16.jpg   <- jeju_03.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/jeju_03.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_16.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_17.jpg   <- main_01.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/main_01.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_17.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_18.jpg   <- main_02.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/main_02.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_18.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_19.jpg   <- sunrise_01.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/sunrise_01.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_19.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_20.jpg   <- sunrise_02.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/sunrise_02.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_20.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (Flag.flag) {
+			// carousel_21.jpg   <- sunrise_03.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
+					"http://arajeju.com:8080/bootstrap3/images/carousel/sunrise_03.jpg",  // inImgFileName
+					"/Users/kangmac/carousel_21.jpg",  // outImgFileName
+					new DrawTextInfo[] {
+							new DrawTextInfo("나눔고딕", 20, "white", 130, 100, false, "발행:(주)올띠쿠폰센타"),
+							new DrawTextInfo("NanumGothicBold", 120, "white", 75, 220, true, "광고 이미지"),
+							new DrawTextInfo("나눔고딕", 20, "yellow", 120, 340, false, "(주)올띠까페"),
+							}
+					);
+			this.drawTextWithImage(drawImageInfo);
+		}
+		
+		if (!Flag.flag) {
+			// carousel_00.jpg   <- slide0.jpg
+			// carousel_01.jpg   <- slide1.jpg
+			// carousel_02.jpg   <- slide2.jpg
+			// carousel_03.jpg   <- slide3.jpg
+			// carousel_04.jpg   <- slide4.jpg
+			// carousel_05.jpg   <- slide5.jpg
+			// carousel_06.jpg   <- slide6.jpg
+			// carousel_07.jpg   <- slide7.jpg
+			// carousel_08.jpg   <- slide8.jpg
+			// carousel_09.jpg   <- coffee1.jpg
+			// carousel_10.jpg   <- coffee2.jpg
+			// carousel_11.jpg   <- coffee3.jpg
+			// carousel_12.jpg   <- computer01.jpg
+			// carousel_13.jpg   <- computer02.jpg
+			// carousel_14.jpg   <- jeju_01.jpg
+			// carousel_15.jpg   <- jeju_02.jpg
+			// carousel_16.jpg   <- jeju_03.jpg
+			// carousel_17.jpg   <- main_01.jpg
+			// carousel_18.jpg   <- main_02.jpg
+			// carousel_19.jpg   <- sunrise_01.jpg
+			// carousel_20.jpg   <- sunrise_02.jpg
+			// carousel_21.jpg   <- sunrise_03.jpg
+			DrawImageInfo drawImageInfo = new DrawImageInfo(
 					"/Users/kangmac/coupon_org_red.png",  // inImgFileName
 					"/Users/kangmac/title.png",  // outImgFileName
 					new DrawTextInfo[] {
@@ -88,7 +434,8 @@ public class WsImageTextUtil {
 	 * @since 2017.03.27
 	 */
 	public void drawTextWithImage(DrawImageInfo drawImageInfo) throws Exception {
-		BufferedImage img = ImageIO.read(new File(drawImageInfo.getInImgFileName()));
+		//BufferedImage img = ImageIO.read(new File(drawImageInfo.getInImgFileName()));
+		BufferedImage img = ImageIO.read(new URL(drawImageInfo.getInImgFileName()));
 
 		DrawTextInfo[] drawTextInfos = drawImageInfo.getDrawTextInfos();
 
