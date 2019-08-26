@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Ara2">
+<mapper namespace="Ara3">
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
@@ -31,7 +31,7 @@
 
 	<!-- comment -->
 	<select id="selectItemInfo" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2.selectItemInfo */
+		SELECT  /* Ara3.selectItemInfo */
 			<if test="conntyp == 'CTR'">
 				A.CTR_NO
 				, A.CTR_ID
@@ -62,28 +62,28 @@
 			, A5.MRRG_LOC
 		FROM
 			<if test="conntyp == 'CTR'">
-				ARA2_CTR A
-					LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.CTR_NO AND A1.ITM_TYP = 'CTR'
-					LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.CTR_NO AND A2.ITM_TYP = 'CTR'
-					LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.CTR_NO AND A3.ITM_TYP = 'CTR'
-					LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.CTR_NO AND A4.ITM_TYP = 'CTR'
-					LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.CTR_NO AND A5.ITM_TYP = 'CTR'
+				ARA3_CTR A
+					LEFT JOIN ARA3_TEL A1 ON A1.ITM_NO = A.CTR_NO AND A1.ITM_TYP = 'CTR'
+					LEFT JOIN ARA3_MBL A2 ON A2.ITM_NO = A.CTR_NO AND A2.ITM_TYP = 'CTR'
+					LEFT JOIN ARA3_EML A3 ON A3.ITM_NO = A.CTR_NO AND A3.ITM_TYP = 'CTR'
+					LEFT JOIN ARA3_BNK A4 ON A4.ITM_NO = A.CTR_NO AND A4.ITM_TYP = 'CTR'
+					LEFT JOIN ARA3_MRRG A5 ON A5.ITM_NO = A.CTR_NO AND A5.ITM_TYP = 'CTR'
 			</if>
 			<if test="conntyp == 'STR'">
-				ARA2_STR A
-					LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
-					LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.STR_NO AND A2.ITM_TYP = 'STR'
-					LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.STR_NO AND A3.ITM_TYP = 'STR'
-					LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
-					LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
+				ARA3_STR A
+					LEFT JOIN ARA3_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
+					LEFT JOIN ARA3_MBL A2 ON A2.ITM_NO = A.STR_NO AND A2.ITM_TYP = 'STR'
+					LEFT JOIN ARA3_EML A3 ON A3.ITM_NO = A.STR_NO AND A3.ITM_TYP = 'STR'
+					LEFT JOIN ARA3_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
+					LEFT JOIN ARA3_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
 			</if>
 			<if test="conntyp == 'USR'">
-				ARA2_USR A
-					LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
-					LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
-					LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
-					LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
-					LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+				ARA3_USR A
+					LEFT JOIN ARA3_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+					LEFT JOIN ARA3_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+					LEFT JOIN ARA3_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+					LEFT JOIN ARA3_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+					LEFT JOIN ARA3_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
 			</if>
 		WHERE 1=1
 			<if test="conntyp == 'CTR'">
@@ -104,16 +104,16 @@
 
 	<!-- comment -->
 	<insert id="insertCnntAraKey" parameterType="Map">
-		INSERT INTO  /* Ara2.insertCnntAraKey */
-			ARA2_CNNT
+		INSERT INTO  /* Ara3.insertCnntAraKey */
+			ARA3_CNNT
 		VALUES
 			( SEQ_CNNT.NEXTVAL, #{connid}, #{conntyp}, #{arakey}, 'Y', SYSDATE, null, null )
 	</insert>
 
 	<!-- comment -->
 	<update id="updateAllCnntByCnntid" parameterType="Map">
-		UPDATE  /* Ara2.updateAllCnntByCnntid */
-			ARA2_CNNT A
+		UPDATE  /* Ara3.updateAllCnntByCnntid */
+			ARA3_CNNT A
 		SET
 			A.CNNT_YN = 'N'
 			, A.DCNT_DTTM = SYSDATE
@@ -126,8 +126,8 @@
 
 	<!-- comment -->
 	<update id="updateCnntByCnntid" parameterType="Map">
-		UPDATE  /* Ara2.updateCnntByCnntid */
-			ARA2_CNNT A
+		UPDATE  /* Ara3.updateCnntByCnntid */
+			ARA3_CNNT A
 		SET
 			A.CNNT_YN = 'N'
 			, A.DCNT_DTTM = SYSDATE
@@ -141,7 +141,7 @@
 
 	<!-- comment -->
 	<select id="selectCnntArakeyInfo" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2.selectCnntArakeyInfo */
+		SELECT  /* Ara3.selectCnntArakeyInfo */
 			A.CNNT_NO
 			, A.CNNT_ID
 			, A.CNNT_TYP
@@ -149,7 +149,7 @@
 			, A.CNNT_YN
 			, A.CNNT_DTTM
 		FROM
-			ARA2_CNNT A
+			ARA3_CNNT A
 		WHERE 1=1
 			AND A.CNNT_ID = #{connid}
 			AND A.CNNT_TYP = #{conntyp}
@@ -163,13 +163,13 @@
 
 	<!-- comment -->
 	<select id="selectLocInfoList" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2.selectLocInfoList */
+		SELECT  /* Ara3.selectLocInfoList */
 			A.CODE
 			, A.CD_NM
 			, A.CD_DESC
 			, A.SORT_NO
 		FROM
-			ARA2_CODE A
+			ARA3_CODE A
 		WHERE 1=1
 			AND A.GRP_CD = 'C015'
 			AND A.USE_YN = 'Y'
@@ -179,7 +179,7 @@
 	
 	<!-- comment -->
 	<select id="selectChkNmMblEml" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2.selectChkNmMblEml */
+		SELECT  /* Ara3.selectChkNmMblEml */
 			A.ROWNO
 			, A.YYMMDD
 			, B.USR_NM
@@ -190,50 +190,50 @@
 				SELECT ROWNUM AS ROWNO, TO_CHAR(SYSDATE, 'YYMMDD') AS YYMMDD FROM DUAL
 			) A
 				LEFT JOIN (
-					SELECT ROWNUM AS ROWNO, USR_NM FROM ARA2_USR WHERE 1=1 AND USR_NM = #{usrName}
+					SELECT ROWNUM AS ROWNO, USR_NM FROM ARA3_USR WHERE 1=1 AND USR_NM = #{usrName}
 				) B ON B.ROWNO = A.ROWNO
 				LEFT JOIN (
-					SELECT ROWNUM AS ROWNO, MBL_NUM FROM ARA2_MBL WHERE 1=1 AND ITM_TYP = 'USR' AND MBL_NUM = #{usrMobile}
+					SELECT ROWNUM AS ROWNO, MBL_NUM FROM ARA3_MBL WHERE 1=1 AND ITM_TYP = 'USR' AND MBL_NUM = #{usrMobile}
 				) C ON C.ROWNO = A.ROWNO
 				LEFT JOIN (
-					SELECT ROWNUM AS ROWNO, EML_ADDR FROM ARA2_EML WHERE 1=1 AND ITM_TYP = 'USR' AND EML_ADDR = #{usrEmail}
+					SELECT ROWNUM AS ROWNO, EML_ADDR FROM ARA3_EML WHERE 1=1 AND ITM_TYP = 'USR' AND EML_ADDR = #{usrEmail}
 				) D ON D.ROWNO = A.ROWNO
 		WHERE 1=1
 	</select>
 
 	<!-- comment -->
 	<select id="selectUsrNo" parameterType="Map" resultType="Map">
-		SELECT SEQ_USR.NEXTVAL AS USR_NO FROM DUAL /* Ara2.selectSeqStrNextval */
+		SELECT SEQ_USR.NEXTVAL AS USR_NO FROM DUAL /* Ara3.selectSeqStrNextval */
 	</select>
 
 	<!-- comment -->
-	<insert id="insertAra2Usr" parameterType="Map">
-		INSERT INTO  /* Ara2.insertAra2Usr */
-			ARA2_USR
+	<insert id="insertAra3Usr" parameterType="Map">
+		INSERT INTO  /* Ara3.insertAra3Usr */
+			ARA3_USR
 		VALUES
 			( #{USR_NO}, TO_CHAR(#{USR_NO}), #{usrName}, null )
 	</insert>
 
 	<!-- comment -->
-	<insert id="insertAra2Mbl" parameterType="Map">
-		INSERT INTO  /* Ara2.insertAra2Mbl */
-			ARA2_MBL
+	<insert id="insertAra3Mbl" parameterType="Map">
+		INSERT INTO  /* Ara3.insertAra3Mbl */
+			ARA3_MBL
 		VALUES
 			( #{USR_NO}, 'USR', 'Y', 1, 'mbl-1', #{usrMobile} )
 	</insert>
 
 	<!-- comment -->
-	<insert id="insertAra2Eml" parameterType="Map">
-		INSERT INTO  /* Ara2.insertAra2Eml */
-			ARA2_EML
+	<insert id="insertAra3Eml" parameterType="Map">
+		INSERT INTO  /* Ara3.insertAra3Eml */
+			ARA3_EML
 		VALUES
 			( #{USR_NO}, 'USR', 'Y', 1, 'eml-1', #{usrEmail} )
 	</insert>
 
 	<!-- comment -->
-	<insert id="insertAra2Mrrg" parameterType="Map">
-		INSERT INTO  /* Ara2.insertAra2Mrrg */
-			ARA2_MRRG
+	<insert id="insertAra3Mrrg" parameterType="Map">
+		INSERT INTO  /* Ara3.insertAra3Mrrg */
+			ARA3_MRRG
 		VALUES
 			( #{USR_NO}, 'USR', 'Y', TO_DATE(#{usrMrrgDt}, 'YYYY-MM-DD'), #{usrMrrgLoc} )
 	</insert>
@@ -241,7 +241,7 @@
 
 	<!-- comment -->
 	<select id="selectLoginInfo" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Ctr.selectLoginInfo */
+		SELECT  /* Ara3Ctr.selectLoginInfo */
 			B.ITM_NO
 			, B.ITM_ID
 			, B.ITM_NM
@@ -269,12 +269,12 @@
 					, TO_CHAR(A5.MRRG_DT, 'YYMMDD')   AS MRRG_DT
 					, A5.MRRG_LOC
 				FROM
-					ARA2_USR A
-						LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
-						LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
-						LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
-						LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
-						LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+					ARA3_USR A
+						LEFT JOIN ARA3_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+						LEFT JOIN ARA3_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+						LEFT JOIN ARA3_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+						LEFT JOIN ARA3_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+						LEFT JOIN ARA3_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
 				WHERE 1=1
 					AND A.USR_ID = TO_CHAR(#{USR_NO})
 			) B
@@ -284,7 +284,7 @@
 
 	<!-- comment -->
 	<insert id="insertLoginInfo" parameterType="Map">
-		INSERT INTO ARA2_LOGIN VALUES ( SEQ_LOGIN.NEXTVAL, #{loginSrch}, #{loginList}, #{ITM_NO}, #{ITM_ID}, #{ITM_NM}, #{ITM_TYP}, SYSDATE )  /* Ara2Ctr.insertLoginInfo */
+		INSERT INTO ARA3_LOGIN VALUES ( SEQ_LOGIN.NEXTVAL, #{loginSrch}, #{loginList}, #{ITM_NO}, #{ITM_ID}, #{ITM_NM}, #{ITM_TYP}, SYSDATE )  /* Ara3Ctr.insertLoginInfo */
 	</insert>
 
 

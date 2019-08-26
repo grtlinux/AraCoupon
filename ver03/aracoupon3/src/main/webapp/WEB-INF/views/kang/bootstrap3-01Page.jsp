@@ -2211,9 +2211,9 @@
 		<h1>Visible</h1>
 		<p>Resize the browser window to see the effect.</p>
 		<div class="row">
-			<div class="col-xs-4 col-sm-4" style="background-color:lightgray;">.col-xs-4 .col-sm-4</div>
-			<div class="         col-sm-4 hidden-xs" style="background-color:lavenderblush;">.col-sm-4 .hidden-xs</div>
-			<div class="col-xs-8 col-sm-4" style="background-color:lavender;">.col-xs-8 .col-sm-4</div>
+			<div class="col-xs-4  col-sm-4 hidden-md col-lg-2" style="background-color:lightgray;">.col-xs-4 .col-sm-4</div>
+			<div class="hidden-xs col-sm-4 col-md-7  col-lg-8" style="background-color:lavenderblush;">.col-sm-4 .hidden-xs</div>
+			<div class="col-xs-6  col-sm-4 col-md-5  col-lg-2" style="background-color:lavender;">.col-xs-8 .col-sm-4</div>
 		</div>
 
 	</div>

@@ -29,12 +29,31 @@
 		<property name="testOnReturn" value="true" />
 		<property name="validationQuery" value="SELECT 1 FROM DUAL"></property>
 		<!-- commons-dbcp setting -->
-		<property name="initialSize" value="5"/> 
-		<property name="maxActive" value="10"/> 
-		<property name="maxIdle" value="10"/> 
-		<property name="minIdle" value="5"/> 
-		<property name="maxWait" value="-1"/> 
+		<property name="initialSize" value="5"/>
+		<property name="maxActive" value="10"/>
+		<property name="maxIdle" value="10"/>
+		<property name="minIdle" value="5"/>
+		<property name="maxWait" value="-1"/>
 	</bean>
+
+	<!-- KANG-20190826:
+		트랜잭션 매니저 bean 을 등록합니다.
+	-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- KANG-20190826:
+		아노테이션 기반의 트랜잭션을 사용합니다.
+		- @Transactional 주요속성
+			isolation     @Transactional(isolation=Isolation.DEFAULT)       Transaction의 isolation Level. 별도로 정의하지 않으면 DB Isolation Level을 따름.
+			propagation   @Transactional(propagation=Propagation.REQUIRED)  트랜젝션 전파규칙을 정의. Default=REQUIRED
+			readOnly      @Transactional(readOnly=true)                     해당 Transaction을 읽기 전용 모드로 처리. (Default=false)
+			rollbackFor   @Transactional(rollbackFor=Exception.class)       정의된 Exception에 대해서는 rollback을 수행.
+			noRollbackFor @Transactional(noRollbackFor=Exception.class)     정의된 Exception에 대해서는 rollback을 수행하지 않음.
+			timeout       @Transactional(timeout=10)                        지정한 시간 내에 해당 메소드 수행이 완료되지 않은 경우 rollback수행. -1일 경우 no timeout (Default=-1)
+	-->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
 </beans>
 

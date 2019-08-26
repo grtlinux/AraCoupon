@@ -21,6 +21,7 @@ public class IndexController {
 
 	private final Log log = LogFactory.getLog(getClass());
 
+	@SuppressWarnings("unused")
 	@Inject
 	private SessionService sessionService;
 
@@ -37,6 +38,7 @@ public class IndexController {
 			Flag.printRequest(request);
 			modelMap = Flag.setModelMap(modelMap, request);
 		}
+		/*
 		if (Flag.flag) {
 			String usridSaveYn = (String) this.sessionService.getSession(request, "usridSaveYn");
 			if (usridSaveYn != null && "Y".equals(usridSaveYn)) {
@@ -50,6 +52,7 @@ public class IndexController {
 				modelMap.put("usridSaveYn", "N");
 			}
 		}
+		*/
 		if (Flag.flag) log.debug(">>>>> modelMap: " + new GsonBuilder().setPrettyPrinting().create().toJson(modelMap));
 		return "/ara3/ara/index";
 	}

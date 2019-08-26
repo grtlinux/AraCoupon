@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Ara2Usr">
+<mapper namespace="Ara3Usr">
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
@@ -15,7 +15,7 @@
 
 	<!-- comment. -->
 	<select id="selectItemInfo" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Usr.selectItemInfo */
+		SELECT  /* Ara3Usr.selectItemInfo */
 			A.USR_NO
 			, A.USR_ID
 			, A.USR_NM
@@ -32,12 +32,12 @@
 			, A5.MRRG_DT
 			, A5.MRRG_LOC
 		FROM
-			ARA2_USR A
-				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
-				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
-				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
-				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
-				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
+			ARA3_USR A
+				LEFT JOIN ARA3_TEL A1 ON A1.ITM_NO = A.USR_NO AND A1.ITM_TYP = 'USR'
+				LEFT JOIN ARA3_MBL A2 ON A2.ITM_NO = A.USR_NO AND A2.ITM_TYP = 'USR'
+				LEFT JOIN ARA3_EML A3 ON A3.ITM_NO = A.USR_NO AND A3.ITM_TYP = 'USR'
+				LEFT JOIN ARA3_BNK A4 ON A4.ITM_NO = A.USR_NO AND A4.ITM_TYP = 'USR'
+				LEFT JOIN ARA3_MRRG A5 ON A5.ITM_NO = A.USR_NO AND A5.ITM_TYP = 'USR'
 		WHERE 1=1
 			AND A.USR_NO = TO_NUMBER(#{usrid})
 	</select>
@@ -50,7 +50,7 @@
 
 	<!-- comment. -->
 	<select id="selectStateCpnList" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Usr.selectStateCpnList */
+		SELECT  /* Ara3Usr.selectStateCpnList */
 			A.CAMP_NO
 			, A.ITM_NO
 			, A.ITM_TYP
@@ -71,10 +71,10 @@
 			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
 			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
 		FROM
-			ARA2_CPN A
-				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
-			, ARA2_CAMP B
-				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+			ARA3_CPN A
+				LEFT JOIN ARA3_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA3_CAMP B
+				LEFT JOIN ARA3_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
 		WHERE 1=1
 			AND B.CAMP_NO = A.CAMP_NO
 			AND A.ITM_NO = TO_NUMBER(#{usrid})
@@ -91,7 +91,7 @@
 
 	<!-- comment. -->
 	<select id="selectUseCpnList" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Usr.selectUseCpnList */
+		SELECT  /* Ara3Usr.selectUseCpnList */
 			A.CAMP_NO
 			, A.ITM_NO
 			, A.ITM_TYP
@@ -112,10 +112,10 @@
 			, TO_CHAR(A.TRM_BGN_DT, 'YY-MM-DD')  AS TRM_BGN_DT
 			, TO_CHAR(A.TRM_END_DT, 'YY-MM-DD')  AS TRM_END_DT
 		FROM
-			ARA2_CPN A
-				LEFT JOIN ARA2_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
-			, ARA2_CAMP B
-				LEFT JOIN ARA2_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
+			ARA3_CPN A
+				LEFT JOIN ARA3_CODE A1 ON A1.GRP_CD = 'C002' AND A1.CODE = A.CPN_PHS
+			, ARA3_CAMP B
+				LEFT JOIN ARA3_CODE B1 ON B1.GRP_CD = 'C012' AND B1.CODE = B.CAMP_PHS
 		WHERE 1=1
 			AND B.CAMP_NO = A.CAMP_NO
 			AND A.ITM_NO = TO_NUMBER(#{usrid})
@@ -128,7 +128,7 @@
 
 	<!-- comment -->
 	<select id="selectStrInfo" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Usr.selectStrInfo */
+		SELECT  /* Ara3Usr.selectStrInfo */
 			A.STR_NO
 			, A.STR_ID
 			, A.STR_NM
@@ -145,12 +145,12 @@
 			, A5.MRRG_DT
 			, A5.MRRG_LOC
 		FROM
-			ARA2_STR A
-				LEFT JOIN ARA2_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
-				LEFT JOIN ARA2_MBL A2 ON A2.ITM_NO = A.STR_NO AND A2.ITM_TYP = 'STR'
-				LEFT JOIN ARA2_EML A3 ON A3.ITM_NO = A.STR_NO AND A3.ITM_TYP = 'STR'
-				LEFT JOIN ARA2_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
-				LEFT JOIN ARA2_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
+			ARA3_STR A
+				LEFT JOIN ARA3_TEL A1 ON A1.ITM_NO = A.STR_NO AND A1.ITM_TYP = 'STR'
+				LEFT JOIN ARA3_MBL A2 ON A2.ITM_NO = A.STR_NO AND A2.ITM_TYP = 'STR'
+				LEFT JOIN ARA3_EML A3 ON A3.ITM_NO = A.STR_NO AND A3.ITM_TYP = 'STR'
+				LEFT JOIN ARA3_BNK A4 ON A4.ITM_NO = A.STR_NO AND A4.ITM_TYP = 'STR'
+				LEFT JOIN ARA3_MRRG A5 ON A5.ITM_NO = A.STR_NO AND A5.ITM_TYP = 'STR'
 		WHERE 1=1
 			AND A.STR_NO = TO_NUMBER(#{strid})
 	</select>
@@ -158,8 +158,8 @@
 
 	<!-- comment -->
 	<update id="updateAllCnntByCnntid" parameterType="Map">
-		UPDATE  /* Ara2Usr.updateAllCnntByCnntid */
-			ARA2_CNNT A
+		UPDATE  /* Ara3Usr.updateAllCnntByCnntid */
+			ARA3_CNNT A
 		SET
 			A.CNNT_YN = 'N'
 			, A.DCNT_DTTM = SYSDATE
@@ -173,8 +173,8 @@
 
 	<!-- comment -->
 	<insert id="insertCnntAraKey" parameterType="Map">
-		INSERT INTO  /* Ara2Usr.insertCnntAraKey */
-			ARA2_CNNT
+		INSERT INTO  /* Ara3Usr.insertCnntAraKey */
+			ARA3_CNNT
 		VALUES
 			( SEQ_CNNT.NEXTVAL, #{strid}, 'STR', #{arakey}, 'Y', SYSDATE, null, null )
 	</insert>
@@ -182,7 +182,7 @@
 
 	<!-- comment -->
 	<select id="selectCnntArakeyInfo" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Usr.selectCnntArakeyInfo */
+		SELECT  /* Ara3Usr.selectCnntArakeyInfo */
 			A.CNNT_NO
 			, A.CNNT_ID
 			, A.CNNT_TYP
@@ -190,7 +190,7 @@
 			, A.CNNT_YN
 			, A.CNNT_DTTM
 		FROM
-			ARA2_CNNT A
+			ARA3_CNNT A
 		WHERE 1=1
 			AND A.CNNT_ID = #{strid}
 			AND A.CNNT_TYP = 'STR'
@@ -201,8 +201,8 @@
 
 	<!-- comment -->
 	<update id="updateCnntByCnntid" parameterType="Map">
-		UPDATE  /* Ara2Usr.updateCnntByCnntid */
-			ARA2_CNNT A
+		UPDATE  /* Ara3Usr.updateCnntByCnntid */
+			ARA3_CNNT A
 		SET
 			A.CNNT_YN = 'N'
 			, A.DCNT_DTTM = SYSDATE
@@ -217,8 +217,8 @@
 
 	<!-- comment -->
 	<update id="updateCpnNoList" parameterType="Map">
-		UPDATE  /* Ara2Usr.updateCpnNoList */
-			ARA2_CPN
+		UPDATE  /* Ara3Usr.updateCpnNoList */
+			ARA3_CPN
 		SET
 			CPN_PHS = '4'
 			, ITM_NO = TO_NUMBER(#{strid})

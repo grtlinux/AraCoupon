@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Ara2Ib">
+<mapper namespace="Ara3Ib">
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
-	<!-- ARA2 IB -->
+	<!-- ARA3 IB -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- comment. -->
 	<select id="selectAraInfo" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Ib.selectAraInfo */
+		SELECT  /* Ara3Ib.selectAraInfo */
 			A.ARA_ID
 			, A.ARA_NM
 			, A.ARA_MBL
 			, A.ARA_PWD
 			, A.ARA_ENC
 		FROM
-			ARA2_ARA  A
+			ARA3_ARA  A
 		WHERE 1=1
 			AND A.ARA_ID IS NOT NULL
 	</select>
@@ -27,8 +27,8 @@
 
 	<!-- comment. -->
 	<insert id="insertIbTkn" parameterType="Map">
-		INSERT INTO  /* Ara2Ib.insertIbTkn */
-			ARA2_IBTKN
+		INSERT INTO  /* Ara3Ib.insertIbTkn */
+			ARA3_IBTKN
 		VALUES (
 			SEQ_TKN.NEXTVAL
 			, #{tknNm}
@@ -43,7 +43,7 @@
 
 	<!-- comment. -->
 	<select id="selectLastIbTkn" parameterType="Map" resultType="Map">
-		SELECT  /* Ara2Ib.selectLastIbTkn */
+		SELECT  /* Ara3Ib.selectLastIbTkn */
 			B.ROWNO
 			, B.TKN_NO
 			, B.TKN_NM
@@ -89,7 +89,7 @@
 							, EXPD
 							, EXPD_DTTM
 						FROM
-							ARA2_IBTKN
+							ARA3_IBTKN
 						WHERE 1=1
 						ORDER BY
 							CNNT_DTTM DESC NULLS LAST
@@ -97,8 +97,8 @@
 				WHERE 1=1
 					AND ROWNUM = 1
 			) B
-				LEFT JOIN ARA2_IBMSG B1 ON B1.MSG_CD = 'IBMSG001'
-				LEFT JOIN ARA2_ARA B2 ON B2.ARA_ID = 'tain_msg'
+				LEFT JOIN ARA3_IBMSG B1 ON B1.MSG_CD = 'IBMSG001'
+				LEFT JOIN ARA3_ARA B2 ON B2.ARA_ID = 'tain_msg'
 		WHERE 1=1
 	</select>
 

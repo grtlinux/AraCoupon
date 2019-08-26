@@ -59,7 +59,7 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- name -->
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
-	<div class="container hide">
+	<div class="container show">
 		<div class="jumbotron text-center">
 			<h1>My First Bootstrap Page</h1>
 			<p>Resize this responsive page to see the effect!!</p>
@@ -105,7 +105,7 @@
 		<!-- Bootstrap 3 icon -->
 		<div class="container">
 			<h2>Cloud Glyph</h2>
-			<p>Cloud icon: <span class="glyphicon glyphicon-cloud"></span></p>		
+			<p>Cloud icon: <span class="glyphicon glyphicon-cloud" style="font-size:60px;color:lightblue;text-shadow:4px 5px 6px #000000;"></span></p>		
 			<p>Cloud icon as a link:
 				<a href="#">
 					<span class="glyphicon glyphicon-cloud"></span>

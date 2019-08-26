@@ -173,7 +173,10 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+			<!-- 
 			<a class="navbar-brand" href="#myPage">Logo</a>
+			 -->
+			<a class="navbar-brand" href="#myPage"><span class="glyphicon glyphicon-barcode" style="font-size:30px;color:lightblue;text-shadow:4px 5px 6px #000000;"></span></a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">

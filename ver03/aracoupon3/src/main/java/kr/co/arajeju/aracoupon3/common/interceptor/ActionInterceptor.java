@@ -12,12 +12,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import kr.co.arajeju.aracoupon3.service.ContextService;
 import kr.co.arajeju.aracoupon3.service.SessionService;
 import kr.co.arajeju.aracoupon3.util.Flag;
-import kr.co.arajeju.aracoupon3.vo.SessionVO;
 
 public class ActionInterceptor extends HandlerInterceptorAdapter {
 	
 	protected Log log = LogFactory.getLog(ActionInterceptor.class);
 	
+	@SuppressWarnings("unused")
 	@Inject
 	private SessionService sessionService;
 
@@ -47,6 +47,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// sales time
+		/*
 		if (Flag.flag) {
 			// 업무시간에 대한 처리를 한다.
 			String araNowTime = Flag.getDateTime(this.contextService.getAraSalesType());
@@ -64,9 +65,11 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				return super.preHandle(request, response, handler);
 			}
 		}
+		*/
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// session process
+		/*
 		if (!Flag.flag) {
 			// session에 대한 처리
 			//if (Flag.flag) Flag.printRequestSession(request);
@@ -94,6 +97,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			}
 			new ModelAndView("redirect:/index.do");
 		}
+		*/
 		///////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////////
 		// mapping controller
@@ -101,9 +105,17 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 			if (!Flag.flag) {
 				// dummy condition
 				return true;
-			} else if (Flag.flag && url.indexOf("/kang/") > -1) {                       // controller.IndexController
+			} else if (Flag.flag && url.indexOf("/kang/") > -1) {                // controller.IndexController
 				return true;
-			} else if (Flag.flag && url.indexOf("/file/") > -1) {                      // controller.UploadController
+			} else if (Flag.flag && url.indexOf("/file/") > -1) {                // controller.UploadController
+				return true;
+			} else if (Flag.flag && url.indexOf("/ara3/") > -1) {                // controller.Ara2Controller
+				return true;
+			} else if (Flag.flag && url.indexOf("/ctr3/") > -1) {                // controller.Ctr2Controller
+				return true;
+			} else if (Flag.flag && url.indexOf("/str3/") > -1) {                // controller.Str2Controller
+				return true;
+			} else if (Flag.flag && url.indexOf("/usr3/") > -1) {                // controller.Usr2Controller
 				return true;
 			} else {
 				if (Flag.flag) log.debug("KANG-20190807 redirect:/index.do   <- url:" + url);
