@@ -34,6 +34,7 @@
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
+
 	<!-- logger interceptor
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -66,10 +67,11 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
 	<!-- multipart - 2
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize"   value="200000000" />
-		<property name="maxInMemorySize" value="200000000" />
+	<bean id="spring.RegularCommonsMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize"   value="-1" />  // unlimited
+		<property name="maxInMemorySize" value="377759039" />
 	</bean>
+	<alias name="spring.RegularCommonsMultipartResolver" alias="multipartResolver" />
 	-->
 
 

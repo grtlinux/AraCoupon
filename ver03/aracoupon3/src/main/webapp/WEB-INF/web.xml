@@ -58,10 +58,19 @@
 			file-size-threshold = 20,971,520 = 20 MB
 		-->
 		<multipart-config>
+			<!--
+			server.xml > Connector > maxPostSize="-1"
+			
+				50MB = 52428800
+				100MB = 104857600
 			<location>/Users/kangmac</location>
 			<max-file-size>20971528</max-file-size>
 			<max-request-size>41943040</max-request-size>
 			<file-size-threshold>20971520</file-size-threshold>
+			-->
+			<max-file-size>104857600</max-file-size>
+			<max-request-size>104857600</max-request-size>
+			<file-size-threshold>0</file-size-threshold>
 		</multipart-config>
 	</servlet>
 	<servlet-mapping>
