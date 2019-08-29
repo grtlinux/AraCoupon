@@ -10,7 +10,7 @@ import kr.co.arajeju.aracoupon3.dao.Ara3AraDAO;
 
 
 @SuppressWarnings("unchecked")
-@Repository("ara3DAO")
+@Repository("ara3AraDAO")
 public class Ara3AraDAOImpl extends AbstractDAO implements Ara3AraDAO {
 
 	// /index.do

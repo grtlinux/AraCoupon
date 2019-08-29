@@ -465,13 +465,24 @@
 			<version>0.1.5</version>
 		</dependency>
 
-		<!-- awt-color-factory
+		<!-- lombok
+			<version>1.16.6</version>
 		-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.8</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- awt-color-factory
+			<version>1.0.0</version>
 		<dependency>
 			<groupId>org.beryx</groupId>
 			<artifactId>awt-color-factory</artifactId>
 			<version>1.0.1</version>
 		</dependency>
+		-->
 
 	</dependencies>
 

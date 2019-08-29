@@ -15,8 +15,6 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-import org.beryx.awt.color.ColorFactory;
-
 /**
  * ref: https://wonsama.tistory.com/456
  * title: 텍스트 로고 이미지 자동 생성 JAVA 프로그램
@@ -456,7 +454,7 @@ public class WsImageTextUtil {
 			}
 
 			// text
-			g2d.setColor(ColorFactory.valueOf(drawTextInfos[i].getFontColor()));  // text color
+			g2d.setColor(ColorFactory.getInstance().getColor(drawTextInfos[i].getFontColor()));  // text color
 			g2d.drawString(drawTextInfos[i].getText(), x, y);
 		}
 		g.dispose();
@@ -614,7 +612,7 @@ public class WsImageTextUtil {
 	private void drawStringDropshadow(Graphics2D g2d, String text, String color, int x, int y) {
 		g2d.setColor(new Color(20, 20, 20));  // shadow color
 		g2d.drawString(text, shiftEast(x, 4), shiftSouth(y, 4));
-		g2d.setColor(ColorFactory.valueOf(color));  // text color
+		g2d.setColor(ColorFactory.getInstance().getColor(color));  // text color
 		g2d.drawString(text, x, y);
 	}
 

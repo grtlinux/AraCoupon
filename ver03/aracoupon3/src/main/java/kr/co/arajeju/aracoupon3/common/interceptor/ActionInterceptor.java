@@ -11,6 +11,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.co.arajeju.aracoupon3.service.ContextService;
 import kr.co.arajeju.aracoupon3.service.SessionService;
+import kr.co.arajeju.aracoupon3.util.ColorFactory;
 import kr.co.arajeju.aracoupon3.util.Flag;
 
 public class ActionInterceptor extends HandlerInterceptorAdapter {
@@ -37,6 +38,7 @@ public class ActionInterceptor extends HandlerInterceptorAdapter {
 				log.debug("KANG-20190308 ====================================== ActionInterceptor START  ======================================");
 				log.debug("KANG-20190308 Request URI \t:  " + url
 						+ (!Flag.flag ? "\n" + this.contextService : ""));
+				log.debug("TEST: " + ColorFactory.getInstance().getColor("red"));
 			}
 			request.setAttribute("araOpenOk", "yes");
 			request.setAttribute("xForwardedFor", request.getHeader("X-Forwarded-For"));

@@ -62,9 +62,9 @@ public class ContextServiceImpl implements ContextService {
 	private static String userHome;
 	
 	static {
-		if (!Flag.flag) {
-			System.getProperties().forEach((k,v) -> System.out.println("\tProperty [" + k + ":" + v + "]"));
-			System.getenv().forEach((k,v) -> System.out.println("\tEnv [" + k + ":" + v + "]"));
+		if (Flag.flag) {
+			System.getProperties().forEach((k,v) -> System.out.println("\tProperty [" + k + "=" + v + "]"));
+			System.getenv().forEach((k,v) -> System.out.println("\tEnv [" + k + "=" + v + "]"));
 		}
 		HOME = System.getenv("HOME");
 		userHome = System.getProperty("user.home", "/tmp");

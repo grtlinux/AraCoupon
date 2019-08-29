@@ -3,13 +3,13 @@
 
 <mapper namespace="member">
 
-	<resultMap type="kr.co.arajeju.aracoupon2.vo.SessionVO" id="LoginResultMap">
+	<resultMap type="kr.co.arajeju.aracoupon3.vo.SessionVO" id="LoginResultMap">
 		<result property="userId" column="user_id" />
 		<result property="userType" column="user_type" />
 	</resultMap>
 
 	<!--
-	<select id="getMemberLogin" parameterType="kr.co.arajeju.aracoupon2.vo.MemberVO" resultMap="LoginResultMap">
+	<select id="getMemberLogin" parameterType="kr.co.arajeju.aracoupon3.vo.MemberVO" resultMap="LoginResultMap">
 		<![CDATA[
 			/* Login 사용자 조회 member_SQL.xml getMemberLogin */
 			select
@@ -24,7 +24,7 @@
 	</select>
 	-->
 
-	<resultMap id="MemberMap" type="kr.co.arajeju.aracoupon2.vo.MemberVO">
+	<resultMap id="MemberMap" type="kr.co.arajeju.aracoupon3.vo.MemberVO">
 		<result property="id" column="id" />
 		<result property="group_name" column="group_name" />
 		<result property="user_name" column="user_name" />
@@ -35,7 +35,7 @@
 		<result property="userid" column="userid" />
 	</resultMap>
 
-	<select id="member.getMemberView" parameterType="kr.co.arajeju.aracoupon2.vo.MemberVO" resultMap="MemberMap">
+	<select id="member.getMemberView" parameterType="kr.co.arajeju.aracoupon3.vo.MemberVO" resultMap="MemberMap">
 		<![CDATA[
 			select  /* member.getMemberView */
 				*
@@ -59,7 +59,7 @@
 		]]>
 	</select>
 
-	<select id="ajaxUserType" parameterType="kr.co.arajeju.aracoupon2.vo.MemberVO" resultMap="MemberMap">
+	<select id="ajaxUserType" parameterType="kr.co.arajeju.aracoupon3.vo.MemberVO" resultMap="MemberMap">
 		<![CDATA[
 			/* 사용자 권한 조회 member_SQL.xml ajaxUserType */
 			select
@@ -71,7 +71,7 @@
 		]]>
 	</select>
 
-	<update id="updateMemberUserType" parameterType="kr.co.arajeju.aracoupon2.vo.MemberVO">
+	<update id="updateMemberUserType" parameterType="kr.co.arajeju.aracoupon3.vo.MemberVO">
 		<![CDATA[
 			/* 사용자 권한 수정 member_SQL.xml userTypeProc */
 			update

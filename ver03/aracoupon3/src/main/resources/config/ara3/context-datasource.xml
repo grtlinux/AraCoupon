@@ -2,11 +2,17 @@
 <beans
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/jdbc
 		http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 		">
 
 	<!-- datasource !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
@@ -45,7 +51,7 @@
 
 	<!-- KANG-20190826:
 		아노테이션 기반의 트랜잭션을 사용합니다.
-		- @Transactional 주요속성
+		@Transactional 주요속성
 			isolation     @Transactional(isolation=Isolation.DEFAULT)       Transaction의 isolation Level. 별도로 정의하지 않으면 DB Isolation Level을 따름.
 			propagation   @Transactional(propagation=Propagation.REQUIRED)  트랜젝션 전파규칙을 정의. Default=REQUIRED
 			readOnly      @Transactional(readOnly=true)                     해당 Transaction을 읽기 전용 모드로 처리. (Default=false)

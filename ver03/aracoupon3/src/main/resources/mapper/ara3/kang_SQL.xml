@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Kang">
 
-	<resultMap id="KangBO" type="kr.co.arajeju.aracoupon2.object.KangBO">
+	<!-- 
+	<resultMap id="KangBO" type="kr.co.arajeju.aracoupon3.object.KangBO">
 		<result property="cmpgn_id" column="cmpgn_id" />
 		<result property="rsrv_dt" column="rsrv_dt" />
 		<result property="campaignname" column="campaignname" />
 		<result property="campaigncode" column="campaigncode" />
 	</resultMap>
+	-->
 
 	<!-- select Message -->
 	<select id="selectMessage" resultType="String">
@@ -54,9 +56,10 @@
 			, C.CODE_ID
 	</select>
 
-	<!-- select CommCodeList on KangBO -->
+	<!-- select CommCodeList on KangBO
 	<select id="selectCommCodeListOnKangBO" parameterType="Map" resultMap="KangBO">
 	</select>
+	-->
 
 <!--
 	/////////////////////////////////////////////////////////////////////
