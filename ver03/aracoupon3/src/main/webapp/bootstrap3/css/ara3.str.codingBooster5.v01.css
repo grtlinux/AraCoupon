@@ -1,0 +1,101 @@
+/*
+	css: ara.codingBooster5.v01.css
+*/
+/* ---------------------------- */
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Nanum Gothic';
+}
+
+/* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
+a,
+a:hover,
+a:focus {
+	color: gray;
+	text-decoration: none;
+	cursor: point;
+}
+
+/* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
+.navbar-default {
+	/*
+	background-color: #1e235a;
+	border-color: #1e235a;
+	*/
+	background-color: #087708;
+	border-color: #087708;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+	color: lightgray;
+}
+
+/* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+	color: gray;
+}
+
+
+/* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a,
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+		color: lightgray;
+	}
+}
+
+
+/* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
+.footer-default {
+	/*
+	background-color: #1e235a;
+	*/
+	background-color: #087708;
+	color: lightgray;
+}
+
+.footer-default .col-center {
+	text-align: center;
+}
+
+
+/* ---------------------------- */
+/* ---------------------------- */
+/* ---------------------------- */
+.show {
+	display: block !important;
+}
+.display {
+	display: block !important;
+}
+.hide {
+	display: none !important;
+	visibility: hidden !important;
+}
+.hidden {
+	display: none !important;
+	visibility: hidden !important;
+}
+.invisible {
+	visibility: hidden;
+}
+
+
+

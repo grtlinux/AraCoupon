@@ -10,7 +10,7 @@
 <!-- style -->
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="stylesheet" href="${staticPATH}/bootstrap3/css/bootstrap.css">
-<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara2.ara.codingBooster5.v01.css">
+<link rel="stylesheet" href="${staticPATH}/bootstrap3/css/ara3.ara.codingBooster5.v01.css">
 <style type="text/css">
 	.jumbotron {
 		background-image: url('${staticPATH}/bootstrap3/images/underConstruct01.jpg');
@@ -20,7 +20,7 @@
 	}
 </style>
 <body>
-<%@ include file="/WEB-INF/views/ara2/common/navbarAra.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/navbarAra.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -34,7 +34,7 @@
 	</div>
 
 
-<%@ include file="/WEB-INF/views/ara2/common/footer.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/footer.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -248,7 +248,7 @@
 			if (true) console.log(">>>>> call ajax:", arguments.callee.caller);
 			// call ajax
 			jQuery.ajax({
-				url           : "${staticPATH}/ara2/ib/selectLastIbTkn.do",
+				url           : "${staticPATH}/ara3/ib/selectLastIbTkn.do",
 				dataType      : "JSON",
 				scriptCharset : "UTF-8",
 				type          : "POST",
@@ -369,7 +369,7 @@
 			if (true) console.log(">>>>> call ajax:", arguments.callee.caller);
 			// call ajax
 			jQuery.ajax({
-				url           : "${staticPATH}/ara2/requestAraKey.do",
+				url           : "${staticPATH}/ara3/requestAraKey.do",
 				dataType      : "JSON",
 				scriptCharset : "UTF-8",
 				type          : "POST",
@@ -468,7 +468,7 @@
 		if (true) {
 			// confirm connection Authentication
 			jQuery.ajax({
-				url           : "${staticPATH}/ara2/connect.do",
+				url           : "${staticPATH}/ara3/connect.do",
 				dataType      : "JSON",
 				scriptCharset : "UTF-8",
 				type          : "POST",
@@ -478,7 +478,7 @@
 						switch (connTyp) {
 						case "ARA":
 							if (result.retCode == "0000") {
-								fn_loadPostPage("#tempForm", "${staticPATH}/ara2/index.do");
+								fn_loadPostPage("#tempForm", "${staticPATH}/ara3/index.do");
 							} else {
 								alert("에러메시지: " + result.retMsg);
 								fn_modalToggle('#modalAra');
@@ -521,7 +521,7 @@
 	}
 	function fn_registerUsr() {
 		if (true) console.log(">>>>> ", arguments.callee.caller);
-		fn_loadPostPage("#tempForm", "${staticPATH}/ara2/register/registerUsrFormPage.do");		
+		fn_loadPostPage("#tempForm", "${staticPATH}/ara3/register/registerUsrFormPage.do");		
 	}
 </script>
 </html>

@@ -154,7 +154,7 @@
 
 	/////////////////////////////////////////////////////////////////////
 	<update id="useCpnList" parameterType="Map">
-		UPDATE  /* Ara2Usr.useCpnList */
+		UPDATE  /* Ara3Usr.useCpnList */
 			ARA_CPN
 		SET
 			USD_STR_ID = #{strid}

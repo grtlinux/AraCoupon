@@ -7,15 +7,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>가게 - ${info.STR_NM}</title>
 </head>
-<%@ include file="/WEB-INF/views/ara2/common/cssStr.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/cssStr.jsp"%>
 <body>
-<%@ include file="/WEB-INF/views/ara2/common/navbarStr.jsp"%>
-<%@ include file="/WEB-INF/views/ara2/common/jumbotron.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/navbarStr.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/jumbotron.jsp"%>
 
 
 
-<%@ include file="/WEB-INF/views/ara2/common/footer.jsp"%>
-<%@ include file="/WEB-INF/views/ara2/common/modalSelfInfoStr.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/footer.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/modalSelfInfoStr.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->

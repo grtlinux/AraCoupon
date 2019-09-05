@@ -7,9 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ara Main</title>
 </head>
-<%@ include file="/WEB-INF/views/ara2/common/cssAra.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/cssAra.jsp"%>
 <body>
-<%@ include file="/WEB-INF/views/ara2/common/navbarAra.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/navbarAra.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -74,7 +74,7 @@
 	<div style="height:70px;"></div>
 
 
-<%@ include file="/WEB-INF/views/ara2/common/footer.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/footer.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -155,7 +155,7 @@
 		if (true) {
 			// ajax
 			jQuery.ajax({
-				url           : "${staticPATH}/ara2/register/createUsrInfo.do",
+				url           : "${staticPATH}/ara3/register/createUsrInfo.do",
 				dataType      : "JSON",
 				scriptCharset : "UTF-8",
 				type          : "POST",
@@ -174,7 +174,7 @@
 		}
 	}
 	function fn_index() {
-		fn_loadPostPage('#tempForm', '${staticPATH}/ara2/index.do');
+		fn_loadPostPage('#tempForm', '${staticPATH}/ara3/index.do');
 	}
 </script>
 </html>

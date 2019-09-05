@@ -7,15 +7,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>센터 - ${info.CTR_NM}</title>
 </head>
-<%@ include file="/WEB-INF/views/ara2/common/cssCtr.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/cssCtr.jsp"%>
 <body>
-<%@ include file="/WEB-INF/views/ara2/common/navbarCtr.jsp"%>
-<%@ include file="/WEB-INF/views/ara2/common/jumbotron.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/navbarCtr.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/jumbotron.jsp"%>
 
 
 
-<%@ include file="/WEB-INF/views/ara2/common/footer.jsp"%>
-<%@ include file="/WEB-INF/views/ara2/common/modalSelfInfoCtr.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/footer.jsp"%>
+<%@ include file="/WEB-INF/views/ara3/common/modalSelfInfoCtr.jsp"%>
 
 
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
